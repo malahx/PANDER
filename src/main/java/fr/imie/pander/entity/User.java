@@ -12,20 +12,20 @@ import java.util.Date;
  */
 public abstract class User {
 
-	private long id;
-	private String email;
-	private String password;
-	private String phone;
-	private String address;
-	private String postcode;
-	private String city;
-	private String photo;
-	private String description;
-	private boolean resetPass;
-	private boolean disabled;
-	private Role role;
-	private Date createdAt;
-	private Date updatedAt;
+	protected long id;
+	protected String email;
+	protected String password;
+	protected String phone;
+	protected String address;
+	protected String postcode;
+	protected String city;
+	protected String photo;
+	protected String description;
+	protected boolean resetPass;
+	protected boolean disabled;
+	protected Role role;
+	protected Date createdAt;
+	protected Date updatedAt;
 
 	/**
 	 * @return the id
@@ -235,6 +235,13 @@ public abstract class User {
 	 */
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+
+	/**
+	 * 
+	 */
+	public User() {
+		super();
 	}
 
 	/**
