@@ -38,3 +38,6 @@ bin/
 
 #Conception's Data
 /Conception/
+
+#Bad File
+.DS_Store
