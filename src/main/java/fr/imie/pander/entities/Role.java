@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.imie.pander.entity;
+package fr.imie.pander.entities;
 
 /**
  * 
