@@ -1,8 +1,16 @@
+/**
+ * 
+ */
 package fr.imie.pander.entities;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 
+ * @author Patrice SCHOCH
+ *
+ */
 public class Company extends User {
 
 	private String name;

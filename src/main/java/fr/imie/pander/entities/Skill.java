@@ -1,5 +1,13 @@
+/**
+ * 
+ */
 package fr.imie.pander.entities;
 
+/**
+ * 
+ * @author Patrice SCHOCH
+ *
+ */
 public class Skill {
 	private String id;
 	private String name;

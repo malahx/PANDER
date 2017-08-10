@@ -1,9 +1,17 @@
+/**
+ * 
+ */
 package fr.imie.pander.entities;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 
+ * @author Patrice SCHOCH
+ *
+ */
 public class Job {
 	private int id;
 	private String name;
