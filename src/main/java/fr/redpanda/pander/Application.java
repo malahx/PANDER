@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.imie.pander;
+package fr.redpanda.pander;
 
 /**
  * @author Gwénolé LE HENAFF

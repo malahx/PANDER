@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.imie.pander.entities;
+package fr.redpanda.pander.entities;
 
 /**
  * 
