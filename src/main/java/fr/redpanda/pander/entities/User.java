@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public abstract class User {
 
-	protected long id;
+	protected Long id;
 	protected String email;
 	protected String password;
 	protected String phone;
@@ -21,8 +21,7 @@ public abstract class User {
 	protected String city;
 	protected String photo;
 	protected String description;
-	protected boolean resetPass;
-	protected boolean disabled;
+	protected Boolean disabled;
 	protected Role role;
 	protected Date createdAt;
 	protected Date updatedAt;
@@ -30,7 +29,7 @@ public abstract class User {
 	/**
 	 * @return the id
 	 */
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -38,7 +37,7 @@ public abstract class User {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -163,24 +162,9 @@ public abstract class User {
 	}
 
 	/**
-	 * @return the resetPass
-	 */
-	public boolean isResetPass() {
-		return resetPass;
-	}
-
-	/**
-	 * @param resetPass
-	 *            the resetPass to set
-	 */
-	public void setResetPass(boolean resetPass) {
-		this.resetPass = resetPass;
-	}
-
-	/**
 	 * @return the disabled
 	 */
-	public boolean isDisabled() {
+	public Boolean isDisabled() {
 		return disabled;
 	}
 
@@ -188,7 +172,7 @@ public abstract class User {
 	 * @param disabled
 	 *            the disabled to set
 	 */
-	public void setDisabled(boolean disabled) {
+	public void setDisabled(Boolean disabled) {
 		this.disabled = disabled;
 	}
 
