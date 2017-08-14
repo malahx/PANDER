@@ -33,7 +33,7 @@ public interface IDAO<T> {
 	 *            the id of the data which need to be deleted
 	 * @return if the data have been deleted
 	 */
-	public boolean delete(int id);
+	public boolean delete(long id);
 
 	/**
 	 * 
@@ -55,6 +55,6 @@ public interface IDAO<T> {
 	 *            the id to find on the database
 	 * @return the object link to the id
 	 */
-	public T findBy(int id);
+	public T findBy(long id);
 
 }
