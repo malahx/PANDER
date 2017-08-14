@@ -3,7 +3,11 @@
  */
 package fr.redpanda.pander.entities;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
+
+import fr.redpanda.pander.utils.StringManager;
 
 /**
  * 
@@ -234,6 +238,28 @@ public abstract class User {
 	public User(String email) {
 		super();
 		this.email = email;
+	}
+
+	/**
+	 * @param result
+	 *            the result set to parse
+	 * @throws SQLException
+	 */
+	public User(ResultSet result) throws SQLException {
+		super();
+		this.setId(result.getLong("id"));
+		this.setEmail(result.getString("email"));
+		this.setPassword(result.getString("password"));
+		this.setPhone(result.getString("phone"));
+		this.setAddress(result.getString("address"));
+		this.setPostcode(result.getString("postcode"));
+		this.setCity(result.getString("city"));
+		this.setPhoto(result.getString("photo"));
+		this.setDescription(result.getString("description"));
+		this.setDisabled(result.getBoolean("disabled"));
+		this.setRole(StringManager.getRoleFrom(result.getString("role")));
+		this.setCreatedAt(new Date(result.getDate("createdAt").getTime()));
+		this.setUpdatedAt(new Date(result.getDate("updatedAt").getTime()));
 	}
 
 	/*

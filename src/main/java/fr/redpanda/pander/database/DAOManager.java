@@ -5,9 +5,9 @@ package fr.redpanda.pander.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -24,6 +24,8 @@ public abstract class DAOManager {
 
 	private static Connection connection = null;
 
+	protected static DAOManager instance;
+	
 	/**
 	 * 
 	 * @return the active or created connection
@@ -50,12 +52,12 @@ public abstract class DAOManager {
 	 * @param prepares all prepare to close
 	 * @param resultSet a result set to close
 	 */
-	protected void close(Connection connection, PreparedStatement[] prepares, ResultSet resultSet) {
+	protected void close(Connection connection, Statement[] prepares, ResultSet resultSet) {
 		try {
 			if (resultSet != null) {
 				resultSet.close();
 			}
-			for (PreparedStatement p : prepares) {
+			for (Statement p : prepares) {
 				if (p != null) {
 					p.close();
 				}
@@ -74,7 +76,7 @@ public abstract class DAOManager {
 	 * @param prepares a prepare to close
 	 * @param resultSet a result set to close
 	 */
-	protected void close(Connection connection, PreparedStatement prepare, ResultSet resultSet) {
+	protected void close(Connection connection, Statement prepare, ResultSet resultSet) {
 		try {
 			if (resultSet != null) {
 				resultSet.close();
@@ -90,7 +92,7 @@ public abstract class DAOManager {
 	 * @param connection a connection to close
 	 * @param prepares a prepare to close
 	 */
-	protected void close(Connection connection, PreparedStatement prepare) {
+	protected void close(Connection connection, Statement prepare) {
 		try {
 			if (prepare != null) {
 				prepare.close();

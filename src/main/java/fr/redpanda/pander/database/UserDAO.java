@@ -20,6 +20,13 @@ import fr.redpanda.pander.utils.date.DateConverter;
  */
 public class UserDAO extends DAOManager implements IDAO<User> {
 
+	public static UserDAO getInstance() {
+		if (instance == null) {
+			instance = new UserDAO();
+		}
+		return (UserDAO) instance;
+	}
+	
 	/**
 	 * 
 	 * @param conn
@@ -31,7 +38,7 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 	 * @return prepared request
 	 * @throws SQLException
 	 */
-	private PreparedStatement prepareUser(Connection conn, String query, User user) throws SQLException {
+	public PreparedStatement prepareUser(Connection conn, String query, User user) throws SQLException {
 		PreparedStatement prepare = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		prepare.setString(0, user.getEmail());
 		prepare.setString(1, user.getPassword());
@@ -123,7 +130,7 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 		Connection conn = null;
 		Boolean value;
 
-		String query = "DELETE FROM kuser u WHERE u.id = ?";
+		String query = "DELETE FROM kuser WHERE id = ?";
 
 		try {
 			conn = getConnection();

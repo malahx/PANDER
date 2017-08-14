@@ -3,6 +3,9 @@
  */
 package fr.redpanda.pander.entities;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  * 
  * @author Patrice SCHOCH
@@ -68,6 +71,17 @@ public class Skill {
 		this.setId(id);
 		this.setName(name);
 		this.setType(type);
+	}
+
+	/**
+	 * @param result
+	 * @throws SQLException
+	 */
+	public Skill(ResultSet result) throws SQLException {
+		super();
+		this.setId(result.getLong("s.id"));
+		this.setName(result.getString("s.name"));
+		this.setType(result.getString("s.type"));
 	}
 
 }
