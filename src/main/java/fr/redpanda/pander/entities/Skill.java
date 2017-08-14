@@ -9,14 +9,14 @@ package fr.redpanda.pander.entities;
  *
  */
 public class Skill {
-	private String id;
+	private Long id;
 	private String name;
 	private String type;
 
 	/**
 	 * @return the id
 	 */
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -24,7 +24,7 @@ public class Skill {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -63,11 +63,11 @@ public class Skill {
 	 * @param name
 	 * @param type
 	 */
-	public Skill(String id, String name, String type) {
+	public Skill(Long id, String name, String type) {
 		super();
-		this.id = id;
-		this.name = name;
-		this.type = type;
+		this.setId(id);
+		this.setName(name);
+		this.setType(type);
 	}
 
 }
