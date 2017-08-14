@@ -41,3 +41,7 @@ bin/
 
 #Bad File
 .DS_Store
+
+#Sublime project
+*.sublime-project
+*.sublime-workspace
