@@ -5,6 +5,8 @@ package fr.redpanda.pander.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -12,7 +14,7 @@ import java.sql.SQLException;
  *
  */
 public abstract class DAOManager {
-	
+
 	private static final String DB_USER = "root";
 	private static final String DB_PASS = "";
 	private static final String DB_HOST = "localhost";
@@ -22,6 +24,10 @@ public abstract class DAOManager {
 
 	private static Connection connection = null;
 
+	/**
+	 * 
+	 * @return the active or created connection
+	 */
 	protected Connection getConnection() {
 		try {
 			if (connection == null || connection.isClosed()) {
@@ -37,5 +43,64 @@ public abstract class DAOManager {
 		}
 		return connection;
 	}
+
+	/**
+	 * 
+	 * @param connection a connection to close
+	 * @param prepares all prepare to close
+	 * @param resultSet a result set to close
+	 */
+	protected void close(Connection connection, PreparedStatement[] prepares, ResultSet resultSet) {
+		try {
+			if (resultSet != null) {
+				resultSet.close();
+			}
+			for (PreparedStatement p : prepares) {
+				if (p != null) {
+					p.close();
+				}
+			}
+			if (connection != null) {
+				connection.close();
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	/**
+	 * 
+	 * @param connection a connection to close
+	 * @param prepares a prepare to close
+	 * @param resultSet a result set to close
+	 */
+	protected void close(Connection connection, PreparedStatement prepare, ResultSet resultSet) {
+		try {
+			if (resultSet != null) {
+				resultSet.close();
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		close(connection, prepare);
+	}
 	
+	/**
+	 * 
+	 * @param connection a connection to close
+	 * @param prepares a prepare to close
+	 */
+	protected void close(Connection connection, PreparedStatement prepare) {
+		try {
+			if (prepare != null) {
+				prepare.close();
+			}
+			if (connection != null) {
+				connection.close();
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
 }
