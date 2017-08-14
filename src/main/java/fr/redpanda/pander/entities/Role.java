@@ -9,7 +9,27 @@ package fr.redpanda.pander.entities;
  *
  */
 public enum Role {
-	CANDIDATE,
-	COMPANY,
-	ADMIN
+	CANDIDATE("CANDIDATE"),
+	COMPANY("COMPANY"),
+	ADMIN("ADMIN");
+
+	private final String text;
+
+	/**
+	 * @param text
+	 */
+	private Role(final String text) {
+		this.text = text;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Enum#toString()
+	 */
+	@Override
+	public String toString() {
+		return text;
+	}
+	
 }
