@@ -1,7 +1,5 @@
 package fr.redpanda.pander.utils;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-
 import fr.redpanda.pander.entities.Role;
 
 public class StringManager {
