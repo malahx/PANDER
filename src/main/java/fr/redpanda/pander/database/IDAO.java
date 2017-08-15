@@ -14,6 +14,29 @@ public interface IDAO<T> {
 	/**
 	 * 
 	 * @param o
+	 *            the object to test
+	 * @return if the object exists
+	 */
+	public boolean checkExists(T o);
+
+	/**
+	 * 
+	 * @param id
+	 *            the id to test
+	 * @return if the id exists
+	 */
+	public boolean checkExists(Long id);
+
+	/**
+	 * @param o
+	 *            the object to test
+	 * @return if the object can be insert in the database
+	 */
+	public boolean validFields(T o);
+
+	/**
+	 * 
+	 * @param o
 	 *            the object to create on the database
 	 * @return the object created
 	 */
@@ -33,7 +56,7 @@ public interface IDAO<T> {
 	 *            the id of the data which need to be deleted
 	 * @return if the data have been deleted
 	 */
-	public boolean delete(long id);
+	public boolean delete(Long id);
 
 	/**
 	 * 

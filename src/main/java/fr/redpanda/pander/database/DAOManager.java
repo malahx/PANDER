@@ -23,8 +23,6 @@ public abstract class DAOManager {
 	private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
 
 	private static Connection connection = null;
-
-	protected static DAOManager instance;
 	
 	/**
 	 * 

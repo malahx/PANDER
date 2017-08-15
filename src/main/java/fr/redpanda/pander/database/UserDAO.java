@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.List;
 
+import fr.redpanda.pander.entities.Role;
 import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.utils.date.DateConverter;
 
@@ -20,11 +21,12 @@ import fr.redpanda.pander.utils.date.DateConverter;
  */
 public class UserDAO extends DAOManager implements IDAO<User> {
 
+	private static UserDAO instance;
 	public static UserDAO getInstance() {
 		if (instance == null) {
 			instance = new UserDAO();
 		}
-		return (UserDAO) instance;
+		return instance;
 	}
 	
 	/**
@@ -40,20 +42,89 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 	 */
 	public PreparedStatement prepareUser(Connection conn, String query, User user) throws SQLException {
 		PreparedStatement prepare = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-		prepare.setString(0, user.getEmail());
-		prepare.setString(1, user.getPassword());
-		prepare.setString(2, user.getPhone());
-		prepare.setString(3, user.getAddress());
-		prepare.setString(4, user.getPostcode());
-		prepare.setString(5, user.getCity());
-		prepare.setString(6, user.getPhoto());
-		prepare.setString(7, user.getDescription());
-		prepare.setBoolean(8, user.isDisabled());
-		prepare.setString(9, user.getRole().toString());
-		prepare.setString(10, DateConverter.getMySqlDatetime(user.getCreatedAt()));
-		prepare.setString(11, DateConverter.getMySqlDatetime(user.getUpdatedAt()));
-		prepare.setLong(12, user.getId());
+		prepare.setString(1, user.getEmail());
+		prepare.setString(2, user.getPassword());
+		prepare.setString(3, user.getPhone());
+		prepare.setString(4, user.getAddress());
+		prepare.setString(5, user.getPostcode());
+		prepare.setString(6, user.getCity());
+		prepare.setString(7, user.getPhoto());
+		prepare.setString(8, user.getDescription());
+		prepare.setBoolean(9, user.isDisabled());
+		prepare.setString(10, user.getRole().toString());
+		prepare.setString(11, DateConverter.getMySqlDatetime(user.getCreatedAt()));
+		prepare.setString(12, DateConverter.getMySqlDatetime(user.getUpdatedAt()));
+		if (user.getId() != null) {
+			prepare.setLong(13, user.getId());
+		}
 		return prepare;
+	}
+
+	/**
+	 * @param id the id to search
+	 * @return if the id exists on the database
+	 */
+	private boolean isExists(Long id) {
+		String query = "SELECT * FROM kuser WHERE id = ?";
+		boolean value = false;
+		try {
+			Connection conn = getConnection();
+			if (conn == null) {
+				return value;
+			}
+			PreparedStatement prepare = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			prepare.setLong(1, id);
+			
+			ResultSet result = prepare.executeQuery();
+			
+			while (result.next()) {
+				value = true;
+				break;
+			}
+			close(null, prepare, result);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return value;
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.redpanda.pander.database.IDAO#checkExists(java.lang.Object)
+	 */
+	@Override
+	public boolean checkExists(User user) {
+		if (user == null) {
+			return false;
+		}
+		return checkExists(user.getId());
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.redpanda.pander.database.IDAO#checkExists(java.lang.Long)
+	 */
+	@Override
+	public boolean checkExists(Long id) {
+		return id != null && id > 0 && isExists(id);
+	}
+	
+	/* (non-Javadoc)
+	 * @see fr.redpanda.pander.database.IDAO#checkExists(java.lang.Long)
+	 */	
+	@Override
+	public boolean validFields(User user) {
+		if (user == null) {
+			return false;
+		}
+
+		String email = user.getEmail();
+		String password = user.getPassword();
+		Role role = user.getRole();
+		if (email == null || email.isEmpty() || password == null || password.isEmpty() || role == null) {
+			return false;
+		}
+
+		return true;
+
 	}
 
 	/*
@@ -63,17 +134,20 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 	 */
 	@Override
 	public User create(User user) {
+		if (checkExists(user) || !validFields(user)) {
+			return null;
+		}
 		PreparedStatement prepare = null;
 		Connection conn = null;
 		ResultSet generatedKeys = null;
 
-		String query = "INSERT INTO kuser (email, password, phone, address, postcode, city, photo, description, disabled, role, createdAt, updatedAt, id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String query = "INSERT INTO kuser (email, password, phone, address, postcode, city, photo, description, disabled, role, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		try {
 			Long id = -1l;
 			conn = getConnection();
 			if (conn == null) {
-				return user;
+				return null;
 			}
 
 			Date date = new Date();
@@ -99,7 +173,7 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 			user.setUpdatedAt(null);
 			throw new RuntimeException(e);
 		} finally {
-			close(conn, prepare, generatedKeys);
+			close(null, prepare, generatedKeys);
 		}
 		return user;
 	}
@@ -111,6 +185,9 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 	 */
 	@Override
 	public User delete(User user) {
+		if (!checkExists(user)) {
+			return null;
+		}
 		if (delete(user.getId())) {
 			user.setId(null);
 			user.setCreatedAt(null);
@@ -125,7 +202,10 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 	 * @see fr.redpanda.pander.database.IDAO#delete(int)
 	 */
 	@Override
-	public boolean delete(long id) {
+	public boolean delete(Long id) {
+		if (!checkExists(id)) {
+			return false;
+		}
 		PreparedStatement prepare = null;
 		Connection conn = null;
 		Boolean value;
@@ -139,7 +219,7 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 			}
 
 			prepare = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-			prepare.setLong(0, id);
+			prepare.setLong(1, id);
 
 			int row = prepare.executeUpdate();
 
@@ -153,7 +233,7 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 			value = false;
 			throw new RuntimeException(e);
 		} finally {
-			close(conn, prepare);
+			close(null, prepare);
 		}
 		return value;
 	}
@@ -165,17 +245,20 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 	 */
 	@Override
 	public User update(User user) {
+		if (!checkExists(user) || validFields(user)) {
+			return null;
+		}
 		PreparedStatement prepare = null;
 		Connection conn = null;
 
-		String query = "UPDATE kuser SET email = ?, SET password = ?, SET phone = ?, SET address = ?, SET postcode = ?, SET city = ?, SET photo = ?, SET description = ?, SET disabled = ?, SET role = ?, SET createdAt = ?, SET updatedAt = ? WHERE id = ?";
+		String query = "UPDATE kuser SET email = ?, SET password = ?, SET phone = ?, SET address = ?, SET postcode = ?, SET city = ?, SET photo = ?, SET description = ?, SET disabled = ?, SET role = ?, SET created_at = ?, SET updated_at = ? WHERE id = ?";
 
 		Date oldDate = user.getUpdatedAt();
 
 		try {
 			conn = getConnection();
 			if (conn == null) {
-				return user;
+				return null;
 			}
 
 			user.setUpdatedAt(new Date());
@@ -192,7 +275,7 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 			user.setUpdatedAt(oldDate);
 			throw new RuntimeException(e);
 		} finally {
-			close(conn, prepare);
+			close(null, prepare);
 		}
 		return user;
 	}
