@@ -73,7 +73,7 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 			Long id = -1l;
 			conn = getConnection();
 			if (conn == null) {
-				return null;
+				return user;
 			}
 
 			Date date = new Date();
