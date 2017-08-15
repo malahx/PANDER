@@ -178,12 +178,13 @@ public class Candidate extends User {
 
 	public Candidate() {
 		super();
-		this.skills = new ArrayList<>();
+		this.setSkills(new ArrayList<>());
 	}
 
 	public Candidate(String email) {
 		super(email);
-		this.skills = new ArrayList<>();
+		this.setRole(Role.CANDIDATE);
+		this.setSkills(new ArrayList<>());
 	}
 
 	/**
@@ -193,9 +194,10 @@ public class Candidate extends User {
 	 */
 	public Candidate(String email, String firstname, String lastname) {
 		super(email);
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.skills = new ArrayList<>();
+		this.setFirstname(firstname);
+		this.setLastname(lastname);
+		this.setRole(Role.CANDIDATE);
+		this.setSkills(new ArrayList<>());
 	}
 
 	/**
@@ -213,6 +215,7 @@ public class Candidate extends User {
 		this.setCertificate2(result.getString("certificate2"));
 		this.setCv(result.getString("cv"));
 		this.setBirthdate(new Date(result.getDate("birthdate").getTime()));
+		this.setRole(Role.CANDIDATE);
 		this.setSkills(new ArrayList<>());
 	}
 

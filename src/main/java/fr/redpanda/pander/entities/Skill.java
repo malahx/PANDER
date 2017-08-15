@@ -6,6 +6,8 @@ package fr.redpanda.pander.entities;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import fr.redpanda.pander.utils.StringManager;
+
 /**
  * 
  * @author Patrice SCHOCH
@@ -14,7 +16,7 @@ import java.sql.SQLException;
 public class Skill {
 	private Long id;
 	private String name;
-	private String type;
+	private TypeSkill type;
 
 	/**
 	 * @return the id
@@ -49,7 +51,7 @@ public class Skill {
 	/**
 	 * @return the type
 	 */
-	public String getType() {
+	public TypeSkill getType() {
 		return type;
 	}
 
@@ -57,7 +59,7 @@ public class Skill {
 	 * @param type
 	 *            the type to set
 	 */
-	public void setType(String type) {
+	public void setType(TypeSkill type) {
 		this.type = type;
 	}
 
@@ -66,7 +68,17 @@ public class Skill {
 	 * @param name
 	 * @param type
 	 */
-	public Skill(Long id, String name, String type) {
+	public Skill(String name, TypeSkill type) {
+		super();
+		this.setName(name);
+		this.setType(type);
+	}
+	/**
+	 * @param id
+	 * @param name
+	 * @param type
+	 */
+	public Skill(Long id, String name, TypeSkill type) {
 		super();
 		this.setId(id);
 		this.setName(name);
@@ -81,7 +93,7 @@ public class Skill {
 		super();
 		this.setId(result.getLong("s.id"));
 		this.setName(result.getString("s.name"));
-		this.setType(result.getString("s.type"));
+		this.setType(StringManager.getTypeSkillFrom(result.getString("s.type")));
 	}
 
 }

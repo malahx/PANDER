@@ -237,7 +237,8 @@ public abstract class User {
 	 */
 	public User(String email) {
 		super();
-		this.email = email;
+		this.setEmail(email);
+		this.setDisabled(false);
 	}
 
 	/**
@@ -258,8 +259,8 @@ public abstract class User {
 		this.setDescription(result.getString("description"));
 		this.setDisabled(result.getBoolean("disabled"));
 		this.setRole(StringManager.getRoleFrom(result.getString("role")));
-		this.setCreatedAt(new Date(result.getDate("createdAt").getTime()));
-		this.setUpdatedAt(new Date(result.getDate("updatedAt").getTime()));
+		this.setCreatedAt(new Date(result.getDate("created_at").getTime()));
+		this.setUpdatedAt(new Date(result.getDate("updated_at").getTime()));
 	}
 
 	/*

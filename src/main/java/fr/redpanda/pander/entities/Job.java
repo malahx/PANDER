@@ -146,6 +146,16 @@ public class Job {
 	}
 
 	/**
+	 * 
+	 * @param name
+	 */
+	public Job(String name) {
+		super();
+		this.setName(name);
+		this.setSkills(new ArrayList<>());
+	}
+	
+	/**
 	 * @param id
 	 * @param name
 	 * @param presentation
@@ -155,17 +165,17 @@ public class Job {
 	 * @param createdAt
 	 * @param updatedAt
 	 */
-	public Job(long id, String name, String presentation, String link, String contactEmail, Date createdAt,
+	public Job(Long id, String name, String presentation, String link, String contactEmail, Date createdAt,
 			Date updatedAt) {
 		super();
-		this.id = id;
-		this.name = name;
-		this.presentation = presentation;
-		this.link = link;
-		this.contactEmail = contactEmail;
-		this.skills = new ArrayList<>();
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
+		this.setId(id);
+		this.setName(name);
+		this.setPresentation(presentation);
+		this.setLink(link);
+		this.setContactEmail(contactEmail);
+		this.setSkills(new ArrayList<>());
+		this.setCreatedAt(createdAt);
+		this.setUpdatedAt(updatedAt);
 	}
 
 	/**

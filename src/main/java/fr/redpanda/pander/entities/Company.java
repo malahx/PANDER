@@ -105,11 +105,12 @@ public class Company extends User {
 	 */
 	public Company(String name, String siret, String contact, String link) {
 		super();
-		this.name = name;
-		this.siret = siret;
-		this.contact = contact;
-		this.link = link;
-		this.jobs = new ArrayList<>();
+		this.setName(name);
+		this.setSiret(siret);
+		this.setContact(contact);
+		this.setLink(link);
+		this.setRole(Role.COMPANY);
+		this.setJobs(new ArrayList<>());
 	}
 
 	/**
@@ -122,6 +123,7 @@ public class Company extends User {
 		this.setSiret(result.getString("siret"));
 		this.setContact(result.getString("contact"));
 		this.setLink(result.getString("link"));
+		this.setRole(Role.COMPANY);
 		this.jobs = new ArrayList<>();
 	}
 
