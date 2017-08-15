@@ -13,6 +13,7 @@ import java.util.List;
 
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Skill;
+import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.utils.date.DateConverter;
 
 /**
@@ -58,12 +59,19 @@ public class CandidateDAO extends DAOManager implements IDAO<Candidate> {
 		try {
 			conn = getConnection();
 			if (conn == null) {
-				return null;
+				return candidate;
 			}
 
 			conn.setAutoCommit(false);
 
-			UserDAO.getInstance().create(candidate);
+			User user = UserDAO.getInstance().create(candidate);
+			
+			if (user.getId() == null) {
+				conn.rollback();
+				conn.setAutoCommit(true);
+				close(conn, prepare);
+				return candidate;
+			}
 
 			prepare = prepareCandidate(conn, query, candidate);
 			int row = prepare.executeUpdate();
@@ -127,7 +135,12 @@ public class CandidateDAO extends DAOManager implements IDAO<Candidate> {
 				throw new SQLException("deletion error");
 			}
 
-			UserDAO.getInstance().delete(id);
+			if (!UserDAO.getInstance().delete(id)) {
+				conn.rollback();
+				conn.setAutoCommit(true);
+				close(conn, prepare);
+				return false;
+			}
 
 			conn.commit();
 			conn.setAutoCommit(true);
