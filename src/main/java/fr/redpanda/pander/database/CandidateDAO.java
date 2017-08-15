@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import fr.redpanda.pander.entities.Candidate;
@@ -84,6 +85,12 @@ public class CandidateDAO extends DAOManager implements IDAO<Candidate> {
 			conn.setAutoCommit(true);
 
 		} catch (SQLException e) {
+			try {
+				conn.rollback();
+				conn.setAutoCommit(true);
+			} catch (SQLException e1) {
+				throw new RuntimeException(e1);
+			}
 			candidate.setId(null);
 			candidate.setCreatedAt(null);
 			candidate.setUpdatedAt(null);
@@ -149,6 +156,12 @@ public class CandidateDAO extends DAOManager implements IDAO<Candidate> {
 
 		} catch (SQLException e) {
 			value = false;
+			try {
+				conn.rollback();
+				conn.setAutoCommit(true);
+			} catch (SQLException e1) {
+				throw new RuntimeException(e1);
+			}
 			throw new RuntimeException(e);
 		} finally {
 			close(conn, prepare);
@@ -176,6 +189,16 @@ public class CandidateDAO extends DAOManager implements IDAO<Candidate> {
 
 			conn.setAutoCommit(false);
 
+			Date oldDate = candidate.getUpdatedAt();
+			UserDAO.getInstance().update(candidate);
+			
+			if (oldDate.equals(candidate.getUpdatedAt())) {
+				conn.rollback();
+				conn.setAutoCommit(false);
+				conn.close();
+				return candidate;
+			}
+
 			prepare = prepareCandidate(conn, query, candidate);
 			int row = prepare.executeUpdate();
 
@@ -183,12 +206,16 @@ public class CandidateDAO extends DAOManager implements IDAO<Candidate> {
 				throw new SQLException("update error");
 			}
 
-			UserDAO.getInstance().update(candidate);
-
 			conn.commit();
 			conn.setAutoCommit(true);
 
 		} catch (SQLException e) {
+			try {
+				conn.rollback();
+				conn.setAutoCommit(true);
+			} catch (SQLException e1) {
+				throw new RuntimeException(e1);
+			}
 			throw new RuntimeException(e);
 		} finally {
 			close(conn, prepare);
@@ -210,7 +237,7 @@ public class CandidateDAO extends DAOManager implements IDAO<Candidate> {
 		try {
 			Connection conn = getConnection();
 			if (conn == null) {
-				return null;
+				return candidates;
 			}
 			Statement state = conn.createStatement();
 			ResultSet result = state.executeQuery(query);
