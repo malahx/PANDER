@@ -8,9 +8,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import fr.redpanda.pander.entities.Candidate;
+import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.Role;
 import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.utils.date.DateConverter;
@@ -287,7 +290,41 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 	 */
 	@Override
 	public List<User> findAll() {
-		 throw new UnsupportedOperationException("Not supported yet.");
+
+		List<User> users = new ArrayList<>();
+		
+		String query = "SELECT * FROM kuser u INNER JOIN company co ON co.id_kuser = u.id INNER JOIN candidate ca ON ca.id_kuser = u.id";
+		
+		try {
+			Connection conn = getConnection();
+			if (conn == null) {
+				return null;
+			}
+
+			PreparedStatement prepare = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			
+			ResultSet result = prepare.executeQuery();
+			
+			if (result.next()) {
+				switch (result.getString("role")) {
+				case "ADMIN":
+					users.add(new User(result));
+					break;
+				case "CANDIDATE":
+					users.add(new Candidate(result));
+					break;
+				case "COMPANY":
+					users.add(new Company(result));
+					break;
+				default:
+					break;
+				}
+			}
+			close(null, prepare, result);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return users;
 	}
 
 	/*
@@ -297,7 +334,82 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 	 */
 	@Override
 	public User findBy(long id) {
-		 throw new UnsupportedOperationException("Not supported yet."); 
+
+		User user = null;
+		
+		String query = "SELECT * FROM kuser u INNER JOIN company co ON co.id_kuser = u.id INNER JOIN candidate ca ON ca.id_kuser = u.id WHERE u.id = ?";
+		
+		try {
+			Connection conn = getConnection();
+			if (conn == null) {
+				return null;
+			}
+
+			PreparedStatement prepare = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			prepare.setLong(1, id);
+			
+			ResultSet result = prepare.executeQuery();
+			
+			if (result.next()) {
+				switch (result.getString("role")) {
+				case "ADMIN":
+					user = new User(result);
+					break;
+				case "CANDIDATE":
+					user = new Candidate(result);
+					break;
+				case "COMPANY":
+					user = new Company(result);
+					break;
+				default:
+					break;
+				}
+			}
+			close(null, prepare, result);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return user;
+	}
+	
+	public User findBy(String email, String password) {
+
+		User user = null;
+		
+		String query = "SELECT * FROM kuser u INNER JOIN company co ON co.id_kuser = u.id INNER JOIN candidate ca ON ca.id_kuser = u.id WHERE u.email = ? AND u.password = ?";
+		
+		try {
+			Connection conn = getConnection();
+			if (conn == null) {
+				return null;
+			}
+
+			PreparedStatement prepare = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+			prepare.setString(1, email);
+			prepare.setString(2, password);
+			
+			ResultSet result = prepare.executeQuery();
+			
+			if (result.next()) {
+				switch (result.getString("role")) {
+				case "ADMIN":
+					user = new User(result);
+					break;
+				case "CANDIDATE":
+					user = new Candidate(result);
+					break;
+				case "COMPANY":
+					user = new Company(result);
+					break;
+				default:
+					break;
+				}
+			}
+			close(null, prepare, result);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return user;
 	}
 
 }
