@@ -15,11 +15,12 @@ import java.sql.Statement;
  */
 public abstract class DAOManager {
 
+
+	private static String dbName = "pander";
+
 	private static final String DB_USER = "root";
 	private static final String DB_PASS = "";
 	private static final String DB_HOST = "localhost";
-	private static final String DB_NAME = "pander";
-	private static final String DB_URL = "jdbc:mysql://" + DB_HOST + "/" + DB_NAME + "?noAccessToProcedureBodies=true";
 	private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
 
 	private static Connection connection = null;
@@ -36,7 +37,7 @@ public abstract class DAOManager {
 				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 					throw new RuntimeException(e);
 				}
-				connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASS);
+				connection = DriverManager.getConnection(getUrl(), DB_USER, DB_PASS);
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -101,6 +102,28 @@ public abstract class DAOManager {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	/**
+	 * @return the dbName
+	 */
+	public static String getDbName() {
+		return dbName;
+	}
+
+	/**
+	 * @param dbName the dbName to set
+	 */
+	public static void setDbName(String dbName) {
+		DAOManager.dbName = dbName;
+	}
+	
+	/**
+	 * 
+	 * @return the url
+	 */
+	private static String getUrl() {
+		return "jdbc:mysql://" + DB_HOST + "/" + dbName + "?noAccessToProcedureBodies=true";
 	}
 
 }

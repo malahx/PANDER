@@ -4,11 +4,11 @@
 
 
 #------------------------------------------------------------
-# DataBase: pander
+# DataBase: panderTest
 #------------------------------------------------------------
-DROP DATABASE IF EXISTS pander;
-CREATE DATABASE IF NOT EXISTS pander;
-USE pander;
+DROP DATABASE IF EXISTS panderTest;
+CREATE DATABASE IF NOT EXISTS panderTest;
+USE panderTest;
 
 #------------------------------------------------------------
 # Table: kuser

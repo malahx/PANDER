@@ -13,7 +13,7 @@ import fr.redpanda.pander.EntitiesCreation;
  * @author Gwénolé LE HENAFF
  *
  */
-public class UserDAOTest extends EntitiesCreation {
+public class daoTest extends EntitiesCreation {
 
 	@Test
 	public void testCandidate() {
@@ -23,7 +23,7 @@ public class UserDAOTest extends EntitiesCreation {
 		assertNotNull(candidate.getCreatedAt());
 		assertNotNull(candidate.getUpdatedAt());
 		
-		//assertNull(CandidateDAO.getInstance().create(candidate));
+		assertNull(CandidateDAO.getInstance().create(candidate));
 
 		assertNotNull(CandidateDAO.getInstance().delete(candidate));
 		assertNull(candidate.getId());
