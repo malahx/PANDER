@@ -14,7 +14,7 @@ import fr.redpanda.pander.utils.StringManager;
  * @author Gwénolé LE HENAFF
  *
  */
-public abstract class User {
+public class User {
 
 	protected Long id;
 	protected String email;
@@ -259,8 +259,8 @@ public abstract class User {
 		this.setDescription(result.getString("description"));
 		this.setDisabled(result.getBoolean("disabled"));
 		this.setRole(StringManager.getRoleFrom(result.getString("role")));
-		this.setCreatedAt(new Date(result.getDate("created_at").getTime()));
-		this.setUpdatedAt(new Date(result.getDate("updated_at").getTime()));
+		this.setCreatedAt(result.getTimestamp("created_at"));
+		this.setUpdatedAt(result.getTimestamp("updated_at"));
 	}
 
 	/*

@@ -214,7 +214,7 @@ public class Candidate extends User {
 		this.setCertificate1(result.getString("certificate1"));
 		this.setCertificate2(result.getString("certificate2"));
 		this.setCv(result.getString("cv"));
-		this.setBirthdate(new Date(result.getDate("birthdate").getTime()));
+		this.setBirthdate(result.getTimestamp("birthdate"));
 		this.setRole(Role.CANDIDATE);
 		this.setSkills(new ArrayList<>());
 	}
