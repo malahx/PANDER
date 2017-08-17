@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.redpanda.pander.controller;
+package fr.redpanda.pander.controllers;
 
 import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.utils.observer.Observer;

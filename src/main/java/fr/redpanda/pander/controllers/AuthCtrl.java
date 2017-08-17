@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.redpanda.pander.controller;
+package fr.redpanda.pander.controllers;
 
 import fr.redpanda.pander.database.UserDAO;
 import fr.redpanda.pander.entities.Candidate;

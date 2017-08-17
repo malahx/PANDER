@@ -3,8 +3,8 @@
  */
 package fr.redpanda.pander;
 
-import fr.redpanda.pander.controller.AuthCtrl;
-import fr.redpanda.pander.controller.MainCtrl;
+import fr.redpanda.pander.controllers.AuthCtrl;
+import fr.redpanda.pander.controllers.MainCtrl;
 
 /**
  * @author Gwénolé LE HENAFF
