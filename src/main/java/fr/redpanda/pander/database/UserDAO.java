@@ -376,7 +376,7 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 
 		User user = null;
 		
-		String query = "SELECT * FROM kuser u INNER JOIN company co ON co.id_kuser = u.id INNER JOIN candidate ca ON ca.id_kuser = u.id WHERE u.email = ? AND u.password = ?";
+		String query = "SELECT * FROM kuser u LEFT JOIN company co ON co.id_kuser = u.id LEFT JOIN candidate ca ON ca.id_kuser = u.id WHERE u.email = ? AND u.password = ?";
 		
 		try {
 			Connection conn = getConnection();
