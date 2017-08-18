@@ -3,27 +3,34 @@
  */
 package fr.redpanda.pander.controllers;
 
+import javax.swing.JFrame;
+
 import fr.redpanda.pander.entities.User;
-import fr.redpanda.pander.utils.observer.Observer;
 
 /**
  * @author Gwénolé LE HENAFF
  *
  */
-public abstract class MainCtrl implements Observer {
+public abstract class MainCtrl {
 
+	protected JFrame frame;
 	private static User loggedUser;
-	private static MainCtrl mainCtrl;
 
 	protected void gotoAuth() {
-		setMainCtrl(new AuthCtrl());
+		new AuthCtrl(frame);
 	}
 
-	protected void gotoMatching() {}
+	protected void gotoMatching() {
+		//new MatchingCtrl(frame);
+	}
 
-	protected void gotoProfile() {}
+	protected void gotoProfile() {
+		new HomeCtrl(frame);
+	}
 	
-	protected void gotoAdmin() {}
+	protected void gotoAdmin() {
+		new AdminCtrl(frame);
+	}
 
 	protected void exit() {}
 
@@ -42,20 +49,6 @@ public abstract class MainCtrl implements Observer {
 	 */
 	public static void setLoggedUser(User loggedUser) {
 		MainCtrl.loggedUser = loggedUser;
-	}
-
-	/**
-	 * @return the mainCtrl
-	 */
-	public static MainCtrl getMainCtrl() {
-		return mainCtrl;
-	}
-
-	/**
-	 * @param mainCtrl the mainCtrl to set
-	 */
-	public static void setMainCtrl(MainCtrl mainCtrl) {
-		MainCtrl.mainCtrl = mainCtrl;
 	}
 
 	public MainCtrl() {
