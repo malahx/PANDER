@@ -3,7 +3,6 @@
  */
 package fr.redpanda.pander.utils.views;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -25,7 +24,6 @@ public class ViewUtils {
 	 */
 	public static void configure(JFrame frame, JPanel panel) {
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
-		panel.setLayout(new BorderLayout(0, 0));
 		frame.setContentPane(panel);
 	}
 	
