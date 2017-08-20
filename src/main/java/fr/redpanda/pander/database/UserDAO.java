@@ -248,13 +248,13 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 	 */
 	@Override
 	public User update(User user) {
-		if (!checkExists(user) || validFields(user)) {
+		if (!checkExists(user) || !validFields(user)) {
 			return null;
 		}
 		PreparedStatement prepare = null;
 		Connection conn = null;
 
-		String query = "UPDATE kuser SET email = ?, SET password = ?, SET phone = ?, SET address = ?, SET postcode = ?, SET city = ?, SET photo = ?, SET description = ?, SET disabled = ?, SET role = ?, SET created_at = ?, SET updated_at = ? WHERE id = ?";
+		String query = "UPDATE kuser SET email = ?, password = ?, phone = ?, address = ?, postcode = ?, city = ?, photo = ?, description = ?, disabled = ?, role = ?, created_at = ?, updated_at = ? WHERE id = ?";
 
 		Date oldDate = user.getUpdatedAt();
 
@@ -293,7 +293,7 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 
 		List<User> users = new ArrayList<>();
 		
-		String query = "SELECT * FROM kuser u INNER JOIN company co ON co.id_kuser = u.id INNER JOIN candidate ca ON ca.id_kuser = u.id";
+		String query = "SELECT * FROM kuser u LEFT JOIN company co ON co.id_kuser = u.id LEFT JOIN candidate ca ON ca.id_kuser = u.id";
 		
 		try {
 			Connection conn = getConnection();
@@ -337,7 +337,7 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 
 		User user = null;
 		
-		String query = "SELECT * FROM kuser u INNER JOIN company co ON co.id_kuser = u.id INNER JOIN candidate ca ON ca.id_kuser = u.id WHERE u.id = ?";
+		String query = "SELECT * FROM kuser u LEFT JOIN company co ON co.id_kuser = u.id LEFT JOIN candidate ca ON ca.id_kuser = u.id WHERE u.id = ?";
 		
 		try {
 			Connection conn = getConnection();
