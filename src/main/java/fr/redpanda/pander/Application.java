@@ -3,11 +3,7 @@
  */
 package fr.redpanda.pander;
 
-import javax.swing.JFrame;
-
-import fr.redpanda.pander.controllers.AuthCtrl;
-import fr.redpanda.pander.controllers.MainCtrl;
-import fr.redpanda.pander.utils.views.ViewUtils;
+import fr.redpanda.pander.managers.ViewsManager;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -20,10 +16,8 @@ public class Application {
 	 */
 	public static void main(String[] args) {
 
-		JFrame frame = new JFrame();
-		ViewUtils.configure(frame);
-		new AuthCtrl(frame);
-
+		ViewsManager.getInstance().start();
+		
 	}
 
 }
