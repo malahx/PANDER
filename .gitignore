@@ -49,3 +49,5 @@ bin/
 #miglayout
 miglayout-src.zip
 miglayout15-swing.jar
+
+*.checkstyle
