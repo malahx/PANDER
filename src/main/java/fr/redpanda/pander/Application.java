@@ -3,8 +3,7 @@
  */
 package fr.redpanda.pander;
 
-import fr.redpanda.pander.controllers.AuthCtrl;
-import fr.redpanda.pander.controllers.MainCtrl;
+import fr.redpanda.pander.managers.ViewsManager;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -17,8 +16,8 @@ public class Application {
 	 */
 	public static void main(String[] args) {
 
-		MainCtrl.setMainCtrl(new AuthCtrl());
-
+		ViewsManager.getInstance().start();
+		
 	}
 
 }
