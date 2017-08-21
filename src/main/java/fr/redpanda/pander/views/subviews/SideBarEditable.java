@@ -1,4 +1,4 @@
-package fr.redpanda.pander.views;
+package fr.redpanda.pander.views.subviews;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
