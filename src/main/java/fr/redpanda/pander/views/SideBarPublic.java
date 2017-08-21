@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SideBar2 extends JFrame {
+public class SideBarPublic extends JFrame {
 
 	private JPanel contentPane;
 
@@ -27,7 +27,7 @@ public class SideBar2 extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					SideBar2 frame = new SideBar2();
+					SideBarPublic frame = new SideBarPublic();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,7 +39,7 @@ public class SideBar2 extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SideBar2() {
+	public SideBarPublic() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 350, 600);
 		contentPane = new JPanel();
