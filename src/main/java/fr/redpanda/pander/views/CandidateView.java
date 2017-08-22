@@ -16,7 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
-public class CandidateProfile extends JFrame {
+public class CandidateView extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textField;
@@ -32,7 +32,7 @@ public class CandidateProfile extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CandidateProfile frame = new CandidateProfile();
+					CandidateView frame = new CandidateView();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +44,7 @@ public class CandidateProfile extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CandidateProfile() {
+	public CandidateView() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 600);
 		contentPane = new JPanel();
