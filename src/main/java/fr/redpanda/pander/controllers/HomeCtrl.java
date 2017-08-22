@@ -11,7 +11,7 @@ import fr.redpanda.pander.views.HomeView;
  * @author Gwénolé LE HENAFF
  *
  */
-public class HomeCtrl extends BaseCtrl {
+public class HomeCtrl extends MainCtrl {
 
 	/**
 	 * 

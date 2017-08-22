@@ -3,12 +3,13 @@
  */
 package fr.redpanda.pander.views.subviews;
 
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
@@ -23,6 +24,9 @@ public class Navbar extends JPanel {
 	 */
 	private static final long serialVersionUID = -9170488463090549030L;
 
+	private JToggleButton tglbtnProfile;
+	private JToggleButton tglbtnHome;
+	private JToggleButton tglbtnMatching;
 	private JLabel lblLogopander;
 	private JLabel lblLogouser;
 	private JPanel pnlNav;
@@ -30,6 +34,51 @@ public class Navbar extends JPanel {
 	private JPanel panel;
 	private JLabel lblPander;
 	private JLabel lblUser;
+
+	/**
+	 * @return the tglbtnProfile
+	 */
+	public JToggleButton getTglbtnProfile() {
+		return tglbtnProfile;
+	}
+
+	/**
+	 * @param tglbtnProfile
+	 *            the tglbtnProfile to set
+	 */
+	public void setTglbtnProfile(JToggleButton tglbtnProfile) {
+		this.tglbtnProfile = tglbtnProfile;
+	}
+
+	/**
+	 * @return the tglbtnHome
+	 */
+	public JToggleButton getTglbtnHome() {
+		return tglbtnHome;
+	}
+
+	/**
+	 * @param tglbtnHome
+	 *            the tglbtnHome to set
+	 */
+	public void setTglbtnHome(JToggleButton tglbtnHome) {
+		this.tglbtnHome = tglbtnHome;
+	}
+
+	/**
+	 * @return the tglbtnMatching
+	 */
+	public JToggleButton getTglbtnMatching() {
+		return tglbtnMatching;
+	}
+
+	/**
+	 * @param tglbtnMatching
+	 *            the tglbtnMatching to set
+	 */
+	public void setTglbtnMatching(JToggleButton tglbtnMatching) {
+		this.tglbtnMatching = tglbtnMatching;
+	}
 
 	/**
 	 * @return the lblLogopander
@@ -210,13 +259,13 @@ public class Navbar extends JPanel {
 		pnlNav.add(pnlButton, gbc_pnlButton);
 		pnlButton.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JToggleButton tglbtnHome = new JToggleButton("Accueil");
+		tglbtnHome = new JToggleButton("Accueil");
 		pnlButton.add(tglbtnHome);
 
-		JToggleButton tglbtnProfile = new JToggleButton("Profile");
+		tglbtnProfile = new JToggleButton("Profile");
 		pnlButton.add(tglbtnProfile);
 
-		JToggleButton tglbtnMatching = new JToggleButton("Matching");
+		tglbtnMatching = new JToggleButton("Matching");
 		pnlButton.add(tglbtnMatching);
 
 		lblLogouser = new JLabel("LogoUser");

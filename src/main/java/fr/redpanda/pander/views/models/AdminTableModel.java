@@ -105,33 +105,51 @@ public class AdminTableModel extends AbstractTableModel {
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		Object object = objects.get(rowIndex);
 		if (object instanceof User) {
-			User user = (User) object;
-			switch (columnIndex) {
-			case 0:
-				return user.isDisabled();
-			case 1:
-				return user.getEmail();
-	
-			case 2:
-				Date createdAt = user.getCreatedAt();
-				Date updateAt = user.getUpdatedAt();
-				return updateAt != null ? updateAt : (createdAt != null ? createdAt : new Date());
-			default:
-				throw new IllegalArgumentException();
-			}
+			return getValueAt((User) object, columnIndex);
 		}
 		if (object instanceof Skill) {
-			Skill skill = (Skill) object;
-			switch (columnIndex) {
-			case 0:
-				return skill.getName();
-			case 1:
-				return skill.getType().toString();
-			default:
-				throw new IllegalArgumentException();
-			}
+			return getValueAt((Skill) object, columnIndex);
 		}
 		return object;
+	}
+	
+	/**
+	 * 
+	 * @param user the object to draw
+	 * @param columnIndex the index column to show
+	 * @return the value of the object
+	 */
+	public Object getValueAt(User user, int columnIndex) {
+		switch (columnIndex) {
+		case 0:
+			return user.isDisabled();
+		case 1:
+			return user.getEmail();
+
+		case 2:
+			Date createdAt = user.getCreatedAt();
+			Date updateAt = user.getUpdatedAt();
+			return updateAt != null ? updateAt : (createdAt != null ? createdAt : new Date());
+		default:
+			throw new IllegalArgumentException();
+		}
+	}
+	
+	/**
+	 * 
+	 * @param user the object to draw
+	 * @param columnIndex the index column to show
+	 * @return the value of the object
+	 */
+	public Object getValueAt(Skill skill, int columnIndex) {
+		switch (columnIndex) {
+		case 0:
+			return skill.getName();
+		case 1:
+			return skill.getType().toString();
+		default:
+			throw new IllegalArgumentException();
+		}
 	}
 
 }
