@@ -13,52 +13,184 @@ import fr.redpanda.pander.views.subviews.SidebarEditable;
 import fr.redpanda.pander.views.subviews.SidebarPublic;
 
 public abstract class MainView extends BaseView implements IMainView {
-	
+
+	private JPanel pnlNavbar;
+	private JPanel pnlSidebar;
+	private JPanel pnlContent;
+	private JPanel pnlFooter;
+
 	private Navbar navbar;
 	private Sidebar sidebar;
 	private Footer footer;
 
 	/**
+	 * @return the pnlNavbar
+	 */
+	public JPanel getPnlNavbar() {
+		return pnlNavbar;
+	}
+
+	/**
+	 * @param pnlNavbar
+	 *            the pnlNavbar to set
+	 */
+	public void setPnlNavbar(JPanel pnlNavbar) {
+		this.pnlNavbar = pnlNavbar;
+	}
+
+	/**
+	 * @return the pnlSidebar
+	 */
+	public JPanel getPnlSidebar() {
+		return pnlSidebar;
+	}
+
+	/**
+	 * @param pnlSidebar
+	 *            the pnlSidebar to set
+	 */
+	public void setPnlSidebar(JPanel pnlSidebar) {
+		this.pnlSidebar = pnlSidebar;
+	}
+
+	/**
+	 * @return the pnlContent
+	 */
+	public JPanel getPnlContent() {
+		return pnlContent;
+	}
+
+	/**
+	 * @param pnlContent
+	 *            the pnlContent to set
+	 */
+	public void setPnlContent(JPanel pnlContent) {
+		this.pnlContent = pnlContent;
+	}
+
+	/**
+	 * @return the pnlFooter
+	 */
+	public JPanel getPnlFooter() {
+		return pnlFooter;
+	}
+
+	/**
+	 * @param pnlFooter
+	 *            the pnlFooter to set
+	 */
+	public void setPnlFooter(JPanel pnlFooter) {
+		this.pnlFooter = pnlFooter;
+	}
+
+	/**
+	 * @return the navbar
+	 */
+	public Navbar getNavbar() {
+		return navbar;
+	}
+
+	/**
+	 * @param navbar
+	 *            the navbar to set
+	 */
+	public void setNavbar(Navbar navbar) {
+		this.navbar = navbar;
+	}
+
+	/**
+	 * @return the sidebar
+	 */
+	public Sidebar getSidebar() {
+		return sidebar;
+	}
+
+	/**
+	 * @param sidebar
+	 *            the sidebar to set
+	 */
+	public void setSidebar(Sidebar sidebar) {
+		this.sidebar = sidebar;
+	}
+
+	/**
+	 * @return the footer
+	 */
+	public Footer getFooter() {
+		return footer;
+	}
+
+	/**
+	 * @param footer
+	 *            the footer to set
+	 */
+	public void setFooter(Footer footer) {
+		this.footer = footer;
+	}
+
+	/**
 	 * Create the frame.
 	 */
 	public MainView() {
-		
+		super.contentPane = new JPanel();
+
 		navbar = new Navbar();
 		sidebar = isEditable() ? new SidebarEditable() : new SidebarPublic();
 		footer = new Footer();
-		
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] { 0, 0, 0 };
+		gbl_contentPane.columnWidths = new int[] { 300, 0 };
 		gbl_contentPane.rowHeights = new int[] { 0, 0, 0 };
-		gbl_contentPane.columnWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
-		gbl_contentPane.rowWeights = new double[] { 0.0, 1.0, Double.MIN_VALUE };
+		gbl_contentPane.columnWeights = new double[] { 0.0, 1.0 };
+		gbl_contentPane.rowWeights = new double[] { 0.0, 1.0, 0.0 };
 		contentPane.setLayout(gbl_contentPane);
 
-		JPanel pnlNavbar = navbar;
+		pnlNavbar = navbar;
 		GridBagConstraints gbc_pnlNavbar = new GridBagConstraints();
 		gbc_pnlNavbar.gridwidth = 2;
-		gbc_pnlNavbar.insets = new Insets(0, 0, 5, 5);
-		gbc_pnlNavbar.fill = GridBagConstraints.BOTH;
+		gbc_pnlNavbar.insets = new Insets(0, 0, 5, 0);
+		gbc_pnlNavbar.anchor = GridBagConstraints.WEST;
+		gbc_pnlNavbar.fill = GridBagConstraints.HORIZONTAL;
 		gbc_pnlNavbar.gridx = 0;
 		gbc_pnlNavbar.gridy = 0;
 		contentPane.add(pnlNavbar, gbc_pnlNavbar);
 
-		JPanel pnlSidebar = sidebar;
+		pnlSidebar = sidebar;
 		GridBagConstraints gbc_pnlSidebar = new GridBagConstraints();
-		gbc_pnlSidebar.weightx = 300.0;
-		gbc_pnlSidebar.insets = new Insets(0, 0, 0, 5);
-		gbc_pnlSidebar.fill = GridBagConstraints.BOTH;
+		gbc_pnlSidebar.gridheight = 2;
+		gbc_pnlSidebar.insets = new Insets(0, 0, 5, 5);
+		gbc_pnlSidebar.anchor = GridBagConstraints.WEST;
+		gbc_pnlSidebar.fill = GridBagConstraints.VERTICAL;
 		gbc_pnlSidebar.gridx = 0;
 		gbc_pnlSidebar.gridy = 1;
 		contentPane.add(pnlSidebar, gbc_pnlSidebar);
 
-		JPanel pnlContent = new JPanel();
+		pnlContent = new JPanel();
 		GridBagConstraints gbc_pnlContent = new GridBagConstraints();
+		gbc_pnlContent.insets = new Insets(0, 0, 5, 0);
 		gbc_pnlContent.fill = GridBagConstraints.BOTH;
 		gbc_pnlContent.gridx = 1;
 		gbc_pnlContent.gridy = 1;
 		contentPane.add(pnlContent, gbc_pnlContent);
-		
+
+		pnlFooter = new JPanel();
+		GridBagConstraints gbc_pnlFooter = new GridBagConstraints();
+		gbc_pnlFooter.insets = new Insets(0, 0, 0, 5);
+		gbc_pnlFooter.anchor = GridBagConstraints.WEST;
+		gbc_pnlFooter.fill = GridBagConstraints.HORIZONTAL;
+		gbc_pnlFooter.gridx = 1;
+		gbc_pnlFooter.gridy = 2;
+		contentPane.add(pnlFooter, gbc_pnlFooter);
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.views.IMainView#isEditable()
+	 */
+	@Override
+	public boolean isEditable() {
+		return false;
 	}
 
 }
