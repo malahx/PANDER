@@ -11,6 +11,11 @@ import javax.swing.JTextField;
 
 public class SidebarEditable extends Sidebar {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7876599813851320634L;
+	
 	private JTextField txtDescriptionTitle;
 	private JTextField txtCP;
 	private JTextField txtCity;
@@ -183,7 +188,7 @@ public class SidebarEditable extends Sidebar {
 		gbl_contentPane.columnWeights = new double[] { 1.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
 		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		contentPane.setLayout(gbl_contentPane);
+		setLayout(gbl_contentPane);
 
 		JLabel lblPhoto = new JLabel("PHOTO");
 		GridBagConstraints gbc_lblPhoto = new GridBagConstraints();
@@ -191,7 +196,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblPhoto.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPhoto.gridx = 0;
 		gbc_lblPhoto.gridy = 2;
-		contentPane.add(lblPhoto, gbc_lblPhoto);
+		add(lblPhoto, gbc_lblPhoto);
 
 		JLabel lblNameOne = new JLabel("Name1");
 		lblNameOne.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
@@ -201,7 +206,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblNameOne.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNameOne.gridx = 1;
 		gbc_lblNameOne.gridy = 2;
-		contentPane.add(lblNameOne, gbc_lblNameOne);
+		add(lblNameOne, gbc_lblNameOne);
 
 		txtNameOne = new JTextField();
 		GridBagConstraints gbc_txtNameOne = new GridBagConstraints();
@@ -210,7 +215,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_txtNameOne.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtNameOne.gridx = 3;
 		gbc_txtNameOne.gridy = 2;
-		contentPane.add(txtNameOne, gbc_txtNameOne);
+		add(txtNameOne, gbc_txtNameOne);
 		txtNameOne.setColumns(10);
 
 		JLabel jlblNameTwo = new JLabel("Name2");
@@ -221,7 +226,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_jlblNameTwo.insets = new Insets(0, 0, 5, 5);
 		gbc_jlblNameTwo.gridx = 1;
 		gbc_jlblNameTwo.gridy = 3;
-		contentPane.add(jlblNameTwo, gbc_jlblNameTwo);
+		add(jlblNameTwo, gbc_jlblNameTwo);
 
 		txtNameTwo = new JTextField();
 		GridBagConstraints gbc_txtNameTwo = new GridBagConstraints();
@@ -230,7 +235,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_txtNameTwo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtNameTwo.gridx = 3;
 		gbc_txtNameTwo.gridy = 3;
-		contentPane.add(txtNameTwo, gbc_txtNameTwo);
+		add(txtNameTwo, gbc_txtNameTwo);
 		txtNameTwo.setColumns(10);
 
 		JLabel lblDescriptionTitle = new JLabel("DESCRIPTION");
@@ -240,7 +245,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblDescriptionTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDescriptionTitle.gridx = 0;
 		gbc_lblDescriptionTitle.gridy = 5;
-		contentPane.add(lblDescriptionTitle, gbc_lblDescriptionTitle);
+		add(lblDescriptionTitle, gbc_lblDescriptionTitle);
 
 		txtDescriptionTitle = new JTextField();
 		GridBagConstraints gbc_txtDescriptionTitle = new GridBagConstraints();
@@ -249,7 +254,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_txtDescriptionTitle.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtDescriptionTitle.gridx = 0;
 		gbc_txtDescriptionTitle.gridy = 6;
-		contentPane.add(txtDescriptionTitle, gbc_txtDescriptionTitle);
+		add(txtDescriptionTitle, gbc_txtDescriptionTitle);
 		txtDescriptionTitle.setColumns(10);
 
 		JLabel lblCoordonateTittle = new JLabel("COORDONNEES");
@@ -259,7 +264,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblCoordonateTittle.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCoordonateTittle.gridx = 0;
 		gbc_lblCoordonateTittle.gridy = 8;
-		contentPane.add(lblCoordonateTittle, gbc_lblCoordonateTittle);
+		add(lblCoordonateTittle, gbc_lblCoordonateTittle);
 
 		JLabel lblAdressTitle = new JLabel("Adresse ");
 		lblAdressTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
@@ -268,7 +273,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblAdressTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_lblAdressTitle.gridx = 0;
 		gbc_lblAdressTitle.gridy = 9;
-		contentPane.add(lblAdressTitle, gbc_lblAdressTitle);
+		add(lblAdressTitle, gbc_lblAdressTitle);
 
 		txtAdress = new JTextField();
 		GridBagConstraints gbc_textAdress = new GridBagConstraints();
@@ -277,7 +282,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_textAdress.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textAdress.gridx = 1;
 		gbc_textAdress.gridy = 9;
-		contentPane.add(txtAdress, gbc_textAdress);
+		add(txtAdress, gbc_textAdress);
 		txtAdress.setColumns(10);
 
 		JLabel lblCpTitle = new JLabel("Code Postal");
@@ -287,7 +292,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblCpTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCpTitle.gridx = 0;
 		gbc_lblCpTitle.gridy = 10;
-		contentPane.add(lblCpTitle, gbc_lblCpTitle);
+		add(lblCpTitle, gbc_lblCpTitle);
 
 		txtCP = new JTextField();
 		GridBagConstraints gbc_textCP = new GridBagConstraints();
@@ -296,7 +301,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_textCP.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textCP.gridx = 1;
 		gbc_textCP.gridy = 10;
-		contentPane.add(txtCP, gbc_textCP);
+		add(txtCP, gbc_textCP);
 		txtCP.setColumns(10);
 
 		JLabel lblCityTitle = new JLabel("Ville");
@@ -306,7 +311,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblCityTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCityTitle.gridx = 0;
 		gbc_lblCityTitle.gridy = 11;
-		contentPane.add(lblCityTitle, gbc_lblCityTitle);
+		add(lblCityTitle, gbc_lblCityTitle);
 
 		txtCity = new JTextField();
 		GridBagConstraints gbc_textCity = new GridBagConstraints();
@@ -315,7 +320,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_textCity.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textCity.gridx = 1;
 		gbc_textCity.gridy = 11;
-		contentPane.add(txtCity, gbc_textCity);
+		add(txtCity, gbc_textCity);
 		txtCity.setColumns(10);
 
 		JLabel lblPhoneTitle = new JLabel("Téléphone");
@@ -325,7 +330,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblPhoneTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPhoneTitle.gridx = 0;
 		gbc_lblPhoneTitle.gridy = 12;
-		contentPane.add(lblPhoneTitle, gbc_lblPhoneTitle);
+		add(lblPhoneTitle, gbc_lblPhoneTitle);
 
 		txtPhone = new JTextField();
 		GridBagConstraints gbc_textPhone = new GridBagConstraints();
@@ -334,7 +339,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_textPhone.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textPhone.gridx = 1;
 		gbc_textPhone.gridy = 12;
-		contentPane.add(txtPhone, gbc_textPhone);
+		add(txtPhone, gbc_textPhone);
 		txtPhone.setColumns(10);
 
 		JLabel lblMailTitle = new JLabel("E-Mail");
@@ -344,7 +349,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblMailTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMailTitle.gridx = 0;
 		gbc_lblMailTitle.gridy = 13;
-		contentPane.add(lblMailTitle, gbc_lblMailTitle);
+		add(lblMailTitle, gbc_lblMailTitle);
 
 		txtMail = new JTextField();
 		GridBagConstraints gbc_textMail = new GridBagConstraints();
@@ -353,7 +358,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_textMail.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textMail.gridx = 1;
 		gbc_textMail.gridy = 13;
-		contentPane.add(txtMail, gbc_textMail);
+		add(txtMail, gbc_textMail);
 		txtMail.setColumns(10);
 
 		JLabel lblSocialLinks = new JLabel("SOCIAL LINKS");
@@ -363,7 +368,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblSocialLinks.insets = new Insets(0, 0, 5, 5);
 		gbc_lblSocialLinks.gridx = 0;
 		gbc_lblSocialLinks.gridy = 15;
-		contentPane.add(lblSocialLinks, gbc_lblSocialLinks);
+		add(lblSocialLinks, gbc_lblSocialLinks);
 
 		JLabel lblLink1Title = new JLabel("Link 1");
 		lblLink1Title.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
@@ -372,7 +377,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblLink1Title.insets = new Insets(0, 0, 5, 5);
 		gbc_lblLink1Title.gridx = 0;
 		gbc_lblLink1Title.gridy = 16;
-		contentPane.add(lblLink1Title, gbc_lblLink1Title);
+		add(lblLink1Title, gbc_lblLink1Title);
 
 		txtLink1 = new JTextField();
 		GridBagConstraints gbc_textLink1 = new GridBagConstraints();
@@ -381,7 +386,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_textLink1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textLink1.gridx = 1;
 		gbc_textLink1.gridy = 16;
-		contentPane.add(txtLink1, gbc_textLink1);
+		add(txtLink1, gbc_textLink1);
 		txtLink1.setColumns(10);
 
 		JLabel lblLinkTitle = new JLabel("Link 2 / Contact");
@@ -391,7 +396,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblLinkTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_lblLinkTitle.gridx = 0;
 		gbc_lblLinkTitle.gridy = 17;
-		contentPane.add(lblLinkTitle, gbc_lblLinkTitle);
+		add(lblLinkTitle, gbc_lblLinkTitle);
 
 		txtLink2 = new JTextField();
 		GridBagConstraints gbc_textLink2 = new GridBagConstraints();
@@ -400,7 +405,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_textLink2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textLink2.gridx = 1;
 		gbc_textLink2.gridy = 17;
-		contentPane.add(txtLink2, gbc_textLink2);
+		add(txtLink2, gbc_textLink2);
 		txtLink2.setColumns(10);
 
 		JLabel lblCurriculumVitae = new JLabel("CURRICULUM VITAE");
@@ -409,7 +414,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblCurriculumVitae.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCurriculumVitae.gridx = 0;
 		gbc_lblCurriculumVitae.gridy = 19;
-		contentPane.add(lblCurriculumVitae, gbc_lblCurriculumVitae);
+		add(lblCurriculumVitae, gbc_lblCurriculumVitae);
 
 		JButton btnTelechargCV = new JButton("Télécharger");
 		btnTelechargCV.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
@@ -417,7 +422,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_btnTelechargCV.insets = new Insets(0, 0, 5, 5);
 		gbc_btnTelechargCV.gridx = 0;
 		gbc_btnTelechargCV.gridy = 20;
-		contentPane.add(btnTelechargCV, gbc_btnTelechargCV);
+		add(btnTelechargCV, gbc_btnTelechargCV);
 
 		JButton btnSeeCV = new JButton("Voir");
 		btnSeeCV.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
@@ -425,14 +430,14 @@ public class SidebarEditable extends Sidebar {
 		gbc_btnSeeCV.insets = new Insets(0, 0, 5, 0);
 		gbc_btnSeeCV.gridx = 4;
 		gbc_btnSeeCV.gridy = 20;
-		contentPane.add(btnSeeCV, gbc_btnSeeCV);
+		add(btnSeeCV, gbc_btnSeeCV);
 
 		JLabel label = new JLabel("");
 		GridBagConstraints gbc_label = new GridBagConstraints();
 		gbc_label.insets = new Insets(0, 0, 5, 5);
 		gbc_label.gridx = 0;
 		gbc_label.gridy = 22;
-		contentPane.add(label, gbc_label);
+		add(label, gbc_label);
 	}
 
 }

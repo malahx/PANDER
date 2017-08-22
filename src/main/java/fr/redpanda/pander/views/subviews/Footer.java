@@ -9,11 +9,13 @@ import javax.swing.JPanel;
  * @author Gwénolé LE HENAFF
  *
  */
-public abstract class Sidebar extends JPanel {
-	
+public class Footer extends JPanel {
+
 	/**
-	 * 
+	 * Create the panel.
 	 */
-	private static final long serialVersionUID = -3102325959457435902L;
-	
+	public Footer() {
+
+	}
+
 }
