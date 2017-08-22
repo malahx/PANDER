@@ -26,7 +26,7 @@ public abstract class BaseView implements IBaseView {
 
 	@Override
 	public void loadView(JFrame frame) {
-		frame.setTitle(getPageName());
+		frame.setTitle("PANDER : "  + getPageName());
 		ViewUtils.configure(frame, getContentPane());
 	}
 }
