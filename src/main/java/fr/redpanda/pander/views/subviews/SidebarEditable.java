@@ -9,13 +9,18 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+/**
+ * 
+ * @author Patrice SCHOCH
+ *
+ */
 public class SidebarEditable extends Sidebar {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7876599813851320634L;
-	
+
 	private JTextField txtDescriptionTitle;
 	private JTextField txtCP;
 	private JTextField txtCity;
@@ -26,6 +31,21 @@ public class SidebarEditable extends Sidebar {
 	private JTextField txtLink2;
 	private JTextField txtNameOne;
 	private JTextField txtNameTwo;
+	private JLabel lblPhoto;
+	private JLabel lblNameOne;
+	private JLabel jlblNameTwo;
+	private JLabel lblDescriptionTitle;
+	private JLabel lblCoordonateTittle;
+	private JLabel lblAdressTitle;
+	private JLabel lblCpTitle;
+	private JLabel lblCityTitle;
+	private JLabel lblPhoneTitle;
+	private JLabel lblMailTitle;
+	private JLabel lblSocialLinks;
+	private JLabel lblLink1Title;
+	private JLabel lblLink2Title;
+	private JLabel lblCurriculumVitae;
+	private JButton btnSeeCV;
 
 	/**
 	 * @return the txtDescriptionTitle
@@ -178,6 +198,231 @@ public class SidebarEditable extends Sidebar {
 	}
 
 	/**
+	 * @return the lblPhoto
+	 */
+	public JLabel getLblPhoto() {
+		return lblPhoto;
+	}
+
+	/**
+	 * @param lblPhoto
+	 *            the lblPhoto to set
+	 */
+	public void setLblPhoto(JLabel lblPhoto) {
+		this.lblPhoto = lblPhoto;
+	}
+
+	/**
+	 * @return the lblNameOne
+	 */
+	public JLabel getLblNameOne() {
+		return lblNameOne;
+	}
+
+	/**
+	 * @param lblNameOne
+	 *            the lblNameOne to set
+	 */
+	public void setLblNameOne(JLabel lblNameOne) {
+		this.lblNameOne = lblNameOne;
+	}
+
+	/**
+	 * @return the jlblNameTwo
+	 */
+	public JLabel getJlblNameTwo() {
+		return jlblNameTwo;
+	}
+
+	/**
+	 * @param jlblNameTwo
+	 *            the jlblNameTwo to set
+	 */
+	public void setJlblNameTwo(JLabel jlblNameTwo) {
+		this.jlblNameTwo = jlblNameTwo;
+	}
+
+	/**
+	 * @return the lblDescriptionTitle
+	 */
+	public JLabel getLblDescriptionTitle() {
+		return lblDescriptionTitle;
+	}
+
+	/**
+	 * @param lblDescriptionTitle
+	 *            the lblDescriptionTitle to set
+	 */
+	public void setLblDescriptionTitle(JLabel lblDescriptionTitle) {
+		this.lblDescriptionTitle = lblDescriptionTitle;
+	}
+
+	/**
+	 * @return the lblCoordonateTittle
+	 */
+	public JLabel getLblCoordonateTittle() {
+		return lblCoordonateTittle;
+	}
+
+	/**
+	 * @param lblCoordonateTittle
+	 *            the lblCoordonateTittle to set
+	 */
+	public void setLblCoordonateTittle(JLabel lblCoordonateTittle) {
+		this.lblCoordonateTittle = lblCoordonateTittle;
+	}
+
+	/**
+	 * @return the lblAdressTitle
+	 */
+	public JLabel getLblAdressTitle() {
+		return lblAdressTitle;
+	}
+
+	/**
+	 * @param lblAdressTitle
+	 *            the lblAdressTitle to set
+	 */
+	public void setLblAdressTitle(JLabel lblAdressTitle) {
+		this.lblAdressTitle = lblAdressTitle;
+	}
+
+	/**
+	 * @return the lblCpTitle
+	 */
+	public JLabel getLblCpTitle() {
+		return lblCpTitle;
+	}
+
+	/**
+	 * @param lblCpTitle
+	 *            the lblCpTitle to set
+	 */
+	public void setLblCpTitle(JLabel lblCpTitle) {
+		this.lblCpTitle = lblCpTitle;
+	}
+
+	/**
+	 * @return the lblCityTitle
+	 */
+	public JLabel getLblCityTitle() {
+		return lblCityTitle;
+	}
+
+	/**
+	 * @param lblCityTitle
+	 *            the lblCityTitle to set
+	 */
+	public void setLblCityTitle(JLabel lblCityTitle) {
+		this.lblCityTitle = lblCityTitle;
+	}
+
+	/**
+	 * @return the lblPhoneTitle
+	 */
+	public JLabel getLblPhoneTitle() {
+		return lblPhoneTitle;
+	}
+
+	/**
+	 * @param lblPhoneTitle
+	 *            the lblPhoneTitle to set
+	 */
+	public void setLblPhoneTitle(JLabel lblPhoneTitle) {
+		this.lblPhoneTitle = lblPhoneTitle;
+	}
+
+	/**
+	 * @return the lblMailTitle
+	 */
+	public JLabel getLblMailTitle() {
+		return lblMailTitle;
+	}
+
+	/**
+	 * @param lblMailTitle
+	 *            the lblMailTitle to set
+	 */
+	public void setLblMailTitle(JLabel lblMailTitle) {
+		this.lblMailTitle = lblMailTitle;
+	}
+
+	/**
+	 * @return the lblSocialLinks
+	 */
+	public JLabel getLblSocialLinks() {
+		return lblSocialLinks;
+	}
+
+	/**
+	 * @param lblSocialLinks
+	 *            the lblSocialLinks to set
+	 */
+	public void setLblSocialLinks(JLabel lblSocialLinks) {
+		this.lblSocialLinks = lblSocialLinks;
+	}
+
+	/**
+	 * @return the lblLink1Title
+	 */
+	public JLabel getLblLink1Title() {
+		return lblLink1Title;
+	}
+
+	/**
+	 * @param lblLink1Title
+	 *            the lblLink1Title to set
+	 */
+	public void setLblLink1Title(JLabel lblLink1Title) {
+		this.lblLink1Title = lblLink1Title;
+	}
+
+	/**
+	 * @return the lblLink2Title
+	 */
+	public JLabel getLblLink2Title() {
+		return lblLink2Title;
+	}
+
+	/**
+	 * @param lblLink2Title
+	 *            the lblLink2Title to set
+	 */
+	public void setLblLink2Title(JLabel lblLink2Title) {
+		this.lblLink2Title = lblLink2Title;
+	}
+
+	/**
+	 * @return the lblCurriculumVitae
+	 */
+	public JLabel getLblCurriculumVitae() {
+		return lblCurriculumVitae;
+	}
+
+	/**
+	 * @param lblCurriculumVitae
+	 *            the lblCurriculumVitae to set
+	 */
+	public void setLblCurriculumVitae(JLabel lblCurriculumVitae) {
+		this.lblCurriculumVitae = lblCurriculumVitae;
+	}
+
+	/**
+	 * @return the btnSeeCV
+	 */
+	public JButton getBtnSeeCV() {
+		return btnSeeCV;
+	}
+
+	/**
+	 * @param btnSeeCV
+	 *            the btnSeeCV to set
+	 */
+	public void setBtnSeeCV(JButton btnSeeCV) {
+		this.btnSeeCV = btnSeeCV;
+	}
+
+	/**
 	 * Create the frame.
 	 */
 	public SidebarEditable() {
@@ -190,7 +435,7 @@ public class SidebarEditable extends Sidebar {
 				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gbl_contentPane);
 
-		JLabel lblPhoto = new JLabel("PHOTO");
+		lblPhoto = new JLabel("PHOTO");
 		GridBagConstraints gbc_lblPhoto = new GridBagConstraints();
 		gbc_lblPhoto.gridheight = 3;
 		gbc_lblPhoto.insets = new Insets(0, 0, 5, 5);
@@ -198,7 +443,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblPhoto.gridy = 2;
 		add(lblPhoto, gbc_lblPhoto);
 
-		JLabel lblNameOne = new JLabel("Name1");
+		lblNameOne = new JLabel("Name1");
 		lblNameOne.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblNameOne = new GridBagConstraints();
 		gbc_lblNameOne.anchor = GridBagConstraints.EAST;
@@ -218,7 +463,7 @@ public class SidebarEditable extends Sidebar {
 		add(txtNameOne, gbc_txtNameOne);
 		txtNameOne.setColumns(10);
 
-		JLabel jlblNameTwo = new JLabel("Name2");
+		jlblNameTwo = new JLabel("Name2");
 		jlblNameTwo.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		GridBagConstraints gbc_jlblNameTwo = new GridBagConstraints();
 		gbc_jlblNameTwo.anchor = GridBagConstraints.EAST;
@@ -238,7 +483,7 @@ public class SidebarEditable extends Sidebar {
 		add(txtNameTwo, gbc_txtNameTwo);
 		txtNameTwo.setColumns(10);
 
-		JLabel lblDescriptionTitle = new JLabel("DESCRIPTION");
+		lblDescriptionTitle = new JLabel("DESCRIPTION");
 		lblDescriptionTitle.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		GridBagConstraints gbc_lblDescriptionTitle = new GridBagConstraints();
 		gbc_lblDescriptionTitle.gridwidth = 2;
@@ -257,7 +502,7 @@ public class SidebarEditable extends Sidebar {
 		add(txtDescriptionTitle, gbc_txtDescriptionTitle);
 		txtDescriptionTitle.setColumns(10);
 
-		JLabel lblCoordonateTittle = new JLabel("COORDONNEES");
+		lblCoordonateTittle = new JLabel("COORDONNEES");
 		lblCoordonateTittle.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		GridBagConstraints gbc_lblCoordonateTittle = new GridBagConstraints();
 		gbc_lblCoordonateTittle.gridwidth = 2;
@@ -266,7 +511,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblCoordonateTittle.gridy = 8;
 		add(lblCoordonateTittle, gbc_lblCoordonateTittle);
 
-		JLabel lblAdressTitle = new JLabel("Adresse ");
+		lblAdressTitle = new JLabel("Adresse ");
 		lblAdressTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblAdressTitle = new GridBagConstraints();
 		gbc_lblAdressTitle.anchor = GridBagConstraints.EAST;
@@ -285,7 +530,7 @@ public class SidebarEditable extends Sidebar {
 		add(txtAdress, gbc_textAdress);
 		txtAdress.setColumns(10);
 
-		JLabel lblCpTitle = new JLabel("Code Postal");
+		lblCpTitle = new JLabel("Code Postal");
 		lblCpTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblCpTitle = new GridBagConstraints();
 		gbc_lblCpTitle.anchor = GridBagConstraints.EAST;
@@ -304,7 +549,7 @@ public class SidebarEditable extends Sidebar {
 		add(txtCP, gbc_textCP);
 		txtCP.setColumns(10);
 
-		JLabel lblCityTitle = new JLabel("Ville");
+		lblCityTitle = new JLabel("Ville");
 		lblCityTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblCityTitle = new GridBagConstraints();
 		gbc_lblCityTitle.anchor = GridBagConstraints.EAST;
@@ -323,7 +568,7 @@ public class SidebarEditable extends Sidebar {
 		add(txtCity, gbc_textCity);
 		txtCity.setColumns(10);
 
-		JLabel lblPhoneTitle = new JLabel("Téléphone");
+		lblPhoneTitle = new JLabel("Téléphone");
 		lblPhoneTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblPhoneTitle = new GridBagConstraints();
 		gbc_lblPhoneTitle.anchor = GridBagConstraints.EAST;
@@ -342,7 +587,7 @@ public class SidebarEditable extends Sidebar {
 		add(txtPhone, gbc_textPhone);
 		txtPhone.setColumns(10);
 
-		JLabel lblMailTitle = new JLabel("E-Mail");
+		lblMailTitle = new JLabel("E-Mail");
 		lblMailTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblMailTitle = new GridBagConstraints();
 		gbc_lblMailTitle.anchor = GridBagConstraints.EAST;
@@ -361,7 +606,7 @@ public class SidebarEditable extends Sidebar {
 		add(txtMail, gbc_textMail);
 		txtMail.setColumns(10);
 
-		JLabel lblSocialLinks = new JLabel("SOCIAL LINKS");
+		lblSocialLinks = new JLabel("SOCIAL LINKS");
 		lblSocialLinks.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		GridBagConstraints gbc_lblSocialLinks = new GridBagConstraints();
 		gbc_lblSocialLinks.gridwidth = 2;
@@ -370,7 +615,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblSocialLinks.gridy = 15;
 		add(lblSocialLinks, gbc_lblSocialLinks);
 
-		JLabel lblLink1Title = new JLabel("Link 1");
+		lblLink1Title = new JLabel("Link 1");
 		lblLink1Title.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblLink1Title = new GridBagConstraints();
 		gbc_lblLink1Title.anchor = GridBagConstraints.EAST;
@@ -389,14 +634,14 @@ public class SidebarEditable extends Sidebar {
 		add(txtLink1, gbc_textLink1);
 		txtLink1.setColumns(10);
 
-		JLabel lblLinkTitle = new JLabel("Link 2 / Contact");
-		lblLinkTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		lblLink2Title = new JLabel("Link 2 / Contact");
+		lblLink2Title.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblLinkTitle = new GridBagConstraints();
 		gbc_lblLinkTitle.anchor = GridBagConstraints.EAST;
 		gbc_lblLinkTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_lblLinkTitle.gridx = 0;
 		gbc_lblLinkTitle.gridy = 17;
-		add(lblLinkTitle, gbc_lblLinkTitle);
+		add(lblLink2Title, gbc_lblLinkTitle);
 
 		txtLink2 = new JTextField();
 		GridBagConstraints gbc_textLink2 = new GridBagConstraints();
@@ -408,7 +653,7 @@ public class SidebarEditable extends Sidebar {
 		add(txtLink2, gbc_textLink2);
 		txtLink2.setColumns(10);
 
-		JLabel lblCurriculumVitae = new JLabel("CURRICULUM VITAE");
+		lblCurriculumVitae = new JLabel("CURRICULUM VITAE");
 		lblCurriculumVitae.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		GridBagConstraints gbc_lblCurriculumVitae = new GridBagConstraints();
 		gbc_lblCurriculumVitae.insets = new Insets(0, 0, 5, 5);
@@ -416,7 +661,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblCurriculumVitae.gridy = 19;
 		add(lblCurriculumVitae, gbc_lblCurriculumVitae);
 
-		JButton btnTelechargCV = new JButton("Télécharger");
+		btnTelechargCV = new JButton("Télécharger");
 		btnTelechargCV.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		GridBagConstraints gbc_btnTelechargCV = new GridBagConstraints();
 		gbc_btnTelechargCV.insets = new Insets(0, 0, 5, 5);
@@ -424,7 +669,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_btnTelechargCV.gridy = 20;
 		add(btnTelechargCV, gbc_btnTelechargCV);
 
-		JButton btnSeeCV = new JButton("Voir");
+		btnSeeCV = new JButton("Voir");
 		btnSeeCV.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		GridBagConstraints gbc_btnSeeCV = new GridBagConstraints();
 		gbc_btnSeeCV.insets = new Insets(0, 0, 5, 0);
