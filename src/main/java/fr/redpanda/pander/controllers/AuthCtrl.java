@@ -74,7 +74,7 @@ public class AuthCtrl extends BaseCtrl {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PopupManager.message("Mot de passe perdu ?", "Merci de bien vouloir contacter\nl'administrateur de ce logiciel");
+				PopupManager.message("Mot de passe perdu ?", "Merci de bien vouloir contacter\nl'administrateur de ce logiciel\nEmail : admin@pander.fr");
 			}
 		});
 
@@ -82,7 +82,7 @@ public class AuthCtrl extends BaseCtrl {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				ViewsManager.getInstance().next(new HomeCtrl(frame));
 
 			}
 		});
