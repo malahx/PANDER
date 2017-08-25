@@ -19,40 +19,130 @@ import javax.swing.border.EmptyBorder;
  * @author Patrice SCHOCH
  *
  */
-public class CandidateView extends JFrame {
+public class CandidateView extends MainView {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTable table;
+	private JTextField textCertificate1;
+	private JTextField textCertificate2;
+	private JTextField textBirthday;
+	private JTextField textTransport;
+	private JTable tableTechSkills;
+	private JTable tableSoftSkills;
+
+	
+	
+	/**
+	 * @return the contentPane
+	 */
+	public JPanel getContentPane() {
+		return contentPane;
+	}
+
+	/**
+	 * @param contentPane the contentPane to set
+	 */
+	public void setContentPane(JPanel contentPane) {
+		this.contentPane = contentPane;
+	}
+
+	/**
+	 * @return the textCertificate1
+	 */
+	public JTextField getTextCertificate1() {
+		return textCertificate1;
+	}
+
+	/**
+	 * @param textCertificate1 the textCertificate1 to set
+	 */
+	public void setTextCertificate1(JTextField textCertificate1) {
+		this.textCertificate1 = textCertificate1;
+	}
+
+	/**
+	 * @return the textCertificate2
+	 */
+	public JTextField getTextCertificate2() {
+		return textCertificate2;
+	}
+
+	/**
+	 * @param textCertificate2 the textCertificate2 to set
+	 */
+	public void setTextCertificate2(JTextField textCertificate2) {
+		this.textCertificate2 = textCertificate2;
+	}
+
+	/**
+	 * @return the textBirthday
+	 */
+	public JTextField getTextBirthday() {
+		return textBirthday;
+	}
+
+	/**
+	 * @param textBirthday the textBirthday to set
+	 */
+	public void setTextBirthday(JTextField textBirthday) {
+		this.textBirthday = textBirthday;
+	}
+
+	/**
+	 * @return the textTransport
+	 */
+	public JTextField getTextTransport() {
+		return textTransport;
+	}
+
+	/**
+	 * @param textTransport the textTransport to set
+	 */
+	public void setTextTransport(JTextField textTransport) {
+		this.textTransport = textTransport;
+	}
+
+	/**
+	 * @return the tableTechSkills
+	 */
+	public JTable getTableTechSkills() {
+		return tableTechSkills;
+	}
+
+	/**
+	 * @param tableTechSkills the tableTechSkills to set
+	 */
+	public void setTableTechSkills(JTable tableTechSkills) {
+		this.tableTechSkills = tableTechSkills;
+	}
+
+	/**
+	 * @return the tableSoftSkills
+	 */
+	public JTable getTableSoftSkills() {
+		return tableSoftSkills;
+	}
+
+	/**
+	 * @param tableSoftSkills the tableSoftSkills to set
+	 */
+	public void setTableSoftSkills(JTable tableSoftSkills) {
+		this.tableSoftSkills = tableSoftSkills;
+	}
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CandidateView frame = new CandidateView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
+	
 
 	/**
 	 * Create the frame.
 	 */
 	public CandidateView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 650, 600);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
+
+		super();
+		super.pageName ="Candidate";
+		
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -61,120 +151,123 @@ public class CandidateView extends JFrame {
 				0.0, 0.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
 
-		JLabel lblNewLabel = new JLabel("Diplôme 1");
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 1;
-		gbc_lblNewLabel.gridy = 1;
-		contentPane.add(lblNewLabel, gbc_lblNewLabel);
+		JLabel lblCertificate1 = new JLabel("Diplôme 1");
+		GridBagConstraints gbc_lblCertificate1 = new GridBagConstraints();
+		gbc_lblCertificate1.anchor = GridBagConstraints.EAST;
+		gbc_lblCertificate1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCertificate1.gridx = 1;
+		gbc_lblCertificate1.gridy = 1;
+		contentPane.add(lblCertificate1, gbc_lblCertificate1);
 
-		textField = new JTextField();
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.gridwidth = 5;
-		gbc_textField.insets = new Insets(0, 0, 5, 5);
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 2;
-		gbc_textField.gridy = 1;
-		contentPane.add(textField, gbc_textField);
-		textField.setColumns(10);
+		textCertificate1 = new JTextField();
+		GridBagConstraints gbc_textCertificate1 = new GridBagConstraints();
+		gbc_textCertificate1.gridwidth = 5;
+		gbc_textCertificate1.insets = new Insets(0, 0, 5, 5);
+		gbc_textCertificate1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textCertificate1.gridx = 2;
+		gbc_textCertificate1.gridy = 1;
+		contentPane.add(textCertificate1, gbc_textCertificate1);
+		textCertificate1.setColumns(10);
 
-		JLabel lblNewLabel_1 = new JLabel("Diplôme 2");
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.gridx = 1;
-		gbc_lblNewLabel_1.gridy = 2;
-		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		JLabel lblCertificate2 = new JLabel("Diplôme 2");
+		GridBagConstraints gbc_lblCertificate2 = new GridBagConstraints();
+		gbc_lblCertificate2.anchor = GridBagConstraints.EAST;
+		gbc_lblCertificate2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCertificate2.gridx = 1;
+		gbc_lblCertificate2.gridy = 2;
+		contentPane.add(lblCertificate2, gbc_lblCertificate2);
 
-		textField_1 = new JTextField();
-		GridBagConstraints gbc_textField_1 = new GridBagConstraints();
-		gbc_textField_1.gridwidth = 5;
-		gbc_textField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_1.gridx = 2;
-		gbc_textField_1.gridy = 2;
-		contentPane.add(textField_1, gbc_textField_1);
-		textField_1.setColumns(10);
+		textCertificate2 = new JTextField();
+		GridBagConstraints gbc_textCertificate2 = new GridBagConstraints();
+		gbc_textCertificate2.gridwidth = 5;
+		gbc_textCertificate2.insets = new Insets(0, 0, 5, 5);
+		gbc_textCertificate2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textCertificate2.gridx = 2;
+		gbc_textCertificate2.gridy = 2;
+		contentPane.add(textCertificate2, gbc_textCertificate2);
+		textCertificate2.setColumns(10);
 
-		JLabel lblNewLabel_2 = new JLabel("Date de naissance");
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.anchor = GridBagConstraints.NORTHEAST;
-		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_2.gridx = 1;
-		gbc_lblNewLabel_2.gridy = 3;
-		contentPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		JLabel lblBirthday = new JLabel("Date de naissance");
+		GridBagConstraints gbc_lblBirthday = new GridBagConstraints();
+		gbc_lblBirthday.anchor = GridBagConstraints.NORTHEAST;
+		gbc_lblBirthday.insets = new Insets(0, 0, 5, 5);
+		gbc_lblBirthday.gridx = 1;
+		gbc_lblBirthday.gridy = 3;
+		contentPane.add(lblBirthday, gbc_lblBirthday);
 
-		textField_2 = new JTextField();
-		GridBagConstraints gbc_textField_2 = new GridBagConstraints();
-		gbc_textField_2.gridwidth = 2;
-		gbc_textField_2.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_2.gridx = 2;
-		gbc_textField_2.gridy = 3;
-		contentPane.add(textField_2, gbc_textField_2);
-		textField_2.setColumns(10);
+		textBirthday = new JTextField();
+		GridBagConstraints gbc_textBirthday = new GridBagConstraints();
+		gbc_textBirthday.gridwidth = 2;
+		gbc_textBirthday.insets = new Insets(0, 0, 5, 5);
+		gbc_textBirthday.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textBirthday.gridx = 2;
+		gbc_textBirthday.gridy = 3;
+		contentPane.add(textBirthday, gbc_textBirthday);
+		textBirthday.setColumns(10);
 
-		JLabel lblNewLabel_3 = new JLabel("Transport");
-		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-		gbc_lblNewLabel_3.anchor = GridBagConstraints.EAST;
-		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_3.gridx = 4;
-		gbc_lblNewLabel_3.gridy = 3;
-		contentPane.add(lblNewLabel_3, gbc_lblNewLabel_3);
+		JLabel lblTransport = new JLabel("Transport");
+		GridBagConstraints gbc_lblTransport = new GridBagConstraints();
+		gbc_lblTransport.anchor = GridBagConstraints.EAST;
+		gbc_lblTransport.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTransport.gridx = 4;
+		gbc_lblTransport.gridy = 3;
+		contentPane.add(lblTransport, gbc_lblTransport);
 
-		textField_3 = new JTextField();
-		GridBagConstraints gbc_textField_3 = new GridBagConstraints();
-		gbc_textField_3.gridwidth = 2;
-		gbc_textField_3.insets = new Insets(0, 0, 5, 5);
-		gbc_textField_3.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField_3.gridx = 5;
-		gbc_textField_3.gridy = 3;
-		contentPane.add(textField_3, gbc_textField_3);
-		textField_3.setColumns(10);
+		textTransport = new JTextField();
+		GridBagConstraints gbc_textTransport = new GridBagConstraints();
+		gbc_textTransport.gridwidth = 2;
+		gbc_textTransport.insets = new Insets(0, 0, 5, 5);
+		gbc_textTransport.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textTransport.gridx = 5;
+		gbc_textTransport.gridy = 3;
+		contentPane.add(textTransport, gbc_textTransport);
+		textTransport.setColumns(10);
 
-		JLabel lblNewLabel_4 = new JLabel("Compétences techniques");
-		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
-		gbc_lblNewLabel_4.gridwidth = 2;
-		gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_4.gridx = 1;
-		gbc_lblNewLabel_4.gridy = 6;
-		contentPane.add(lblNewLabel_4, gbc_lblNewLabel_4);
+		JLabel lblTechSkillsTitle = new JLabel("Compétences techniques");
+		GridBagConstraints gbc_lblTechSkillsTitle = new GridBagConstraints();
+		gbc_lblTechSkillsTitle.gridwidth = 2;
+		gbc_lblTechSkillsTitle.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTechSkillsTitle.gridx = 1;
+		gbc_lblTechSkillsTitle.gridy = 6;
+		contentPane.add(lblTechSkillsTitle, gbc_lblTechSkillsTitle);
 
-		JLabel lblNewLabel_5 = new JLabel("Soft Skills");
-		GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
-		gbc_lblNewLabel_5.gridwidth = 2;
-		gbc_lblNewLabel_5.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_5.gridx = 4;
-		gbc_lblNewLabel_5.gridy = 6;
-		contentPane.add(lblNewLabel_5, gbc_lblNewLabel_5);
+		JLabel lblSoftSkillsTitle = new JLabel("Soft Skills");
+		GridBagConstraints gbc_lblSoftSkillsTitle = new GridBagConstraints();
+		gbc_lblSoftSkillsTitle.gridwidth = 2;
+		gbc_lblSoftSkillsTitle.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSoftSkillsTitle.gridx = 4;
+		gbc_lblSoftSkillsTitle.gridy = 6;
+		contentPane.add(lblSoftSkillsTitle, gbc_lblSoftSkillsTitle);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-		gbc_scrollPane.gridheight = 4;
-		gbc_scrollPane.gridwidth = 2;
-		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
-		gbc_scrollPane.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane.gridx = 1;
-		gbc_scrollPane.gridy = 7;
-		contentPane.add(scrollPane, gbc_scrollPane);
+		JScrollPane scrollPaneTechSkills = new JScrollPane();
+		scrollPaneTechSkills.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneTechSkills.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		GridBagConstraints gbc_scrollPaneTechSkills = new GridBagConstraints();
+		gbc_scrollPaneTechSkills.gridheight = 4;
+		gbc_scrollPaneTechSkills.gridwidth = 2;
+		gbc_scrollPaneTechSkills.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPaneTechSkills.fill = GridBagConstraints.BOTH;
+		gbc_scrollPaneTechSkills.gridx = 1;
+		gbc_scrollPaneTechSkills.gridy = 7;
+		contentPane.add(scrollPaneTechSkills, gbc_scrollPaneTechSkills);
 
-		table = new JTable();
-		scrollPane.setViewportView(table);
+		tableTechSkills = new JTable();
+		scrollPaneTechSkills.setViewportView(tableTechSkills);
 
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane_1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		GridBagConstraints gbc_scrollPane_1 = new GridBagConstraints();
-		gbc_scrollPane_1.gridheight = 4;
-		gbc_scrollPane_1.gridwidth = 2;
-		gbc_scrollPane_1.insets = new Insets(0, 0, 5, 5);
-		gbc_scrollPane_1.fill = GridBagConstraints.BOTH;
-		gbc_scrollPane_1.gridx = 4;
-		gbc_scrollPane_1.gridy = 7;
-		contentPane.add(scrollPane_1, gbc_scrollPane_1);
+		JScrollPane scrollPaneSoftSkills = new JScrollPane();
+		scrollPaneSoftSkills.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPaneSoftSkills.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		GridBagConstraints gbc_scrollPaneSoftSkills = new GridBagConstraints();
+		gbc_scrollPaneSoftSkills.gridheight = 4;
+		gbc_scrollPaneSoftSkills.gridwidth = 2;
+		gbc_scrollPaneSoftSkills.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPaneSoftSkills.fill = GridBagConstraints.BOTH;
+		gbc_scrollPaneSoftSkills.gridx = 4;
+		gbc_scrollPaneSoftSkills.gridy = 7;
+		contentPane.add(scrollPaneSoftSkills, gbc_scrollPaneSoftSkills);
+		
+		tableSoftSkills = new JTable();
+		scrollPaneSoftSkills.setViewportView(tableSoftSkills);
 	}
 
 }
