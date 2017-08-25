@@ -14,44 +14,11 @@ import fr.redpanda.pander.views.subviews.SidebarPublic;
 
 public abstract class MainView extends BaseView implements IMainView {
 
-	private JPanel pnlNavbar;
-	private JPanel pnlSidebar;
 	private JPanel pnlContent;
-	private JPanel pnlFooter;
 
 	private Navbar navbar;
 	private Sidebar sidebar;
 	private Footer footer;
-
-	/**
-	 * @return the pnlNavbar
-	 */
-	public JPanel getPnlNavbar() {
-		return pnlNavbar;
-	}
-
-	/**
-	 * @param pnlNavbar
-	 *            the pnlNavbar to set
-	 */
-	public void setPnlNavbar(JPanel pnlNavbar) {
-		this.pnlNavbar = pnlNavbar;
-	}
-
-	/**
-	 * @return the pnlSidebar
-	 */
-	public JPanel getPnlSidebar() {
-		return pnlSidebar;
-	}
-
-	/**
-	 * @param pnlSidebar
-	 *            the pnlSidebar to set
-	 */
-	public void setPnlSidebar(JPanel pnlSidebar) {
-		this.pnlSidebar = pnlSidebar;
-	}
 
 	/**
 	 * @return the pnlContent
@@ -67,22 +34,7 @@ public abstract class MainView extends BaseView implements IMainView {
 	public void setPnlContent(JPanel pnlContent) {
 		this.pnlContent = pnlContent;
 	}
-
-	/**
-	 * @return the pnlFooter
-	 */
-	public JPanel getPnlFooter() {
-		return pnlFooter;
-	}
-
-	/**
-	 * @param pnlFooter
-	 *            the pnlFooter to set
-	 */
-	public void setPnlFooter(JPanel pnlFooter) {
-		this.pnlFooter = pnlFooter;
-	}
-
+	
 	/**
 	 * @return the navbar
 	 */
@@ -144,7 +96,7 @@ public abstract class MainView extends BaseView implements IMainView {
 		gbl_contentPane.rowWeights = new double[] { 0.0, 1.0, 0.0 };
 		contentPane.setLayout(gbl_contentPane);
 
-		pnlNavbar = navbar;
+		JPanel pnlNavbar = navbar;
 		GridBagConstraints gbc_pnlNavbar = new GridBagConstraints();
 		gbc_pnlNavbar.gridwidth = 2;
 		gbc_pnlNavbar.insets = new Insets(0, 0, 5, 0);
@@ -154,7 +106,7 @@ public abstract class MainView extends BaseView implements IMainView {
 		gbc_pnlNavbar.gridy = 0;
 		contentPane.add(pnlNavbar, gbc_pnlNavbar);
 
-		pnlSidebar = sidebar;
+		JPanel pnlSidebar = sidebar;
 		GridBagConstraints gbc_pnlSidebar = new GridBagConstraints();
 		gbc_pnlSidebar.gridheight = 2;
 		gbc_pnlSidebar.insets = new Insets(0, 0, 5, 5);
@@ -172,7 +124,7 @@ public abstract class MainView extends BaseView implements IMainView {
 		gbc_pnlContent.gridy = 1;
 		contentPane.add(pnlContent, gbc_pnlContent);
 
-		pnlFooter = new JPanel();
+		JPanel pnlFooter = new JPanel();
 		GridBagConstraints gbc_pnlFooter = new GridBagConstraints();
 		gbc_pnlFooter.insets = new Insets(0, 0, 0, 5);
 		gbc_pnlFooter.anchor = GridBagConstraints.WEST;
