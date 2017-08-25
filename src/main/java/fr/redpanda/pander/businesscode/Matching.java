@@ -28,14 +28,24 @@ public class Matching {
 		return null;
 	}
 	
-	public int matchingCalc() {
-		return 0;
+	public int matchingCalc() 
+		matchingResult = 
+		return ;
 	}
 
-
+	// Variables pour fixer des boucles éventuelles.
+	int ii = 0;
+	int jj = 0;
 	
+	// Variable pour le résultat du matching.
+	int matchingResult;
 
-
+	// Recherche de la taille des listes afin de pouvoir calculer les ratios de calcul du matching.
+	int SkillsNumber = Skill.size();
+	int SkillsNumberCandidate = candidateSkills.size();
+	int SkillsNumberJob = jobSkills.size();
+	
+	
 
 }
 

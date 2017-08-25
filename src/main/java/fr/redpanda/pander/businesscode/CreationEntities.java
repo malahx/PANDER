@@ -1,5 +1,14 @@
 package fr.redpanda.pander.businesscode;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import fr.redpanda.pander.entities.Candidate;
+import fr.redpanda.pander.entities.Company;
+import fr.redpanda.pander.entities.Job;
+import fr.redpanda.pander.entities.Skill;
+import fr.redpanda.pander.entities.TypeSkill;
+
 public class CreationEntities {
 
 	protected Candidate candidate;
@@ -9,12 +18,107 @@ public class CreationEntities {
 	protected Skill skillTech;
 	protected Skill skillOther;
 
-	@Before
-	public void setUp() {
-		
+	/** GENERATION DES GETTERS ET DES SETTERS :
+	 *
+	 */
+	/**
+	 * @return the candidate
+	 */
+	public Candidate getCandidate() {
+		return candidate;
+	}
 
-		initDb();
-		
+	/**
+	 * @param candidate the candidate to set
+	 */
+	public void setCandidate(Candidate candidate) {
+		this.candidate = candidate;
+	}
+
+	/**
+	 * @return the company
+	 */
+	public Company getCompany() {
+		return company;
+	}
+
+	/**
+	 * @param company the company to set
+	 */
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	/**
+	 * @return the job
+	 */
+	public Job getJob() {
+		return job;
+	}
+
+	/**
+	 * @param job the job to set
+	 */
+	public void setJob(Job job) {
+		this.job = job;
+	}
+
+	/**
+	 * @return the skillSoft
+	 */
+	public Skill getSkillSoft() {
+		return skillSoft;
+	}
+
+	/**
+	 * @param skillSoft the skillSoft to set
+	 */
+	public void setSkillSoft(Skill skillSoft) {
+		this.skillSoft = skillSoft;
+	}
+
+	/**
+	 * @return the skillTech
+	 */
+	public Skill getSkillTech() {
+		return skillTech;
+	}
+
+	/**
+	 * @param skillTech the skillTech to set
+	 */
+	public void setSkillTech(Skill skillTech) {
+		this.skillTech = skillTech;
+	}
+
+	/**
+	 * @return the skillOther
+	 */
+	public Skill getSkillOther() {
+		return skillOther;
+	}
+
+	/**
+	 * @param skillOther the skillOther to set
+	 */
+	public void setSkillOther(Skill skillOther) {
+		this.skillOther = skillOther;
+	}
+
+
+	
+	/** GENERATION DU CONSTRUCTEUR
+	 * @param candidate
+	 * @param company
+	 * @param job
+	 * @param skillSoft
+	 * @param skillTech
+	 * @param skillOther
+	 */
+	
+	public CreationEntities() {
+		super();
+
 		candidate = new Candidate("firstname@lastname.com", "firstname", "lastname");
 		candidate.setPassword("hashedpassword");
 
