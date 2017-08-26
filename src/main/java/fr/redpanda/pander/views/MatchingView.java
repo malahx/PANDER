@@ -8,7 +8,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
@@ -19,10 +18,54 @@ import javax.swing.ScrollPaneConstants;
  */
 public class MatchingView extends MainView {
 
-	private JPanel contentPane;
 	private JScrollPane scrPMatching;
 	private JTable tblMatching;
 	private JButton btnMatching;
+
+	/**
+	 * @return the scrPMatching
+	 */
+	public JScrollPane getScrPMatching() {
+		return scrPMatching;
+	}
+
+	/**
+	 * @param scrPMatching
+	 *            the scrPMatching to set
+	 */
+	public void setScrPMatching(JScrollPane scrPMatching) {
+		this.scrPMatching = scrPMatching;
+	}
+
+	/**
+	 * @return the tblMatching
+	 */
+	public JTable getTblMatching() {
+		return tblMatching;
+	}
+
+	/**
+	 * @param tblMatching
+	 *            the tblMatching to set
+	 */
+	public void setTblMatching(JTable tblMatching) {
+		this.tblMatching = tblMatching;
+	}
+
+	/**
+	 * @return the btnMatching
+	 */
+	public JButton getBtnMatching() {
+		return btnMatching;
+	}
+
+	/**
+	 * @param btnMatching
+	 *            the btnMatching to set
+	 */
+	public void setBtnMatching(JButton btnMatching) {
+		this.btnMatching = btnMatching;
+	}
 
 	/**
 	 * Create the frame.
@@ -31,7 +74,7 @@ public class MatchingView extends MainView {
 		super();
 
 		super.pageName = "Matching";
-		
+
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 0, 0 };
 		gbl_contentPane.rowHeights = new int[] { 0, 0, 0 };

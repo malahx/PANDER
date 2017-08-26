@@ -5,6 +5,8 @@ package fr.redpanda.pander.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 import fr.redpanda.pander.database.UserDAO;
 import fr.redpanda.pander.entities.Candidate;
@@ -13,6 +15,7 @@ import fr.redpanda.pander.managers.ViewsManager;
 import fr.redpanda.pander.utils.constant.TypeData;
 import fr.redpanda.pander.views.MainView;
 import fr.redpanda.pander.views.subviews.SidebarEditable;
+import fr.redpanda.pander.views.subviews.SidebarPublic;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -32,6 +35,23 @@ public abstract class MainCtrl extends BaseCtrl {
 
 		User user = (User) getViewDatas().get(TypeData.USER);
 		view.getNavbar().getLblUser().setText(user instanceof Candidate ? "Candidat" : "Entreprise");
+		
+
+		if (view.isEditable()) {
+			SidebarEditable sidebar = (SidebarEditable) view.getSidebar();
+			sidebar.getTxtAdress().setText(user.getAddress());
+			sidebar.getTxtCity().setText(user.getCity());
+			sidebar.getTxtDescriptionTitle().setText(user.getDescription());
+			sidebar.getTxtPhone().setText(user.getPhone());
+			sidebar.getTxtCP().setText(user.getPostcode());
+		} else {
+			SidebarPublic sidebar = (SidebarPublic) view.getSidebar();
+			sidebar.getLblAddress().setText(user.getAddress());
+			sidebar.getLblCity().setText(user.getCity());
+			sidebar.getLblDescriptionTitle().setText(user.getDescription());
+			sidebar.getLblPhone().setText(user.getPhone());
+			sidebar.getLblCp().setText(user.getPostcode());
+		}
 
 	}
 
@@ -45,45 +65,36 @@ public abstract class MainCtrl extends BaseCtrl {
 
 		MainView view = (MainView) this.view;
 
-		view.getNavbar().getTglbtnHome().addActionListener(new ActionListener() {
-
+		view.getNavbar().getTglbtnHome().addItemListener(new ItemListener() {
+			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				view.getNavbar().getTglbtnHome().setSelected(true);
+			public void itemStateChanged(ItemEvent e) {
 				if (ViewsManager.getInstance().isCurrentController(HomeCtrl.class)) {
 					return;
 				}
 				ViewsManager.getInstance().next(new HomeCtrl(frame));
-				view.getNavbar().getTglbtnMatching().setSelected(false);
-				view.getNavbar().getTglbtnProfile().setSelected(false);
 			}
 		});
 
-		view.getNavbar().getTglbtnProfile().addActionListener(new ActionListener() {
-
+		view.getNavbar().getTglbtnProfile().addItemListener(new ItemListener() {
+			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				view.getNavbar().getTglbtnProfile().setSelected(true);
+			public void itemStateChanged(ItemEvent e) {
 				if (ViewsManager.getInstance().isCurrentController(ProfileCtrl.class)) {
 					return;
 				}
-				ViewsManager.getInstance().next(new ProfileCtrl(frame));
-				view.getNavbar().getTglbtnMatching().setSelected(false);
-				view.getNavbar().getTglbtnHome().setSelected(false);
+				ViewsManager.getInstance().next(new ProfileCtrl(frame));				
 			}
 		});
 
-		view.getNavbar().getTglbtnProfile().addActionListener(new ActionListener() {
-
+		view.getNavbar().getTglbtnMatching().addItemListener(new ItemListener() {
+			
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				view.getNavbar().getTglbtnMatching().setSelected(true);
+			public void itemStateChanged(ItemEvent e) {
 				if (ViewsManager.getInstance().isCurrentController(MatchingCtrl.class)) {
 					return;
 				}
 				ViewsManager.getInstance().next(new MatchingCtrl(frame));
-				view.getNavbar().getTglbtnProfile().setSelected(false);
-				view.getNavbar().getTglbtnHome().setSelected(false);
 			}
 		});
 

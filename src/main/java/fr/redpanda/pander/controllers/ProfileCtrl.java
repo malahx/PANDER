@@ -12,11 +12,11 @@ import javax.swing.JFrame;
 public class ProfileCtrl extends MainCtrl {
 
 	/**
-	 * @param frame 
+	 * @param frame
 	 * 
 	 */
 	public ProfileCtrl(JFrame frame) {
-		// TODO Auto-generated constructor stub
+		super.frame = frame;
 	}
 
 }
