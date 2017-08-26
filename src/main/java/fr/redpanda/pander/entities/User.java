@@ -14,7 +14,7 @@ import fr.redpanda.pander.utils.StringManager;
  * @author Gwénolé LE HENAFF
  *
  */
-public class User {
+public abstract class User {
 
 	protected Long id;
 	protected String email;

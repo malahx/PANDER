@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import fr.redpanda.pander.entities.Admin;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.Role;
@@ -308,7 +309,7 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 			if (result.next()) {
 				switch (result.getString("role")) {
 				case "ADMIN":
-					users.add(new User(result));
+					users.add(new Admin(result));
 					break;
 				case "CANDIDATE":
 					users.add(new Candidate(result));
@@ -353,7 +354,7 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 			if (result.next()) {
 				switch (result.getString("role")) {
 				case "ADMIN":
-					user = new User(result);
+					user = new Admin(result);
 					break;
 				case "CANDIDATE":
 					user = new Candidate(result);
@@ -393,7 +394,7 @@ public class UserDAO extends DAOManager implements IDAO<User> {
 			if (result.next()) {
 				switch (result.getString("role")) {
 				case "ADMIN":
-					user = new User(result);
+					user = new Admin(result);
 					break;
 				case "CANDIDATE":
 					user = new Candidate(result);
