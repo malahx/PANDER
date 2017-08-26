@@ -480,7 +480,7 @@ public class SidebarPublic extends Sidebar {
 		gbc_lblLink1.gridy = 16;
 		add(lblLink1, gbc_lblLink1);
 
-		JLabel lblLink2Title = new JLabel("Link 2 / Contact :");
+		lblLink2Title = new JLabel("Link 2 / Contact :");
 		lblLink2Title.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblLinkTitle = new GridBagConstraints();
 		gbc_lblLinkTitle.anchor = GridBagConstraints.EAST;
@@ -489,7 +489,7 @@ public class SidebarPublic extends Sidebar {
 		gbc_lblLinkTitle.gridy = 17;
 		add(lblLink2Title, gbc_lblLinkTitle);
 
-		JLabel lblLink2 = new JLabel("Lien 2");
+		lblLink2 = new JLabel("Lien 2");
 		GridBagConstraints gbc_lblLink2 = new GridBagConstraints();
 		gbc_lblLink2.anchor = GridBagConstraints.WEST;
 		gbc_lblLink2.gridwidth = 5;
@@ -498,7 +498,7 @@ public class SidebarPublic extends Sidebar {
 		gbc_lblLink2.gridy = 17;
 		add(lblLink2, gbc_lblLink2);
 
-		JLabel lblCurriculumVitae = new JLabel("CURRICULUM VITAE");
+		lblCurriculumVitae = new JLabel("CURRICULUM VITAE");
 		lblCurriculumVitae.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		GridBagConstraints gbc_lblCurriculumVitae = new GridBagConstraints();
 		gbc_lblCurriculumVitae.insets = new Insets(0, 0, 5, 5);
@@ -506,7 +506,7 @@ public class SidebarPublic extends Sidebar {
 		gbc_lblCurriculumVitae.gridy = 19;
 		add(lblCurriculumVitae, gbc_lblCurriculumVitae);
 
-		JButton btnTelechargCV = new JButton("Télécharger");
+		btnTelechargCV = new JButton("Télécharger");
 		btnTelechargCV.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		GridBagConstraints gbc_btnTelechargCV = new GridBagConstraints();
 		gbc_btnTelechargCV.gridwidth = 6;
