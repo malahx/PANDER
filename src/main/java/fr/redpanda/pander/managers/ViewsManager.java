@@ -28,6 +28,8 @@ public class ViewsManager {
 
 	public void start() {
 		ViewUtils.configure(frame);
+		controllers = new ArrayList<BaseCtrl>();
+		currentControllerIndex = -1;
 		loadController(new AuthCtrl(frame));
 	}
 
