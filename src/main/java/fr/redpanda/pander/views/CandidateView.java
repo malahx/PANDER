@@ -1,18 +1,14 @@
 package fr.redpanda.pander.views;
 
-import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.EmptyBorder;
 
 /**
  * 
@@ -21,29 +17,12 @@ import javax.swing.border.EmptyBorder;
  */
 public class CandidateView extends MainView {
 
-	private JPanel contentPane;
 	private JTextField textCertificate1;
 	private JTextField textCertificate2;
 	private JTextField textBirthday;
 	private JTextField textTransport;
 	private JTable tableTechSkills;
 	private JTable tableSoftSkills;
-
-	
-	
-	/**
-	 * @return the contentPane
-	 */
-	public JPanel getContentPane() {
-		return contentPane;
-	}
-
-	/**
-	 * @param contentPane the contentPane to set
-	 */
-	public void setContentPane(JPanel contentPane) {
-		this.contentPane = contentPane;
-	}
 
 	/**
 	 * @return the textCertificate1
@@ -53,7 +32,8 @@ public class CandidateView extends MainView {
 	}
 
 	/**
-	 * @param textCertificate1 the textCertificate1 to set
+	 * @param textCertificate1
+	 *            the textCertificate1 to set
 	 */
 	public void setTextCertificate1(JTextField textCertificate1) {
 		this.textCertificate1 = textCertificate1;
@@ -67,7 +47,8 @@ public class CandidateView extends MainView {
 	}
 
 	/**
-	 * @param textCertificate2 the textCertificate2 to set
+	 * @param textCertificate2
+	 *            the textCertificate2 to set
 	 */
 	public void setTextCertificate2(JTextField textCertificate2) {
 		this.textCertificate2 = textCertificate2;
@@ -81,7 +62,8 @@ public class CandidateView extends MainView {
 	}
 
 	/**
-	 * @param textBirthday the textBirthday to set
+	 * @param textBirthday
+	 *            the textBirthday to set
 	 */
 	public void setTextBirthday(JTextField textBirthday) {
 		this.textBirthday = textBirthday;
@@ -95,7 +77,8 @@ public class CandidateView extends MainView {
 	}
 
 	/**
-	 * @param textTransport the textTransport to set
+	 * @param textTransport
+	 *            the textTransport to set
 	 */
 	public void setTextTransport(JTextField textTransport) {
 		this.textTransport = textTransport;
@@ -109,7 +92,8 @@ public class CandidateView extends MainView {
 	}
 
 	/**
-	 * @param tableTechSkills the tableTechSkills to set
+	 * @param tableTechSkills
+	 *            the tableTechSkills to set
 	 */
 	public void setTableTechSkills(JTable tableTechSkills) {
 		this.tableTechSkills = tableTechSkills;
@@ -123,7 +107,8 @@ public class CandidateView extends MainView {
 	}
 
 	/**
-	 * @param tableSoftSkills the tableSoftSkills to set
+	 * @param tableSoftSkills
+	 *            the tableSoftSkills to set
 	 */
 	public void setTableSoftSkills(JTable tableSoftSkills) {
 		this.tableSoftSkills = tableSoftSkills;
@@ -132,8 +117,6 @@ public class CandidateView extends MainView {
 	/**
 	 * Launch the application.
 	 */
-	
-	
 
 	/**
 	 * Create the frame.
@@ -141,8 +124,8 @@ public class CandidateView extends MainView {
 	public CandidateView() {
 
 		super();
-		super.pageName ="Candidate";
-		
+		super.pageName = "Candidat";
+
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -265,7 +248,7 @@ public class CandidateView extends MainView {
 		gbc_scrollPaneSoftSkills.gridx = 4;
 		gbc_scrollPaneSoftSkills.gridy = 7;
 		contentPane.add(scrollPaneSoftSkills, gbc_scrollPaneSoftSkills);
-		
+
 		tableSoftSkills = new JTable();
 		scrollPaneSoftSkills.setViewportView(tableSoftSkills);
 	}
