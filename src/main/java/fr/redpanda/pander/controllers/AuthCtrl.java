@@ -31,7 +31,7 @@ public class AuthCtrl extends BaseCtrl {
 			System.out.println("logged");
 			getViewDatas().put(TypeData.USER, loggedUser);
 			if (loggedUser instanceof Candidate || loggedUser instanceof Company) {
-				// ViewsManager.getInstance().next(new ProfileCtrl(frame));
+				ViewsManager.getInstance().next(new HomeCtrl(frame));
 				return;
 			}
 			ViewsManager.getInstance().next(new AdminCtrl(frame));
@@ -47,16 +47,20 @@ public class AuthCtrl extends BaseCtrl {
 		super.frame = frame;
 		super.view = new AuthView();
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.redpanda.pander.controllers.BaseCtrl#initView()
 	 */
 	@Override
 	public void initView() {
 		refreshValidate();
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.redpanda.pander.controllers.BaseCtrl#initEvent()
 	 */
 	@Override
@@ -69,54 +73,58 @@ public class AuthCtrl extends BaseCtrl {
 				login(view.getTxtLogin().getText(), new String(view.getTxtPassword().getPassword()));
 			}
 		});
-		
+
 		view.getBtnPassword().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PopupManager.message("Mot de passe perdu ?", "Merci de bien vouloir contacter\nl'administrateur de ce logiciel\nEmail : admin@pander.fr");
+				PopupManager.message("Mot de passe perdu ?",
+						"Merci de bien vouloir contacter\nl'administrateur de ce logiciel\nEmail : admin@pander.fr");
 			}
 		});
 
 		view.getBtnCandidate().addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				ViewsManager.getInstance().next(new HomeCtrl(frame));
 
 			}
 		});
-		
+
 		view.getBtnCompany().addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
-		
+
 		view.getTxtLogin().getDocument().addDocumentListener(new DocListener() {
-			
+
 			@Override
 			public void update(DocumentEvent e) {
 				refreshValidate();
 			}
 		});
-		
+
 		view.getTxtPassword().getDocument().addDocumentListener(new DocListener() {
-			
+
 			@Override
 			public void update(DocumentEvent e) {
 				refreshValidate();
 			}
 		});
-		
+
 	}
-	
+
 	private void refreshValidate() {
 		AuthView view = (AuthView) this.view;
-		view.getBtnValidate().setEnabled(view.getTxtLogin().getText().length() > 0 && view.getTxtPassword().getPassword().length > 0 ? true : false);
+		view.getBtnValidate()
+				.setEnabled(view.getTxtLogin().getText().length() > 0 && view.getTxtPassword().getPassword().length > 0
+						? true
+						: false);
 	}
 
 }
