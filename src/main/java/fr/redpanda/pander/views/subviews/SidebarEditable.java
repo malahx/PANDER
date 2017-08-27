@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import fr.redpanda.pander.entities.Candidate;
+import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.User;
 
 /**
@@ -691,12 +693,37 @@ public class SidebarEditable extends Sidebar {
 	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.entities.User)
 	 */
 	@Override
-	public void initData(User user) {
+	protected void initUser(User user) {
+		getTxtMail().setText(user.getEmail());
 		getTxtAdress().setText(user.getAddress());
 		getTxtCity().setText(user.getCity());
 		getTxtDescriptionTitle().setText(user.getDescription());
 		getTxtPhone().setText(user.getPhone());
 		getTxtCP().setText(user.getPostcode());
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.entities.User)
+	 */
+	@Override
+	public void initCandidate(Candidate candidate) {
+		initUser(candidate);
+		getTxtLink1().setText(candidate.getLink1());
+		getTxtLink2().setText(candidate.getLink2());
+		getTxtNameOne().setText(candidate.getFirstname());
+		getTxtNameTwo().setText(candidate.getLastname());
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.entities.User)
+	 */
+	@Override
+	public void initCompany(Company company) {
+		initUser(company);
+		getTxtLink1().setText(company.getLink());
+		getTxtLink2().setText(company.getContact());
+		getTxtNameOne().setText(company.getName());
+		getTxtNameTwo().setText(company.getSiret());		
 	}
 
 }

@@ -10,12 +10,12 @@ import java.awt.event.ItemListener;
 
 import fr.redpanda.pander.database.UserDAO;
 import fr.redpanda.pander.entities.Candidate;
+import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.managers.ViewsManager;
 import fr.redpanda.pander.utils.constant.TypeData;
 import fr.redpanda.pander.views.MainView;
 import fr.redpanda.pander.views.subviews.SidebarEditable;
-import fr.redpanda.pander.views.subviews.SidebarPublic;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -34,8 +34,13 @@ public abstract class MainCtrl extends BaseCtrl {
 		MainView view = (MainView) this.view;
 
 		User user = (User) getViewDatas().get(TypeData.USER);
-		view.getNavbar().getLblUser().setText(user instanceof Candidate ? "Candidat" : "Entreprise");
-		view.getSidebar().initData(user);
+		if (user instanceof Candidate) {
+			view.getNavbar().getLblUser().setText("CANDIDAT");
+			view.getSidebar().initCandidate((Candidate) user); 
+		} else {
+			view.getNavbar().getLblUser().setText("ENTREPRISE");
+			view.getSidebar().initCompany((Company) user);
+		}
 
 	}
 
@@ -50,7 +55,7 @@ public abstract class MainCtrl extends BaseCtrl {
 		MainView view = (MainView) this.view;
 
 		view.getNavbar().getTglbtnHome().addItemListener(new ItemListener() {
-			
+
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if (ViewsManager.getInstance().isCurrentController(HomeCtrl.class)) {
@@ -61,18 +66,18 @@ public abstract class MainCtrl extends BaseCtrl {
 		});
 
 		view.getNavbar().getTglbtnProfile().addItemListener(new ItemListener() {
-			
+
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if (ViewsManager.getInstance().isCurrentController(ProfileCtrl.class)) {
 					return;
 				}
-				ViewsManager.getInstance().next(new ProfileCtrl(frame));				
+				ViewsManager.getInstance().next(new ProfileCtrl(frame));
 			}
 		});
 
 		view.getNavbar().getTglbtnMatching().addItemListener(new ItemListener() {
-			
+
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if (ViewsManager.getInstance().isCurrentController(MatchingCtrl.class)) {

@@ -24,7 +24,7 @@ public class ProfileCtrl extends MainCtrl {
 		if (view == null) {
 			User user = (User) getViewDatas().get(TypeData.USER);
 			if (user instanceof Company) {
-				view = new CompanyView();
+				//view = new CompanyView();
 			} else {
 				view = new CandidateView();
 			}

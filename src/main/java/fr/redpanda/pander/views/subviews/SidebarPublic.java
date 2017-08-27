@@ -8,6 +8,8 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import fr.redpanda.pander.entities.Candidate;
+import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.User;
 
 /**
@@ -529,12 +531,37 @@ public class SidebarPublic extends Sidebar {
 	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.entities.User)
 	 */
 	@Override
-	public void initData(User user) {
+	protected void initUser(User user) {
+		getLblMail().setText(user.getEmail());
 		getLblAddress().setText(user.getAddress());
 		getLblCity().setText(user.getCity());
 		getLblDescriptionTitle().setText(user.getDescription());
 		getLblPhone().setText(user.getPhone());
 		getLblCp().setText(user.getPostcode());
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.entities.User)
+	 */
+	@Override
+	public void initCandidate(Candidate candidate) {
+		initUser(candidate);
+		getLblLink1().setText(candidate.getLink1());
+		getLblLink2().setText(candidate.getLink2());
+		getLblName1().setText(candidate.getFirstname());
+		getLblName2().setText(candidate.getLastname());
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.entities.User)
+	 */
+	@Override
+	public void initCompany(Company company) {
+		initUser(company);
+		getLblLink1().setText(company.getLink());
+		getLblLink2().setText(company.getContact());
+		getLblName1().setText(company.getName());
+		getLblName2().setText(company.getSiret());		
 	}
 
 }

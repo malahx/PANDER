@@ -6,6 +6,8 @@ package fr.redpanda.pander.views.subviews;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import fr.redpanda.pander.entities.Candidate;
+import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.User;
 
 /**
@@ -40,6 +42,18 @@ public abstract class Sidebar extends JPanel {
 	 * Initialize the sidebar datas
 	 * @param user the user to take datas
 	 */
-	public abstract void initData(User user);
+	protected abstract void initUser(User user);
+	
+	/**
+	 * Initialize the sidebar datas
+	 * @param user the user to take datas
+	 */
+	public abstract void initCandidate(Candidate candidate);
+	
+	/**
+	 * Initialize the sidebar datas
+	 * @param user the user to take datas
+	 */
+	public abstract void initCompany(Company company);
 
 }
