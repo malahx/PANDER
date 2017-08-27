@@ -80,7 +80,7 @@ public class MatchingView extends MainView {
 		gbl_contentPane.rowHeights = new int[] { 0, 0, 0 };
 		gbl_contentPane.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
 		gbl_contentPane.rowWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
-		contentPane.setLayout(gbl_contentPane);
+		getPnlContent().setLayout(gbl_contentPane);
 
 		scrPMatching = new JScrollPane();
 		scrPMatching.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
@@ -90,7 +90,7 @@ public class MatchingView extends MainView {
 		gbc_scrollPane.fill = GridBagConstraints.BOTH;
 		gbc_scrollPane.gridx = 0;
 		gbc_scrollPane.gridy = 0;
-		contentPane.add(scrPMatching, gbc_scrollPane);
+		getPnlContent().add(scrPMatching, gbc_scrollPane);
 
 		tblMatching = new JTable();
 		scrPMatching.setViewportView(tblMatching);
@@ -99,7 +99,7 @@ public class MatchingView extends MainView {
 		GridBagConstraints gbc_btnMatching = new GridBagConstraints();
 		gbc_btnMatching.gridx = 0;
 		gbc_btnMatching.gridy = 1;
-		contentPane.add(btnMatching, gbc_btnMatching);
+		getPnlContent().add(btnMatching, gbc_btnMatching);
 	}
 
 }

@@ -8,6 +8,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -45,6 +46,11 @@ public class CompanyView extends MainView {
 	private JLabel lblSoftSkills;
 	private JScrollPane scrPSoftSkills;
 	private JPanel pnlSoftSkills;
+	private JPanel pnlTechSkills;
+	private JTable tblSoftSkills;
+	private JPanel pnlButton;
+	private JButton btnAddUp;
+	private JButton btnDelete;
 
 	/**
 	 * @return the pnlJobList
@@ -376,19 +382,65 @@ public class CompanyView extends MainView {
 		this.tblSoftSkills = tblSoftSkills;
 	}
 
-	private JPanel pnlTechSkills;
-	private JTable tblSoftSkills;
+	/**
+	 * @return the pnlButton
+	 */
+	public JPanel getPnlButton() {
+		return pnlButton;
+	}
+
+	/**
+	 * @param pnlButton
+	 *            the pnlButton to set
+	 */
+	public void setPnlButton(JPanel pnlButton) {
+		this.pnlButton = pnlButton;
+	}
+
+	/**
+	 * @return the btnAddUp
+	 */
+	public JButton getBtnAddUp() {
+		return btnAddUp;
+	}
+
+	/**
+	 * @param btnAddUp
+	 *            the btnAddUp to set
+	 */
+	public void setBtnAddUp(JButton btnAddUp) {
+		this.btnAddUp = btnAddUp;
+	}
+
+	/**
+	 * @return the btnDelete
+	 */
+	public JButton getBtnDelete() {
+		return btnDelete;
+	}
+
+	/**
+	 * @param btnDelete
+	 *            the btnDelete to set
+	 */
+	public void setBtnDelete(JButton btnDelete) {
+		this.btnDelete = btnDelete;
+	}
 
 	/**
 	 * Create the frame.
 	 */
 	public CompanyView() {
+
+		super();
+		super.pageName = "Entreprise";
+
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 0, 0, 0 };
-		gbl_contentPane.rowHeights = new int[] { 0 };
+		gbl_contentPane.rowHeights = new int[] { 0, 0, 0 };
 		gbl_contentPane.columnWeights = new double[] { 1.0, 1.0 };
-		gbl_contentPane.rowWeights = new double[] { 0.0 };
-		contentPane.setLayout(gbl_contentPane);
+		gbl_contentPane.rowWeights = new double[] { 1.0, 1.0, 0.0 };
+		getPnlContent().setLayout(gbl_contentPane);
 
 		pnlJobList = new JPanel();
 		GridBagConstraints gbc_pnlJobList = new GridBagConstraints();
@@ -396,10 +448,11 @@ public class CompanyView extends MainView {
 		gbc_pnlJobList.fill = GridBagConstraints.BOTH;
 		gbc_pnlJobList.gridx = 0;
 		gbc_pnlJobList.gridy = 0;
-		contentPane.add(pnlJobList, gbc_pnlJobList);
+		getPnlContent().add(pnlJobList, gbc_pnlJobList);
 		pnlJobList.setLayout(new BoxLayout(pnlJobList, BoxLayout.Y_AXIS));
 
 		lblJobList = new JLabel("Liste de Poste");
+		lblJobList.setAlignmentY(0.0f);
 		pnlJobList.add(lblJobList);
 
 		scrPJobList = new JScrollPane();
@@ -412,28 +465,27 @@ public class CompanyView extends MainView {
 
 		pnlJobInfo = new JPanel();
 		GridBagConstraints gbc_pnlJobInfo = new GridBagConstraints();
-		gbc_pnlJobInfo.insets = new Insets(0, 0, 5, 5);
+		gbc_pnlJobInfo.insets = new Insets(0, 0, 5, 0);
 		gbc_pnlJobInfo.fill = GridBagConstraints.BOTH;
 		gbc_pnlJobInfo.gridx = 1;
 		gbc_pnlJobInfo.gridy = 0;
-		contentPane.add(pnlJobInfo, gbc_pnlJobInfo);
+		getPnlContent().add(pnlJobInfo, gbc_pnlJobInfo);
 		GridBagLayout gbl_pnlJobInfo = new GridBagLayout();
 		gbl_pnlJobInfo.columnWidths = new int[] { 0, 0 };
-		gbl_pnlJobInfo.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_pnlJobInfo.rowHeights = new int[] { 0, 30, 0, 30, 0, 30, 0 };
 		gbl_pnlJobInfo.columnWeights = new double[] { 0.0, 1.0 };
-		gbl_pnlJobInfo.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_pnlJobInfo.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0 };
 		pnlJobInfo.setLayout(gbl_pnlJobInfo);
 
 		lblName = new JLabel("Nom :");
 		GridBagConstraints gbc_lblName = new GridBagConstraints();
-		gbc_lblName.anchor = GridBagConstraints.WEST;
+		gbc_lblName.anchor = GridBagConstraints.EAST;
 		gbc_lblName.insets = new Insets(0, 0, 5, 5);
 		gbc_lblName.gridx = 0;
 		gbc_lblName.gridy = 0;
 		pnlJobInfo.add(lblName, gbc_lblName);
 
 		txtName = new JTextField();
-		txtName.setText("Name");
 		GridBagConstraints gbc_txtName = new GridBagConstraints();
 		gbc_txtName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtName.insets = new Insets(0, 0, 5, 0);
@@ -451,7 +503,6 @@ public class CompanyView extends MainView {
 		pnlJobInfo.add(lblContact, gbc_lblContact);
 
 		txtContact = new JTextField();
-		txtContact.setText("Contact");
 		GridBagConstraints gbc_txtContact = new GridBagConstraints();
 		gbc_txtContact.insets = new Insets(0, 0, 5, 0);
 		gbc_txtContact.fill = GridBagConstraints.HORIZONTAL;
@@ -469,7 +520,6 @@ public class CompanyView extends MainView {
 		pnlJobInfo.add(lblLien, gbc_lblLien);
 
 		txtLink = new JTextField();
-		txtLink.setText("Link");
 		GridBagConstraints gbc_txtLink = new GridBagConstraints();
 		gbc_txtLink.insets = new Insets(0, 0, 5, 0);
 		gbc_txtLink.fill = GridBagConstraints.HORIZONTAL;
@@ -480,72 +530,28 @@ public class CompanyView extends MainView {
 
 		lblInfos = new JLabel("Infos :");
 		GridBagConstraints gbc_lblInfos = new GridBagConstraints();
+		gbc_lblInfos.anchor = GridBagConstraints.NORTHEAST;
 		gbc_lblInfos.insets = new Insets(0, 0, 0, 5);
 		gbc_lblInfos.gridx = 0;
 		gbc_lblInfos.gridy = 6;
 		pnlJobInfo.add(lblInfos, gbc_lblInfos);
 
 		txtrInfos = new JTextArea();
-		txtrInfos.setText("Infos");
+		txtrInfos.setRows(8);
 		GridBagConstraints gbc_txtrInfos = new GridBagConstraints();
 		gbc_txtrInfos.fill = GridBagConstraints.BOTH;
+		gbc_txtrInfos.ipady = 1;
 		gbc_txtrInfos.gridx = 1;
 		gbc_txtrInfos.gridy = 6;
 		pnlJobInfo.add(txtrInfos, gbc_txtrInfos);
 
-		pnlSkillList = new JPanel();
-		GridBagConstraints gbc_pnlSkillList = new GridBagConstraints();
-		gbc_pnlSkillList.insets = new Insets(0, 0, 5, 0);
-		gbc_pnlSkillList.fill = GridBagConstraints.VERTICAL;
-		gbc_pnlSkillList.gridx = 2;
-		gbc_pnlSkillList.gridy = 0;
-		contentPane.add(pnlSkillList, gbc_pnlSkillList);
-		GridBagLayout gbl_pnlSkillList = new GridBagLayout();
-		gbl_pnlSkillList.columnWidths = new int[] { 0 };
-		gbl_pnlSkillList.rowHeights = new int[] { 0, 0, 0 };
-		gbl_pnlSkillList.columnWeights = new double[] { 1.0 };
-		gbl_pnlSkillList.rowWeights = new double[] { 1.0, 0.0, 1.0 };
-		pnlSkillList.setLayout(gbl_pnlSkillList);
-
-		pnlSoftSkills = new JPanel();
-		GridBagConstraints gbc_pnlSoftSkills = new GridBagConstraints();
-		gbc_pnlSoftSkills.fill = GridBagConstraints.VERTICAL;
-		gbc_pnlSoftSkills.insets = new Insets(0, 0, 5, 0);
-		gbc_pnlSoftSkills.gridx = 0;
-		gbc_pnlSoftSkills.gridy = 0;
-		pnlSkillList.add(pnlSoftSkills, gbc_pnlSoftSkills);
-		GridBagLayout gbl_pnlSoftSkills = new GridBagLayout();
-		gbl_pnlSoftSkills.columnWidths = new int[] { 0 };
-		gbl_pnlSoftSkills.rowHeights = new int[] { 0, 0 };
-		gbl_pnlSoftSkills.columnWeights = new double[] { 1.0 };
-		gbl_pnlSoftSkills.rowWeights = new double[] { 0.0, 1.0 };
-		pnlSoftSkills.setLayout(gbl_pnlSoftSkills);
-
-		lblSoftSkills = new JLabel("Soft Skills");
-		GridBagConstraints gbc_lblSoftSkills = new GridBagConstraints();
-		gbc_lblSoftSkills.anchor = GridBagConstraints.NORTHWEST;
-		gbc_lblSoftSkills.insets = new Insets(0, 0, 5, 0);
-		gbc_lblSoftSkills.gridx = 0;
-		gbc_lblSoftSkills.gridy = 0;
-		pnlSoftSkills.add(lblSoftSkills, gbc_lblSoftSkills);
-
-		scrPSoftSkills = new JScrollPane();
-		GridBagConstraints gbc_scrPSoftSkills = new GridBagConstraints();
-		gbc_scrPSoftSkills.fill = GridBagConstraints.VERTICAL;
-		gbc_scrPSoftSkills.gridx = 0;
-		gbc_scrPSoftSkills.gridy = 1;
-		pnlSoftSkills.add(scrPSoftSkills, gbc_scrPSoftSkills);
-		scrPSoftSkills.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrPSoftSkills.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-		tblSoftSkills = new JTable();
-		scrPSoftSkills.setViewportView(tblSoftSkills);
-
 		pnlTechSkills = new JPanel();
 		GridBagConstraints gbc_pnlTechSkills = new GridBagConstraints();
+		gbc_pnlTechSkills.fill = GridBagConstraints.BOTH;
+		gbc_pnlTechSkills.insets = new Insets(0, 0, 5, 5);
 		gbc_pnlTechSkills.gridx = 0;
-		gbc_pnlTechSkills.gridy = 2;
-		pnlSkillList.add(pnlTechSkills, gbc_pnlTechSkills);
+		gbc_pnlTechSkills.gridy = 1;
+		getPnlContent().add(pnlTechSkills, gbc_pnlTechSkills);
 		GridBagLayout gbl_pnlTechSkills = new GridBagLayout();
 		gbl_pnlTechSkills.columnWidths = new int[] { 0 };
 		gbl_pnlTechSkills.rowHeights = new int[] { 0, 0 };
@@ -555,7 +561,7 @@ public class CompanyView extends MainView {
 
 		lblTechSkills = new JLabel("Compétences Techniques");
 		GridBagConstraints gbc_lblTechSkills = new GridBagConstraints();
-		gbc_lblTechSkills.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblTechSkills.anchor = GridBagConstraints.NORTH;
 		gbc_lblTechSkills.insets = new Insets(0, 0, 5, 0);
 		gbc_lblTechSkills.gridx = 0;
 		gbc_lblTechSkills.gridy = 0;
@@ -563,7 +569,7 @@ public class CompanyView extends MainView {
 
 		scrPTechSkills = new JScrollPane();
 		GridBagConstraints gbc_scrPTechSkills = new GridBagConstraints();
-		gbc_scrPTechSkills.fill = GridBagConstraints.VERTICAL;
+		gbc_scrPTechSkills.fill = GridBagConstraints.BOTH;
 		gbc_scrPTechSkills.gridx = 0;
 		gbc_scrPTechSkills.gridy = 1;
 		pnlTechSkills.add(scrPTechSkills, gbc_scrPTechSkills);
@@ -572,6 +578,57 @@ public class CompanyView extends MainView {
 
 		tblTechSkills = new JTable();
 		scrPTechSkills.setViewportView(tblTechSkills);
+
+		pnlSoftSkills = new JPanel();
+		GridBagConstraints gbc_pnlSoftSkills = new GridBagConstraints();
+		gbc_pnlSoftSkills.insets = new Insets(0, 0, 5, 0);
+		gbc_pnlSoftSkills.fill = GridBagConstraints.BOTH;
+		gbc_pnlSoftSkills.gridx = 1;
+		gbc_pnlSoftSkills.gridy = 1;
+		getPnlContent().add(pnlSoftSkills, gbc_pnlSoftSkills);
+		GridBagLayout gbl_pnlSoftSkills = new GridBagLayout();
+		gbl_pnlSoftSkills.columnWidths = new int[] { 0 };
+		gbl_pnlSoftSkills.rowHeights = new int[] { 0, 0 };
+		gbl_pnlSoftSkills.columnWeights = new double[] { 1.0 };
+		gbl_pnlSoftSkills.rowWeights = new double[] { 0.0, 1.0 };
+		pnlSoftSkills.setLayout(gbl_pnlSoftSkills);
+
+		lblSoftSkills = new JLabel("Soft Skills");
+		GridBagConstraints gbc_lblSoftSkills = new GridBagConstraints();
+		gbc_lblSoftSkills.anchor = GridBagConstraints.NORTH;
+		gbc_lblSoftSkills.insets = new Insets(0, 0, 5, 0);
+		gbc_lblSoftSkills.gridx = 0;
+		gbc_lblSoftSkills.gridy = 0;
+		pnlSoftSkills.add(lblSoftSkills, gbc_lblSoftSkills);
+
+		scrPSoftSkills = new JScrollPane();
+		GridBagConstraints gbc_scrPSoftSkills = new GridBagConstraints();
+		gbc_scrPSoftSkills.fill = GridBagConstraints.BOTH;
+		gbc_scrPSoftSkills.gridx = 0;
+		gbc_scrPSoftSkills.gridy = 1;
+		pnlSoftSkills.add(scrPSoftSkills, gbc_scrPSoftSkills);
+		scrPSoftSkills.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrPSoftSkills.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+		tblSoftSkills = new JTable();
+		scrPSoftSkills.setViewportView(tblSoftSkills);
+
+		pnlButton = new JPanel();
+		GridBagConstraints gbc_pnlButton = new GridBagConstraints();
+		gbc_pnlButton.anchor = GridBagConstraints.EAST;
+		gbc_pnlButton.gridwidth = 2;
+		gbc_pnlButton.insets = new Insets(0, 0, 0, 5);
+		gbc_pnlButton.fill = GridBagConstraints.VERTICAL;
+		gbc_pnlButton.gridx = 0;
+		gbc_pnlButton.gridy = 2;
+		getPnlContent().add(pnlButton, gbc_pnlButton);
+
+		btnAddUp = new JButton("Ajouter un poste");
+		pnlButton.add(btnAddUp);
+
+		btnDelete = new JButton("Supprimer un poste");
+		pnlButton.add(btnDelete);
+
 	}
 
 }

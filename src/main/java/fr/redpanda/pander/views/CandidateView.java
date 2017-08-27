@@ -132,7 +132,7 @@ public class CandidateView extends MainView {
 		gbl_contentPane.columnWeights = new double[] { 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
 		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0,
 				0.0, 0.0, Double.MIN_VALUE };
-		contentPane.setLayout(gbl_contentPane);
+		getPnlContent().setLayout(gbl_contentPane);
 
 		JLabel lblCertificate1 = new JLabel("Diplôme 1");
 		GridBagConstraints gbc_lblCertificate1 = new GridBagConstraints();
@@ -140,7 +140,7 @@ public class CandidateView extends MainView {
 		gbc_lblCertificate1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCertificate1.gridx = 1;
 		gbc_lblCertificate1.gridy = 1;
-		contentPane.add(lblCertificate1, gbc_lblCertificate1);
+		getPnlContent().add(lblCertificate1, gbc_lblCertificate1);
 
 		textCertificate1 = new JTextField();
 		GridBagConstraints gbc_textCertificate1 = new GridBagConstraints();
@@ -149,7 +149,7 @@ public class CandidateView extends MainView {
 		gbc_textCertificate1.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textCertificate1.gridx = 2;
 		gbc_textCertificate1.gridy = 1;
-		contentPane.add(textCertificate1, gbc_textCertificate1);
+		getPnlContent().add(textCertificate1, gbc_textCertificate1);
 		textCertificate1.setColumns(10);
 
 		JLabel lblCertificate2 = new JLabel("Diplôme 2");
@@ -158,7 +158,7 @@ public class CandidateView extends MainView {
 		gbc_lblCertificate2.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCertificate2.gridx = 1;
 		gbc_lblCertificate2.gridy = 2;
-		contentPane.add(lblCertificate2, gbc_lblCertificate2);
+		getPnlContent().add(lblCertificate2, gbc_lblCertificate2);
 
 		textCertificate2 = new JTextField();
 		GridBagConstraints gbc_textCertificate2 = new GridBagConstraints();
@@ -167,7 +167,7 @@ public class CandidateView extends MainView {
 		gbc_textCertificate2.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textCertificate2.gridx = 2;
 		gbc_textCertificate2.gridy = 2;
-		contentPane.add(textCertificate2, gbc_textCertificate2);
+		getPnlContent().add(textCertificate2, gbc_textCertificate2);
 		textCertificate2.setColumns(10);
 
 		JLabel lblBirthday = new JLabel("Date de naissance");
@@ -176,7 +176,7 @@ public class CandidateView extends MainView {
 		gbc_lblBirthday.insets = new Insets(0, 0, 5, 5);
 		gbc_lblBirthday.gridx = 1;
 		gbc_lblBirthday.gridy = 3;
-		contentPane.add(lblBirthday, gbc_lblBirthday);
+		getPnlContent().add(lblBirthday, gbc_lblBirthday);
 
 		textBirthday = new JTextField();
 		GridBagConstraints gbc_textBirthday = new GridBagConstraints();
@@ -185,7 +185,7 @@ public class CandidateView extends MainView {
 		gbc_textBirthday.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textBirthday.gridx = 2;
 		gbc_textBirthday.gridy = 3;
-		contentPane.add(textBirthday, gbc_textBirthday);
+		getPnlContent().add(textBirthday, gbc_textBirthday);
 		textBirthday.setColumns(10);
 
 		JLabel lblTransport = new JLabel("Transport");
@@ -194,7 +194,7 @@ public class CandidateView extends MainView {
 		gbc_lblTransport.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTransport.gridx = 4;
 		gbc_lblTransport.gridy = 3;
-		contentPane.add(lblTransport, gbc_lblTransport);
+		getPnlContent().add(lblTransport, gbc_lblTransport);
 
 		textTransport = new JTextField();
 		GridBagConstraints gbc_textTransport = new GridBagConstraints();
@@ -203,7 +203,7 @@ public class CandidateView extends MainView {
 		gbc_textTransport.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textTransport.gridx = 5;
 		gbc_textTransport.gridy = 3;
-		contentPane.add(textTransport, gbc_textTransport);
+		getPnlContent().add(textTransport, gbc_textTransport);
 		textTransport.setColumns(10);
 
 		JLabel lblTechSkillsTitle = new JLabel("Compétences techniques");
@@ -212,7 +212,7 @@ public class CandidateView extends MainView {
 		gbc_lblTechSkillsTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTechSkillsTitle.gridx = 1;
 		gbc_lblTechSkillsTitle.gridy = 6;
-		contentPane.add(lblTechSkillsTitle, gbc_lblTechSkillsTitle);
+		getPnlContent().add(lblTechSkillsTitle, gbc_lblTechSkillsTitle);
 
 		JLabel lblSoftSkillsTitle = new JLabel("Soft Skills");
 		GridBagConstraints gbc_lblSoftSkillsTitle = new GridBagConstraints();
@@ -220,7 +220,7 @@ public class CandidateView extends MainView {
 		gbc_lblSoftSkillsTitle.insets = new Insets(0, 0, 5, 5);
 		gbc_lblSoftSkillsTitle.gridx = 4;
 		gbc_lblSoftSkillsTitle.gridy = 6;
-		contentPane.add(lblSoftSkillsTitle, gbc_lblSoftSkillsTitle);
+		getPnlContent().add(lblSoftSkillsTitle, gbc_lblSoftSkillsTitle);
 
 		JScrollPane scrollPaneTechSkills = new JScrollPane();
 		scrollPaneTechSkills.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -232,7 +232,7 @@ public class CandidateView extends MainView {
 		gbc_scrollPaneTechSkills.fill = GridBagConstraints.BOTH;
 		gbc_scrollPaneTechSkills.gridx = 1;
 		gbc_scrollPaneTechSkills.gridy = 7;
-		contentPane.add(scrollPaneTechSkills, gbc_scrollPaneTechSkills);
+		getPnlContent().add(scrollPaneTechSkills, gbc_scrollPaneTechSkills);
 
 		tableTechSkills = new JTable();
 		scrollPaneTechSkills.setViewportView(tableTechSkills);
@@ -247,7 +247,7 @@ public class CandidateView extends MainView {
 		gbc_scrollPaneSoftSkills.fill = GridBagConstraints.BOTH;
 		gbc_scrollPaneSoftSkills.gridx = 4;
 		gbc_scrollPaneSoftSkills.gridy = 7;
-		contentPane.add(scrollPaneSoftSkills, gbc_scrollPaneSoftSkills);
+		getPnlContent().add(scrollPaneSoftSkills, gbc_scrollPaneSoftSkills);
 
 		tableSoftSkills = new JTable();
 		scrollPaneSoftSkills.setViewportView(tableSoftSkills);
