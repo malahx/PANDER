@@ -571,6 +571,7 @@ public class SidebarPublic extends Sidebar {
 		getLblLink2().setText(company.getContact());
 		getLblName1().setText(company.getName());
 		getLblName2().setText(company.getSiret());
+		getBtnTelechargCV().setVisible(false);
 	}
 
 }

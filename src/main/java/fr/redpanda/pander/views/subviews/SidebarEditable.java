@@ -723,7 +723,9 @@ public class SidebarEditable extends Sidebar {
 		getTxtLink1().setText(company.getLink());
 		getTxtLink2().setText(company.getContact());
 		getTxtName1().setText(company.getName());
-		getTxtName2().setText(company.getSiret());		
+		getTxtName2().setText(company.getSiret());
+		getBtnSeeCV().setVisible(false);
+		getBtnTelechargCV().setVisible(false);
 	}
 
 }
