@@ -115,9 +115,9 @@ public class SidebarPublic extends Sidebar {
 	}
 
 	/**
-	 * @return the lblCoordonateTittle
+	 * @return the lblCoordonateTitle
 	 */
-	public JLabel getLblCoordonateTittle() {
+	public JLabel getLblCoordonateTitle() {
 		return lblCoordonateTitle;
 	}
 
@@ -527,8 +527,11 @@ public class SidebarPublic extends Sidebar {
 		add(label, gbc_label);
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.entities.User)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.
+	 * entities.User)
 	 */
 	@Override
 	protected void initUser(User user) {
@@ -540,8 +543,11 @@ public class SidebarPublic extends Sidebar {
 		getLblCp().setText(user.getPostcode());
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.entities.User)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.
+	 * entities.User)
 	 */
 	@Override
 	public void initCandidate(Candidate candidate) {
@@ -552,8 +558,11 @@ public class SidebarPublic extends Sidebar {
 		getLblName2().setText(candidate.getLastname());
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.entities.User)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.
+	 * entities.User)
 	 */
 	@Override
 	public void initCompany(Company company) {
@@ -561,7 +570,7 @@ public class SidebarPublic extends Sidebar {
 		getLblLink1().setText(company.getLink());
 		getLblLink2().setText(company.getContact());
 		getLblName1().setText(company.getName());
-		getLblName2().setText(company.getSiret());		
+		getLblName2().setText(company.getSiret());
 	}
 
 }

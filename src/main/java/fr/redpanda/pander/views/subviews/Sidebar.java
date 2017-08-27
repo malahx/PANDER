@@ -37,22 +37,28 @@ public abstract class Sidebar extends JPanel {
 	public void setBtnTelechargCV(JButton btnTelechargCV) {
 		this.btnTelechargCV = btnTelechargCV;
 	}
-	
+
 	/**
 	 * Initialize the sidebar datas
-	 * @param user the user to take datas
+	 * 
+	 * @param user
+	 *            the user to take datas
 	 */
 	protected abstract void initUser(User user);
-	
+
 	/**
 	 * Initialize the sidebar datas
-	 * @param user the user to take datas
+	 * 
+	 * @param user
+	 *            the user to take datas
 	 */
 	public abstract void initCandidate(Candidate candidate);
-	
+
 	/**
 	 * Initialize the sidebar datas
-	 * @param user the user to take datas
+	 * 
+	 * @param user
+	 *            the user to take datas
 	 */
 	public abstract void initCompany(Company company);
 

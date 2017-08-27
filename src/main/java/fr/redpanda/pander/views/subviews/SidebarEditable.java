@@ -26,20 +26,20 @@ public class SidebarEditable extends Sidebar {
 	private static final long serialVersionUID = -7876599813851320634L;
 
 	private JTextField txtDescriptionTitle;
-	private JTextField txtCP;
+	private JTextField txtCp;
 	private JTextField txtCity;
 	private JTextField txtPhone;
 	private JTextField txtMail;
 	private JTextField txtAdress;
 	private JTextField txtLink1;
 	private JTextField txtLink2;
-	private JTextField txtNameOne;
-	private JTextField txtNameTwo;
+	private JTextField txtName1;
+	private JTextField txtName2;
 	private JLabel lblPhoto;
 	private JLabel lblNameOne;
 	private JLabel jlblNameTwo;
 	private JLabel lblDescriptionTitle;
-	private JLabel lblCoordonateTittle;
+	private JLabel lblCoordonateTitle;
 	private JLabel lblAdressTitle;
 	private JLabel lblCpTitle;
 	private JLabel lblCityTitle;
@@ -67,18 +67,18 @@ public class SidebarEditable extends Sidebar {
 	}
 
 	/**
-	 * @return the txtCP
+	 * @return the txtCp
 	 */
-	public JTextField getTxtCP() {
-		return txtCP;
+	public JTextField getTxtCp() {
+		return txtCp;
 	}
 
 	/**
-	 * @param txtCP
-	 *            the txtCP to set
+	 * @param txtCp
+	 *            the txtCp to set
 	 */
-	public void setTxtCP(JTextField txtCP) {
-		this.txtCP = txtCP;
+	public void setTxtCp(JTextField txtCp) {
+		this.txtCp = txtCp;
 	}
 
 	/**
@@ -172,33 +172,33 @@ public class SidebarEditable extends Sidebar {
 	}
 
 	/**
-	 * @return the txtNameOne
+	 * @return the txtName1
 	 */
-	public JTextField getTxtNameOne() {
-		return txtNameOne;
+	public JTextField getTxtName1() {
+		return txtName1;
 	}
 
 	/**
-	 * @param txtNameOne
-	 *            the txtNameOne to set
+	 * @param txtName1
+	 *            the txtName1 to set
 	 */
-	public void setTxtNameOne(JTextField txtNameOne) {
-		this.txtNameOne = txtNameOne;
+	public void setTxtName1(JTextField txtName1) {
+		this.txtName1 = txtName1;
 	}
 
 	/**
-	 * @return the txtNameTwo
+	 * @return the txtName2
 	 */
-	public JTextField getTxtNameTwo() {
-		return txtNameTwo;
+	public JTextField getTxtName2() {
+		return txtName2;
 	}
 
 	/**
-	 * @param txtNameTwo
-	 *            the txtNameTwo to set
+	 * @param txtName2
+	 *            the txtName2 to set
 	 */
-	public void setTxtNameTwo(JTextField txtNameTwo) {
-		this.txtNameTwo = txtNameTwo;
+	public void setTxtName2(JTextField txtName2) {
+		this.txtName2 = txtName2;
 	}
 
 	/**
@@ -239,11 +239,11 @@ public class SidebarEditable extends Sidebar {
 	}
 
 	/**
-	 * @param jlblNameTwo
-	 *            the jlblNameTwo to set
+	 * @param jlblName2
+	 *            the jlblName2 to set
 	 */
-	public void setJlblNameTwo(JLabel jlblNameTwo) {
-		this.jlblNameTwo = jlblNameTwo;
+	public void setJlblName2(JLabel jlblName2) {
+		this.jlblNameTwo = jlblName2;
 	}
 
 	/**
@@ -262,18 +262,18 @@ public class SidebarEditable extends Sidebar {
 	}
 
 	/**
-	 * @return the lblCoordonateTittle
+	 * @return the lblCoordonateTitle
 	 */
-	public JLabel getLblCoordonateTittle() {
-		return lblCoordonateTittle;
+	public JLabel getLblCoordonateTitle() {
+		return lblCoordonateTitle;
 	}
 
 	/**
-	 * @param lblCoordonateTittle
-	 *            the lblCoordonateTittle to set
+	 * @param lblCoordonateTitle
+	 *            the lblCoordonateTitle to set
 	 */
-	public void setLblCoordonateTittle(JLabel lblCoordonateTittle) {
-		this.lblCoordonateTittle = lblCoordonateTittle;
+	public void setLblCoordonateTitle(JLabel lblCoordonateTitle) {
+		this.lblCoordonateTitle = lblCoordonateTitle;
 	}
 
 	/**
@@ -457,15 +457,15 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblNameOne.gridy = 2;
 		add(lblNameOne, gbc_lblNameOne);
 
-		txtNameOne = new JTextField();
+		txtName1 = new JTextField();
 		GridBagConstraints gbc_txtNameOne = new GridBagConstraints();
 		gbc_txtNameOne.gridwidth = 2;
 		gbc_txtNameOne.insets = new Insets(0, 0, 5, 0);
 		gbc_txtNameOne.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtNameOne.gridx = 3;
 		gbc_txtNameOne.gridy = 2;
-		add(txtNameOne, gbc_txtNameOne);
-		txtNameOne.setColumns(10);
+		add(txtName1, gbc_txtNameOne);
+		txtName1.setColumns(10);
 
 		jlblNameTwo = new JLabel("Name2");
 		jlblNameTwo.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
@@ -477,15 +477,15 @@ public class SidebarEditable extends Sidebar {
 		gbc_jlblNameTwo.gridy = 3;
 		add(jlblNameTwo, gbc_jlblNameTwo);
 
-		txtNameTwo = new JTextField();
+		txtName2 = new JTextField();
 		GridBagConstraints gbc_txtNameTwo = new GridBagConstraints();
 		gbc_txtNameTwo.gridwidth = 2;
 		gbc_txtNameTwo.insets = new Insets(0, 0, 5, 0);
 		gbc_txtNameTwo.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtNameTwo.gridx = 3;
 		gbc_txtNameTwo.gridy = 3;
-		add(txtNameTwo, gbc_txtNameTwo);
-		txtNameTwo.setColumns(10);
+		add(txtName2, gbc_txtNameTwo);
+		txtName2.setColumns(10);
 
 		lblDescriptionTitle = new JLabel("DESCRIPTION");
 		lblDescriptionTitle.setFont(new Font("Lucida Grande", Font.BOLD, 13));
@@ -506,14 +506,14 @@ public class SidebarEditable extends Sidebar {
 		add(txtDescriptionTitle, gbc_txtDescriptionTitle);
 		txtDescriptionTitle.setColumns(10);
 
-		lblCoordonateTittle = new JLabel("COORDONNEES");
-		lblCoordonateTittle.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblCoordonateTitle = new JLabel("COORDONNEES");
+		lblCoordonateTitle.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		GridBagConstraints gbc_lblCoordonateTittle = new GridBagConstraints();
 		gbc_lblCoordonateTittle.gridwidth = 2;
 		gbc_lblCoordonateTittle.insets = new Insets(0, 0, 5, 5);
 		gbc_lblCoordonateTittle.gridx = 0;
 		gbc_lblCoordonateTittle.gridy = 8;
-		add(lblCoordonateTittle, gbc_lblCoordonateTittle);
+		add(lblCoordonateTitle, gbc_lblCoordonateTittle);
 
 		lblAdressTitle = new JLabel("Adresse ");
 		lblAdressTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
@@ -543,15 +543,15 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblCpTitle.gridy = 10;
 		add(lblCpTitle, gbc_lblCpTitle);
 
-		txtCP = new JTextField();
+		txtCp = new JTextField();
 		GridBagConstraints gbc_textCP = new GridBagConstraints();
 		gbc_textCP.gridwidth = 4;
 		gbc_textCP.insets = new Insets(0, 0, 5, 0);
 		gbc_textCP.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textCP.gridx = 1;
 		gbc_textCP.gridy = 10;
-		add(txtCP, gbc_textCP);
-		txtCP.setColumns(10);
+		add(txtCp, gbc_textCP);
+		txtCp.setColumns(10);
 
 		lblCityTitle = new JLabel("Ville");
 		lblCityTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
@@ -699,7 +699,7 @@ public class SidebarEditable extends Sidebar {
 		getTxtCity().setText(user.getCity());
 		getTxtDescriptionTitle().setText(user.getDescription());
 		getTxtPhone().setText(user.getPhone());
-		getTxtCP().setText(user.getPostcode());
+		getTxtCp().setText(user.getPostcode());
 	}
 
 	/* (non-Javadoc)
@@ -710,8 +710,8 @@ public class SidebarEditable extends Sidebar {
 		initUser(candidate);
 		getTxtLink1().setText(candidate.getLink1());
 		getTxtLink2().setText(candidate.getLink2());
-		getTxtNameOne().setText(candidate.getFirstname());
-		getTxtNameTwo().setText(candidate.getLastname());
+		getTxtName1().setText(candidate.getFirstname());
+		getTxtName2().setText(candidate.getLastname());
 	}
 
 	/* (non-Javadoc)
@@ -722,8 +722,8 @@ public class SidebarEditable extends Sidebar {
 		initUser(company);
 		getTxtLink1().setText(company.getLink());
 		getTxtLink2().setText(company.getContact());
-		getTxtNameOne().setText(company.getName());
-		getTxtNameTwo().setText(company.getSiret());		
+		getTxtName1().setText(company.getName());
+		getTxtName2().setText(company.getSiret());		
 	}
 
 }

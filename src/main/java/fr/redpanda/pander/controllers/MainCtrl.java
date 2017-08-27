@@ -125,7 +125,7 @@ public abstract class MainCtrl extends BaseCtrl {
 			sidebar.getTxtCity().addActionListener(updateProfile);
 			sidebar.getTxtDescriptionTitle().addActionListener(updateProfile);
 			sidebar.getTxtPhone().addActionListener(updateProfile);
-			sidebar.getTxtCP().addActionListener(updateProfile);
+			sidebar.getTxtCp().addActionListener(updateProfile);
 		}
 
 	}
@@ -139,7 +139,7 @@ public abstract class MainCtrl extends BaseCtrl {
 		user.setCity(sidebar.getTxtCity().getText());
 		user.setDescription(sidebar.getTxtDescriptionTitle().getText());
 		user.setPhone(sidebar.getTxtPhone().getText());
-		user.setPostcode(sidebar.getTxtCP().getText());
+		user.setPostcode(sidebar.getTxtCp().getText());
 		UserDAO.getInstance().update(user);
 	}
 
