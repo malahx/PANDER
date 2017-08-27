@@ -8,6 +8,8 @@ import java.awt.Insets;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import fr.redpanda.pander.entities.User;
+
 /**
  * 
  * @author Patrice SCHOCH
@@ -521,6 +523,18 @@ public class SidebarPublic extends Sidebar {
 		gbc_label.gridx = 0;
 		gbc_label.gridy = 23;
 		add(label, gbc_label);
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.entities.User)
+	 */
+	@Override
+	public void initData(User user) {
+		getLblAddress().setText(user.getAddress());
+		getLblCity().setText(user.getCity());
+		getLblDescriptionTitle().setText(user.getDescription());
+		getLblPhone().setText(user.getPhone());
+		getLblCp().setText(user.getPostcode());
 	}
 
 }

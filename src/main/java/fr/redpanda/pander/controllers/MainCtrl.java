@@ -35,23 +35,7 @@ public abstract class MainCtrl extends BaseCtrl {
 
 		User user = (User) getViewDatas().get(TypeData.USER);
 		view.getNavbar().getLblUser().setText(user instanceof Candidate ? "Candidat" : "Entreprise");
-		
-
-		if (view.isEditable()) {
-			SidebarEditable sidebar = (SidebarEditable) view.getSidebar();
-			sidebar.getTxtAdress().setText(user.getAddress());
-			sidebar.getTxtCity().setText(user.getCity());
-			sidebar.getTxtDescriptionTitle().setText(user.getDescription());
-			sidebar.getTxtPhone().setText(user.getPhone());
-			sidebar.getTxtCP().setText(user.getPostcode());
-		} else {
-			SidebarPublic sidebar = (SidebarPublic) view.getSidebar();
-			sidebar.getLblAddress().setText(user.getAddress());
-			sidebar.getLblCity().setText(user.getCity());
-			sidebar.getLblDescriptionTitle().setText(user.getDescription());
-			sidebar.getLblPhone().setText(user.getPhone());
-			sidebar.getLblCp().setText(user.getPostcode());
-		}
+		view.getSidebar().initData(user);
 
 	}
 

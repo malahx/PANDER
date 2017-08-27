@@ -6,6 +6,8 @@ package fr.redpanda.pander.views.subviews;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import fr.redpanda.pander.entities.User;
+
 /**
  * @author Gwénolé LE HENAFF
  *
@@ -33,5 +35,11 @@ public abstract class Sidebar extends JPanel {
 	public void setBtnTelechargCV(JButton btnTelechargCV) {
 		this.btnTelechargCV = btnTelechargCV;
 	}
+	
+	/**
+	 * Initialize the sidebar datas
+	 * @param user the user to take datas
+	 */
+	public abstract void initData(User user);
 
 }

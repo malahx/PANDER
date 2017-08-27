@@ -9,6 +9,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import fr.redpanda.pander.entities.User;
+
 /**
  * 
  * @author Patrice SCHOCH
@@ -683,6 +685,18 @@ public class SidebarEditable extends Sidebar {
 		gbc_label.gridx = 0;
 		gbc_label.gridy = 22;
 		add(label, gbc_label);
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.entities.User)
+	 */
+	@Override
+	public void initData(User user) {
+		getTxtAdress().setText(user.getAddress());
+		getTxtCity().setText(user.getCity());
+		getTxtDescriptionTitle().setText(user.getDescription());
+		getTxtPhone().setText(user.getPhone());
+		getTxtCP().setText(user.getPostcode());
 	}
 
 }
