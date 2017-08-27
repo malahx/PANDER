@@ -253,4 +253,14 @@ public class CandidateView extends MainView {
 		scrollPaneSoftSkills.setViewportView(tableSoftSkills);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.views.IMainView#isEditable()
+	 */
+	@Override
+	public boolean isEditable() {
+		return true;
+	}
+
 }

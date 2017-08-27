@@ -631,4 +631,14 @@ public class CompanyView extends MainView {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.views.IMainView#isEditable()
+	 */
+	@Override
+	public boolean isEditable() {
+		return true;
+	}
+
 }
