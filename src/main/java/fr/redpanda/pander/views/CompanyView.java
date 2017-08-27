@@ -3,13 +3,11 @@
  */
 package fr.redpanda.pander.views;
 
-import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -18,21 +16,21 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.border.EmptyBorder;
+
+import fr.redpanda.pander.entities.Job;
 
 /**
  * @author Gwénolé LE HENAFF
  *
  */
-public class CompanyView extends JFrame {
+public class CompanyView extends MainView {
 
-	private JPanel contentPane;
 	private JPanel pnlJobList;
 	private JPanel pnlJobInfo;
 	private JPanel pnlSkillList;
 	private JLabel lblJobList;
 	private JScrollPane scrPJobList;
-	private JList lstJob;
+	private JList<Job> lstJob;
 	private JLabel lblName;
 	private JTextField txtName;
 	private JLabel lblContact;
@@ -47,34 +45,344 @@ public class CompanyView extends JFrame {
 	private JLabel lblSoftSkills;
 	private JScrollPane scrPSoftSkills;
 	private JPanel pnlSoftSkills;
-	private JPanel pnlTechSkills;
-	private JTable tblSoftSkills;
 
 	/**
-	 * Launch the application.
+	 * @return the pnlJobList
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CompanyView frame = new CompanyView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public JPanel getPnlJobList() {
+		return pnlJobList;
 	}
+
+	/**
+	 * @param pnlJobList
+	 *            the pnlJobList to set
+	 */
+	public void setPnlJobList(JPanel pnlJobList) {
+		this.pnlJobList = pnlJobList;
+	}
+
+	/**
+	 * @return the pnlJobInfo
+	 */
+	public JPanel getPnlJobInfo() {
+		return pnlJobInfo;
+	}
+
+	/**
+	 * @param pnlJobInfo
+	 *            the pnlJobInfo to set
+	 */
+	public void setPnlJobInfo(JPanel pnlJobInfo) {
+		this.pnlJobInfo = pnlJobInfo;
+	}
+
+	/**
+	 * @return the pnlSkillList
+	 */
+	public JPanel getPnlSkillList() {
+		return pnlSkillList;
+	}
+
+	/**
+	 * @param pnlSkillList
+	 *            the pnlSkillList to set
+	 */
+	public void setPnlSkillList(JPanel pnlSkillList) {
+		this.pnlSkillList = pnlSkillList;
+	}
+
+	/**
+	 * @return the lblJobList
+	 */
+	public JLabel getLblJobList() {
+		return lblJobList;
+	}
+
+	/**
+	 * @param lblJobList
+	 *            the lblJobList to set
+	 */
+	public void setLblJobList(JLabel lblJobList) {
+		this.lblJobList = lblJobList;
+	}
+
+	/**
+	 * @return the scrPJobList
+	 */
+	public JScrollPane getScrPJobList() {
+		return scrPJobList;
+	}
+
+	/**
+	 * @param scrPJobList
+	 *            the scrPJobList to set
+	 */
+	public void setScrPJobList(JScrollPane scrPJobList) {
+		this.scrPJobList = scrPJobList;
+	}
+
+	/**
+	 * @return the lstJob
+	 */
+	public JList<Job> getLstJob() {
+		return lstJob;
+	}
+
+	/**
+	 * @param lstJob
+	 *            the lstJob to set
+	 */
+	public void setLstJob(JList<Job> lstJob) {
+		this.lstJob = lstJob;
+	}
+
+	/**
+	 * @return the lblName
+	 */
+	public JLabel getLblName() {
+		return lblName;
+	}
+
+	/**
+	 * @param lblName
+	 *            the lblName to set
+	 */
+	public void setLblName(JLabel lblName) {
+		this.lblName = lblName;
+	}
+
+	/**
+	 * @return the txtName
+	 */
+	public JTextField getTxtName() {
+		return txtName;
+	}
+
+	/**
+	 * @param txtName
+	 *            the txtName to set
+	 */
+	public void setTxtName(JTextField txtName) {
+		this.txtName = txtName;
+	}
+
+	/**
+	 * @return the lblContact
+	 */
+	public JLabel getLblContact() {
+		return lblContact;
+	}
+
+	/**
+	 * @param lblContact
+	 *            the lblContact to set
+	 */
+	public void setLblContact(JLabel lblContact) {
+		this.lblContact = lblContact;
+	}
+
+	/**
+	 * @return the txtContact
+	 */
+	public JTextField getTxtContact() {
+		return txtContact;
+	}
+
+	/**
+	 * @param txtContact
+	 *            the txtContact to set
+	 */
+	public void setTxtContact(JTextField txtContact) {
+		this.txtContact = txtContact;
+	}
+
+	/**
+	 * @return the lblLien
+	 */
+	public JLabel getLblLien() {
+		return lblLien;
+	}
+
+	/**
+	 * @param lblLien
+	 *            the lblLien to set
+	 */
+	public void setLblLien(JLabel lblLien) {
+		this.lblLien = lblLien;
+	}
+
+	/**
+	 * @return the txtLink
+	 */
+	public JTextField getTxtLink() {
+		return txtLink;
+	}
+
+	/**
+	 * @param txtLink
+	 *            the txtLink to set
+	 */
+	public void setTxtLink(JTextField txtLink) {
+		this.txtLink = txtLink;
+	}
+
+	/**
+	 * @return the lblInfos
+	 */
+	public JLabel getLblInfos() {
+		return lblInfos;
+	}
+
+	/**
+	 * @param lblInfos
+	 *            the lblInfos to set
+	 */
+	public void setLblInfos(JLabel lblInfos) {
+		this.lblInfos = lblInfos;
+	}
+
+	/**
+	 * @return the txtrInfos
+	 */
+	public JTextArea getTxtrInfos() {
+		return txtrInfos;
+	}
+
+	/**
+	 * @param txtrInfos
+	 *            the txtrInfos to set
+	 */
+	public void setTxtrInfos(JTextArea txtrInfos) {
+		this.txtrInfos = txtrInfos;
+	}
+
+	/**
+	 * @return the lblTechSkills
+	 */
+	public JLabel getLblTechSkills() {
+		return lblTechSkills;
+	}
+
+	/**
+	 * @param lblTechSkills
+	 *            the lblTechSkills to set
+	 */
+	public void setLblTechSkills(JLabel lblTechSkills) {
+		this.lblTechSkills = lblTechSkills;
+	}
+
+	/**
+	 * @return the scrPTechSkills
+	 */
+	public JScrollPane getScrPTechSkills() {
+		return scrPTechSkills;
+	}
+
+	/**
+	 * @param scrPTechSkills
+	 *            the scrPTechSkills to set
+	 */
+	public void setScrPTechSkills(JScrollPane scrPTechSkills) {
+		this.scrPTechSkills = scrPTechSkills;
+	}
+
+	/**
+	 * @return the tblTechSkills
+	 */
+	public JTable getTblTechSkills() {
+		return tblTechSkills;
+	}
+
+	/**
+	 * @param tblTechSkills
+	 *            the tblTechSkills to set
+	 */
+	public void setTblTechSkills(JTable tblTechSkills) {
+		this.tblTechSkills = tblTechSkills;
+	}
+
+	/**
+	 * @return the lblSoftSkills
+	 */
+	public JLabel getLblSoftSkills() {
+		return lblSoftSkills;
+	}
+
+	/**
+	 * @param lblSoftSkills
+	 *            the lblSoftSkills to set
+	 */
+	public void setLblSoftSkills(JLabel lblSoftSkills) {
+		this.lblSoftSkills = lblSoftSkills;
+	}
+
+	/**
+	 * @return the scrPSoftSkills
+	 */
+	public JScrollPane getScrPSoftSkills() {
+		return scrPSoftSkills;
+	}
+
+	/**
+	 * @param scrPSoftSkills
+	 *            the scrPSoftSkills to set
+	 */
+	public void setScrPSoftSkills(JScrollPane scrPSoftSkills) {
+		this.scrPSoftSkills = scrPSoftSkills;
+	}
+
+	/**
+	 * @return the pnlSoftSkills
+	 */
+	public JPanel getPnlSoftSkills() {
+		return pnlSoftSkills;
+	}
+
+	/**
+	 * @param pnlSoftSkills
+	 *            the pnlSoftSkills to set
+	 */
+	public void setPnlSoftSkills(JPanel pnlSoftSkills) {
+		this.pnlSoftSkills = pnlSoftSkills;
+	}
+
+	/**
+	 * @return the pnlTechSkills
+	 */
+	public JPanel getPnlTechSkills() {
+		return pnlTechSkills;
+	}
+
+	/**
+	 * @param pnlTechSkills
+	 *            the pnlTechSkills to set
+	 */
+	public void setPnlTechSkills(JPanel pnlTechSkills) {
+		this.pnlTechSkills = pnlTechSkills;
+	}
+
+	/**
+	 * @return the tblSoftSkills
+	 */
+	public JTable getTblSoftSkills() {
+		return tblSoftSkills;
+	}
+
+	/**
+	 * @param tblSoftSkills
+	 *            the tblSoftSkills to set
+	 */
+	public void setTblSoftSkills(JTable tblSoftSkills) {
+		this.tblSoftSkills = tblSoftSkills;
+	}
+
+	private JPanel pnlTechSkills;
+	private JTable tblSoftSkills;
 
 	/**
 	 * Create the frame.
 	 */
 	public CompanyView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 0, 0, 0 };
 		gbl_contentPane.rowHeights = new int[] { 0 };
@@ -99,7 +407,7 @@ public class CompanyView extends JFrame {
 		scrPJobList.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		pnlJobList.add(scrPJobList);
 
-		lstJob = new JList();
+		lstJob = new JList<Job>();
 		scrPJobList.setViewportView(lstJob);
 
 		pnlJobInfo = new JPanel();
