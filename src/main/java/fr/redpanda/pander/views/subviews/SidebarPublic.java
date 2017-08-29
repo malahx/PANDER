@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.User;
+import fr.redpanda.pander.utils.views.ViewUtils;
 
 /**
  * 
@@ -333,6 +334,9 @@ public class SidebarPublic extends Sidebar {
 	 * Create the public sidebar.
 	 */
 	public SidebarPublic() {
+
+		ViewUtils.colorGrey(this);
+		
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
 		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

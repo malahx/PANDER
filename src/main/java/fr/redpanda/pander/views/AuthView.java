@@ -1,17 +1,27 @@
 package fr.redpanda.pander.views;
 
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.JTextField;
 import java.awt.Font;
-import javax.swing.JPasswordField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.text.View;
+
+import fr.redpanda.pander.utils.views.ViewUtils;
+
+/**
+ * 
+ * @author Patrice SCHOCH
+ *
+ */
 public class AuthView extends BaseView {
 
 	private JPanel contentPane;
@@ -133,7 +143,7 @@ public class AuthView extends BaseView {
 	public AuthView() {
 		pageName = "Authentification";
 		contentPane = new JPanel();
-		
+
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 0, 0 };
 		gbl_contentPane.rowHeights = new int[] { 0, 0 };
@@ -141,7 +151,9 @@ public class AuthView extends BaseView {
 		gbl_contentPane.rowWeights = new double[] { 0.0, 1.0 };
 		contentPane.setLayout(gbl_contentPane);
 
-		JLabel lblLogoImie = new JLabel("Logo IMIE");
+		JLabel lblLogoImie = new JLabel();
+		ImageIcon imieIcon = new ImageIcon("resources/imie.png");
+		lblLogoImie.setIcon(imieIcon);
 		GridBagConstraints gbc_lblLogoImie = new GridBagConstraints();
 		gbc_lblLogoImie.anchor = GridBagConstraints.WEST;
 		gbc_lblLogoImie.insets = new Insets(0, 0, 5, 5);
@@ -149,7 +161,9 @@ public class AuthView extends BaseView {
 		gbc_lblLogoImie.gridy = 0;
 		contentPane.add(lblLogoImie, gbc_lblLogoImie);
 
-		JLabel lblPander = new JLabel("PANDER");
+		JLabel lblPander = new JLabel();
+		ImageIcon titleIcon = new ImageIcon("resources/title.png");
+		lblPander.setIcon(titleIcon);
 		lblPander.setFont(new Font("Lucida Grande", Font.BOLD, 35));
 		GridBagConstraints gbc_lblPander = new GridBagConstraints();
 		gbc_lblPander.insets = new Insets(0, 0, 5, 0);
@@ -157,10 +171,12 @@ public class AuthView extends BaseView {
 		gbc_lblPander.gridy = 0;
 		contentPane.add(lblPander, gbc_lblPander);
 
-		JLabel lblLogo = new JLabel("LOGO");
+		JLabel lblLogo = new JLabel();
+		ImageIcon logoIcon = new ImageIcon("resources/logo.png");
+		lblLogo.setIcon(logoIcon);
 		lblLogo.setFont(new Font("Lucida Grande", Font.PLAIN, 36));
 		GridBagConstraints gbc_lblLogo = new GridBagConstraints();
-		gbc_lblLogo.insets = new Insets(0, 0, 0, 5);
+		gbc_lblLogo.insets = new Insets(0, 50, 0, 5);
 		gbc_lblLogo.gridx = 0;
 		gbc_lblLogo.gridy = 1;
 		contentPane.add(lblLogo, gbc_lblLogo);
@@ -195,13 +211,14 @@ public class AuthView extends BaseView {
 		JLabel lblSidentifier = new JLabel("S'IDENTIFIER :");
 		lblSidentifier.setFont(new Font("Lucida Grande", Font.BOLD, 15));
 		GridBagConstraints gbc_lblSidentifier = new GridBagConstraints();
-		gbc_lblSidentifier.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSidentifier.insets = new Insets(0, 100, 5, 5);
 		gbc_lblSidentifier.gridx = 0;
 		gbc_lblSidentifier.gridy = 0;
 		panel_1.add(lblSidentifier, gbc_lblSidentifier);
 
 		JLabel lblIdentifiant = new JLabel("Identifiant");
 		GridBagConstraints gbc_lblIdentifiant = new GridBagConstraints();
+		gbc_lblIdentifiant.anchor = GridBagConstraints.EAST;
 		gbc_lblIdentifiant.insets = new Insets(0, 0, 5, 5);
 		gbc_lblIdentifiant.gridx = 0;
 		gbc_lblIdentifiant.gridy = 2;
@@ -209,7 +226,7 @@ public class AuthView extends BaseView {
 
 		txtLogin = new JTextField();
 		GridBagConstraints gbc_txtLogin = new GridBagConstraints();
-		gbc_txtLogin.insets = new Insets(0, 0, 5, 0);
+		gbc_txtLogin.insets = new Insets(0, 0, 5, 50);
 		gbc_txtLogin.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtLogin.gridx = 2;
 		gbc_txtLogin.gridy = 2;
@@ -218,6 +235,7 @@ public class AuthView extends BaseView {
 
 		JLabel lblMotDePasse = new JLabel("Mot de passe");
 		GridBagConstraints gbc_lblMotDePasse = new GridBagConstraints();
+		gbc_lblMotDePasse.anchor = GridBagConstraints.EAST;
 		gbc_lblMotDePasse.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMotDePasse.gridx = 0;
 		gbc_lblMotDePasse.gridy = 4;
@@ -225,7 +243,7 @@ public class AuthView extends BaseView {
 
 		txtPassword = new JPasswordField();
 		GridBagConstraints gbc_txtPassword = new GridBagConstraints();
-		gbc_txtPassword.insets = new Insets(0, 0, 5, 0);
+		gbc_txtPassword.insets = new Insets(0, 0, 5, 50);
 		gbc_txtPassword.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtPassword.gridx = 2;
 		gbc_txtPassword.gridy = 4;
@@ -248,7 +266,7 @@ public class AuthView extends BaseView {
 		btnValidate.setFont(new Font("Lucida Grande", Font.BOLD, 13));
 		GridBagConstraints gbc_btnValidate = new GridBagConstraints();
 		gbc_btnValidate.anchor = GridBagConstraints.EAST;
-		gbc_btnValidate.insets = new Insets(0, 0, 5, 0);
+		gbc_btnValidate.insets = new Insets(0, 0, 5, 50);
 		gbc_btnValidate.gridx = 2;
 		gbc_btnValidate.gridy = 6;
 		panel_1.add(btnValidate, gbc_btnValidate);
@@ -257,7 +275,7 @@ public class AuthView extends BaseView {
 		lblSenregistrer.setFont(new Font("Lucida Grande", Font.BOLD, 15));
 		GridBagConstraints gbc_lblSenregistrer = new GridBagConstraints();
 		gbc_lblSenregistrer.anchor = GridBagConstraints.WEST;
-		gbc_lblSenregistrer.insets = new Insets(0, 0, 5, 0);
+		gbc_lblSenregistrer.insets = new Insets(0, 100, 5, 0);
 		gbc_lblSenregistrer.gridx = 0;
 		gbc_lblSenregistrer.gridy = 1;
 		panel.add(lblSenregistrer, gbc_lblSenregistrer);
@@ -277,13 +295,15 @@ public class AuthView extends BaseView {
 
 		JPanel panel_3 = new JPanel();
 		GridBagConstraints gbc_panel_3 = new GridBagConstraints();
-		gbc_panel_3.insets = new Insets(0, 0, 0, 5);
+		gbc_panel_3.insets = new Insets(0, 100, 0, 5);
 		gbc_panel_3.fill = GridBagConstraints.BOTH;
 		gbc_panel_3.gridx = 0;
 		gbc_panel_3.gridy = 0;
 		panel_2.add(panel_3, gbc_panel_3);
 
-		btnCandidate = new JButton("CANDIDAT");
+		btnCandidate = new JButton();
+		ImageIcon registerCandidateIcon = new ImageIcon("resources/registerCandidate.png");
+		btnCandidate.setIcon(registerCandidateIcon);
 		btnCandidate.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		panel_3.add(btnCandidate);
 
@@ -296,9 +316,22 @@ public class AuthView extends BaseView {
 		gbc_panel_4.gridy = 0;
 		panel_2.add(panel_4, gbc_panel_4);
 
-		btnCompany = new JButton("ENTREPRISE");
+		btnCompany = new JButton();
+		ImageIcon registerCompanyIcon = new ImageIcon("resources/registerCompany.png");
+		btnCompany.setIcon(registerCompanyIcon);
 		btnCompany.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		panel_4.add(btnCompany);
+
+		ViewUtils.colorWhite(panel_1);
+		ViewUtils.colorWhite(panel_2);
+		ViewUtils.colorWhite(panel_3);
+		ViewUtils.colorWhite(panel_4);
+		ViewUtils.colorWhite(panel);
+		ViewUtils.colorWhite(btnCandidate);
+		ViewUtils.colorWhite(btnCompany);
+		ViewUtils.colorLight(btnValidate);
+		ViewUtils.colorGreyLight(btnPassword);
+
 	}
 
 }

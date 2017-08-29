@@ -6,6 +6,7 @@ import java.awt.Insets;
 
 import javax.swing.JPanel;
 
+import fr.redpanda.pander.utils.views.ViewUtils;
 import fr.redpanda.pander.views.subviews.Footer;
 import fr.redpanda.pander.views.subviews.Navbar;
 import fr.redpanda.pander.views.subviews.Sidebar;
@@ -33,6 +34,7 @@ public abstract class MainView extends BaseView implements IMainView {
 	 */
 	public void setPnlContent(JPanel pnlContent) {
 		this.pnlContent = pnlContent;
+		ViewUtils.colorWhite(pnlContent);
 	}
 	
 	/**
@@ -124,7 +126,7 @@ public abstract class MainView extends BaseView implements IMainView {
 		gbc_pnlContent.gridy = 1;
 		contentPane.add(pnlContent, gbc_pnlContent);
 
-		JPanel pnlFooter = new JPanel();
+		JPanel pnlFooter = footer;
 		GridBagConstraints gbc_pnlFooter = new GridBagConstraints();
 		gbc_pnlFooter.insets = new Insets(0, 0, 0, 5);
 		gbc_pnlFooter.anchor = GridBagConstraints.WEST;
@@ -132,6 +134,8 @@ public abstract class MainView extends BaseView implements IMainView {
 		gbc_pnlFooter.gridx = 1;
 		gbc_pnlFooter.gridy = 2;
 		contentPane.add(pnlFooter, gbc_pnlFooter);
+		
+		ViewUtils.colorWhite(pnlContent);
 
 	}
 

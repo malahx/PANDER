@@ -3,12 +3,15 @@
  */
 package fr.redpanda.pander.views.subviews;
 
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
-import javax.swing.JButton;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import fr.redpanda.pander.utils.views.ViewUtils;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -74,6 +77,8 @@ public class Footer extends JPanel {
 	 * Create the panel.
 	 */
 	public Footer() {
+
+		ViewUtils.colorGrey(this);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0 };
@@ -84,7 +89,6 @@ public class Footer extends JPanel {
 
 		lblCopyright = new JLabel("PANDER Copyright (c) RedPanda 2017");
 		GridBagConstraints gbc_lblCopyright = new GridBagConstraints();
-		gbc_lblCopyright.insets = new Insets(0, 0, 5, 0);
 		gbc_lblCopyright.anchor = GridBagConstraints.WEST;
 		gbc_lblCopyright.gridx = 0;
 		gbc_lblCopyright.gridy = 0;
@@ -93,7 +97,7 @@ public class Footer extends JPanel {
 		btnLogout = new JButton("Déconnexion");
 		GridBagConstraints gbc_btnLogout = new GridBagConstraints();
 		gbc_btnLogout.anchor = GridBagConstraints.EAST;
-		gbc_btnLogout.insets = new Insets(0, 0, 5, 0);
+		gbc_btnLogout.insets = new Insets(0, 0, 0, 5);
 		gbc_btnLogout.gridx = 1;
 		gbc_btnLogout.gridy = 0;
 		add(btnLogout, gbc_btnLogout);
@@ -101,6 +105,7 @@ public class Footer extends JPanel {
 		btnExit = new JButton("Quitter");
 		GridBagConstraints gbc_btnExit = new GridBagConstraints();
 		gbc_btnExit.anchor = GridBagConstraints.EAST;
+		gbc_btnLogout.insets = new Insets(0, 0, 5, 0);
 		gbc_btnExit.gridx = 2;
 		gbc_btnExit.gridy = 0;
 		add(btnExit, gbc_btnExit);
