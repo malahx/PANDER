@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+import javax.swing.event.DocumentEvent;
+
 import fr.redpanda.pander.database.UserDAO;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
@@ -15,6 +17,7 @@ import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.managers.ViewsManager;
 import fr.redpanda.pander.utils.constant.TypeData;
 import fr.redpanda.pander.views.MainView;
+import fr.redpanda.pander.views.models.DocListener;
 import fr.redpanda.pander.views.subviews.SidebarEditable;
 
 /**
@@ -114,18 +117,18 @@ public abstract class MainCtrl extends BaseCtrl {
 
 		if (view.isEditable()) {
 			SidebarEditable sidebar = (SidebarEditable) view.getSidebar();
-			ActionListener updateProfile = new ActionListener() {
-
+			DocListener updateProfile = new DocListener() {
+				
 				@Override
-				public void actionPerformed(ActionEvent e) {
+				public void update(DocumentEvent e) {
 					updateUser(sidebar);
 				}
 			};
-			sidebar.getTxtAdress().addActionListener(updateProfile);
-			sidebar.getTxtCity().addActionListener(updateProfile);
-			sidebar.getTxtDescriptionTitle().addActionListener(updateProfile);
-			sidebar.getTxtPhone().addActionListener(updateProfile);
-			sidebar.getTxtCp().addActionListener(updateProfile);
+			sidebar.getTxtAdress().getDocument().addDocumentListener(updateProfile);
+			sidebar.getTxtCity().getDocument().addDocumentListener(updateProfile);
+			sidebar.getTxtDescriptionTitle().getDocument().addDocumentListener(updateProfile);
+			sidebar.getTxtPhone().getDocument().addDocumentListener(updateProfile);
+			sidebar.getTxtCp().getDocument().addDocumentListener(updateProfile);
 		}
 
 	}
