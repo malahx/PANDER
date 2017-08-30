@@ -97,19 +97,19 @@ public class DBManager {
 		connect();
 
 		FileManager fileManager = new FileManager(path, fileName);
-		String query = "";
+		String queries = "";
 
 		for (String s : fileManager.loadFromFile()) {
 			if (s.startsWith("#") || s.startsWith("USE ") || s.startsWith("CREATE DATABASE")
 					|| s.startsWith("DROP DATABASE") || s.equals("")) {
 				continue;
 			}
-			query += s + "\n";
+			queries += s + "\n";
 		}
 
 		try {
 			Statement statement = connection.createStatement();
-			for (String s : query.split(";")) {
+			for (String s : queries.split(";")) {
 				if (s.equals("") || s.equals("\n")) {
 					continue;
 				}
@@ -139,7 +139,7 @@ public class DBManager {
 	public void connect(String serverAddress, String port, String dbName, String login, String password) {
 		this.dbName = dbName;
 		try {
-			if (connection == null || connection.isClosed()) {
+			if (connection == null) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver").newInstance();
 				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
@@ -172,7 +172,7 @@ public class DBManager {
 
 	public void connectCrea(String serverAddress, String port, String login, String password) {
 		try {
-			if (createConnection == null || createConnection.isClosed()) {
+			if (createConnection == null) {
 				try {
 					Class.forName("com.mysql.jdbc.Driver").newInstance();
 				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
