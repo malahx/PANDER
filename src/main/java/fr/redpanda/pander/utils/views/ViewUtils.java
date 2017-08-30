@@ -113,15 +113,25 @@ public class ViewUtils {
 		int frameHeight = 600;
 		int maxFrameWidth = 1500;
 		int maxFrameHeight = 900;
+		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
+		frame.setMaximumSize(new Dimension(maxFrameWidth, maxFrameHeight));
+		center(frame);
+	}
+
+	public static void center(JFrame frame) {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int screenWidth = (int) screenSize.getWidth();
 		int screenHeight = (int) screenSize.getHeight();
-		int posWidth = (screenWidth - frameWidth) / 2;
-		int posHeight = (screenHeight - frameHeight) / 2;
-		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-		frame.setBounds(posWidth, posHeight, frameWidth, frameHeight);
-		frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
-		frame.setMaximumSize(new Dimension(maxFrameWidth, maxFrameHeight));
+		int posWidth = (screenWidth - frame.getWidth()) / 2;
+		int posHeight = (screenHeight - frame.getHeight()) / 2;
+		frame.setBounds(posWidth, posHeight, frame.getWidth(), frame.getHeight());
+	}
+
+	public static void center(JFrame mainFrame, JFrame frame) {
+		int posWidth = mainFrame.getX() + (mainFrame.getWidth() - frame.getWidth()) / 2;
+		int posHeight = mainFrame.getY() + (mainFrame.getHeight() - frame.getHeight()) / 2;
+		frame.setBounds(posWidth, posHeight, frame.getWidth(), frame.getHeight());
 	}
 
 }

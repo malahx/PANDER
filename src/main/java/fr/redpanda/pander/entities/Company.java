@@ -97,6 +97,15 @@ public class Company extends User {
 	}
 
 	/**
+	 * 
+	 */
+	public Company() {
+		super();
+		this.setRole(Role.CANDIDATE);
+		this.setJobs(new ArrayList<>());
+	}
+
+	/**
 	 * @param name
 	 * @param siret
 	 * @param contact

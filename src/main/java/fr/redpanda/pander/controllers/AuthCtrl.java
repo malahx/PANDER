@@ -3,12 +3,15 @@
  */
 package fr.redpanda.pander.controllers;
 
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.event.DocumentEvent;
 
+import fr.redpanda.pander.database.CandidateDAO;
+import fr.redpanda.pander.database.CompanyDAO;
 import fr.redpanda.pander.database.UserDAO;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
@@ -16,7 +19,9 @@ import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.managers.ViewsManager;
 import fr.redpanda.pander.utils.PopupManager;
 import fr.redpanda.pander.utils.constant.TypeData;
+import fr.redpanda.pander.utils.views.ViewUtils;
 import fr.redpanda.pander.views.AuthView;
+import fr.redpanda.pander.views.RegisterView;
 import fr.redpanda.pander.views.models.DocListener;
 
 /**
@@ -87,8 +92,7 @@ public class AuthCtrl extends BaseCtrl {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ViewsManager.getInstance().next(new HomeCtrl(frame));
-
+				initRegistration(new Candidate());
 			}
 		});
 
@@ -96,8 +100,7 @@ public class AuthCtrl extends BaseCtrl {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
+				initRegistration(new Company());
 			}
 		});
 
@@ -125,6 +128,101 @@ public class AuthCtrl extends BaseCtrl {
 				.setEnabled(view.getTxtLogin().getText().length() > 0 && view.getTxtPassword().getPassword().length > 0
 						? true
 						: false);
+	}
+
+	private void initRegistration(User user) {
+		JFrame registerFrame = new JFrame();
+		registerFrame.setBounds(0, 0, 400, 250);
+		ViewUtils.center(frame, registerFrame);
+		RegisterView registerView = new RegisterView();
+		registerView.loadView(registerFrame);
+
+		if (user instanceof Candidate) {
+			registerView.getLblName().setText("Prénom");
+			registerView.getLblOtherName().setText("Nom");
+		} else if (user instanceof Company) {
+			registerView.getLblName().setText("Nom");
+			registerView.getLblOtherName().setText("SIRET");
+		}
+
+		DocListener btnEnabler = new DocListener() {
+
+			@Override
+			public void update(DocumentEvent e) {
+				if (registerView.getTextName1().getText().equals("") || registerView.getTextName2().getText().equals("")
+						|| registerView.getTextEmail().getText().equals("")
+						|| new String(registerView.getPwdPass().getPassword()).equals("")
+						|| !registerView.isSamePass()) {
+					registerView.getBtnRegister().setEnabled(false);
+				} else {
+					registerView.getBtnRegister().setEnabled(true);
+				}
+			}
+		};
+
+		DocListener passInfo = new DocListener() {
+
+			@Override
+			public void update(DocumentEvent e) {
+				if (!new String(registerView.getPwdPass().getPassword())
+						.equals(new String(registerView.getPwdPassVerify().getPassword()))) {
+					registerView.getLblInfo().setText("Le mot de passe ne correspond pas.");
+				} else {
+					registerView.getLblInfo().setText("Merci de compléter ces informations.");
+				}
+			}
+		};
+
+		registerView.getTextName1().getDocument().addDocumentListener(btnEnabler);
+		registerView.getTextName2().getDocument().addDocumentListener(btnEnabler);
+		registerView.getTextEmail().getDocument().addDocumentListener(btnEnabler);
+		registerView.getPwdPass().getDocument().addDocumentListener(btnEnabler);
+		registerView.getPwdPassVerify().getDocument().addDocumentListener(btnEnabler);
+
+		registerView.getPwdPass().getDocument().addDocumentListener(passInfo);
+		registerView.getPwdPassVerify().getDocument().addDocumentListener(passInfo);
+
+		registerView.getBtnRegister().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (user instanceof Candidate) {
+					Candidate candidate = (Candidate) user;
+					candidate.setFirstname(registerView.getTextName1().getText());
+					candidate.setLastname(registerView.getTextName2().getText());
+					candidate.setEmail(registerView.getTextEmail().getText());
+					candidate.setPassword(registerView.getTextEmail().getText());
+					System.out.println(CandidateDAO.getInstance().create(candidate));
+				} else if (user instanceof Company) {
+					Company company = (Company) user;
+					company.setName(registerView.getTextName1().getText());
+					company.setSiret(registerView.getTextName2().getText());
+					company.setEmail(registerView.getTextEmail().getText());
+					company.setPassword(registerView.getTextEmail().getText());
+					CompanyDAO.getInstance().create(company);
+				}
+				registerFrame.dispose();
+			}
+		});
+		
+		registerView.getBtnCancel().addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				registerFrame.dispose();
+			}
+		});
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					registerFrame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
 	}
 
 }

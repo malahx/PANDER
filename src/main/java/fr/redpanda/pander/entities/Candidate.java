@@ -178,6 +178,7 @@ public class Candidate extends User {
 
 	public Candidate() {
 		super();
+		this.setRole(Role.CANDIDATE);
 		this.setSkills(new ArrayList<>());
 	}
 
