@@ -10,7 +10,6 @@ import java.awt.event.ItemListener;
 
 import javax.swing.event.DocumentEvent;
 
-import fr.redpanda.pander.database.UserDAO;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.User;
@@ -143,7 +142,7 @@ public abstract class MainCtrl extends BaseCtrl {
 		user.setDescription(sidebar.getTxtDescriptionTitle().getText());
 		user.setPhone(sidebar.getTxtPhone().getText());
 		user.setPostcode(sidebar.getTxtCp().getText());
-		UserDAO.getInstance().update(user);
+		//UserDAO.getInstance().update(user);
 	}
 
 }

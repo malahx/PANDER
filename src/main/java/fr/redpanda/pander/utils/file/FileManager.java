@@ -1,10 +1,5 @@
 package fr.redpanda.pander.utils.file;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -16,6 +11,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FileManager {
 	public final static String FILE_SCHEME = "file://";
@@ -38,16 +38,12 @@ public class FileManager {
 		this.path = path;
 		this.fileName = fileName;
 
-		if (!this.path.endsWith("\\")) {
-			this.path += "\\";
+		if (!this.path.endsWith(File.separator)) {
+			this.path += File.separator;
 		}
-
 		try {
-			this.uri = new URI(FILE_SCHEME
-					+ (new File(path + fileName).getAbsolutePath().substring(
-							2,
-							new File(path + fileName).getAbsolutePath()
-									.length()).replace('\\', '/')));
+			this.uri = new URI(FILE_SCHEME + (new File(path + fileName).getAbsolutePath()
+					.substring(2, new File(path + fileName).getAbsolutePath().length()).replace('\\', '/')));
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -62,8 +58,7 @@ public class FileManager {
 		this.writeToFile(content, StandardOpenOption.APPEND);
 	}
 
-	public void writeToFile(ArrayList<String> content,
-			StandardOpenOption openOption) {
+	public void writeToFile(ArrayList<String> content, StandardOpenOption openOption) {
 		File file = new File(this.path);
 
 		if (!file.exists()) {
@@ -86,8 +81,7 @@ public class FileManager {
 
 		try {
 			file.createNewFile();
-			Files.write(writableFile, content, Charset.forName("UTF-8"),
-					openOption);
+			Files.write(writableFile, content, Charset.forName("UTF-8"), openOption);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -109,20 +103,20 @@ public class FileManager {
 		return this.content;
 	}
 
-	public Map<String,Object> extractFromPattern(){
+	public Map<String, Object> extractFromPattern() {
 		Pattern p = Pattern.compile("(\\w+)=\"*((?<=\")[^\"]+(?=\")|([^\\s]+))\"*");
 		return extractFromPattern(p);
 	}
 
-	public Map<String,Object> extractFromPattern(Pattern p){
-		Map<String,Object> map = new HashMap<String, Object>();
+	public Map<String, Object> extractFromPattern(Pattern p) {
+		Map<String, Object> map = new HashMap<String, Object>();
 
 		ArrayList<String> fileStrings = loadFromFile();
 
 		for (String string : fileStrings) {
 			Matcher m = p.matcher(string);
-			while(m.find()){
-				map.put(m.group(1), m.group(2)) ;
+			while (m.find()) {
+				map.put(m.group(1), m.group(2));
 			}
 		}
 

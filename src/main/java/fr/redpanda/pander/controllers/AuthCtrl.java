@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.event.DocumentEvent;
 
-import fr.redpanda.pander.database.UserDAO;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.User;
@@ -26,7 +25,7 @@ import fr.redpanda.pander.views.models.DocListener;
 public class AuthCtrl extends BaseCtrl {
 
 	private void login(String email, String password) {
-		User loggedUser = UserDAO.getInstance().findBy(email, password);
+		User loggedUser = null;//= UserDAO.getInstance().findBy(email, password);
 		if (loggedUser != null) {
 			System.out.println("logged");
 			getViewDatas().put(TypeData.USER, loggedUser);
