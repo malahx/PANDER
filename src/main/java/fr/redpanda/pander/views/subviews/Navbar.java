@@ -3,14 +3,17 @@
  */
 package fr.redpanda.pander.views.subviews;
 
-import javax.swing.JPanel;
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
+
+import fr.redpanda.pander.utils.views.ViewUtils;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -23,13 +26,61 @@ public class Navbar extends JPanel {
 	 */
 	private static final long serialVersionUID = -9170488463090549030L;
 
+	private JToggleButton tglbtnProfile;
+	private JToggleButton tglbtnHome;
+	private JToggleButton tglbtnMatching;
 	private JLabel lblLogopander;
 	private JLabel lblLogouser;
 	private JPanel pnlNav;
 	private JPanel pnlButton;
-	private JPanel panel;
+	private JPanel pnlHeader;
 	private JLabel lblPander;
 	private JLabel lblUser;
+
+	/**
+	 * @return the tglbtnProfile
+	 */
+	public JToggleButton getTglbtnProfile() {
+		return tglbtnProfile;
+	}
+
+	/**
+	 * @param tglbtnProfile
+	 *            the tglbtnProfile to set
+	 */
+	public void setTglbtnProfile(JToggleButton tglbtnProfile) {
+		this.tglbtnProfile = tglbtnProfile;
+	}
+
+	/**
+	 * @return the tglbtnHome
+	 */
+	public JToggleButton getTglbtnHome() {
+		return tglbtnHome;
+	}
+
+	/**
+	 * @param tglbtnHome
+	 *            the tglbtnHome to set
+	 */
+	public void setTglbtnHome(JToggleButton tglbtnHome) {
+		this.tglbtnHome = tglbtnHome;
+	}
+
+	/**
+	 * @return the tglbtnMatching
+	 */
+	public JToggleButton getTglbtnMatching() {
+		return tglbtnMatching;
+	}
+
+	/**
+	 * @param tglbtnMatching
+	 *            the tglbtnMatching to set
+	 */
+	public void setTglbtnMatching(JToggleButton tglbtnMatching) {
+		this.tglbtnMatching = tglbtnMatching;
+	}
 
 	/**
 	 * @return the lblLogopander
@@ -95,7 +146,7 @@ public class Navbar extends JPanel {
 	 * @return the panel
 	 */
 	public JPanel getPanel() {
-		return panel;
+		return pnlHeader;
 	}
 
 	/**
@@ -103,7 +154,7 @@ public class Navbar extends JPanel {
 	 *            the panel to set
 	 */
 	public void setPanel(JPanel panel) {
-		this.panel = panel;
+		this.pnlHeader = panel;
 	}
 
 	/**
@@ -140,6 +191,9 @@ public class Navbar extends JPanel {
 	 * Create the panel.
 	 */
 	public Navbar() {
+
+		ViewUtils.colorWhite(this);
+		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0 };
@@ -169,19 +223,19 @@ public class Navbar extends JPanel {
 		gbl_pnlNav.rowWeights = new double[] { 1.0, 0.0 };
 		pnlNav.setLayout(gbl_pnlNav);
 
-		panel = new JPanel();
-		GridBagConstraints gbc_panel = new GridBagConstraints();
-		gbc_panel.insets = new Insets(0, 0, 5, 0);
-		gbc_panel.fill = GridBagConstraints.BOTH;
-		gbc_panel.gridx = 0;
-		gbc_panel.gridy = 0;
-		pnlNav.add(panel, gbc_panel);
-		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[] { 0, 0 };
-		gbl_panel.rowHeights = new int[] { 0 };
-		gbl_panel.columnWeights = new double[] { 1.0, 0.0 };
-		gbl_panel.rowWeights = new double[] { 0.0 };
-		panel.setLayout(gbl_panel);
+		pnlHeader = new JPanel();
+		GridBagConstraints gbc_pnlHeader = new GridBagConstraints();
+		gbc_pnlHeader.insets = new Insets(0, 0, 5, 0);
+		gbc_pnlHeader.fill = GridBagConstraints.BOTH;
+		gbc_pnlHeader.gridx = 0;
+		gbc_pnlHeader.gridy = 0;
+		pnlNav.add(pnlHeader, gbc_pnlHeader);
+		GridBagLayout gbl_pnlHeader = new GridBagLayout();
+		gbl_pnlHeader.columnWidths = new int[] { 0, 0 };
+		gbl_pnlHeader.rowHeights = new int[] { 0 };
+		gbl_pnlHeader.columnWeights = new double[] { 1.0, 0.0 };
+		gbl_pnlHeader.rowWeights = new double[] { 0.0 };
+		pnlHeader.setLayout(gbl_pnlHeader);
 
 		lblPander = new JLabel("PANDER");
 		lblPander.setHorizontalAlignment(SwingConstants.LEFT);
@@ -190,7 +244,7 @@ public class Navbar extends JPanel {
 		gbc_lblPander.insets = new Insets(0, 0, 0, 5);
 		gbc_lblPander.gridx = 0;
 		gbc_lblPander.gridy = 0;
-		panel.add(lblPander, gbc_lblPander);
+		pnlHeader.add(lblPander, gbc_lblPander);
 
 		lblUser = new JLabel("User");
 		lblUser.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -199,7 +253,7 @@ public class Navbar extends JPanel {
 		gbc_lblUser.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblUser.gridx = 1;
 		gbc_lblUser.gridy = 0;
-		panel.add(lblUser, gbc_lblUser);
+		pnlHeader.add(lblUser, gbc_lblUser);
 
 		pnlButton = new JPanel();
 		GridBagConstraints gbc_pnlButton = new GridBagConstraints();
@@ -210,13 +264,13 @@ public class Navbar extends JPanel {
 		pnlNav.add(pnlButton, gbc_pnlButton);
 		pnlButton.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-		JToggleButton tglbtnHome = new JToggleButton("Accueil");
+		tglbtnHome = new JToggleButton("Accueil");
 		pnlButton.add(tglbtnHome);
 
-		JToggleButton tglbtnProfile = new JToggleButton("Profile");
+		tglbtnProfile = new JToggleButton("Profile");
 		pnlButton.add(tglbtnProfile);
 
-		JToggleButton tglbtnMatching = new JToggleButton("Matching");
+		tglbtnMatching = new JToggleButton("Matching");
 		pnlButton.add(tglbtnMatching);
 
 		lblLogouser = new JLabel("LogoUser");
@@ -225,6 +279,11 @@ public class Navbar extends JPanel {
 		gbc_lblLogouser.gridx = 2;
 		gbc_lblLogouser.gridy = 0;
 		add(lblLogouser, gbc_lblLogouser);
+		
+
+		ViewUtils.colorWhite(pnlButton);
+		ViewUtils.colorWhite(pnlHeader);
+		ViewUtils.colorWhite(pnlNav);
 
 	}
 

@@ -3,7 +3,6 @@
  */
 package fr.redpanda.pander.controllers;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -34,17 +33,6 @@ public class AdminCtrl extends BaseCtrl {
 	public AdminCtrl(JFrame frame) {
 		super.frame = frame;
 		super.view = new AdminView(this.frame);
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					view = new AdminView(AdminCtrl.this.frame);
-					frame.setVisible(true);
-					initEvent();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 
 	/*
@@ -54,6 +42,15 @@ public class AdminCtrl extends BaseCtrl {
 	 */
 	@Override
 	public void initView() {
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.controllers.IBaseCtrl#initEvent()
+	 */
+	@Override
+	public void initEvent() {
 		AdminView view = (AdminView) this.view;
 		view.getTglbtnUsers().addActionListener(new ActionListener() {
 
@@ -172,15 +169,6 @@ public class AdminCtrl extends BaseCtrl {
 			}
 		});
 		view.getTglbtnUsers().doClick();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.redpanda.pander.controllers.IBaseCtrl#initEvent()
-	 */
-	@Override
-	public void initEvent() {
 	}
 
 	/*

@@ -13,6 +13,7 @@ import fr.redpanda.pander.utils.views.ViewUtils;
 public class ViewsManager {
 
 	private static ViewsManager instance = null;
+
 	public static ViewsManager getInstance() {
 		if (instance == null) {
 			instance = new ViewsManager();
@@ -25,8 +26,10 @@ public class ViewsManager {
 	private int currentControllerIndex;
 	private BaseCtrl currentController;
 
-	public void start(){
+	public void start() {
 		ViewUtils.configure(frame);
+		controllers = new ArrayList<BaseCtrl>();
+		currentControllerIndex = -1;
 		loadController(new AuthCtrl(frame));
 	}
 
@@ -40,7 +43,7 @@ public class ViewsManager {
 		loadController(controller);
 		return this;
 	}
-	
+
 	private void loadController(BaseCtrl controller) {
 		currentController = controller;
 		this.controllers.add(currentController);
@@ -55,12 +58,21 @@ public class ViewsManager {
 				}
 			}
 		});
-		
+
 	}
 
 	protected ViewsManager() {
 		this.frame = new JFrame();
 		controllers = new ArrayList<BaseCtrl>();
 		currentControllerIndex = -1;
+	}
+
+	/**
+	 * @param clazz
+	 *            the controller to test
+	 * @return if the controller is instance of clazz
+	 */
+	public boolean isCurrentController(Class<?> clazz) {
+		return clazz.isInstance(controllers.get(currentControllerIndex));
 	}
 }

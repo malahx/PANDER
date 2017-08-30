@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS company(
         name        Varchar(255) NOT NULL,
         siret       Varchar(20) NOT NULL,
         contact     Varchar(255) NULL,
+        link        Varchar(255) NULL,
         UNIQUE(siret),
         CONSTRAINT FK_company_id_kuser  FOREIGN KEY (id_kuser) REFERENCES kuser(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
