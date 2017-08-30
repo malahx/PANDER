@@ -3,7 +3,11 @@
  */
 package fr.redpanda.pander.entities;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
+
+import fr.redpanda.pander.utils.StringManager;
 
 /**
  * 
@@ -12,7 +16,7 @@ import java.util.Date;
  */
 public abstract class User {
 
-	protected long id;
+	protected Long id;
 	protected String email;
 	protected String password;
 	protected String phone;
@@ -21,8 +25,7 @@ public abstract class User {
 	protected String city;
 	protected String photo;
 	protected String description;
-	protected boolean resetPass;
-	protected boolean disabled;
+	protected Boolean disabled;
 	protected Role role;
 	protected Date createdAt;
 	protected Date updatedAt;
@@ -30,7 +33,7 @@ public abstract class User {
 	/**
 	 * @return the id
 	 */
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -38,7 +41,7 @@ public abstract class User {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -163,24 +166,9 @@ public abstract class User {
 	}
 
 	/**
-	 * @return the resetPass
-	 */
-	public boolean isResetPass() {
-		return resetPass;
-	}
-
-	/**
-	 * @param resetPass
-	 *            the resetPass to set
-	 */
-	public void setResetPass(boolean resetPass) {
-		this.resetPass = resetPass;
-	}
-
-	/**
 	 * @return the disabled
 	 */
-	public boolean isDisabled() {
+	public Boolean isDisabled() {
 		return disabled;
 	}
 
@@ -188,7 +176,7 @@ public abstract class User {
 	 * @param disabled
 	 *            the disabled to set
 	 */
-	public void setDisabled(boolean disabled) {
+	public void setDisabled(Boolean disabled) {
 		this.disabled = disabled;
 	}
 
@@ -249,7 +237,30 @@ public abstract class User {
 	 */
 	public User(String email) {
 		super();
-		this.email = email;
+		this.setEmail(email);
+		this.setDisabled(false);
+	}
+
+	/**
+	 * @param result
+	 *            the result set to parse
+	 * @throws SQLException
+	 */
+	public User(ResultSet result) throws SQLException {
+		super();
+		this.setId(result.getLong("id"));
+		this.setEmail(result.getString("email"));
+		this.setPassword(result.getString("password"));
+		this.setPhone(result.getString("phone"));
+		this.setAddress(result.getString("address"));
+		this.setPostcode(result.getString("postcode"));
+		this.setCity(result.getString("city"));
+		this.setPhoto(result.getString("photo"));
+		this.setDescription(result.getString("description"));
+		this.setDisabled(result.getBoolean("disabled"));
+		this.setRole(StringManager.getRoleFrom(result.getString("role")));
+		this.setCreatedAt(result.getTimestamp("created_at"));
+		this.setUpdatedAt(result.getTimestamp("updated_at"));
 	}
 
 	/*

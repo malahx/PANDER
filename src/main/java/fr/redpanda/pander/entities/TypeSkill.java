@@ -4,21 +4,20 @@
 package fr.redpanda.pander.entities;
 
 /**
- * 
  * @author Gwénolé LE HENAFF
  *
  */
-public enum Role {
-	CANDIDATE("CANDIDATE"),
-	COMPANY("COMPANY"),
-	ADMIN("ADMIN");
+public enum TypeSkill {
+
+	SOFT("SOFT"),
+	TECH("TECH");
 
 	private final String text;
 
 	/**
 	 * @param text
 	 */
-	private Role(final String text) {
+	private TypeSkill(final String text) {
 		this.text = text;
 	}
 

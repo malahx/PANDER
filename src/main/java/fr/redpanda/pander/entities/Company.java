@@ -3,6 +3,8 @@
  */
 package fr.redpanda.pander.entities;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,10 +105,25 @@ public class Company extends User {
 	 */
 	public Company(String name, String siret, String contact, String link) {
 		super();
-		this.name = name;
-		this.siret = siret;
-		this.contact = contact;
-		this.link = link;
+		this.setName(name);
+		this.setSiret(siret);
+		this.setContact(contact);
+		this.setLink(link);
+		this.setRole(Role.COMPANY);
+		this.setJobs(new ArrayList<>());
+	}
+
+	/**
+	 * @param result
+	 * @throws SQLException 
+	 */
+	public Company(ResultSet result) throws SQLException {
+		super(result);
+		this.setName(result.getString("name"));
+		this.setSiret(result.getString("siret"));
+		this.setContact(result.getString("contact"));
+		this.setLink(result.getString("link"));
+		this.setRole(Role.COMPANY);
 		this.jobs = new ArrayList<>();
 	}
 

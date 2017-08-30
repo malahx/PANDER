@@ -3,6 +3,8 @@
  */
 package fr.redpanda.pander.entities;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +15,8 @@ import java.util.List;
  *
  */
 public class Job {
-	private int id;
+
+	private Long id;
 	private String name;
 	private String presentation;
 	private String link;
@@ -25,7 +28,7 @@ public class Job {
 	/**
 	 * @return the id
 	 */
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -33,7 +36,7 @@ public class Job {
 	 * @param id
 	 *            the id to set
 	 */
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -143,6 +146,16 @@ public class Job {
 	}
 
 	/**
+	 * 
+	 * @param name
+	 */
+	public Job(String name) {
+		super();
+		this.setName(name);
+		this.setSkills(new ArrayList<>());
+	}
+	
+	/**
 	 * @param id
 	 * @param name
 	 * @param presentation
@@ -152,17 +165,33 @@ public class Job {
 	 * @param createdAt
 	 * @param updatedAt
 	 */
-	public Job(int id, String name, String presentation, String link, String contactEmail, Date createdAt,
+	public Job(Long id, String name, String presentation, String link, String contactEmail, Date createdAt,
 			Date updatedAt) {
 		super();
-		this.id = id;
-		this.name = name;
-		this.presentation = presentation;
-		this.link = link;
-		this.contactEmail = contactEmail;
-		this.skills = new ArrayList<>();
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
+		this.setId(id);
+		this.setName(name);
+		this.setPresentation(presentation);
+		this.setLink(link);
+		this.setContactEmail(contactEmail);
+		this.setSkills(new ArrayList<>());
+		this.setCreatedAt(createdAt);
+		this.setUpdatedAt(updatedAt);
+	}
+
+	/**
+	 * @param result
+	 * @throws SQLException
+	 */
+	public Job(ResultSet result) throws SQLException {
+		super();
+		this.setId(result.getLong("id"));
+		this.setName(result.getString("name"));
+		this.setPresentation(result.getString("presentation"));
+		this.setLink(result.getString("link"));
+		this.setContactEmail(result.getString("contactEmail"));
+		this.setSkills(new ArrayList<>());
+		this.setCreatedAt(new Date(result.getDate("createdAt").getTime()));
+		this.setUpdatedAt(new Date(result.getDate("updatedAt").getTime()));
 	}
 
 }
