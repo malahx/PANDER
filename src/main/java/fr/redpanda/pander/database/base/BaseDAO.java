@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.redpanda.pander.database;
+package fr.redpanda.pander.database.base;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.redpanda.pander.database.DBManager;
 import fr.redpanda.pander.entities.base.BaseEntity;
 
 /**
@@ -170,7 +171,7 @@ public abstract class BaseDAO implements IDAOBase {
 	@Override
 	public BaseEntity insert(BaseEntity entity) {
 		if (!checkExists(entity) && checkFields(entity) && !checkUniqueFields(entity)) {
-			prepare(entity, "INSERT INTO " + table + " " + fields() + " VALUES " + parse(entity));
+			prepare(entity, "INSERT INTO " + table + " (" + fields() + ") VALUES (" + parse(entity) + ")");
 		}
 		return entity;
 	}

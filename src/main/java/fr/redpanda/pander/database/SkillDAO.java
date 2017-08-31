@@ -6,6 +6,7 @@ package fr.redpanda.pander.database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import fr.redpanda.pander.database.base.BaseDAO;
 import fr.redpanda.pander.entities.Skill;
 import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.utils.StringManager;
@@ -16,15 +17,28 @@ import fr.redpanda.pander.utils.StringManager;
  */
 public class SkillDAO extends BaseDAO {
 
+	/** the table */
 	public static final String TABLE = "skill";
+
+	/** the id */
 	public static final String ID = "id";
+
+	/** the name field */
 	public static final String NAME = "name";
+
+	/** the type field */
 	public static final String TYPE = "type";
 
+	/** The Constructor */
 	protected SkillDAO() {
 		super(TABLE, ID);
 	}
 
+	/**
+	 * get and instance the singleton
+	 * 
+	 * @return the singleton
+	 */
 	public static SkillDAO getInstance() {
 		if (instance == null) {
 			instance = new SkillDAO();
@@ -32,12 +46,20 @@ public class SkillDAO extends BaseDAO {
 		return (SkillDAO) instance;
 	}
 
+	/**
+	 * get a {@link BaseEntity} by name
+	 * 
+	 * @param name
+	 *            the name to search
+	 * @return a {@link BaseEntity}
+	 */
 	public BaseEntity getByName(String name) {
 		ResultSet rs = query("SELECT * FROM " + TABLE + " WHERE " + NAME + " = " + name);
 		BaseEntity entity = null;
 		try {
-			rs.next();
-			entity = parse(rs);
+			if (rs.next()) {
+				entity = parse(rs);
+			}
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -77,7 +99,7 @@ public class SkillDAO extends BaseDAO {
 	@Override
 	public String parse(BaseEntity entity) {
 		Skill skill = (Skill) entity;
-		return "('" + skill.getName() + "','" + skill.getType().toString() + "')";
+		return "'" + skill.getName() + "','" + skill.getType().toString() + "'";
 	}
 
 	/*
@@ -106,7 +128,7 @@ public class SkillDAO extends BaseDAO {
 	 */
 	@Override
 	public String fields() {
-		return "(" + NAME + "," + TYPE + ")";
+		return "'" + NAME + "','" + TYPE + "'";
 	}
 
 	/*
