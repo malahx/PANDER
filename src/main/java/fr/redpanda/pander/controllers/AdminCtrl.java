@@ -130,9 +130,9 @@ public class AdminCtrl extends BaseCtrl {
 						//UserDAO.getInstance().delete((User) object);
 						view.getBtnBtn1().setEnabled(false);
 					}
-					if (object instanceof Skill) {
-						// SkillDAO.getInstance().delete((Skill) object);
-					}
+//					if (object instanceof Skill) {
+//						// SkillDAO.getInstance().delete((Skill) object);
+//					}
 					model.getObjects().remove(selectedRow);
 					model.fireTableDataChanged();
 				}
