@@ -28,7 +28,8 @@ public class DBManager {
 		if (canConnect()) {
 			connect();
 		} else {
-			createDB(PATH_CONFIG, DB_SQL);
+			createDB();
+			initDB(PATH_CONFIG, DB_SQL);
 		}
 	}
 
@@ -81,11 +82,7 @@ public class DBManager {
 		return false;
 	}
 
-	/**
-	 * @param path
-	 * @param fileName
-	 */
-	private void createDB(String path, String fileName) {
+	private void createDB() {
 
 		try {
 			Statement statement = createConnection.createStatement();
@@ -94,6 +91,26 @@ public class DBManager {
 			e.printStackTrace();
 		}
 
+	}
+
+//	private void deleteDB() {
+//
+//		try {
+//			Statement statement = createConnection.createStatement();
+//			statement.execute("DROP DATABSE " + dbName + ";");
+//			statement.close();
+//			connection.close();
+//			connection = null;
+//			createConnection.close();
+//			createConnection = null;
+//			instance = null;
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//
+//	}
+
+	private void initDB(String path, String fileName) {
 		connect();
 
 		FileManager fileManager = new FileManager(path, fileName);
@@ -118,7 +135,6 @@ public class DBManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void connect() {

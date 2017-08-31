@@ -3,11 +3,7 @@
  */
 package fr.redpanda.pander.entities;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import fr.redpanda.pander.entities.base.BaseEntity;
-import fr.redpanda.pander.utils.StringManager;
 
 /**
  * 
@@ -73,14 +69,9 @@ public class Skill extends BaseEntity {
 	}
 
 	/**
-	 * @param result
-	 * @throws SQLException
+	 * An empty constructor
 	 */
-	public Skill(ResultSet result) throws SQLException {
-		super();
-		this.setId(result.getLong("s.id"));
-		this.setName(result.getString("s.name"));
-		this.setType(StringManager.getTypeSkillFrom(result.getString("s.type")));
+	public Skill() {
 	}
 
 	/*

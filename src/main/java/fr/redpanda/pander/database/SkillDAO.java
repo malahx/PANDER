@@ -3,9 +3,12 @@
  */
 package fr.redpanda.pander.database;
 
-import java.util.List;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import fr.redpanda.pander.entities.Skill;
 import fr.redpanda.pander.entities.base.BaseEntity;
+import fr.redpanda.pander.utils.StringManager;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -13,49 +16,57 @@ import fr.redpanda.pander.entities.base.BaseEntity;
  */
 public class SkillDAO extends BaseDAO {
 
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.database.IDAOBase#insert(fr.redpanda.pander.entities.base.BaseEntity)
+	public static final String TABLE = "skill";
+	public static final String ID = "id";
+	public static final String NAME = "name";
+	public static final String TYPE = "type";
+
+	public SkillDAO() {
+		super(TABLE, ID);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.database.IDAOBase#parse(java.sql.ResultSet)
 	 */
 	@Override
-	public void insert(BaseEntity item) {
-		// TODO Auto-generated method stub
+	public BaseEntity parse(ResultSet resultSet) {
+
+		Skill skill = new Skill();
+		try {
+			skill.setId(resultSet.getDouble(ID));
+			skill.setName(resultSet.getString(NAME));
+			skill.setType(StringManager.getTypeSkillFrom(resultSet.getString(TYPE)));
+		} catch (SQLException e) {
+			e.printStackTrace();
+			skill = null;
+		}
+		return skill;
 
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.database.IDAOBase#update(fr.redpanda.pander.entities.base.BaseEntity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.database.IDAOBase#parse(fr.redpanda.pander.entities.base.
+	 * BaseEntity)
 	 */
 	@Override
-	public void update(BaseEntity item) {
-		// TODO Auto-generated method stub
-
+	public String parse(BaseEntity entity) {
+		Skill skill = (Skill) entity;
+		return "('" + skill.getName() + "','" + skill.getType().toString() + "')";
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.database.IDAOBase#delete(fr.redpanda.pander.entities.base.BaseEntity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.database.IDAOBase#fields()
 	 */
 	@Override
-	public void delete(BaseEntity item) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.database.IDAOBase#get(double)
-	 */
-	@Override
-	public BaseEntity get(double id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.database.IDAOBase#get()
-	 */
-	@Override
-	public List<BaseEntity> get() {
-		// TODO Auto-generated method stub
-		return null;
+	public String fields() {
+		return "(" + NAME + "," + TYPE + ")";
 	}
 
 }
