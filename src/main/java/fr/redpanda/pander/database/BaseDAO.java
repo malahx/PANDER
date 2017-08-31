@@ -57,7 +57,7 @@ public abstract class BaseDAO implements IDAOBase {
 	 * @see fr.redpanda.pander.database.IDAOBase#executeRequest(java.lang.String)
 	 */
 	@Override
-	public ResultSet executeRequest(String request) {
+	public ResultSet query(String request) {
 
 		ResultSet resultSet = null;
 
@@ -78,22 +78,73 @@ public abstract class BaseDAO implements IDAOBase {
 	 * @see fr.redpanda.pander.database.IDAOBase#execute(java.lang.String)
 	 */
 	@Override
-	public double execute(String request) {
-		
-		double id = 0;
+	public BaseEntity prepare(BaseEntity entity, String request) {
+
 		try {
-			PreparedStatement prepare = DBManager.getInstance().getConnection().prepareStatement(request, Statement.RETURN_GENERATED_KEYS);
-			prepare.execute();
+			PreparedStatement prepare = DBManager.getInstance().getConnection().prepareStatement(request,
+					Statement.RETURN_GENERATED_KEYS);
+			prepare.executeUpdate();
 			ResultSet generatedKeys = prepare.getGeneratedKeys();
 			if (generatedKeys.next()) {
-				id = generatedKeys.getDouble(1);
+				entity.setId(generatedKeys.getDouble(1));
 			}
-
+			generatedKeys.close();
 			prepare.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return id;
+		return entity;
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.database.IDAOBase#execute(java.lang.String)
+	 */
+	@Override
+	public int execute(String request) {
+
+		int result = 0;
+		try {
+			Statement statement = DBManager.getInstance().getConnection().createStatement();
+			result = statement.executeUpdate(request);
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+
+	}
+
+	/* (non-Javadoc)
+	 * @see fr.redpanda.pander.database.IDAOBase#checkUniqueFields(fr.redpanda.pander.entities.base.BaseEntity)
+	 */
+	@Override
+	public boolean checkUniqueFields(BaseEntity entity) {
+		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.database.IDAOBase#checkFields(fr.redpanda.pander.entities.
+	 * base.checkExists)
+	 */
+	@Override
+	public boolean checkExists(BaseEntity entity) {
+
+		if (entity == null || entity.getId() <= 0) {
+			return false;
+		}
+		ResultSet rs = query("SELECT * FROM " + table + " WHERE " + id + " = " + entity.getId());
+		try {
+			rs.next();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return parse(rs) != null;
 
 	}
 
@@ -105,8 +156,11 @@ public abstract class BaseDAO implements IDAOBase {
 	 * BaseEntity)
 	 */
 	@Override
-	public void insert(BaseEntity item) {
-		execute("INSERT INTO " + table + " " + fields() + " VALUES " + parse(item));
+	public BaseEntity insert(BaseEntity entity) {
+		if (!checkExists(entity) && checkFields(entity) && !checkUniqueFields(entity)) {
+			prepare(entity, "INSERT INTO " + table + " " + fields() + " VALUES " + parse(entity));
+		}
+		return entity;
 	}
 
 	/*
@@ -117,9 +171,11 @@ public abstract class BaseDAO implements IDAOBase {
 	 * BaseEntity)
 	 */
 	@Override
-	public void update(BaseEntity item) {
-		// TODO Auto-generated method stub
-
+	public int update(BaseEntity entity) {
+		if (checkExists(entity) && checkFields(entity)) {
+			return execute("UPDATE " + table + " SET " + parseUpdate(entity) + " WHERE " + id + " = " + entity.getId());
+		}
+		return 0;
 	}
 
 	/*
@@ -130,8 +186,8 @@ public abstract class BaseDAO implements IDAOBase {
 	 * BaseEntity)
 	 */
 	@Override
-	public void delete(BaseEntity item) {
-		execute("DELETE FROM " + table + " WHERE " + id + " = " + item.getId());
+	public int delete(BaseEntity entity) {
+		return execute("DELETE FROM " + table + " WHERE " + id + " = " + entity.getId());
 	}
 
 	/*
@@ -140,8 +196,8 @@ public abstract class BaseDAO implements IDAOBase {
 	 * @see fr.redpanda.pander.database.IDAOBase#delete()
 	 */
 	@Override
-	public void delete() {
-		execute("DELETE FROM " + table);
+	public int delete() {
+		return execute("DELETE FROM " + table);
 	}
 
 	/*
@@ -151,7 +207,7 @@ public abstract class BaseDAO implements IDAOBase {
 	 */
 	@Override
 	public BaseEntity get(double id) {
-		ResultSet resultSet = executeRequest("SELECT * FROM " + table + " WHERE " + getId() + " = " + id);
+		ResultSet resultSet = query("SELECT * FROM " + table + " WHERE " + getId() + " = " + id);
 		BaseEntity entity = null;
 		try {
 			resultSet.next();
@@ -170,7 +226,7 @@ public abstract class BaseDAO implements IDAOBase {
 	@Override
 	public List<BaseEntity> get() {
 		List<BaseEntity> entities = new ArrayList<>();
-		ResultSet resultSet = executeRequest("SELECT * FROM " + table);
+		ResultSet resultSet = query("SELECT * FROM " + table);
 		try {
 			while (resultSet.next()) {
 				entities.add(parse(resultSet));

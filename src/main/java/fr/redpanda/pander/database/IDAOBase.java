@@ -24,19 +24,56 @@ public interface IDAOBase {
 	public BaseEntity parse(ResultSet resultSet);
 
 	/**
-	 * Parse a {@link BaseEntity} to a {@link String}
+	 * Parse a {@link BaseEntity} to a {@link String} for SQL insert
 	 * 
 	 * @param entity
 	 *            the entity to parse
 	 * @return the string
 	 */
 	public String parse(BaseEntity entity);
-	
+
+	/**
+	 * Parse a {@link BaseEntity} to a {@link String} for SQL update
+	 * 
+	 * @param entity
+	 *            the entity to parse
+	 * @return the string
+	 */
+	public String parseUpdate(BaseEntity entity);
+
 	/**
 	 * Parse fields in a {@link String}
+	 * 
 	 * @return the fields
 	 */
 	public String fields();
+
+	/**
+	 * Check if fields can be inserted
+	 * 
+	 * @param entity
+	 *            the entity to check
+	 * @return if fields can be inserted
+	 */
+	public boolean checkFields(BaseEntity entity);
+
+	/**
+	 * Check uniques fields
+	 * 
+	 * @param entity
+	 *            the entity to check
+	 * @return if fields have unique value
+	 */
+	public boolean checkUniqueFields(BaseEntity entity);
+
+	/**
+	 * Check if fields exists on the database
+	 * 
+	 * @param entity
+	 *            the entity to check
+	 * @return if fields exists on the database
+	 */
+	public boolean checkExists(BaseEntity entity);
 
 	/**
 	 * Execute a SQL request
@@ -45,45 +82,56 @@ public interface IDAOBase {
 	 *            the SQL request
 	 * @return the result of the request
 	 */
-	public ResultSet executeRequest(String request);
+	public ResultSet query(String request);
 
 	/**
-	 * Execute a SQL request
+	 * Prepare a SQL request
+	 * 
+	 * @param entity
+	 *            the {@link BaseEntity} to prepare
+	 * @param request
+	 *            the SQL request
+	 * @return the {@link BaseEntity}
+	 */
+	public BaseEntity prepare(BaseEntity entity, String request);
+
+	/**
+	 * Execute a SQL request without a result
 	 * 
 	 * @param request
 	 *            the SQL request
-	 * @return the id
+	 * @return the number of modified row
 	 */
-	public double execute(String request);
+	public int execute(String request);
 
 	/**
 	 * Insert a {@link BaseEntity} on the database
 	 * 
-	 * @param item
-	 *            the item to insert
+	 * @param entity
+	 *            the entity to insert
 	 */
-	public void insert(BaseEntity item);
+	public BaseEntity insert(BaseEntity entity);
 
 	/**
 	 * Update a {@link BaseEntity} on the database
 	 * 
-	 * @param item
-	 *            the item to update
+	 * @param entity
+	 *            the entity to update
 	 */
-	public void update(BaseEntity item);
+	public int update(BaseEntity entity);
 
 	/**
 	 * Delete a {@link BaseEntity} on the database
 	 * 
-	 * @param item
-	 *            the item to delete
+	 * @param entity
+	 *            the entity to delete
 	 */
-	public void delete(BaseEntity item);
+	public int delete(BaseEntity entity);
 
 	/**
 	 * Delete all datas on the database
 	 */
-	public void delete();
+	public int delete();
 
 	/**
 	 * Get a {@link BaseEntity} from an id on the database

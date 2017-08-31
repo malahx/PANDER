@@ -25,6 +25,18 @@ public class SkillDAO extends BaseDAO {
 		super(TABLE, ID);
 	}
 
+	public BaseEntity getByName(String name) {
+		ResultSet resultSet = query("SELECT * FROM " + TABLE + " WHERE " + NAME + " = " + name);
+		BaseEntity entity = null;
+		try {
+			resultSet.next();
+			entity = parse(resultSet);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -62,11 +74,60 @@ public class SkillDAO extends BaseDAO {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see
+	 * fr.redpanda.pander.database.IDAOBase#parseUpdate(fr.redpanda.pander.entities.
+	 * base.BaseEntity)
+	 */
+	@Override
+	public String parseUpdate(BaseEntity entity) {
+
+		String result = "";
+		Skill skill = (Skill) entity;
+
+		result += NAME + " = '" + skill.getName() + "',";
+		result += TYPE + " = '" + skill.getType() + "'";
+		return result;
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.redpanda.pander.database.IDAOBase#fields()
 	 */
 	@Override
 	public String fields() {
 		return "(" + NAME + "," + TYPE + ")";
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.database.IDAOBase#checkFields(fr.redpanda.pander.entities.
+	 * base.BaseEntity)
+	 */
+	@Override
+	public boolean checkFields(BaseEntity entity) {
+
+		Skill skill = (Skill) entity;
+		if (skill.getName() == null) {
+			return false;
+		}
+		return true;
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.database.IDAOBase#checkUniqueFields(fr.redpanda.pander.
+	 * entities.base.BaseEntity)
+	 */
+	@Override
+	public boolean checkUniqueFields(BaseEntity entity) {
+		return getByName(((Skill) entity).getName()) != null;
 	}
 
 }
