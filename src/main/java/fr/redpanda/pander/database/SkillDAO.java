@@ -21,8 +21,15 @@ public class SkillDAO extends BaseDAO {
 	public static final String NAME = "name";
 	public static final String TYPE = "type";
 
-	public SkillDAO() {
+	protected SkillDAO() {
 		super(TABLE, ID);
+	}
+
+	public static SkillDAO getInstance() {
+		if (instance == null) {
+			instance = new SkillDAO();
+		}
+		return (SkillDAO) instance;
 	}
 
 	public BaseEntity getByName(String name) {

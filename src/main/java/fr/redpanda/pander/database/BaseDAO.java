@@ -17,7 +17,9 @@ import fr.redpanda.pander.entities.base.BaseEntity;
  *
  */
 public abstract class BaseDAO implements IDAOBase {
-
+	
+	protected static BaseDAO instance = null;
+	
 	/** the table to use */
 	private String table;
 
