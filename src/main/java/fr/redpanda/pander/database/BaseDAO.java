@@ -59,16 +59,16 @@ public abstract class BaseDAO implements IDAOBase {
 	@Override
 	public ResultSet query(String request) {
 
-		ResultSet resultSet = null;
+		ResultSet rs = null;
 
 		try {
 			Statement statement = DBManager.getInstance().getConnection().createStatement();
-			resultSet = statement.executeQuery(request);
+			rs = statement.executeQuery(request);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return resultSet;
+		return rs;
 
 	}
 
@@ -117,8 +117,12 @@ public abstract class BaseDAO implements IDAOBase {
 
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.database.IDAOBase#checkUniqueFields(fr.redpanda.pander.entities.base.BaseEntity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.database.IDAOBase#checkUniqueFields(fr.redpanda.pander.
+	 * entities.base.BaseEntity)
 	 */
 	@Override
 	public boolean checkUniqueFields(BaseEntity entity) {
@@ -140,11 +144,17 @@ public abstract class BaseDAO implements IDAOBase {
 		}
 		ResultSet rs = query("SELECT * FROM " + table + " WHERE " + id + " = " + entity.getId());
 		try {
-			rs.next();
+			if (rs.next()) {
+				entity = parse(rs);
+			} else {
+				entity = null;
+			}
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			entity = null;
 		}
-		return parse(rs) != null;
+		return entity != null;
 
 	}
 
@@ -207,11 +217,12 @@ public abstract class BaseDAO implements IDAOBase {
 	 */
 	@Override
 	public BaseEntity get(double id) {
-		ResultSet resultSet = query("SELECT * FROM " + table + " WHERE " + getId() + " = " + id);
+		ResultSet rs = query("SELECT * FROM " + table + " WHERE " + getId() + " = " + id);
 		BaseEntity entity = null;
 		try {
-			resultSet.next();
-			entity = parse(resultSet);
+			if (rs.next()) {
+				entity = parse(rs);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -226,10 +237,10 @@ public abstract class BaseDAO implements IDAOBase {
 	@Override
 	public List<BaseEntity> get() {
 		List<BaseEntity> entities = new ArrayList<>();
-		ResultSet resultSet = query("SELECT * FROM " + table);
+		ResultSet rs = query("SELECT * FROM " + table);
 		try {
-			while (resultSet.next()) {
-				entities.add(parse(resultSet));
+			while (rs.next()) {
+				entities.add(parse(rs));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -26,11 +26,12 @@ public class SkillDAO extends BaseDAO {
 	}
 
 	public BaseEntity getByName(String name) {
-		ResultSet resultSet = query("SELECT * FROM " + TABLE + " WHERE " + NAME + " = " + name);
+		ResultSet rs = query("SELECT * FROM " + TABLE + " WHERE " + NAME + " = " + name);
 		BaseEntity entity = null;
 		try {
-			resultSet.next();
-			entity = parse(resultSet);
+			rs.next();
+			entity = parse(rs);
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -43,13 +44,14 @@ public class SkillDAO extends BaseDAO {
 	 * @see fr.redpanda.pander.database.IDAOBase#parse(java.sql.ResultSet)
 	 */
 	@Override
-	public BaseEntity parse(ResultSet resultSet) {
+	public BaseEntity parse(ResultSet rs) {
 
 		Skill skill = new Skill();
 		try {
-			skill.setId(resultSet.getDouble(ID));
-			skill.setName(resultSet.getString(NAME));
-			skill.setType(StringManager.getTypeSkillFrom(resultSet.getString(TYPE)));
+			skill.setId(rs.getDouble(ID));
+			skill.setName(rs.getString(NAME));
+			skill.setType(StringManager.getTypeSkillFrom(rs.getString(TYPE)));
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			skill = null;
