@@ -215,6 +215,7 @@ public abstract class User extends BaseEntity {
 	 */
 	public User() {
 		super();
+		this.setDisabled(false);
 	}
 
 	/**

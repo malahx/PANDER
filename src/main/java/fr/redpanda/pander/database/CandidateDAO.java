@@ -3,366 +3,188 @@
  */
 package fr.redpanda.pander.database;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
+import fr.redpanda.pander.database.base.BaseUserDAO;
 import fr.redpanda.pander.entities.Candidate;
-import fr.redpanda.pander.entities.Role;
-import fr.redpanda.pander.entities.Skill;
-import fr.redpanda.pander.entities.User;
+import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.utils.date.DateConverter;
 
 /**
  * @author Gwénolé LE HENAFF
  *
  */
-//public class CandidateDAO extends DAOManager implements IDAO<Candidate> {
-//
-//	private static CandidateDAO instance;
-//
-//	public static CandidateDAO getInstance() {
-//		if (instance == null) {
-//			instance = new CandidateDAO();
-//		}
-//		return (CandidateDAO) instance;
-//	}
-//
-//	/**
-//	 * 
-//	 * @param conn
-//	 *            the connection
-//	 * @param query
-//	 *            the query to apply
-//	 * @param candidate
-//	 *            the candidate to pass
-//	 * @return prepared request
-//	 * @throws SQLException
-//	 */
-//	private PreparedStatement prepareCandidate(Connection conn, String query, Candidate candidate) throws SQLException {
-//		PreparedStatement prepare = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-//		prepare.setString(1, candidate.getFirstname());
-//		prepare.setString(2, candidate.getLastname());
-//		prepare.setString(3, DateConverter.getMySqlDate(candidate.getBirthdate()));
-//		prepare.setString(4, candidate.getTransport());
-//		prepare.setString(5, candidate.getLink1());
-//		prepare.setString(6, candidate.getLink2());
-//		prepare.setString(7, candidate.getCertificate1());
-//		prepare.setString(8, candidate.getCertificate2());
-//		prepare.setString(9, candidate.getCv());
-//		prepare.setLong(10, candidate.getId());
-//		return prepare;
-//	}
-//
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see fr.redpanda.pander.database.IDAO#checkExists(java.lang.Long)
-//	 */
-//	@Override
-//	public boolean checkExists(Candidate candidate) {
-//		if (candidate == null) {
-//			return false;
-//		}
-//		return checkExists(candidate.getId());
-//	}
-//
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see fr.redpanda.pander.database.IDAO#checkExists(java.lang.Long)
-//	 */
-//	@Override
-//	public boolean checkExists(Long id) {
-//		return id != null && id > 0 && findBy(id) != null;
-//	}
-//
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see fr.redpanda.pander.database.IDAO#checkExists(java.lang.Long)
-//	 */
-//	@Override
-//	public boolean validFields(Candidate candidate) {
-//		if (candidate == null) {
-//			return false;
-//		}
-//
-//		String email = candidate.getEmail();
-//		String password = candidate.getPassword();
-//		Role role = candidate.getRole();
-//		String firstname = candidate.getFirstname();
-//		String lastname = candidate.getLastname();
-//		if (email == null || email.isEmpty() || password == null || password.isEmpty() || role == null
-//				|| firstname == null || firstname.isEmpty() || lastname == null || lastname.isEmpty()) {
-//			return false;
-//		}
-//
-//		return true;
-//
-//	}
-//
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see fr.redpanda.pander.database.IDAO#create(java.lang.Object)
-//	 */
-//	@Override
-//	public Candidate create(Candidate candidate) {
-//		if (checkExists(candidate) || !validFields(candidate)) {
-//			return null;
-//		}
-//
-//		PreparedStatement prepare = null;
-//		Connection conn = null;
-//
-//		String query = "INSERT INTO candidate (firstname, lastname, birthdate, transport, link1, link2, certificate1, certificate2, cv, id_kuser) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//
-//		try {
-//			conn = getConnection();
-//			if (conn == null) {
-//				return null;
-//			}
-//
-//			conn.setAutoCommit(false);
-//
-//			User user = UserDAO.getInstance().create(candidate);
-//
-//			if (user == null || user.getId() == null) {
-//				conn.rollback();
-//				conn.setAutoCommit(true);
-//				close(conn, prepare);
-//				return null;
-//			}
-//
-//			prepare = prepareCandidate(conn, query, candidate);
-//			int row = prepare.executeUpdate();
-//
-//			if (row == 0) {
-//				throw new SQLException("insert error");
-//			}
-//
-//			conn.commit();
-//			conn.setAutoCommit(true);
-//
-//		} catch (SQLException e) {
-//			try {
-//				conn.rollback();
-//				conn.setAutoCommit(true);
-//			} catch (SQLException e1) {
-//				throw new RuntimeException(e1);
-//			}
-//			candidate.setId(null);
-//			candidate.setCreatedAt(null);
-//			candidate.setUpdatedAt(null);
-//			throw new RuntimeException(e);
-//		} finally {
-//			close(conn, prepare);
-//		}
-//		return candidate;
-//	}
-//
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see fr.redpanda.pander.database.IDAO#delete(java.lang.Object)
-//	 */
-//	@Override
-//	public Candidate delete(Candidate candidate) {
-//		if (!checkExists(candidate)) {
-//			return null;
-//		}
-//		if (delete(candidate.getId())) {
-//			candidate.setId(null);
-//			candidate.setCreatedAt(null);
-//			candidate.setUpdatedAt(null);
-//		}
-//		return candidate;
-//	}
-//
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see fr.redpanda.pander.database.IDAO#delete(long)
-//	 */
-//	@Override
-//	public boolean delete(Long id) {
-//		if (!checkExists(id)) {
-//			return false;
-//		}
-//		PreparedStatement prepare = null;
-//		Connection conn = null;
-//		Boolean value;
-//
-//		String query = "DELETE FROM candidate WHERE id_kuser = ?";
-//
-//		try {
-//			conn = getConnection();
-//			if (conn == null) {
-//				return false;
-//			}
-//
-//			conn.setAutoCommit(false);
-//
-//			prepare = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-//			prepare.setLong(1, id);
-//
-//			int row = prepare.executeUpdate();
-//
-//			if (row == 0) {
-//				throw new SQLException("deletion error");
-//			}
-//
-//			if (!UserDAO.getInstance().delete(id)) {
-//				conn.rollback();
-//				conn.setAutoCommit(true);
-//				close(conn, prepare);
-//				return false;
-//			}
-//
-//			conn.commit();
-//			conn.setAutoCommit(true);
-//
-//			value = true;
-//
-//		} catch (SQLException e) {
-//			value = false;
-//			try {
-//				conn.rollback();
-//				conn.setAutoCommit(true);
-//			} catch (SQLException e1) {
-//				throw new RuntimeException(e1);
-//			}
-//			throw new RuntimeException(e);
-//		} finally {
-//			close(conn, prepare);
-//		}
-//		return value;
-//	}
-//
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see fr.redpanda.pander.database.IDAO#update(java.lang.Object)
-//	 */
-//	@Override
-//	public Candidate update(Candidate candidate) {
-//		if (!checkExists(candidate) || !validFields(candidate)) {
-//			return null;
-//		}
-//		PreparedStatement prepare = null;
-//		Connection conn = null;
-//
-//		String query = "UPDATE candidate SET firstname = ?, SET lastname = ?, SET birthdate = ?, SET transport = ?, SET link1 = ?, SET link2 = ?, SET certificate1 = ?, SET certificate2 = ?, SET cv = ? WHERE id_kuser = ?";
-//
-//		try {
-//			conn = getConnection();
-//			if (conn == null) {
-//				return null;
-//			}
-//
-//			conn.setAutoCommit(false);
-//
-//			Date oldDate = candidate.getUpdatedAt();
-//			UserDAO.getInstance().update(candidate);
-//
-//			if (oldDate.equals(candidate.getUpdatedAt())) {
-//				conn.rollback();
-//				conn.setAutoCommit(false);
-//				conn.close();
-//				return null;
-//			}
-//
-//			prepare = prepareCandidate(conn, query, candidate);
-//			int row = prepare.executeUpdate();
-//
-//			if (row == 0) {
-//				throw new SQLException("update error");
-//			}
-//
-//			conn.commit();
-//			conn.setAutoCommit(true);
-//
-//		} catch (SQLException e) {
-//			try {
-//				conn.rollback();
-//				conn.setAutoCommit(true);
-//			} catch (SQLException e1) {
-//				throw new RuntimeException(e1);
-//			}
-//			throw new RuntimeException(e);
-//		} finally {
-//			close(conn, prepare);
-//		}
-//		return candidate;
-//	}
-//
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see fr.redpanda.pander.database.IDAO#findAll()
-//	 */
-//	@Override
-//	public List<Candidate> findAll() {
-//		List<Candidate> candidates = new ArrayList<>();
-//
-//		String query = "SELECT * FROM candidate";
-//
-//		try {
-//			Connection conn = getConnection();
-//			if (conn == null) {
-//				return candidates;
-//			}
-//			Statement state = conn.createStatement();
-//			ResultSet result = state.executeQuery(query);
-//			while (result.next()) {
-//				candidates.add(new Candidate(result));
-//			}
-//			close(conn, state, result);
-//		} catch (SQLException e) {
-//			throw new RuntimeException(e);
-//		}
-//		return candidates;
-//	}
-//
-//	/*
-//	 * (non-Javadoc)
-//	 * 
-//	 * @see fr.redpanda.pander.database.IDAO#findBy(long)
-//	 */
-//	@Override
-//	public Candidate findBy(long id) {
-//		Candidate candidate = null;
-//
-//		String query = "SELECT * FROM candidate c INNER JOIN kuser u ON u.id = c.id_kuser LEFT JOIN candidate_skill cs ON cs.id_candidate = c.id_kuser LEFT JOIN skill s ON s.id = cs.id_skill WHERE c.id_kuser = ?";
-//
-//		try {
-//			Connection conn = getConnection();
-//			if (conn == null) {
-//				return null;
-//			}
-//
-//			PreparedStatement prepare = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-//			prepare.setLong(1, id);
-//
-//			ResultSet result = prepare.executeQuery();
-//
-//			while (result.next()) {
-//				if (candidate == null) {
-//					candidate = new Candidate(result);
-//				}
-//				candidate.getSkills().add(new Skill(result));
-//			}
-//			close(null, prepare, result);
-//		} catch (SQLException e) {
-//			throw new RuntimeException(e);
-//		}
-//		return candidate;
-//	}
-//
-//}
+public class CandidateDAO extends BaseUserDAO {
+
+	/** the table */
+	public static final String TABLE = "candidate";
+
+	/** the id */
+	public static final String ID = "id_kuser";
+
+	/** the firstname field */
+	public static final String FIRSTNAME = "firstname";
+
+	/** the lastname field */
+	public static final String LASTNAME = "lastname";
+
+	/** the birthdate field */
+	public static final String BIRTHDATE = "birthdate";
+
+	/** the transport field */
+	public static final String TRANSPORT = "transport";
+
+	/** the link1 field */
+	public static final String LINK1 = "link1";
+
+	/** the link2 field */
+	public static final String LINK2 = "link2";
+
+	/** the certificate1 field */
+	public static final String CERTIFICATE1 = "certificate1";
+
+	/** the certificate2 field */
+	public static final String CERTIFICATE2 = "certificate2";
+
+	/** the cv field */
+	public static final String CV = "cv";
+
+	/** The Constructor */
+	protected CandidateDAO() {
+		super(TABLE, ID);
+	}
+
+	/**
+	 * get and instance the singleton
+	 * 
+	 * @return the singleton
+	 */
+	public static CandidateDAO getInstance() {
+		if (instance == null) {
+			instance = new CandidateDAO();
+		}
+		return (CandidateDAO) instance;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.database.IDAOBase#parse(java.sql.ResultSet)
+	 */
+	@Override
+	public BaseEntity parse(ResultSet rs) {
+
+		Candidate candidate = new Candidate();
+		try {
+			candidate.setId(rs.getDouble(ID));
+			candidate.setFirstname(rs.getString(FIRSTNAME));
+			candidate.setLastname(rs.getString(LASTNAME));
+			candidate.setBirthdate(rs.getTimestamp(BIRTHDATE));
+			candidate.setTransport(rs.getString(TRANSPORT));
+			candidate.setLink1(rs.getString(LINK1));
+			candidate.setLink2(rs.getString(LINK2));
+			candidate.setCertificate1(rs.getString(CERTIFICATE1));
+			candidate.setCertificate2(rs.getString(CERTIFICATE2));
+			candidate.setCv(rs.getString(CV));
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			candidate = null;
+		}
+		return candidate;
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.database.IDAOBase#parse(fr.redpanda.pander.entities.base.
+	 * BaseEntity)
+	 */
+	@Override
+	public String parse(BaseEntity entity) {
+
+		String result = "";
+		Candidate candidate = (Candidate) entity;
+		result += "'" + candidate.getId() + "',";
+		result += "'" + candidate.getFirstname() + "',";
+		result += "'" + candidate.getLastname() + "',";
+		result += "'" + DateConverter.getMySqlDate(candidate.getBirthdate()) + "',";
+		result += "'" + candidate.getTransport() + "',";
+		result += "'" + candidate.getLink1() + "',";
+		result += "'" + candidate.getLink2() + "',";
+		result += "'" + candidate.getCertificate1() + "',";
+		result += "'" + candidate.getCertificate2() + "',";
+		result += "'" + candidate.getCv() + "'";
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.database.IDAOBase#parseUpdate(fr.redpanda.pander.entities.
+	 * base.BaseEntity)
+	 */
+	@Override
+	public String parseUpdate(BaseEntity entity) {
+
+		String result = "";
+		Candidate candidate = (Candidate) entity;
+		result += FIRSTNAME + " = '" + candidate.getFirstname() + "',";
+		result += LASTNAME + " = '" + candidate.getLastname() + "',";
+		result += BIRTHDATE + " = '" + DateConverter.getMySqlDate(candidate.getBirthdate()) + "',";
+		result += TRANSPORT + " = '" + candidate.getTransport() + "',";
+		result += LINK1 + " = '" + candidate.getLink1() + "',";
+		result += LINK2 + " = '" + candidate.getLink2() + "',";
+		result += CERTIFICATE1 + " = '" + candidate.getCertificate1() + "',";
+		result += CERTIFICATE2 + " = '" + candidate.getCertificate2() + "',";
+		result += CV + " = '" + candidate.getCv() + "'";
+		return result;
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.database.IDAOBase#fields()
+	 */
+	@Override
+	public String fields() {
+
+		String result = "";
+		result += "'" + ID + "',";
+		result += "'" + FIRSTNAME + "',";
+		result += "'" + LASTNAME + "',";
+		result += "'" + BIRTHDATE + "',";
+		result += "'" + TRANSPORT + "',";
+		result += "'" + LINK1 + "',";
+		result += "'" + LINK2 + "',";
+		result += "'" + CERTIFICATE1 + "',";
+		result += "'" + CERTIFICATE2 + "',";
+		result += "'" + CV + "'";
+		return result;
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.database.IDAOBase#checkFields(fr.redpanda.pander.entities.
+	 * base.BaseEntity)
+	 */
+	@Override
+	public boolean checkFields(BaseEntity entity) {
+
+		Candidate candidate = (Candidate) entity;
+		if (candidate.getFirstname() == null || candidate.getLastname() == null) {
+			return false;
+		}
+		return true;
+
+	}
+	
+}
