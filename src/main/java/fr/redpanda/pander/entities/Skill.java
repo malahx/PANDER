@@ -71,6 +71,9 @@ public class Skill extends BaseEntity {
 		this.setName(name);
 		this.setType(type);
 	}
+	public Skill(){
+		
+	}
 
 	/**
 	 * @param result
@@ -99,5 +102,12 @@ public class Skill extends BaseEntity {
 		Skill other = (Skill) obj;
 		return this.id == other.getId();
 	}
+
+	public void setLevel(int int1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
 }

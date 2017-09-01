@@ -141,12 +141,13 @@ public class DBManager {
 		try {
 			if (connection == null || connection.isClosed()) {
 				try {
-					Class.forName("com.mysql.jdbc.Driver").newInstance();
+					Class.forName("org.mariadb.jdbc.Driver").newInstance();
 				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 					throw new RuntimeException(e);
 				}
-				connection = DriverManager.getConnection("jdbc:mysql://" + serverAddress + ":" + port + "/" + dbName,
-						login, password);
+				connection = DriverManager.getConnection("jdbc:mariadb://localhost:3306/?user=root&password=");
+//				connection = DriverManager.getConnection("jdbc:mariadb://" + serverAddress + ":" + port + "/" + dbName,
+//						login, password);
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -174,16 +175,29 @@ public class DBManager {
 		try {
 			if (createConnection == null || createConnection.isClosed()) {
 				try {
-					Class.forName("com.mysql.jdbc.Driver").newInstance();
+					Class.forName("org.mariadb.jdbc.Driver").newInstance();
 				} catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
 					throw new RuntimeException(e);
 				}
-				createConnection = DriverManager.getConnection("jdbc:mysql://" + serverAddress + ":" + port + "/",
+				createConnection = DriverManager.getConnection("jdbc:mariadb://" + serverAddress + ":" + port + "/",
 						login, password);
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+	}
+	public void deleteDB(){
+		try {
+			Statement statement = createConnection.createStatement();
+			statement.execute("DROP DATABASE" + dbName + ";");
+			connection.close();
+			connection = null;
+			createConnection.close();
+			createConnection = null;
+			instance = null;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
 	}
 
 }
