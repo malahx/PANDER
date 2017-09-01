@@ -69,21 +69,28 @@ public class ProfileCtrl extends MainCtrl {
 		view.getNavbar().getTglbtnProfile().setSelected(true);
 		User user = (User) getViewDatas().get(TypeData.USER);
 		if (user instanceof Candidate && view instanceof CandidateView) {
-			CandidateView cview = (CandidateView) this.view;
-			Candidate cuser = (Candidate) user;
-			cview.getTextCertificate1().setText(cuser.getCertificate1());
-			cview.getTextCertificate2().setText(cuser.getCertificate2());
-			cview.getTextBirthday().setText(DateConverter.getDate(cuser.getBirthdate()));
-			cview.getTextTransport().setText(cuser.getTransport());
-			String[] title = { "Activer", "Compétence" };
-			List<BaseEntity> skills = SkillDAO.getInstance().get();
-			cview.updateDatas(cview.getTableSoftSkills(), title, Utils.getSkills(skills, TypeSkill.SOFT), cuser);
-			cview.updateDatas(cview.getTableTechSkills(), title, Utils.getSkills(skills, TypeSkill.TECH), cuser);
+			initCandidateView(user);
 		} else if (user instanceof Company && view instanceof CompanyView) {
-			CompanyView cview = (CompanyView) this.view;
-			Company cuser = (Company) user;
+			initCompanyView(user);
 		}
 
+	}
+
+	private void initCompanyView(User user) {
+		updateCompany(user);
+	}
+
+	private void initCandidateView(User user) {
+		CandidateView cview = (CandidateView) this.view;
+		Candidate cuser = (Candidate) user;
+		cview.getTextCertificate1().setText(cuser.getCertificate1());
+		cview.getTextCertificate2().setText(cuser.getCertificate2());
+		cview.getTextBirthday().setText(DateConverter.getDate(cuser.getBirthdate()));
+		cview.getTextTransport().setText(cuser.getTransport());
+		String[] title = { "Activer", "Compétence" };
+		List<BaseEntity> skills = SkillDAO.getInstance().get();
+		cview.updateDatas(cview.getTableSoftSkills(), title, Utils.getSkills(skills, TypeSkill.SOFT), cuser);
+		cview.updateDatas(cview.getTableTechSkills(), title, Utils.getSkills(skills, TypeSkill.TECH), cuser);
 	}
 
 	/*
@@ -103,43 +110,65 @@ public class ProfileCtrl extends MainCtrl {
 			}
 		};
 		if (view instanceof CandidateView) {
-			CandidateView cview = (CandidateView) this.view;
-			cview.getTextCertificate1().getDocument().addDocumentListener(updateProfile);
-			cview.getTextCertificate2().getDocument().addDocumentListener(updateProfile);
-			cview.getTextBirthday().getDocument().addDocumentListener(updateProfile);
-			cview.getTextTransport().getDocument().addDocumentListener(updateProfile);
-			cview.getTableTechSkills().getModel().addTableModelListener(new TableModelListener() {
-
-				@Override
-				public void tableChanged(TableModelEvent e) {
-					CandidateDAO.getInstance().insertSkills((Candidate) user);
-				}
-			});
+			initCandidateEvent(user, updateProfile);
 		} else if (view instanceof CompanyView) {
-			CompanyView cview = (CompanyView) this.view;
+			initCompanyEvent(user, updateProfile);
 		}
+	}
+
+	private void initCompanyEvent(User user, DocListener updateProfile) {
+		CompanyView cview = (CompanyView) this.view;
+	}
+
+	private void initCandidateEvent(User user, DocListener updateProfile) {
+		CandidateView cview = (CandidateView) this.view;
+		cview.getTextCertificate1().getDocument().addDocumentListener(updateProfile);
+		cview.getTextCertificate2().getDocument().addDocumentListener(updateProfile);
+		cview.getTextBirthday().getDocument().addDocumentListener(updateProfile);
+		cview.getTextTransport().getDocument().addDocumentListener(updateProfile);
+		cview.getTableTechSkills().getModel().addTableModelListener(new TableModelListener() {
+
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				CandidateDAO.getInstance().insertSkills((Candidate) user);
+			}
+		});
 	}
 
 	private void updateUser() {
 		User user = (User) getViewDatas().get(TypeData.USER);
 		if (user instanceof Candidate && view instanceof CandidateView) {
-			CandidateView view = (CandidateView) this.view;
-			Candidate cuser = (Candidate) user;
-			cuser.setCertificate1(view.getTextCertificate1().getText());
-			cuser.setCertificate2(view.getTextCertificate2().getText());
-			try {
-				String s = view.getTextBirthday().getText();
-				cuser.setBirthdate(!s.equals("") ? new SimpleDateFormat("dd/MM/yyyy").parse(s) : null);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			cuser.setTransport(view.getTextTransport().getText());
-			CandidateDAO.getInstance().update(cuser);
+			updateCandidate(user);
 		} else if (user instanceof Company && view instanceof CompanyView) {
-			CompanyView view = (CompanyView) this.view;
-			Company cuser = (Company) user;
+			updateCompany(user);
 		}
 
+	}
+
+	/**
+	 * @param user
+	 */
+	private void updateCompany(User user) {
+		CompanyView view = (CompanyView) this.view;
+		Company cuser = (Company) user;
+	}
+
+	/**
+	 * @param user
+	 */
+	private void updateCandidate(User user) {
+		CandidateView view = (CandidateView) this.view;
+		Candidate cuser = (Candidate) user;
+		cuser.setCertificate1(view.getTextCertificate1().getText());
+		cuser.setCertificate2(view.getTextCertificate2().getText());
+		try {
+			String s = view.getTextBirthday().getText();
+			cuser.setBirthdate(!s.equals("") ? new SimpleDateFormat("dd/MM/yyyy").parse(s) : null);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		cuser.setTransport(view.getTextTransport().getText());
+		CandidateDAO.getInstance().update(cuser);
 	}
 
 }
