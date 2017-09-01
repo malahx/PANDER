@@ -79,7 +79,7 @@ public class CandidateDAO extends BaseUserDAO {
 
 		Candidate candidate = (Candidate) super.parse(new Candidate(), rs);
 		try {
-			candidate.setId(rs.getDouble(ID));
+			// candidate.setId(rs.getDouble(ID));
 			candidate.setFirstname(rs.getString(FIRSTNAME));
 			candidate.setLastname(rs.getString(LASTNAME));
 			candidate.setBirthdate(rs.getTimestamp(BIRTHDATE));
@@ -112,7 +112,8 @@ public class CandidateDAO extends BaseUserDAO {
 		result += "'" + candidate.getId() + "',";
 		result += "'" + candidate.getFirstname() + "',";
 		result += "'" + candidate.getLastname() + "',";
-		result += "'" + DateConverter.getMySqlDate(candidate.getBirthdate()) + "',";
+		result += candidate.getBirthdate() == null ? "NULL, "
+				: "'" + DateConverter.getMySqlDate(candidate.getBirthdate()) + "',";
 		result += "'" + candidate.getTransport() + "',";
 		result += "'" + candidate.getLink1() + "',";
 		result += "'" + candidate.getLink2() + "',";
@@ -136,13 +137,16 @@ public class CandidateDAO extends BaseUserDAO {
 		Candidate candidate = (Candidate) entity;
 		result += FIRSTNAME + " = '" + candidate.getFirstname() + "',";
 		result += LASTNAME + " = '" + candidate.getLastname() + "',";
-		result += BIRTHDATE + " = '" + DateConverter.getMySqlDate(candidate.getBirthdate()) + "',";
-		result += TRANSPORT + " = '" + candidate.getTransport() + "',";
-		result += LINK1 + " = '" + candidate.getLink1() + "',";
-		result += LINK2 + " = '" + candidate.getLink2() + "',";
-		result += CERTIFICATE1 + " = '" + candidate.getCertificate1() + "',";
-		result += CERTIFICATE2 + " = '" + candidate.getCertificate2() + "',";
-		result += CV + " = '" + candidate.getCv() + "'";
+		result += BIRTHDATE + " = " + (candidate.getBirthdate() == null ? "NULL"
+				: "'" + DateConverter.getMySqlDate(candidate.getBirthdate()) + "'") + ",";
+		result += TRANSPORT + " = " + (candidate.getTransport() == null ? "" : "'" + candidate.getTransport()) + "',";
+		result += LINK1 + " = '" + (candidate.getLink1() == null ? "" : candidate.getLink1()) + "',";
+		result += LINK2 + " = '" + (candidate.getLink2() == null ? "" : candidate.getLink2()) + "',";
+		result += CERTIFICATE1 + " = '" + (candidate.getCertificate1() == null ? "" : candidate.getCertificate1())
+				+ "',";
+		result += CERTIFICATE2 + " = '" + (candidate.getCertificate2() == null ? "" : candidate.getCertificate2())
+				+ "',";
+		result += CV + " = '" + (candidate.getCv() == null ? "" : candidate.getCv()) + "'";
 		return result;
 
 	}

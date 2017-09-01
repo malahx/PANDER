@@ -20,10 +20,10 @@ import fr.redpanda.pander.entities.base.BaseEntity;
 public abstract class BaseDAO implements IDAOBase {
 	
 	/** the table to use */
-	private String table;
+	protected String table;
 
 	/** the id to use */
-	private String id;
+	protected String id;
 
 	/**
 	 * @return the table
@@ -139,14 +139,13 @@ public abstract class BaseDAO implements IDAOBase {
 	 */
 	@Override
 	public boolean checkExists(BaseEntity entity) {
-
 		if (entity == null || entity.getId() <= 0) {
 			return false;
 		}
-		ResultSet rs = query("SELECT * FROM " + table + " WHERE " + id + " = " + entity.getId());
+		ResultSet rs = query("SELECT " + id + " FROM " + table + " WHERE " + id + " = " + entity.getId());
 		try {
 			if (rs.next()) {
-				entity = parse(rs);
+				entity.setId(rs.getDouble(1));
 			} else {
 				entity = null;
 			}
@@ -155,8 +154,7 @@ public abstract class BaseDAO implements IDAOBase {
 			e.printStackTrace();
 			entity = null;
 		}
-		return entity != null;
-
+		return entity != null && entity.getId() >= 0;
 	}
 
 	/*

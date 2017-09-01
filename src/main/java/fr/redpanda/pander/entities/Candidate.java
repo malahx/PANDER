@@ -185,6 +185,7 @@ public class Candidate extends User {
 		this.setRole(Role.CANDIDATE);
 		this.setSkills(new ArrayList<>());
 	}
+	
 
 	/**
 	 * @param email

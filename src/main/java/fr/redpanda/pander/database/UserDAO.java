@@ -12,7 +12,6 @@ import java.util.List;
 import fr.redpanda.pander.database.base.BaseDAO;
 import fr.redpanda.pander.entities.Admin;
 import fr.redpanda.pander.entities.Role;
-import fr.redpanda.pander.entities.Skill;
 import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.utils.StringManager;
@@ -197,18 +196,19 @@ public class UserDAO extends BaseDAO {
 
 		String result = "";
 		User user = (User) entity;
-		result += "'" + EMAIL + "'" + " = '" + user.getEmail() + "' ";
-		result += "'" + PASSWORD + "'" + " = '" + user.getPassword() + "' ";
-		result += "'" + ROLE + "'" + " = '" + user.getRole() + "' ";
-		result += "'" + DISABLED + "'" + " = " + (user.isDisabled() ? 1 : 0);
-		result += "'" + PHONE + "'" + " = '" + user.getPhone() + "' ";
-		result += "'" + ADDRESS + "'" + " = '" + user.getAddress() + "' ";
-		result += "'" + POSTCODE + "'" + " = '" + user.getPostcode() + "' ";
-		result += "'" + CITY + "'" + " = '" + user.getCity() + "' ";
-		result += "'" + PHOTO + "'" + " = '" + user.getPhoto() + "' ";
-		result += "'" + DESCRIPTION + "'" + " = '" + user.getDescription() + "' ";
-		result += "'" + CREATED_AT + "'" + " = '" + DateConverter.getMySqlDatetime(user.getCreatedAt()) + "' ";
-		result += "'" + UPDATED_AT + "'" + " = '" + DateConverter.getMySqlDatetime(user.getUpdatedAt()) + "'";
+		result += EMAIL + " = '" + user.getEmail() + "', ";
+		result += PASSWORD + " = '" + user.getPassword() + "', ";
+		result += ROLE + " = '" + user.getRole() + "', ";
+		result += DISABLED + " = " + (user.isDisabled() ? 1 : 0) + ", ";
+		result += PHONE + " = '" + (user.getPhone() == null ? "" : user.getPhone()) + "', ";
+		result += ADDRESS + " = '" + (user.getAddress() == null ? "" : user.getAddress()) + "', ";
+		result += POSTCODE + " = '" + (user.getPostcode() == null ? "" : user.getPostcode()) + "', ";
+		result += CITY + " = '" + (user.getCity() == null ? "" : user.getCity()) + "', ";
+		result += PHOTO + " = '" + (user.getPhoto() == null ? "" : user.getPhoto()) + "', ";
+		result += DESCRIPTION  + " = '" + (user.getDescription() == null ? "" : user.getDescription())
+				+ "', ";
+		result += CREATED_AT + " = '" + DateConverter.getMySqlDatetime(user.getCreatedAt()) + "', ";
+		result += UPDATED_AT + " = '" + DateConverter.getMySqlDatetime(user.getUpdatedAt()) + "'";
 		return result;
 
 	}
@@ -248,8 +248,8 @@ public class UserDAO extends BaseDAO {
 	@Override
 	public boolean checkFields(BaseEntity entity) {
 
-		Skill skill = (Skill) entity;
-		if (skill.getName() == null) {
+		User user = (User) entity;
+		if (user.getEmail() == null || user.getPassword() == null || user.getRole() == null) {
 			return false;
 		}
 		return true;
@@ -305,9 +305,9 @@ public class UserDAO extends BaseDAO {
 	@Override
 	public List<BaseEntity> get() {
 
-		ResultSet rs = query("SELECT * FROM " + TABLE + " LEFT JOIN " + CompanyDAO.TABLE
-				+ " ON " + CompanyDAO.TABLE + "." + CompanyDAO.ID + " = " + ID + " LEFT JOIN " + CandidateDAO.TABLE
-				+ " ON " + CandidateDAO.TABLE + "." + CandidateDAO.ID + " = " + ID);
+		ResultSet rs = query("SELECT * FROM " + TABLE + " LEFT JOIN " + CompanyDAO.TABLE + " ON " + CompanyDAO.TABLE
+				+ "." + CompanyDAO.ID + " = " + ID + " LEFT JOIN " + CandidateDAO.TABLE + " ON " + CandidateDAO.TABLE
+				+ "." + CandidateDAO.ID + " = " + ID);
 		List<BaseEntity> entities = new ArrayList<>();
 		try {
 			while (rs.next()) {

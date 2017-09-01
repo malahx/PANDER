@@ -43,10 +43,10 @@ public abstract class BaseCtrl implements IBaseCtrl {
 
 	@Override
 	public BaseCtrl loadController(JFrame frame) {
+		setupDatas();
 		getView().loadView(frame);
 		initView();
 		initEvent();
-		setupDatas();
 		return this;
 	}
 
