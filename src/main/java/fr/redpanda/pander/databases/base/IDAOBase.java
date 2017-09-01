@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.redpanda.pander.database.base;
+package fr.redpanda.pander.databases.base;
 
 import java.sql.ResultSet;
 import java.util.List;

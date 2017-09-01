@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.redpanda.pander.controllers;
+package fr.redpanda.pander.controllers.base;
 
 import java.util.HashMap;
 import java.util.Map;

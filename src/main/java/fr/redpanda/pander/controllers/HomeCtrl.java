@@ -5,6 +5,7 @@ package fr.redpanda.pander.controllers;
 
 import javax.swing.JFrame;
 
+import fr.redpanda.pander.controllers.base.MainCtrl;
 import fr.redpanda.pander.views.HomeView;
 
 /**

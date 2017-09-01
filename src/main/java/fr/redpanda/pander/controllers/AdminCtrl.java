@@ -11,8 +11,9 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import fr.redpanda.pander.database.SkillDAO;
-import fr.redpanda.pander.database.UserDAO;
+import fr.redpanda.pander.controllers.base.BaseCtrl;
+import fr.redpanda.pander.databases.SkillDAO;
+import fr.redpanda.pander.databases.UserDAO;
 import fr.redpanda.pander.entities.Skill;
 import fr.redpanda.pander.entities.TypeSkill;
 import fr.redpanda.pander.entities.User;

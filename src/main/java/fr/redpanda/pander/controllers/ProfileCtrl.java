@@ -12,8 +12,9 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
-import fr.redpanda.pander.database.CandidateDAO;
-import fr.redpanda.pander.database.SkillDAO;
+import fr.redpanda.pander.controllers.base.MainCtrl;
+import fr.redpanda.pander.databases.CandidateDAO;
+import fr.redpanda.pander.databases.SkillDAO;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.TypeSkill;

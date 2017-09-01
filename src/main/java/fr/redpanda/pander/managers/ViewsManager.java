@@ -7,7 +7,7 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import fr.redpanda.pander.controllers.AuthCtrl;
-import fr.redpanda.pander.controllers.BaseCtrl;
+import fr.redpanda.pander.controllers.base.BaseCtrl;
 import fr.redpanda.pander.utils.views.ViewUtils;
 
 public class ViewsManager {

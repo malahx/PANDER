@@ -1,11 +1,11 @@
 /**
  * 
  */
-package fr.redpanda.pander.database.base;
+package fr.redpanda.pander.databases.base;
 
 import java.sql.ResultSet;
 
-import fr.redpanda.pander.database.UserDAO;
+import fr.redpanda.pander.databases.UserDAO;
 import fr.redpanda.pander.entities.base.BaseEntity;
 
 /**

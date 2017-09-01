@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.redpanda.pander.controllers;
+package fr.redpanda.pander.controllers.base;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,9 +10,12 @@ import java.awt.event.ItemListener;
 
 import javax.swing.event.DocumentEvent;
 
-import fr.redpanda.pander.database.CandidateDAO;
-import fr.redpanda.pander.database.CompanyDAO;
-import fr.redpanda.pander.database.UserDAO;
+import fr.redpanda.pander.controllers.HomeCtrl;
+import fr.redpanda.pander.controllers.MatchingCtrl;
+import fr.redpanda.pander.controllers.ProfileCtrl;
+import fr.redpanda.pander.databases.CandidateDAO;
+import fr.redpanda.pander.databases.CompanyDAO;
+import fr.redpanda.pander.databases.UserDAO;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.User;

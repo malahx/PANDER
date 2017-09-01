@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.redpanda.pander.database.base;
+package fr.redpanda.pander.databases.base;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.redpanda.pander.database.DBManager;
+import fr.redpanda.pander.databases.DBManager;
 import fr.redpanda.pander.entities.base.BaseEntity;
 
 /**

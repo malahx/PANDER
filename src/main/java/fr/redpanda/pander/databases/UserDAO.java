@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.redpanda.pander.database;
+package fr.redpanda.pander.databases;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import fr.redpanda.pander.database.base.BaseDAO;
+import fr.redpanda.pander.databases.base.BaseDAO;
 import fr.redpanda.pander.entities.Admin;
 import fr.redpanda.pander.entities.Role;
 import fr.redpanda.pander.entities.User;

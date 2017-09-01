@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.redpanda.pander.database;
+package fr.redpanda.pander.databases;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,4 +1,4 @@
-package fr.redpanda.pander.controllers;
+package fr.redpanda.pander.controllers.base;
 
 import javax.swing.JFrame;
 

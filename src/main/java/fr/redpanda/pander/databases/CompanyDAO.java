@@ -1,12 +1,12 @@
 /**
  * 
  */
-package fr.redpanda.pander.database;
+package fr.redpanda.pander.databases;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import fr.redpanda.pander.database.base.BaseUserDAO;
+import fr.redpanda.pander.databases.base.BaseUserDAO;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.base.BaseEntity;
 
