@@ -6,8 +6,12 @@ package fr.redpanda.pander.controllers;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
+import javax.swing.AbstractAction;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.KeyStroke;
 import javax.swing.event.DocumentEvent;
 
 import fr.redpanda.pander.controllers.base.BaseCtrl;
@@ -43,7 +47,7 @@ public class AuthCtrl extends BaseCtrl {
 				CandidateDAO.getInstance().getSkills((Candidate) loggedUser);
 			} else if (loggedUser instanceof Company) {
 				ViewsManager.getInstance().next(new HomeCtrl(frame));
-				//CompanyDAO.getInstance().getJobs((Company) loggedUser);
+				// CompanyDAO.getInstance().getJobs((Company) loggedUser);
 			} else if (loggedUser instanceof Admin) {
 				ViewsManager.getInstance().next(new AdminCtrl(frame));
 			}
@@ -123,6 +127,19 @@ public class AuthCtrl extends BaseCtrl {
 			@Override
 			public void update(DocumentEvent e) {
 				refreshValidate();
+			}
+		});
+
+		view.getContentPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "login");
+		view.getContentPane().getActionMap().put("login", new AbstractAction() {
+
+			private static final long serialVersionUID = 2923284308284198391L;
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (view.getBtnValidate().isEnabled()) {
+					view.getBtnValidate().doClick();
+				}
 			}
 		});
 
