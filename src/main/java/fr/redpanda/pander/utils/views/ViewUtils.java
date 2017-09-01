@@ -18,6 +18,13 @@ import javax.swing.border.EmptyBorder;
  */
 public class ViewUtils {
 
+	private static final Color GREY_LIGHT = new Color(207, 207, 207);
+	private static final Color GREY = new Color(158, 158, 158);
+	private static final Color LIGHT = new Color(255, 192, 70);
+	private static final Color NORMAL = new Color(255, 143, 0);
+	private static final Color DARK = new Color(197, 96, 0);
+	private static final Color WHITE = new Color(255, 255, 255);
+
 	/**
 	 * Configure the jFrame and the jPanel
 	 * 
@@ -41,7 +48,7 @@ public class ViewUtils {
 	 * 
 	 */
 	public static void colorDark(JComponent component) {
-		component.setBackground(new Color(197, 96, 0));
+		component.setBackground(DARK);
 	}
 
 	/**
@@ -52,7 +59,7 @@ public class ViewUtils {
 	 * 
 	 */
 	public static void colorNormal(JComponent component) {
-		component.setBackground(new Color(255, 143, 0));
+		component.setBackground(NORMAL);
 	}
 
 	/**
@@ -63,7 +70,7 @@ public class ViewUtils {
 	 * 
 	 */
 	public static void colorLight(JComponent component) {
-		component.setBackground(new Color(255, 192, 70));
+		component.setBackground(LIGHT);
 	}
 
 	/**
@@ -74,7 +81,7 @@ public class ViewUtils {
 	 * 
 	 */
 	public static void colorGrey(JComponent component) {
-		component.setBackground(new Color(158, 158, 158));
+		component.setBackground(GREY);
 	}
 
 	/**
@@ -85,7 +92,7 @@ public class ViewUtils {
 	 * 
 	 */
 	public static void colorGreyLight(JComponent component) {
-		component.setBackground(new Color(207, 207, 207));
+		component.setBackground(GREY_LIGHT);
 	}
 
 	/**
@@ -96,7 +103,7 @@ public class ViewUtils {
 	 * 
 	 */
 	public static void colorWhite(JComponent component) {
-		component.setBackground(new Color(255, 255, 255));
+		component.setBackground(WHITE);
 	}
 
 	/**
