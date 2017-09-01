@@ -15,7 +15,7 @@ public class Matching {
 	private Candidate candidate;
 	private Company company;
 	private Job job;
-	private int calculateRatio;
+	private double calculateRatio;
 
 	/**
 	 * @param candidate
@@ -27,6 +27,7 @@ public class Matching {
 		this.candidate = candidate;
 		this.company = company;
 		this.job = job;
+		calculateRatio = 0;
 	}
 
 	private List<Skill> getTechSkills(List<Skill> skills) {
@@ -87,9 +88,9 @@ public class Matching {
 		double softMatchingResult = (equalSoftSkills.size()) / (jobSoftSkills.size());
 		double jokerSkills = (jobTechSkills.size() - equalTechSkills.size()) / (jobTechSkills.size());
 
-		double matchingResult = (techMatchingResult * 60) + (softMatchingResult * 30) + (jokerSkills * 10);
+		calculateRatio = (techMatchingResult * 60) + (softMatchingResult * 30) + (jokerSkills * 10);
 
-		return matchingResult;
+		return calculateRatio;
 	}
 
 }

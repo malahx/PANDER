@@ -41,8 +41,8 @@ public class StringManager {
 	 * @return the role
 	 */
 	public static Role getRoleFrom(String role) {
-		return role == Role.CANDIDATE.toString() ? Role.CANDIDATE
-				: (role == Role.COMPANY.toString() ? Role.COMPANY : Role.ADMIN);
+		return role.equals(Role.CANDIDATE.toString()) ? Role.CANDIDATE
+				: (role.equals(Role.COMPANY.toString()) ? Role.COMPANY : Role.ADMIN);
 	}
 
 	/**
@@ -52,7 +52,7 @@ public class StringManager {
 	 * @return the type skill
 	 */
 	public static TypeSkill getTypeSkillFrom(String type) {
-		return type == TypeSkill.SOFT.toString() ? TypeSkill.SOFT : TypeSkill.TECH;
+		return type.equals(TypeSkill.SOFT.toString()) ? TypeSkill.SOFT : TypeSkill.TECH;
 	}
 
 	/**

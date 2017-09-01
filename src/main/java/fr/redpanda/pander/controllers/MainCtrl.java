@@ -10,6 +10,8 @@ import java.awt.event.ItemListener;
 
 import javax.swing.event.DocumentEvent;
 
+import fr.redpanda.pander.database.CandidateDAO;
+import fr.redpanda.pander.database.CompanyDAO;
 import fr.redpanda.pander.database.UserDAO;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
@@ -39,7 +41,7 @@ public abstract class MainCtrl extends BaseCtrl {
 		User user = (User) getViewDatas().get(TypeData.USER);
 		if (user instanceof Candidate) {
 			view.getNavbar().getLblUser().setText("CANDIDAT");
-			view.getSidebar().initCandidate((Candidate) user); 
+			view.getSidebar().initCandidate((Candidate) user);
 		} else {
 			view.getNavbar().getLblUser().setText("ENTREPRISE");
 			view.getSidebar().initCompany((Company) user);
@@ -118,7 +120,7 @@ public abstract class MainCtrl extends BaseCtrl {
 		if (view.isEditable()) {
 			SidebarEditable sidebar = (SidebarEditable) view.getSidebar();
 			DocListener updateProfile = new DocListener() {
-				
+
 				@Override
 				public void update(DocumentEvent e) {
 					updateUser(sidebar);
@@ -138,12 +140,29 @@ public abstract class MainCtrl extends BaseCtrl {
 	 */
 	private void updateUser(SidebarEditable sidebar) {
 		User user = (User) getViewDatas().get(TypeData.USER);
+		user.setEmail(sidebar.getTxtMail().getText());
 		user.setAddress(sidebar.getTxtAdress().getText());
 		user.setCity(sidebar.getTxtCity().getText());
 		user.setDescription(sidebar.getTxtDescriptionTitle().getText());
 		user.setPhone(sidebar.getTxtPhone().getText());
 		user.setPostcode(sidebar.getTxtCp().getText());
-		UserDAO.getInstance().update(user);
+		if (user instanceof Candidate) {
+			Candidate cuser = (Candidate) user;
+			cuser.setFirstname(sidebar.getTxtName1().getText());
+			cuser.setLastname(sidebar.getTxtName2().getText());
+			cuser.setLink1(sidebar.getTxtLink1().getText());
+			cuser.setLink2(sidebar.getTxtLink2().getText());
+			CandidateDAO.getInstance().update(cuser);
+		} else if (user instanceof Company) {
+			Company cuser = (Company) user;
+			cuser.setLink(sidebar.getTxtLink1().getText());
+			cuser.setSiret(sidebar.getTxtName2().getText());
+			cuser.setName(sidebar.getTxtName1().getText());
+			cuser.setContact(sidebar.getTxtLink2().getText());
+			CompanyDAO.getInstance().update(cuser);
+		} else {
+			UserDAO.getInstance().update(user);
+		}
 	}
 
 }

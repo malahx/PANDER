@@ -50,4 +50,8 @@ bin/
 miglayout-src.zip
 miglayout15-swing.jar
 
+#checkstyle
 *.checkstyle
+
+#config files
+config/dbconfig

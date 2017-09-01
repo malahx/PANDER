@@ -9,14 +9,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import fr.redpanda.pander.entities.base.BaseEntity;
+
 /**
  * 
  * @author Patrice SCHOCH
  *
  */
-public class Job {
+public class Job extends BaseEntity {
 
-	private Long id;
 	private String name;
 	private String presentation;
 	private String link;
@@ -25,20 +26,6 @@ public class Job {
 	private Date createdAt;
 	private Date updatedAt;
 
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	/**
 	 * @return the name

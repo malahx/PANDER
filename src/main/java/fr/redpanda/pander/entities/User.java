@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
+import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.utils.StringManager;
 
 /**
@@ -14,9 +15,8 @@ import fr.redpanda.pander.utils.StringManager;
  * @author Gwénolé LE HENAFF
  *
  */
-public abstract class User {
+public abstract class User extends BaseEntity {
 
-	protected Long id;
 	protected String email;
 	protected String password;
 	protected String phone;
@@ -29,21 +29,6 @@ public abstract class User {
 	protected Role role;
 	protected Date createdAt;
 	protected Date updatedAt;
-
-	/**
-	 * @return the id
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	/**
-	 * @param id
-	 *            the id to set
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	/**
 	 * @return the email

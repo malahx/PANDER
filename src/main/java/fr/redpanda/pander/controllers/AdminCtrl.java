@@ -12,6 +12,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import fr.redpanda.pander.database.SkillDAO;
 import fr.redpanda.pander.database.UserDAO;
 import fr.redpanda.pander.entities.Skill;
 import fr.redpanda.pander.entities.TypeSkill;
@@ -59,7 +60,7 @@ public class AdminCtrl extends BaseCtrl {
 
 				String[] title = { "Désactiver", "Email", "Mise à jour" };
 				view.getLblSubtitle().setText("Utilisateurs");
-				view.updateDatas(title, UserDAO.getInstance().findAll());
+				view.updateDatas(title, UserDAO.getInstance().get());
 				view.getTglbtnSkills().setSelected(false);
 				view.getBtnBtn1().setText("Générer mot de passe");
 				view.getTxtSkill().setText("");
@@ -110,7 +111,7 @@ public class AdminCtrl extends BaseCtrl {
 					String text = view.getTxtSkill().getText();
 					if (text.length() > 0) {
 						Skill skill = new Skill(text, TypeSkill.TECH);
-						//SkillDAO.getInstance().create(skill);
+						SkillDAO.getInstance().insert(skill);
 						AdminTableModel model = (AdminTableModel) view.getTblTable().getModel();
 						model.getObjects().add(skill);
 						model.fireTableDataChanged();
@@ -132,7 +133,7 @@ public class AdminCtrl extends BaseCtrl {
 						view.getBtnBtn1().setEnabled(false);
 					}
 					if (object instanceof Skill) {
-						// SkillDAO.getInstance().delete((Skill) object);
+						SkillDAO.getInstance().delete((Skill) object);
 					}
 					model.getObjects().remove(selectedRow);
 					model.fireTableDataChanged();

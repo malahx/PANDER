@@ -3,8 +3,6 @@
  */
 package fr.redpanda.pander.entities;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -187,6 +185,7 @@ public class Candidate extends User {
 		this.setRole(Role.CANDIDATE);
 		this.setSkills(new ArrayList<>());
 	}
+	
 
 	/**
 	 * @param email
@@ -197,25 +196,6 @@ public class Candidate extends User {
 		super(email);
 		this.setFirstname(firstname);
 		this.setLastname(lastname);
-		this.setRole(Role.CANDIDATE);
-		this.setSkills(new ArrayList<>());
-	}
-
-	/**
-	 * @param result
-	 * @throws SQLException
-	 */
-	public Candidate(ResultSet result) throws SQLException {
-		super(result);
-		this.setFirstname(result.getString("firstname"));
-		this.setLastname(result.getString("lastname"));
-		this.setTransport(result.getString("transport"));
-		this.setLink1(result.getString("link1"));
-		this.setLink2(result.getString("link2"));
-		this.setCertificate1(result.getString("certificate1"));
-		this.setCertificate2(result.getString("certificate2"));
-		this.setCv(result.getString("cv"));
-		this.setBirthdate(result.getTimestamp("birthdate"));
 		this.setRole(Role.CANDIDATE);
 		this.setSkills(new ArrayList<>());
 	}

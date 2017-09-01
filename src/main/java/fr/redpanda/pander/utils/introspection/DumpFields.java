@@ -5,7 +5,10 @@ import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.*;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,11 +17,13 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Map.Entry;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class DumpFields {
+
+	@SuppressWarnings("rawtypes")
 	public static ArrayList<String> inspectBaseAttribut(Class klazz, Class classLimiter) {
 		ArrayList<String> attributs = new ArrayList<String>();
 		Field[] fields;
@@ -94,10 +99,11 @@ public class DumpFields {
 
 	/**
 	 * This method return an array of all the getters of the given class
+	 * 
 	 * @param klazz
 	 * @return
 	 */
-	public static <T,R> ArrayList<Method> getGetter(Class<T> klazz, Class<R> classLimiter) {
+	public static <T, R> ArrayList<Method> getGetter(Class<T> klazz, Class<R> classLimiter) {
 		ArrayList<Method> result = new ArrayList<Method>();
 		try {
 			for (PropertyDescriptor propertyDescriptor : Introspector.getBeanInfo(klazz, classLimiter)
@@ -112,16 +118,17 @@ public class DumpFields {
 		return result;
 	}
 
-	public static <T,R> ArrayList<Method> getGetter(Class<T> klazz) {
-		return DumpFields.getGetter(klazz,Object.class);
+	public static <T, R> ArrayList<Method> getGetter(Class<T> klazz) {
+		return DumpFields.getGetter(klazz, Object.class);
 	}
 
 	/**
 	 * This method return an array of all the setters of the given class
+	 * 
 	 * @param klazz
 	 * @return
 	 */
-	public static <T,R> ArrayList<Method> getSetter(Class<T> klazz, Class<R> classLimiter) {
+	public static <T, R> ArrayList<Method> getSetter(Class<T> klazz, Class<R> classLimiter) {
 		ArrayList<Method> result = new ArrayList<Method>();
 		try {
 			for (PropertyDescriptor propertyDescriptor : Introspector.getBeanInfo(klazz, classLimiter)
@@ -137,7 +144,7 @@ public class DumpFields {
 	}
 
 	public static <T> ArrayList<Method> getSetter(Class<T> klazz) {
-		return DumpFields.getSetter(klazz,Object.class);
+		return DumpFields.getSetter(klazz, Object.class);
 	}
 
 	public static Map<String, Object> fielder(Object bean) {
@@ -145,8 +152,7 @@ public class DumpFields {
 			return Arrays.asList(Introspector.getBeanInfo(bean.getClass(), Object.class).getPropertyDescriptors())
 					.stream()
 					// filter out properties with setters only
-					.filter(pd -> Objects.nonNull(pd.getReadMethod()))
-					.collect(Collectors.toMap(
+					.filter(pd -> Objects.nonNull(pd.getReadMethod())).collect(Collectors.toMap(
 							// bean property name
 							PropertyDescriptor::getName, pd -> { // invoke
 																	// method to
@@ -168,14 +174,14 @@ public class DumpFields {
 		}
 	}
 
-	public static Map<String, Object> fielderWithList(Object o){
-		Map<String,Object> result = new HashMap<String, Object>();
+	public static Map<String, Object> fielderWithList(Object o) {
+		Map<String, Object> result = new HashMap<String, Object>();
 
-		Map<String,Object> objectDump = DumpFields.fielder(o);
+		Map<String, Object> objectDump = DumpFields.fielder(o);
 		for (Entry<String, Object> item : objectDump.entrySet()) {
 			if (item.getValue().getClass().isAssignableFrom(ArrayList.class)) {
 				SubFielder(result, item);
-			}else{
+			} else {
 				result.put(item.getKey(), item.getValue());
 			}
 		}
@@ -183,8 +189,8 @@ public class DumpFields {
 		return result;
 	}
 
-	private static void SubFielder(Map<String, Object> result,
-			Entry<String, Object> item) {
+	@SuppressWarnings({ "rawtypes", "unused" })
+	private static void SubFielder(Map<String, Object> result, Entry<String, Object> item) {
 		Map<String, Object> subResult = new HashMap<String, Object>();
 
 		result.put(item.getKey(), " :");
@@ -194,12 +200,12 @@ public class DumpFields {
 		int i = 0;
 
 		for (Object object : ((Iterable) item.getValue())) {
-			Map<String,Object>subDump = DumpFields.fielderWithList(object);
+			Map<String, Object> subDump = DumpFields.fielderWithList(object);
 			for (Entry<String, Object> subItem : subDump.entrySet()) {
 				if (subItem.getValue().getClass().isAssignableFrom(ArrayList.class)) {
 					SubFielder(subResult, subItem);
-				}else{
-					subResult.put(subItem.getKey()+"["+i+"]", subItem.getValue());
+				} else {
+					subResult.put(subItem.getKey() + "[" + i + "]", subItem.getValue());
 				}
 			}
 			i++;
@@ -217,8 +223,8 @@ public class DumpFields {
 	}
 
 	/**
-	 * Scans all classes accessible from the context class loader which belong
-	 * to the given package and subpackages.
+	 * Scans all classes accessible from the context class loader which belong to
+	 * the given package and subpackages.
 	 *
 	 * @param packageName
 	 *            The base package
@@ -226,6 +232,7 @@ public class DumpFields {
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 */
+	@SuppressWarnings("rawtypes")
 	public static ArrayList<String> getClassesNames(String packageName) throws ClassNotFoundException, IOException {
 		ArrayList<String> result = new ArrayList<String>();
 
@@ -250,8 +257,7 @@ public class DumpFields {
 	}
 
 	/**
-	 * Recursive method used to find all classes in a given directory and
-	 * subdirs.
+	 * Recursive method used to find all classes in a given directory and subdirs.
 	 *
 	 * @param directory
 	 *            The base directory
@@ -260,6 +266,7 @@ public class DumpFields {
 	 * @return The classes
 	 * @throws ClassNotFoundException
 	 */
+	@SuppressWarnings("rawtypes")
 	private static List<Class> findClasses(File directory, String packageName) throws ClassNotFoundException {
 		List<Class> classes = new ArrayList<Class>();
 		if (!directory.exists()) {
@@ -332,8 +339,8 @@ public class DumpFields {
 	}
 
 	/**
-	 * scinder find getter et find setters pourrait etre plus interessant pour
-	 * la suite
+	 * scinder find getter et find setters pourrait etre plus interessant pour la
+	 * suite
 	 *
 	 * @param c
 	 * @return
@@ -349,6 +356,7 @@ public class DumpFields {
 
 	/**
 	 * This method return the setter associated to the given field
+	 * 
 	 * @param field
 	 * @return
 	 */
@@ -367,6 +375,7 @@ public class DumpFields {
 
 	/**
 	 * This method return the getter associated to the given field
+	 * 
 	 * @param field
 	 * @return
 	 */

@@ -22,4 +22,13 @@ public class DateConverter {
 			return null;
 		}
 	}
+
+	public static String getDate(Date date) {
+		if (date != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			return sdf.format(date);
+		} else {
+			return null;
+		}
+	}
 }
