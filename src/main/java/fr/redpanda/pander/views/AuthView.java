@@ -23,28 +23,12 @@ import fr.redpanda.pander.utils.views.ViewUtils;
  */
 public class AuthView extends BaseView {
 
-	private JPanel contentPane;
 	private JTextField txtLogin;
 	private JPasswordField txtPassword;
 	private JButton btnPassword;
 	private JButton btnValidate;
 	private JButton btnCandidate;
 	private JButton btnCompany;
-
-	/**
-	 * @return the contentPane
-	 */
-	public JPanel getContentPane() {
-		return contentPane;
-	}
-
-	/**
-	 * @param contentPane
-	 *            the contentPane to set
-	 */
-	public void setContentPane(JPanel contentPane) {
-		this.contentPane = contentPane;
-	}
 
 	/**
 	 * @return the txtLogin
