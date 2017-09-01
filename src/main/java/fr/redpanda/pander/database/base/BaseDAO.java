@@ -222,6 +222,7 @@ public abstract class BaseDAO implements IDAOBase {
 			if (rs.next()) {
 				entity = parse(rs);
 			}
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -241,6 +242,7 @@ public abstract class BaseDAO implements IDAOBase {
 			while (rs.next()) {
 				entities.add(parse(rs));
 			}
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

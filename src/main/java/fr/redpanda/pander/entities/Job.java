@@ -10,13 +10,14 @@ import java.util.Date;
 import java.util.List;
 
 import fr.redpanda.pander.entities.base.BaseEntity;
+import fr.redpanda.pander.entities.base.IBaseSkillEntity;
 
 /**
  * 
  * @author Patrice SCHOCH
  *
  */
-public class Job extends BaseEntity {
+public class Job extends BaseEntity implements IBaseSkillEntity {
 
 	private String name;
 	private String presentation;
@@ -90,6 +91,7 @@ public class Job extends BaseEntity {
 	/**
 	 * @return the skills
 	 */
+	@Override
 	public List<Skill> getSkills() {
 		return skills;
 	}
@@ -98,6 +100,7 @@ public class Job extends BaseEntity {
 	 * @param skills
 	 *            the skills to set
 	 */
+	@Override
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
 	}

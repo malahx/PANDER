@@ -56,7 +56,7 @@ public class SkillDAO extends BaseDAO {
 	 * @return a {@link BaseEntity}
 	 */
 	public BaseEntity get(String name) {
-		ResultSet rs = query("SELECT * FROM " + TABLE + " WHERE " + NAME + " = " + name);
+		ResultSet rs = query("SELECT * FROM " + TABLE + " WHERE " + NAME + " = '" + name + "'");
 		BaseEntity entity = null;
 		try {
 			if (rs.next()) {
@@ -82,7 +82,6 @@ public class SkillDAO extends BaseDAO {
 			skill.setId(rs.getDouble(ID));
 			skill.setName(rs.getString(NAME));
 			skill.setType(StringManager.getTypeSkillFrom(rs.getString(TYPE)));
-			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			skill = null;
@@ -130,7 +129,7 @@ public class SkillDAO extends BaseDAO {
 	 */
 	@Override
 	public String fields() {
-		return "'" + NAME + "','" + TYPE + "'";
+		return "" + NAME + "," + TYPE + "";
 	}
 
 	/*
@@ -144,7 +143,7 @@ public class SkillDAO extends BaseDAO {
 	public boolean checkFields(BaseEntity entity) {
 
 		Skill skill = (Skill) entity;
-		if (skill.getName() == null) {
+		if (skill == null || skill.getName() == null) {
 			return false;
 		}
 		return true;

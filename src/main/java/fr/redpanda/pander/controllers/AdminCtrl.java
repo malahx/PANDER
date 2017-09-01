@@ -5,7 +5,6 @@ package fr.redpanda.pander.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.event.DocumentEvent;
@@ -76,7 +75,7 @@ public class AdminCtrl extends BaseCtrl {
 			public void actionPerformed(ActionEvent e) {
 
 				String[] title = { "Nom", "Type" };
-				view.updateDatas(title, new ArrayList<Object>());
+				view.updateDatas(title, SkillDAO.getInstance().get());
 				view.getTglbtnUsers().setSelected(false);
 				view.getBtnBtn1().setText("Ajouter compétence");
 				view.getTxtSkill().setText("");

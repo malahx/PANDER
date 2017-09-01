@@ -37,13 +37,15 @@ public class AuthCtrl extends BaseCtrl {
 		BaseEntity loggedUser = UserDAO.getInstance().get(email, password);
 		if (loggedUser != null) {
 			getViewDatas().put(TypeData.USER, loggedUser);
-			if (loggedUser instanceof Candidate || loggedUser instanceof Company) {
+			if (loggedUser instanceof Candidate) {
 				ViewsManager.getInstance().next(new HomeCtrl(frame));
-				return;
+				CandidateDAO.getInstance().getSkills((Candidate) loggedUser);
+			} else if (loggedUser instanceof Company) {
+				ViewsManager.getInstance().next(new HomeCtrl(frame));
+				//CompanyDAO.getInstance().getJobs((Company) loggedUser);
 			} else if (loggedUser instanceof Admin) {
 				ViewsManager.getInstance().next(new AdminCtrl(frame));
 			}
-			return;
 		}
 
 	}

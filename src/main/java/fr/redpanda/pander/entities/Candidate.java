@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import fr.redpanda.pander.entities.base.IBaseSkillEntity;
+
 /**
  * @author Gwénolé LE HENAFF
  *
  */
-public class Candidate extends User {
+public class Candidate extends User implements IBaseSkillEntity {
 
 	private String firstname;
 	private String lastname;
@@ -159,17 +161,12 @@ public class Candidate extends User {
 		this.birthdate = birthdate;
 	}
 
-	/**
-	 * @return the skills
-	 */
+	@Override
 	public List<Skill> getSkills() {
 		return skills;
 	}
 
-	/**
-	 * @param skills
-	 *            the skills to set
-	 */
+	@Override
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
 	}

@@ -5,14 +5,21 @@ package fr.redpanda.pander.controllers;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.event.DocumentEvent;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 import fr.redpanda.pander.database.CandidateDAO;
+import fr.redpanda.pander.database.SkillDAO;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
+import fr.redpanda.pander.entities.TypeSkill;
 import fr.redpanda.pander.entities.User;
+import fr.redpanda.pander.entities.base.BaseEntity;
+import fr.redpanda.pander.utils.Utils;
 import fr.redpanda.pander.utils.constant.TypeData;
 import fr.redpanda.pander.utils.date.DateConverter;
 import fr.redpanda.pander.views.BaseView;
@@ -55,7 +62,7 @@ public class ProfileCtrl extends MainCtrl {
 	 */
 	@Override
 	public void initView() {
-		
+
 		super.initView();
 		MainView view = (MainView) this.view;
 		view.getNavbar().getTglbtnProfile().setSelected(true);
@@ -67,11 +74,15 @@ public class ProfileCtrl extends MainCtrl {
 			cview.getTextCertificate2().setText(cuser.getCertificate2());
 			cview.getTextBirthday().setText(DateConverter.getDate(cuser.getBirthdate()));
 			cview.getTextTransport().setText(cuser.getTransport());
+			String[] title = { "Activer", "Compétence" };
+			List<BaseEntity> skills = SkillDAO.getInstance().get();
+			cview.updateDatas(cview.getTableSoftSkills(), title, Utils.getSkills(skills, TypeSkill.SOFT), cuser);
+			cview.updateDatas(cview.getTableTechSkills(), title, Utils.getSkills(skills, TypeSkill.TECH), cuser);
 		} else if (user instanceof Company && view instanceof CompanyView) {
 			CompanyView cview = (CompanyView) this.view;
 			Company cuser = (Company) user;
 		}
-		
+
 	}
 
 	/*
@@ -82,6 +93,7 @@ public class ProfileCtrl extends MainCtrl {
 	@Override
 	public void initEvent() {
 		super.initEvent();
+		User user = (User) getViewDatas().get(TypeData.USER);
 		DocListener updateProfile = new DocListener() {
 
 			@Override
@@ -95,6 +107,13 @@ public class ProfileCtrl extends MainCtrl {
 			cview.getTextCertificate2().getDocument().addDocumentListener(updateProfile);
 			cview.getTextBirthday().getDocument().addDocumentListener(updateProfile);
 			cview.getTextTransport().getDocument().addDocumentListener(updateProfile);
+			cview.getTableTechSkills().getModel().addTableModelListener(new TableModelListener() {
+
+				@Override
+				public void tableChanged(TableModelEvent e) {
+					CandidateDAO.getInstance().insertSkills((Candidate) user);
+				}
+			});
 		} else if (view instanceof CompanyView) {
 			CompanyView cview = (CompanyView) this.view;
 		}
