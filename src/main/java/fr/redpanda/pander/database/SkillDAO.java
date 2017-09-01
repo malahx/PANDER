@@ -34,6 +34,8 @@ public class SkillDAO extends BaseDAO {
 		super(TABLE, ID);
 	}
 
+	protected static SkillDAO instance = null;
+
 	/**
 	 * get and instance the singleton
 	 * 
@@ -43,7 +45,7 @@ public class SkillDAO extends BaseDAO {
 		if (instance == null) {
 			instance = new SkillDAO();
 		}
-		return (SkillDAO) instance;
+		return instance;
 	}
 
 	/**
@@ -53,7 +55,7 @@ public class SkillDAO extends BaseDAO {
 	 *            the name to search
 	 * @return a {@link BaseEntity}
 	 */
-	public BaseEntity getByName(String name) {
+	public BaseEntity get(String name) {
 		ResultSet rs = query("SELECT * FROM " + TABLE + " WHERE " + NAME + " = " + name);
 		BaseEntity entity = null;
 		try {
@@ -158,7 +160,7 @@ public class SkillDAO extends BaseDAO {
 	 */
 	@Override
 	public boolean checkUniqueFields(BaseEntity entity) {
-		return getByName(((Skill) entity).getName()) != null;
+		return get(((Skill) entity).getName()) != null;
 	}
 
 }

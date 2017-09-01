@@ -6,7 +6,7 @@ package fr.redpanda.pander.database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import fr.redpanda.pander.database.base.BaseDAO;
+import fr.redpanda.pander.database.base.BaseUserDAO;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.base.BaseEntity;
 
@@ -14,7 +14,7 @@ import fr.redpanda.pander.entities.base.BaseEntity;
  * @author Gwénolé LE HENAFF
  *
  */
-public class CompanyDAO extends BaseDAO {
+public class CompanyDAO extends BaseUserDAO {
 
 	/** the table */
 	public static final String TABLE = "company";
@@ -39,6 +39,8 @@ public class CompanyDAO extends BaseDAO {
 		super(TABLE, ID);
 	}
 
+	protected static CompanyDAO instance = null;
+
 	/**
 	 * get and instance the singleton
 	 * 
@@ -48,7 +50,7 @@ public class CompanyDAO extends BaseDAO {
 		if (instance == null) {
 			instance = new CompanyDAO();
 		}
-		return (CompanyDAO) instance;
+		return instance;
 	}
 
 	/*
@@ -59,7 +61,7 @@ public class CompanyDAO extends BaseDAO {
 	@Override
 	public BaseEntity parse(ResultSet rs) {
 
-		Company company = new Company();
+		Company company = (Company) super.parse(new Company(), rs);
 		try {
 			company.setId(rs.getDouble(ID));
 			company.setName(rs.getString(NAME));

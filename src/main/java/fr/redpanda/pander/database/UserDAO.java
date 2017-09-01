@@ -5,9 +5,13 @@ package fr.redpanda.pander.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import fr.redpanda.pander.database.base.BaseDAO;
+import fr.redpanda.pander.entities.Admin;
+import fr.redpanda.pander.entities.Role;
 import fr.redpanda.pander.entities.Skill;
 import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.entities.base.BaseEntity;
@@ -39,6 +43,8 @@ public class UserDAO extends BaseDAO {
 		super(TABLE, ID);
 	}
 
+	protected static UserDAO instance = null;
+
 	/**
 	 * get and instance the singleton
 	 * 
@@ -48,10 +54,34 @@ public class UserDAO extends BaseDAO {
 		if (instance == null) {
 			instance = new UserDAO();
 		}
-		return (UserDAO) instance;
+		return instance;
 	}
 
-	public BaseEntity getByEmail(String email) {
+	public BaseEntity get(String email, String password) {
+		ResultSet rs = query(
+				"SELECT * FROM " + TABLE + " u LEFT JOIN " + CompanyDAO.TABLE + " co ON co." + CompanyDAO.ID + " = u."
+						+ ID + " LEFT JOIN " + CandidateDAO.TABLE + " ca ON ca." + CandidateDAO.ID + " = u." + ID
+						+ " WHERE u." + EMAIL + " = '" + email + "' AND u." + PASSWORD + " = '" + password + "'");
+		BaseEntity entity = null;
+		try {
+			if (rs.next()) {
+				String role = rs.getString(ROLE);
+				if (role.equals(Role.CANDIDATE.toString())) {
+					entity = CandidateDAO.getInstance().parse(rs);
+				} else if (role.equals(Role.COMPANY.toString())) {
+					entity = CompanyDAO.getInstance().parse(rs);
+				} else if (role.equals(Role.ADMIN.toString())) {
+					entity = parse(new Admin(), rs);
+				}
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	public BaseEntity get(String email) {
 		ResultSet rs = query("SELECT * FROM " + TABLE + " WHERE " + EMAIL + " = " + email);
 		BaseEntity entity = null;
 		try {
@@ -82,7 +112,6 @@ public class UserDAO extends BaseDAO {
 			user.setDescription(rs.getString(DESCRIPTION));
 			user.setCreatedAt(rs.getTimestamp(CREATED_AT));
 			user.setUpdatedAt(rs.getTimestamp(UPDATED_AT));
-			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -100,6 +129,32 @@ public class UserDAO extends BaseDAO {
 			e.printStackTrace();
 		}
 		return entity;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.database.IDAOBase#parse(java.sql.ResultSet)
+	 */
+	@Override
+	public BaseEntity parse(ResultSet rs) {
+
+		BaseEntity entity = null;
+		String role;
+		try {
+			role = rs.getString(ROLE);
+			if (role.equals(Role.CANDIDATE.toString())) {
+				entity = CandidateDAO.getInstance().parse(rs);
+			} else if (role.equals(Role.COMPANY.toString())) {
+				entity = CompanyDAO.getInstance().parse(rs);
+			} else if (role.equals(Role.ADMIN.toString())) {
+				entity = parse(new Admin(), rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return entity;
+
 	}
 
 	/*
@@ -210,27 +265,7 @@ public class UserDAO extends BaseDAO {
 	 */
 	@Override
 	public boolean checkUniqueFields(BaseEntity entity) {
-		return getByEmail(((User) entity).getEmail()) != null;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.redpanda.pander.database.IDAOBase#parse(java.sql.ResultSet)
-	 */
-	@Override
-	public BaseEntity parse(ResultSet resultSet) {
-		throw new UnsupportedOperationException("Not supported on UserDAO.");
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.redpanda.pander.database.BaseDAO#get(double)
-	 */
-	@Override
-	public BaseEntity get(double id) {
-		throw new UnsupportedOperationException("Not supported on UserDAO.");
+		return get(((User) entity).getEmail()) != null;
 	}
 
 	/*
@@ -260,6 +295,30 @@ public class UserDAO extends BaseDAO {
 		User user = (User) entity;
 		user.setUpdatedAt(new Date());
 		return super.update(entity);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.database.base.BaseDAO#get()
+	 */
+	@Override
+	public List<BaseEntity> get() {
+
+		ResultSet rs = query("SELECT * FROM " + TABLE + " LEFT JOIN " + CompanyDAO.TABLE
+				+ " ON " + CompanyDAO.TABLE + "." + CompanyDAO.ID + " = " + ID + " LEFT JOIN " + CandidateDAO.TABLE
+				+ " ON " + CandidateDAO.TABLE + "." + CandidateDAO.ID + " = " + ID);
+		List<BaseEntity> entities = new ArrayList<>();
+		try {
+			while (rs.next()) {
+				entities.add(parse(rs));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return entities;
+
 	}
 
 }

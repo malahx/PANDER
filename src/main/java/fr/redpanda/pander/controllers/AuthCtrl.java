@@ -9,9 +9,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.event.DocumentEvent;
 
+import fr.redpanda.pander.database.UserDAO;
+import fr.redpanda.pander.entities.Admin;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
-import fr.redpanda.pander.entities.User;
+import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.managers.ViewsManager;
 import fr.redpanda.pander.utils.PopupManager;
 import fr.redpanda.pander.utils.constant.TypeData;
@@ -25,18 +27,19 @@ import fr.redpanda.pander.views.models.DocListener;
 public class AuthCtrl extends BaseCtrl {
 
 	private void login(String email, String password) {
-		User loggedUser = null;//= UserDAO.getInstance().findBy(email, password);
+
+		BaseEntity loggedUser = UserDAO.getInstance().get(email, password);
 		if (loggedUser != null) {
-			System.out.println("logged");
 			getViewDatas().put(TypeData.USER, loggedUser);
 			if (loggedUser instanceof Candidate || loggedUser instanceof Company) {
 				ViewsManager.getInstance().next(new HomeCtrl(frame));
 				return;
+			} else if (loggedUser instanceof Admin) {
+				ViewsManager.getInstance().next(new AdminCtrl(frame));
 			}
-			ViewsManager.getInstance().next(new AdminCtrl(frame));
 			return;
 		}
-		System.out.println("not logged");
+
 	}
 
 	/**

@@ -55,6 +55,8 @@ public class CandidateDAO extends BaseUserDAO {
 		super(TABLE, ID);
 	}
 
+	protected static CandidateDAO instance = null;
+
 	/**
 	 * get and instance the singleton
 	 * 
@@ -64,7 +66,7 @@ public class CandidateDAO extends BaseUserDAO {
 		if (instance == null) {
 			instance = new CandidateDAO();
 		}
-		return (CandidateDAO) instance;
+		return instance;
 	}
 
 	/*
@@ -75,7 +77,7 @@ public class CandidateDAO extends BaseUserDAO {
 	@Override
 	public BaseEntity parse(ResultSet rs) {
 
-		Candidate candidate = new Candidate();
+		Candidate candidate = (Candidate) super.parse(new Candidate(), rs);
 		try {
 			candidate.setId(rs.getDouble(ID));
 			candidate.setFirstname(rs.getString(FIRSTNAME));
@@ -87,7 +89,6 @@ public class CandidateDAO extends BaseUserDAO {
 			candidate.setCertificate1(rs.getString(CERTIFICATE1));
 			candidate.setCertificate2(rs.getString(CERTIFICATE2));
 			candidate.setCv(rs.getString(CV));
-			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			candidate = null;
@@ -186,5 +187,5 @@ public class CandidateDAO extends BaseUserDAO {
 		return true;
 
 	}
-	
+
 }

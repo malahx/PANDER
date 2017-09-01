@@ -12,6 +12,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import fr.redpanda.pander.database.SkillDAO;
+import fr.redpanda.pander.database.UserDAO;
 import fr.redpanda.pander.entities.Skill;
 import fr.redpanda.pander.entities.TypeSkill;
 import fr.redpanda.pander.entities.User;
@@ -58,7 +60,7 @@ public class AdminCtrl extends BaseCtrl {
 
 				String[] title = { "Désactiver", "Email", "Mise à jour" };
 				view.getLblSubtitle().setText("Utilisateurs");
-				//view.updateDatas(title, UserDAO.getInstance().findAll());
+				view.updateDatas(title, UserDAO.getInstance().get());
 				view.getTglbtnSkills().setSelected(false);
 				view.getBtnBtn1().setText("Générer mot de passe");
 				view.getTxtSkill().setText("");
@@ -99,7 +101,7 @@ public class AdminCtrl extends BaseCtrl {
 							String password = StringManager.createString();
 							user.setPassword(password);
 							view.getTxtSkill().setText(password);
-							//UserDAO.getInstance().update(user);
+							UserDAO.getInstance().update(user);
 							model.fireTableDataChanged();
 							view.getTblTable().setRowSelectionInterval(selectedRow, selectedRow);
 						}
@@ -109,7 +111,7 @@ public class AdminCtrl extends BaseCtrl {
 					String text = view.getTxtSkill().getText();
 					if (text.length() > 0) {
 						Skill skill = new Skill(text, TypeSkill.TECH);
-						//SkillDAO.getInstance().create(skill);
+						SkillDAO.getInstance().insert(skill);
 						AdminTableModel model = (AdminTableModel) view.getTblTable().getModel();
 						model.getObjects().add(skill);
 						model.fireTableDataChanged();
@@ -127,12 +129,12 @@ public class AdminCtrl extends BaseCtrl {
 					AdminTableModel model = (AdminTableModel) view.getTblTable().getModel();
 					Object object = model.getObjects().get(selectedRow);
 					if (object instanceof User) {
-						//UserDAO.getInstance().delete((User) object);
+						UserDAO.getInstance().delete((User) object);
 						view.getBtnBtn1().setEnabled(false);
 					}
-//					if (object instanceof Skill) {
-//						// SkillDAO.getInstance().delete((Skill) object);
-//					}
+					if (object instanceof Skill) {
+						SkillDAO.getInstance().delete((Skill) object);
+					}
 					model.getObjects().remove(selectedRow);
 					model.fireTableDataChanged();
 				}

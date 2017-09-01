@@ -17,11 +17,11 @@ public interface IDAOBase {
 	/**
 	 * Parse a {@link ResultSet} to a {@link BaseEntity}
 	 * 
-	 * @param resultSet
+	 * @param rs
 	 *            the result set
 	 * @return the entity
 	 */
-	public BaseEntity parse(ResultSet resultSet);
+	public BaseEntity parse(ResultSet rs);
 
 	/**
 	 * Parse a {@link BaseEntity} to a {@link String} for SQL insert

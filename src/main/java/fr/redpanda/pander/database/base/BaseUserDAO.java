@@ -3,6 +3,8 @@
  */
 package fr.redpanda.pander.database.base;
 
+import java.sql.ResultSet;
+
 import fr.redpanda.pander.database.UserDAO;
 import fr.redpanda.pander.entities.base.BaseEntity;
 
@@ -22,6 +24,10 @@ public abstract class BaseUserDAO extends BaseDAO {
 	 */
 	public BaseUserDAO(String table, String id) {
 		super(table, id);
+	}
+
+	public BaseEntity parse(BaseEntity entity, ResultSet rs) {
+		return UserDAO.getInstance().parse(entity, rs);
 	}
 
 	/*
