@@ -205,8 +205,7 @@ public class UserDAO extends BaseDAO {
 		result += POSTCODE + " = '" + (user.getPostcode() == null ? "" : user.getPostcode()) + "', ";
 		result += CITY + " = '" + (user.getCity() == null ? "" : user.getCity()) + "', ";
 		result += PHOTO + " = '" + (user.getPhoto() == null ? "" : user.getPhoto()) + "', ";
-		result += DESCRIPTION  + " = '" + (user.getDescription() == null ? "" : user.getDescription())
-				+ "', ";
+		result += DESCRIPTION + " = '" + (user.getDescription() == null ? "" : user.getDescription()) + "', ";
 		result += CREATED_AT + " = '" + DateConverter.getMySqlDatetime(user.getCreatedAt()) + "', ";
 		result += UPDATED_AT + " = '" + DateConverter.getMySqlDatetime(user.getUpdatedAt()) + "'";
 		return result;
