@@ -160,16 +160,16 @@ public class CandidateDAO extends BaseUserDAO {
 	public String fields() {
 
 		String result = "";
-		result += "'" + ID + "',";
-		result += "'" + FIRSTNAME + "',";
-		result += "'" + LASTNAME + "',";
-		result += "'" + BIRTHDATE + "',";
-		result += "'" + TRANSPORT + "',";
-		result += "'" + LINK1 + "',";
-		result += "'" + LINK2 + "',";
-		result += "'" + CERTIFICATE1 + "',";
-		result += "'" + CERTIFICATE2 + "',";
-		result += "'" + CV + "'";
+		result += ID + ",";
+		result += FIRSTNAME + ",";
+		result += LASTNAME + ",";
+		result += BIRTHDATE + ",";
+		result += TRANSPORT + ",";
+		result += LINK1 + ",";
+		result += LINK2 + ",";
+		result += CERTIFICATE1 + ",";
+		result += CERTIFICATE2 + ",";
+		result += CV;
 		return result;
 
 	}

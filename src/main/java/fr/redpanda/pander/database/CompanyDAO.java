@@ -63,7 +63,7 @@ public class CompanyDAO extends BaseUserDAO {
 
 		Company company = (Company) super.parse(new Company(), rs);
 		try {
-			company.setId(rs.getDouble(ID));
+			//company.setId(rs.getDouble(ID));
 			company.setName(rs.getString(NAME));
 			company.setSiret(rs.getString(SIRET));
 			company.setContact(rs.getString(CONTACT));
@@ -89,11 +89,11 @@ public class CompanyDAO extends BaseUserDAO {
 
 		String result = "";
 		Company company = (Company) entity;
-		result += "'" + company.getId() + "',";
-		result += "'" + company.getName() + "',";
-		result += "'" + company.getSiret() + "',";
-		result += "'" + company.getContact() + "',";
-		result += "'" + company.getLink() + "'";
+		result += company.getId() + ",";
+		result += "'" + (company.getName() == null ? "" : company.getName()) + "',";
+		result += "'" + (company.getSiret() == null ? "" : company.getSiret()) + "',";
+		result += "'" + (company.getContact() == null ? "" : company.getContact()) + "',";
+		result += "'" + (company.getLink() == null ? "" : company.getLink()) + "'";
 		return result;
 	}
 
@@ -109,10 +109,10 @@ public class CompanyDAO extends BaseUserDAO {
 
 		String result = "";
 		Company company = (Company) entity;
-		result += NAME + " = '" + company.getName() + "',";
-		result += SIRET + " = '" + company.getSiret() + "',";
-		result += CONTACT + " = '" + company.getContact() + "',";
-		result += LINK + " = '" + company.getLink() + "'";
+		result += NAME + " = '" + (company.getName() == null ? "" : company.getName()) + "',";
+		result += SIRET + " = '" + (company.getSiret() == null ? "" : company.getSiret()) + "',";
+		result += CONTACT + " = '" + (company.getContact() == null ? "" : company.getContact()) + "',";
+		result += LINK + " = '" + (company.getLink() == null ? "" : company.getLink()) + "'";
 		return result;
 
 	}
@@ -126,11 +126,11 @@ public class CompanyDAO extends BaseUserDAO {
 	public String fields() {
 
 		String result = "";
-		result += "'" + ID + "',";
-		result += "'" + NAME + "',";
-		result += "'" + SIRET + "',";
-		result += "'" + CONTACT + "',";
-		result += "'" + LINK + "'";
+		result += ID + ",";
+		result += NAME + ",";
+		result += SIRET + ",";
+		result += CONTACT + ",";
+		result += LINK;
 		return result;
 
 	}

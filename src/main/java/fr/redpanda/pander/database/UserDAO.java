@@ -81,7 +81,7 @@ public class UserDAO extends BaseDAO {
 	}
 
 	public BaseEntity get(String email) {
-		ResultSet rs = query("SELECT * FROM " + TABLE + " WHERE " + EMAIL + " = " + email);
+		ResultSet rs = query("SELECT * FROM " + TABLE + " WHERE " + EMAIL + " = '" + email + "'");
 		BaseEntity entity = null;
 		try {
 			if (rs.next()) {
@@ -168,16 +168,16 @@ public class UserDAO extends BaseDAO {
 
 		String result = "";
 		User user = (User) entity;
-		result += "'" + user.getEmail() + "',";
-		result += "'" + user.getPassword() + "',";
-		result += "'" + user.getRole() + "',";
-		result += user.isDisabled() ? 1 : 0;
-		result += "'" + user.getPhone() + "',";
-		result += "'" + user.getAddress() + "',";
-		result += "'" + user.getPostcode() + "',";
-		result += "'" + user.getCity() + "',";
-		result += "'" + user.getPhoto() + "',";
-		result += "'" + user.getDescription() + "',";
+		result += "'" + (user.getEmail() == null ? "" : user.getEmail()) + "',";
+		result += "'" + (user.getPassword() == null ? "" : user.getPassword()) + "',";
+		result += "'" + (user.getRole() == null ? "" : user.getRole().toString()) + "',";
+		result += (!user.isDisabled() ? 0 : 1) + ",";
+		result += "'" + (user.getPhone() == null ? "" : user.getPhone()) + "',";
+		result += "'" + (user.getAddress() == null ? "" : user.getAddress()) + "',";
+		result += "'" + (user.getPostcode() == null ? "" : user.getPostcode()) + "',";
+		result += "'" + (user.getCity() == null ? "" : user.getCity()) + "',";
+		result += "'" + (user.getPhoto() == null ? "" : user.getPhoto()) + "',";
+		result += "'" + (user.getDescription() == null ? "" : user.getDescription()) + "',";
 		result += "'" + DateConverter.getMySqlDatetime(user.getCreatedAt()) + "',";
 		result += "'" + DateConverter.getMySqlDatetime(user.getUpdatedAt()) + "'";
 		return result;
@@ -221,18 +221,18 @@ public class UserDAO extends BaseDAO {
 	public String fields() {
 
 		String result = "";
-		result += "'" + EMAIL + "',";
-		result += "'" + PASSWORD + "',";
-		result += "'" + ROLE + "',";
-		result += "'" + DISABLED + "',";
-		result += "'" + PHONE + "',";
-		result += "'" + ADDRESS + "',";
-		result += "'" + POSTCODE + "',";
-		result += "'" + CITY + "',";
-		result += "'" + PHOTO + "',";
-		result += "'" + DESCRIPTION + "',";
-		result += "'" + CREATED_AT + "',";
-		result += "'" + UPDATED_AT + "'";
+		result += EMAIL + ",";
+		result += PASSWORD + ",";
+		result += ROLE + ",";
+		result += DISABLED + ",";
+		result += PHONE + ",";
+		result += ADDRESS + ",";
+		result += POSTCODE + ",";
+		result += CITY + ",";
+		result += PHOTO + ",";
+		result += DESCRIPTION + ",";
+		result += CREATED_AT + ",";
+		result += UPDATED_AT;
 		return result;
 
 	}

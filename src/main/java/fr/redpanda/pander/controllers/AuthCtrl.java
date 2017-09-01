@@ -16,6 +16,7 @@ import fr.redpanda.pander.database.UserDAO;
 import fr.redpanda.pander.entities.Admin;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
+import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.managers.ViewsManager;
 import fr.redpanda.pander.utils.PopupManager;
@@ -194,27 +195,27 @@ public class AuthCtrl extends BaseCtrl {
 					candidate.setLastname(registerView.getTextName2().getText());
 					candidate.setEmail(registerView.getTextEmail().getText());
 					candidate.setPassword(registerView.getTextEmail().getText());
-					System.out.println(CandidateDAO.getInstance().create(candidate));
+					CandidateDAO.getInstance().insert(candidate);
 				} else if (user instanceof Company) {
 					Company company = (Company) user;
 					company.setName(registerView.getTextName1().getText());
 					company.setSiret(registerView.getTextName2().getText());
 					company.setEmail(registerView.getTextEmail().getText());
 					company.setPassword(registerView.getTextEmail().getText());
-					CompanyDAO.getInstance().create(company);
+					CompanyDAO.getInstance().insert(company);
 				}
 				registerFrame.dispose();
 			}
 		});
-		
+
 		registerView.getBtnCancel().addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				registerFrame.dispose();
 			}
 		});
-		
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
