@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS job(
         name          Varchar(100) NOT NULL,
         presentation  Text NULL,
         link          Varchar(255) NULL,
-        contactEmail  Varchar(255) NULL,
+        contact  Varchar(255) NULL,
         created_at    Datetime NULL,
         updated_at    Datetime NULL,
         id_company    Bigint NOT NULL,
