@@ -6,7 +6,6 @@ package fr.redpanda.pander.views.models;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JTable;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.AbstractTableModel;
@@ -29,11 +28,6 @@ public class SkillTableModel extends AbstractTableModel {
 	private final List<BaseEntity> skills;
 	private final IBaseSkillEntity entity;
 	private final TableRowSorter<TableModel> sorter;
-	
-	public void updateDatas(JTable table, String[] title, List<BaseEntity> skills, IBaseSkillEntity entity) {
-		SkillTableModel model = new SkillTableModel(title, skills, entity);
-		table.setModel(model);
-	}
 
 	/**
 	 * @return the skills

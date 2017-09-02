@@ -5,6 +5,9 @@ package fr.redpanda.pander.databases;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import fr.redpanda.pander.databases.base.BaseDAO;
 import fr.redpanda.pander.databases.base.IBaseSkillDAO;
@@ -57,12 +60,22 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 	/** the job id on the job skill table */
 	private static final String ID_JOB = "id_job";
 
+	protected JobDAO() {
+		super(TABLE, ID);
+	}
+
+	protected static JobDAO instance = null;
+
 	/**
-	 * @param table
-	 * @param id
+	 * get and instance the singleton
+	 * 
+	 * @return the singleton
 	 */
-	protected JobDAO(String table, String id) {
-		super(table, id);
+	public static JobDAO getInstance() {
+		if (instance == null) {
+			instance = new JobDAO();
+		}
+		return instance;
 	}
 
 	/*
@@ -99,33 +112,32 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 				+ ",";
 		result += (job.getUpdatedAt() == null ? "NULL" : "'" + DateConverter.getMySqlDatetime(job.getUpdatedAt()) + "'")
 				+ ",";
-		result += company.getId();
+		result += String.valueOf(company.getId());
 		return result;
 	}
 
 	public BaseEntity insert(Job job, Company company) {
 		if (!checkExists(job) && checkFields(job)) {
+			job.setCreatedAt(new Date());
+			job.setUpdatedAt(new Date());
 			prepare(job, "INSERT INTO " + TABLE + " (" + fields() + ") VALUES (" + parse(job, company) + ")");
-			if (!company.getJobs().contains(job)) {
-				company.getJobs().add(job);
-			}
 		}
 		return job;
 	}
 
-	public BaseEntity get(Company company) {
+	public List<Job> get(Company company) {
 
 		ResultSet rs = query("SELECT * FROM " + TABLE + " WHERE " + ID_COMPANY + " = " + company.getId());
-		BaseEntity entity = null;
+		List<Job> jobs = new ArrayList<>();
 		try {
-			if (rs.next()) {
-				entity = parse(rs);
+			while (rs.next()) {
+				jobs.add((Job) parse(rs));
 			}
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return entity;
+		return jobs;
 
 	}
 
@@ -158,8 +170,8 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 		Job job = (Job) entity;
 		String result = NAME + " = '" + job.getName() + "',";
 		result += PRESENTATION + " = '" + job.getPresentation() + "',";
-		result += LINK + " = " + (job.getLink() == null ? "" : "'" + job.getLink()) + ",";
-		result += CONTACT + " = '" + (job.getContact() == null ? "" : "'" + job.getContact()) + "',";
+		result += LINK + " = '" + (job.getLink() == null ? "" : job.getLink()) + "',";
+		result += CONTACT + " = '" + (job.getContact() == null ? "" : job.getContact()) + "',";
 		result += CREATED_AT + " = "
 				+ (job.getCreatedAt() == null ? "NULL" : "'" + DateConverter.getMySqlDatetime(job.getCreatedAt()) + "'")
 				+ ",";
@@ -213,6 +225,20 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 	@Override
 	public BaseEntity insert(BaseEntity entity) {
 		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.databases.base.BaseDAO#update(fr.redpanda.pander.entities.
+	 * base.BaseEntity)
+	 */
+	@Override
+	public int update(BaseEntity entity) {
+		Job job = (Job) entity;
+		job.setUpdatedAt(new Date());
+		return super.update(entity);
 	}
 
 }
