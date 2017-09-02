@@ -14,6 +14,11 @@ import fr.redpanda.pander.entities.Skill;
 public interface IBaseSkillEntity {
 
 	/**
+	 * @return the id
+	 */
+	public double getId();
+
+	/**
 	 * @return the skills
 	 */
 	public List<Skill> getSkills();

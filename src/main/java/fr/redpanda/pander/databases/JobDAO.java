@@ -7,16 +7,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import fr.redpanda.pander.databases.base.BaseDAO;
+import fr.redpanda.pander.databases.base.IBaseSkillDAO;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.Job;
+import fr.redpanda.pander.entities.Skill;
 import fr.redpanda.pander.entities.base.BaseEntity;
+import fr.redpanda.pander.entities.base.IBaseSkillEntity;
 import fr.redpanda.pander.utils.date.DateConverter;
 
 /**
  * @author Gwénolé LE HENAFF
  *
  */
-public class JobDAO extends BaseDAO {
+public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 
 	/** the table */
 	public static final String TABLE = "job";
@@ -27,23 +30,32 @@ public class JobDAO extends BaseDAO {
 	/** the name field */
 	public static final String NAME = "name";
 
-	/** the name field */
+	/** the presentation field */
 	public static final String PRESENTATION = "presentation";
 
-	/** the name field */
+	/** the link field */
 	public static final String LINK = "link";
 
-	/** the name field */
+	/** the contact field */
 	public static final String CONTACT = "contact";
 
-	/** the name field */
+	/** the created at field */
 	public static final String CREATED_AT = "created_at";
 
-	/** the name field */
+	/** the updated at field */
 	public static final String UPDATED_AT = "updated_at";
 
-	/** the name field */
+	/** the company id field */
 	public static final String ID_COMPANY = "id_company";
+
+	/** the skill table */
+	private static final String TABLE_SKILL = "job_skill";
+
+	/** the skill id on the job skill table */
+	private static final String ID_SKILL = "id_skill";
+
+	/** the job id on the job skill table */
+	private static final String ID_JOB = "id_job";
 
 	/**
 	 * @param table
@@ -89,6 +101,48 @@ public class JobDAO extends BaseDAO {
 				+ ",";
 		result += company.getId();
 		return result;
+	}
+
+	public BaseEntity insert(Job job, Company company) {
+		if (!checkExists(job) && checkFields(job)) {
+			prepare(job, "INSERT INTO " + TABLE + " (" + fields() + ") VALUES (" + parse(job, company) + ")");
+			if (!company.getJobs().contains(job)) {
+				company.getJobs().add(job);
+			}
+		}
+		return job;
+	}
+
+	public BaseEntity get(Company company) {
+
+		ResultSet rs = query("SELECT * FROM " + TABLE + " WHERE " + ID_COMPANY + " = " + company.getId());
+		BaseEntity entity = null;
+		try {
+			if (rs.next()) {
+				entity = parse(rs);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return entity;
+
+	}
+
+	@Override
+	public IBaseSkillEntity getSkills(IBaseSkillEntity entity) {
+
+		ResultSet rs = query(
+				"SELECT " + ID_SKILL + " FROM " + TABLE_SKILL + " WHERE " + ID_JOB + " = " + entity.getId());
+		try {
+			while (rs.next()) {
+				entity.getSkills().add((Skill) SkillDAO.getInstance().get(rs.getDouble(1)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return entity;
+
 	}
 
 	/*
@@ -137,12 +191,28 @@ public class JobDAO extends BaseDAO {
 		return ((Job) entity).getName() != null;
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.databases.base.IDAOBase#parse(fr.redpanda.pander.entities.base.BaseEntity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.databases.base.IDAOBase#parse(fr.redpanda.pander.entities.
+	 * base.BaseEntity)
 	 */
 	@Override
 	public String parse(BaseEntity entity) {
-		 throw new UnsupportedOperationException("Not supported yet.");
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.database.IDAOBase#insert(fr.redpanda.pander.entities.base.
+	 * BaseEntity)
+	 */
+	@Override
+	public BaseEntity insert(BaseEntity entity) {
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 }

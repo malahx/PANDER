@@ -17,13 +17,13 @@ import fr.redpanda.pander.utils.file.FileManager;
  * @author Gwénolé LE HENAFF
  *
  */
-public class DBManager {
+public class DAOManager {
 
 	private static final String DB_SQL = "pander.sql";
 	private static final String FILE_CONFIG = "dbconfig";
 	private static final String PATH_CONFIG = "config";
 
-	protected DBManager() {
+	protected DAOManager() {
 		connectCrea();
 		if (canConnect()) {
 			connect();
@@ -33,11 +33,11 @@ public class DBManager {
 		}
 	}
 
-	protected static DBManager instance = null;
+	protected static DAOManager instance = null;
 
-	public static DBManager getInstance() {
+	public static DAOManager getInstance() {
 		if (instance == null) {
-			instance = new DBManager();
+			instance = new DAOManager();
 		}
 		return instance;
 	}

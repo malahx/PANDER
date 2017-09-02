@@ -10,14 +10,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.redpanda.pander.databases.DBManager;
+import fr.redpanda.pander.databases.DAOManager;
 import fr.redpanda.pander.entities.base.BaseEntity;
 
 /**
  * @author Gwénolé LE HENAFF
  *
  */
-public abstract class BaseDAO implements IDAOBase {
+public abstract class BaseDAO implements IBaseDAO {
 	
 	/** the table to use */
 	protected String table;
@@ -63,7 +63,7 @@ public abstract class BaseDAO implements IDAOBase {
 		ResultSet rs = null;
 
 		try {
-			Statement statement = DBManager.getInstance().getConnection().createStatement();
+			Statement statement = DAOManager.getInstance().getConnection().createStatement();
 			rs = statement.executeQuery(request);
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -82,7 +82,7 @@ public abstract class BaseDAO implements IDAOBase {
 	public BaseEntity prepare(BaseEntity entity, String request) {
 
 		try {
-			PreparedStatement prepare = DBManager.getInstance().getConnection().prepareStatement(request,
+			PreparedStatement prepare = DAOManager.getInstance().getConnection().prepareStatement(request,
 					Statement.RETURN_GENERATED_KEYS);
 			prepare.executeUpdate();
 			ResultSet generatedKeys = prepare.getGeneratedKeys();
@@ -108,7 +108,7 @@ public abstract class BaseDAO implements IDAOBase {
 
 		int result = 0;
 		try {
-			Statement statement = DBManager.getInstance().getConnection().createStatement();
+			Statement statement = DAOManager.getInstance().getConnection().createStatement();
 			result = statement.executeUpdate(request);
 			statement.close();
 		} catch (SQLException e) {

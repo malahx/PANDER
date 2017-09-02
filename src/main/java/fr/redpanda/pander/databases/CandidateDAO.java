@@ -5,20 +5,20 @@ package fr.redpanda.pander.databases;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import fr.redpanda.pander.databases.base.BaseUserDAO;
+import fr.redpanda.pander.databases.base.IBaseSkillDAO;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Skill;
 import fr.redpanda.pander.entities.base.BaseEntity;
+import fr.redpanda.pander.entities.base.IBaseSkillEntity;
 import fr.redpanda.pander.utils.date.DateConverter;
 
 /**
  * @author Gwénolé LE HENAFF
  *
  */
-public class CandidateDAO extends BaseUserDAO {
+public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 
 	/** the table */
 	public static final String TABLE = "candidate";
@@ -76,20 +76,19 @@ public class CandidateDAO extends BaseUserDAO {
 		return instance;
 	}
 
-	public Candidate getSkills(Candidate candidate) {
+	@Override
+	public IBaseSkillEntity getSkills(IBaseSkillEntity entity) {
 
-		List<Skill> skills = new ArrayList<>();
 		ResultSet rs = query(
-				"SELECT " + ID_SKILL + " FROM " + TABLE_SKILL + " WHERE " + ID_CANDIDATE + " = " + candidate.getId());
+				"SELECT " + ID_SKILL + " FROM " + TABLE_SKILL + " WHERE " + ID_CANDIDATE + " = " + entity.getId());
 		try {
 			while (rs.next()) {
-				skills.add((Skill) SkillDAO.getInstance().get(rs.getDouble(1)));
+				entity.getSkills().add((Skill) SkillDAO.getInstance().get(rs.getDouble(1)));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		candidate.setSkills(skills);
-		return candidate;
+		return entity;
 
 	}
 

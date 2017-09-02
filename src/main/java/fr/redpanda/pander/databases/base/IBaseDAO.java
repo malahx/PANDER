@@ -12,7 +12,7 @@ import fr.redpanda.pander.entities.base.BaseEntity;
  * @author Gwénolé LE HENAFF
  *
  */
-public interface IDAOBase {
+public interface IBaseDAO {
 
 	/**
 	 * Parse a {@link ResultSet} to a {@link BaseEntity}
