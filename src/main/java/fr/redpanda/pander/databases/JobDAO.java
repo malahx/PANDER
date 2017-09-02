@@ -241,4 +241,49 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 		return super.update(entity);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.databases.base.BaseDAO#delete(fr.redpanda.pander.entities.
+	 * base.BaseEntity)
+	 */
+	@Override
+	public int delete(BaseEntity entity) {
+		deleteSkills((IBaseSkillEntity) entity);
+		return super.delete(entity);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.databases.base.BaseDAO#delete()
+	 */
+	@Override
+	public int delete() {
+		deleteSkills();
+		return super.delete();
+	}
+
+	@Override
+	public int insertSkills(IBaseSkillEntity entity) {
+		int result = 0;
+		deleteSkills(entity);
+		for (Skill skill : entity.getSkills()) {
+			result += execute("INSERT INTO " + TABLE_SKILL + " (" + ID_JOB + "," + ID_SKILL + ") VALUES ("
+					+ entity.getId() + "," + skill.getId() + ")");
+		}
+		return result;
+	}
+
+	@Override
+	public int deleteSkills(IBaseSkillEntity entity) {
+		return execute("DELETE FROM " + TABLE_SKILL + " WHERE " + ID_JOB + " = " + entity.getId());
+	}
+
+	@Override
+	public int deleteSkills() {
+		return execute("DELETE FROM " + TABLE_SKILL);
+	}
+
 }

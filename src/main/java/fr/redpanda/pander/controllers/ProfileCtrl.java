@@ -15,6 +15,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 
 import fr.redpanda.pander.controllers.base.MainCtrl;
 import fr.redpanda.pander.databases.CandidateDAO;
@@ -90,6 +91,9 @@ public class ProfileCtrl extends MainCtrl {
 		CompanyView cview = (CompanyView) this.view;
 		Company cuser = (Company) user;
 		cuser.setJobs(JobDAO.getInstance().get(cuser));
+		for (Job job : cuser.getJobs()) {
+			JobDAO.getInstance().getSkills(job);
+		}
 		cview.getLstJob().setModel(new JobListModel(cuser));
 	}
 
@@ -130,6 +134,7 @@ public class ProfileCtrl extends MainCtrl {
 	private void initCompanyEvent(User user) {
 		CompanyView cview = (CompanyView) this.view;
 		Company cuser = (Company) user;
+		List<BaseEntity> skills = SkillDAO.getInstance().get();
 
 		DocListener updateJob = new DocListener() {
 
@@ -169,7 +174,6 @@ public class ProfileCtrl extends MainCtrl {
 					loadJob(job, cview);
 
 					String[] title = { "Activer", "Compétence" };
-					List<BaseEntity> skills = SkillDAO.getInstance().get();
 					SkillTableModel softSkillsModel = new SkillTableModel(title,
 							Utils.getSkills(skills, TypeSkill.SOFT), job);
 					SkillTableModel techSkillsModel = new SkillTableModel(title,
@@ -178,6 +182,22 @@ public class ProfileCtrl extends MainCtrl {
 					cview.getTblSoftSkills().setRowSorter(softSkillsModel.getSorter());
 					cview.getTblTechSkills().setModel(techSkillsModel);
 					cview.getTblTechSkills().setRowSorter(techSkillsModel.getSorter());
+
+					cview.getTblSoftSkills().getModel().addTableModelListener(new TableModelListener() {
+
+						@Override
+						public void tableChanged(TableModelEvent e) {
+							JobDAO.getInstance().insertSkills(cview.getLstJob().getSelectedValue());
+						}
+					});
+
+					cview.getTblTechSkills().getModel().addTableModelListener(new TableModelListener() {
+
+						@Override
+						public void tableChanged(TableModelEvent e) {
+							JobDAO.getInstance().insertSkills(cview.getLstJob().getSelectedValue());
+						}
+					});
 				}
 			}
 		});
@@ -198,6 +218,7 @@ public class ProfileCtrl extends MainCtrl {
 					Job job = cview.getLstJob().getSelectedValue();
 					((JobListModel) cview.getLstJob().getModel()).remove(job);
 					JobDAO.getInstance().delete(job);
+					resetJob(cview);
 				}
 
 			}
@@ -240,6 +261,14 @@ public class ProfileCtrl extends MainCtrl {
 				CandidateDAO.getInstance().insertSkills((Candidate) user);
 			}
 		});
+
+		cview.getTableSoftSkills().getModel().addTableModelListener(new TableModelListener() {
+
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				CandidateDAO.getInstance().insertSkills((Candidate) user);
+			}
+		});
 	}
 
 	private void loadJob(Job job, CompanyView view) {
@@ -265,6 +294,8 @@ public class ProfileCtrl extends MainCtrl {
 		view.getTxtInfos().setText("");
 		view.getTxtLink().setText("");
 		view.getTxtName().setText("");
+		view.getTblSoftSkills().setModel(new DefaultTableModel());
+		view.getTblTechSkills().setModel(new DefaultTableModel());
 	}
 
 	/**

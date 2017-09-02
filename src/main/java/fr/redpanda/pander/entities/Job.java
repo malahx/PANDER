@@ -170,6 +170,7 @@ public class Job extends BaseEntity implements IBaseSkillEntity {
 	 */
 	public Job() {
 		super();
+		this.setSkills(new ArrayList<>());
 	}
 
 	/*

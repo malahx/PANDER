@@ -64,7 +64,7 @@ public class SkillTableModel extends AbstractTableModel {
 		this.sorter = new TableRowSorter<TableModel>(this);
 		List<RowSorter.SortKey> sortKeys = new ArrayList<RowSorter.SortKey>();
 		for (int i = 0; i < title.length; i++) {
-			sortKeys.add(new RowSorter.SortKey(i, SortOrder.ASCENDING));
+			sortKeys.add(new RowSorter.SortKey(i, SortOrder.DESCENDING));
 		}
 		sorter.setSortKeys(sortKeys);
 		sorter.setSortsOnUpdates(true);

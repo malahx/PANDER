@@ -3,10 +3,12 @@
  */
 package fr.redpanda.pander.views;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -581,7 +583,7 @@ public class CompanyView extends MainView {
 		lblInfos = new JLabel("Infos :");
 		GridBagConstraints gbc_lblInfos = new GridBagConstraints();
 		gbc_lblInfos.anchor = GridBagConstraints.NORTHEAST;
-		gbc_lblInfos.insets = new Insets(0, 0, 0, 5);
+		gbc_lblInfos.insets = new Insets(0, 0, 5, 0);
 		gbc_lblInfos.gridx = 0;
 		gbc_lblInfos.gridy = 6;
 		pnlJobInfo.add(lblInfos, gbc_lblInfos);
@@ -589,6 +591,7 @@ public class CompanyView extends MainView {
 		txtInfos = new JTextArea();
 		txtInfos.setWrapStyleWord(true);
 		txtInfos.setLineWrap(true);
+		txtInfos.setBorder(BorderFactory.createLineBorder(Color.GRAY));
 		GridBagConstraints gbc_txtInfos = new GridBagConstraints();
 		gbc_txtInfos.fill = GridBagConstraints.BOTH;
 		gbc_txtInfos.ipady = 1;
@@ -604,9 +607,9 @@ public class CompanyView extends MainView {
 		gbc_pnlSkills.gridy = 1;
 		getPnlContent().add(pnlSkills, gbc_pnlSkills);
 		GridBagLayout gbl_pnlSkills = new GridBagLayout();
-		gbl_pnlSkills.columnWidths = new int[] { 0, 0, 0 };
+		gbl_pnlSkills.columnWidths = new int[] { 0, 0 };
 		gbl_pnlSkills.rowHeights = new int[] { 0 };
-		gbl_pnlSkills.columnWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
+		gbl_pnlSkills.columnWeights = new double[] { 0.5, 1 };
 		gbl_pnlSkills.rowWeights = new double[] { 1.0 };
 		pnlSkills.setLayout(gbl_pnlSkills);
 
@@ -614,7 +617,7 @@ public class CompanyView extends MainView {
 		GridBagConstraints gbc_pnlSoftSkills = new GridBagConstraints();
 		gbc_pnlSoftSkills.fill = GridBagConstraints.BOTH;
 		gbc_pnlSoftSkills.insets = new Insets(0, 0, 0, 5);
-		gbc_pnlSoftSkills.gridx = 0;
+		gbc_pnlSoftSkills.gridx = 1;
 		gbc_pnlSoftSkills.gridy = 0;
 		pnlSkills.add(pnlSoftSkills, gbc_pnlSoftSkills);
 		GridBagLayout gbl_pnlSoftSkills = new GridBagLayout();
@@ -647,7 +650,7 @@ public class CompanyView extends MainView {
 		pnlTechSkills = new JPanel();
 		GridBagConstraints gbc_pnlTechSkills = new GridBagConstraints();
 		gbc_pnlTechSkills.fill = GridBagConstraints.BOTH;
-		gbc_pnlTechSkills.gridx = 1;
+		gbc_pnlTechSkills.gridx = 0;
 		gbc_pnlTechSkills.gridy = 0;
 		pnlSkills.add(pnlTechSkills, gbc_pnlTechSkills);
 		GridBagLayout gbl_pnlTechSkills = new GridBagLayout();

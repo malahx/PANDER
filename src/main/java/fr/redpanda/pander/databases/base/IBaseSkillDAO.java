@@ -19,5 +19,22 @@ public interface IBaseSkillDAO {
 	 * @return the entity
 	 */
 	public IBaseSkillEntity getSkills(IBaseSkillEntity entity);
+
+	/**
+	 * @param candidate
+	 * @return
+	 */
+	public int insertSkills(IBaseSkillEntity entity);
+
+	/**
+	 * @param candidate
+	 * @return
+	 */
+	public int deleteSkills(IBaseSkillEntity entity);
+
+	/**
+	 * @return
+	 */
+	int deleteSkills();
 	
 }
