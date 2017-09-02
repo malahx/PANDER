@@ -129,7 +129,7 @@ public class SkillDAO extends BaseDAO {
 	 */
 	@Override
 	public String fields() {
-		return "" + NAME + "," + TYPE + "";
+		return NAME + "," + TYPE;
 	}
 
 	/*

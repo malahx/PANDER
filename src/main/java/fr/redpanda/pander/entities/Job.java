@@ -3,8 +3,6 @@
  */
 package fr.redpanda.pander.entities;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,11 +20,10 @@ public class Job extends BaseEntity implements IBaseSkillEntity {
 	private String name;
 	private String presentation;
 	private String link;
-	private String contactEmail;
+	private String contact;
 	private List<Skill> skills;
 	private Date createdAt;
 	private Date updatedAt;
-
 
 	/**
 	 * @return the name
@@ -74,18 +71,18 @@ public class Job extends BaseEntity implements IBaseSkillEntity {
 	}
 
 	/**
-	 * @return the contactEmail
+	 * @return the contact
 	 */
-	public String getContactEmail() {
-		return contactEmail;
+	public String getContact() {
+		return contact;
 	}
 
 	/**
-	 * @param contactEmail
-	 *            the contactEmail to set
+	 * @param contact
+	 *            the contact to set
 	 */
-	public void setContactEmail(String contactEmail) {
-		this.contactEmail = contactEmail;
+	public void setContact(String contact) {
+		this.contact = contact;
 	}
 
 	/**
@@ -144,7 +141,7 @@ public class Job extends BaseEntity implements IBaseSkillEntity {
 		this.setName(name);
 		this.setSkills(new ArrayList<>());
 	}
-	
+
 	/**
 	 * @param id
 	 * @param name
@@ -155,33 +152,24 @@ public class Job extends BaseEntity implements IBaseSkillEntity {
 	 * @param createdAt
 	 * @param updatedAt
 	 */
-	public Job(Long id, String name, String presentation, String link, String contactEmail, Date createdAt,
+	public Job(double id, String name, String presentation, String link, String contactEmail, Date createdAt,
 			Date updatedAt) {
 		super();
 		this.setId(id);
 		this.setName(name);
 		this.setPresentation(presentation);
 		this.setLink(link);
-		this.setContactEmail(contactEmail);
+		this.setContact(contactEmail);
 		this.setSkills(new ArrayList<>());
 		this.setCreatedAt(createdAt);
 		this.setUpdatedAt(updatedAt);
 	}
 
 	/**
-	 * @param result
-	 * @throws SQLException
+	 * 
 	 */
-	public Job(ResultSet result) throws SQLException {
+	public Job() {
 		super();
-		this.setId(result.getLong("id"));
-		this.setName(result.getString("name"));
-		this.setPresentation(result.getString("presentation"));
-		this.setLink(result.getString("link"));
-		this.setContactEmail(result.getString("contactEmail"));
-		this.setSkills(new ArrayList<>());
-		this.setCreatedAt(new Date(result.getDate("createdAt").getTime()));
-		this.setUpdatedAt(new Date(result.getDate("updatedAt").getTime()));
 	}
 
 }
