@@ -13,7 +13,6 @@ import fr.redpanda.pander.databases.base.BaseDAO;
 import fr.redpanda.pander.databases.base.IBaseSkillDAO;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.Job;
-import fr.redpanda.pander.entities.Skill;
 import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.entities.base.IBaseSkillEntity;
 import fr.redpanda.pander.utils.date.DateConverter;
@@ -141,22 +140,6 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 
 	}
 
-	@Override
-	public IBaseSkillEntity getSkills(IBaseSkillEntity entity) {
-
-		ResultSet rs = query(
-				"SELECT " + ID_SKILL + " FROM " + TABLE_SKILL + " WHERE " + ID_JOB + " = " + entity.getId());
-		try {
-			while (rs.next()) {
-				entity.getSkills().add((Skill) SkillDAO.getInstance().get(rs.getDouble(1)));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return entity;
-
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -266,24 +249,23 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 	}
 
 	@Override
+	public IBaseSkillEntity getSkills(IBaseSkillEntity entity) {
+		return SkillDAO.getInstance().getSkills(TABLE_SKILL, ID_SKILL, ID_JOB, entity);
+	}
+
+	@Override
 	public int insertSkills(IBaseSkillEntity entity) {
-		int result = 0;
-		deleteSkills(entity);
-		for (Skill skill : entity.getSkills()) {
-			result += execute("INSERT INTO " + TABLE_SKILL + " (" + ID_JOB + "," + ID_SKILL + ") VALUES ("
-					+ entity.getId() + "," + skill.getId() + ")");
-		}
-		return result;
+		return SkillDAO.getInstance().insertSkills(TABLE_SKILL, ID_SKILL, ID_JOB, entity);
 	}
 
 	@Override
 	public int deleteSkills(IBaseSkillEntity entity) {
-		return execute("DELETE FROM " + TABLE_SKILL + " WHERE " + ID_JOB + " = " + entity.getId());
+		return SkillDAO.getInstance().deleteSkills(TABLE_SKILL, ID_JOB, entity);
 	}
 
 	@Override
 	public int deleteSkills() {
-		return execute("DELETE FROM " + TABLE_SKILL);
+		return SkillDAO.getInstance().deleteSkills(TABLE_SKILL);
 	}
 
 }

@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import fr.redpanda.pander.databases.base.BaseUserDAO;
 import fr.redpanda.pander.databases.base.IBaseSkillDAO;
 import fr.redpanda.pander.entities.Candidate;
-import fr.redpanda.pander.entities.Skill;
 import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.entities.base.IBaseSkillEntity;
 import fr.redpanda.pander.utils.date.DateConverter;
@@ -74,36 +73,6 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 			instance = new CandidateDAO();
 		}
 		return instance;
-	}
-
-	@Override
-	public IBaseSkillEntity getSkills(IBaseSkillEntity entity) {
-
-		ResultSet rs = query(
-				"SELECT " + ID_SKILL + " FROM " + TABLE_SKILL + " WHERE " + ID_CANDIDATE + " = " + entity.getId());
-		try {
-			while (rs.next()) {
-				entity.getSkills().add((Skill) SkillDAO.getInstance().get(rs.getDouble(1)));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return entity;
-
-	}
-
-	public int insertSkills(Candidate candidate) {
-		int result = 0;
-		deleteSkills(candidate);
-		for (Skill skill : candidate.getSkills()) {
-			result += execute("INSERT INTO " + TABLE_SKILL + " (" + ID_CANDIDATE + "," + ID_SKILL + ") VALUES ("
-					+ candidate.getId() + "," + skill.getId() + ")");
-		}
-		return result;
-	}
-
-	private int deleteSkills(BaseEntity entity) {
-		return execute("DELETE FROM " + TABLE_SKILL + " WHERE " + ID_CANDIDATE + " = " + entity.getId());
 	}
 
 	/*
@@ -227,6 +196,26 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 		}
 		return true;
 
+	}
+
+	@Override
+	public IBaseSkillEntity getSkills(IBaseSkillEntity entity) {
+		return SkillDAO.getInstance().getSkills(TABLE_SKILL, ID_SKILL, ID_CANDIDATE, entity);
+	}
+
+	@Override
+	public int insertSkills(IBaseSkillEntity entity) {
+		return SkillDAO.getInstance().insertSkills(TABLE_SKILL, ID_SKILL, ID_CANDIDATE, entity);
+	}
+
+	@Override
+	public int deleteSkills(IBaseSkillEntity entity) {
+		return SkillDAO.getInstance().deleteSkills(TABLE_SKILL, ID_CANDIDATE, entity);
+	}
+
+	@Override
+	public int deleteSkills() {
+		return SkillDAO.getInstance().deleteSkills(TABLE_SKILL);
 	}
 
 }

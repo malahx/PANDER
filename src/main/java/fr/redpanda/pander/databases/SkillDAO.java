@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import fr.redpanda.pander.databases.base.BaseDAO;
 import fr.redpanda.pander.entities.Skill;
 import fr.redpanda.pander.entities.base.BaseEntity;
+import fr.redpanda.pander.entities.base.IBaseSkillEntity;
 import fr.redpanda.pander.utils.StringManager;
 
 /**
@@ -67,6 +68,39 @@ public class SkillDAO extends BaseDAO {
 			e.printStackTrace();
 		}
 		return entity;
+	}
+	
+	public IBaseSkillEntity getSkills(String table, String skillId, String otherId, IBaseSkillEntity entity) {
+
+		ResultSet rs = query(
+				"SELECT " + skillId + " FROM " + table + " WHERE " + otherId + " = " + entity.getId());
+		try {
+			while (rs.next()) {
+				entity.getSkills().add((Skill) get(rs.getDouble(1)));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return entity;
+
+	}
+
+	public int insertSkills(String table, String skillId, String otherId, IBaseSkillEntity entity) {
+		int result = 0;
+		deleteSkills(table, otherId, entity);
+		for (Skill skill : entity.getSkills()) {
+			result += execute("INSERT INTO " + table + " (" + otherId + "," + skillId + ") VALUES ("
+					+ entity.getId() + "," + skill.getId() + ")");
+		}
+		return result;
+	}
+
+	public int deleteSkills(String table, String otherId, IBaseSkillEntity entity) {
+		return execute("DELETE FROM " + table + " WHERE " + otherId + " = " + entity.getId());
+	}
+
+	public int deleteSkills(String table) {
+		return execute("DELETE FROM " + table);
 	}
 
 	/*
