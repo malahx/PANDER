@@ -106,8 +106,8 @@ public class ProfileCtrl extends MainCtrl {
 		cview.getTextTransport().setText(cuser.getTransport());
 		String[] title = { "Activer", "Compétence" };
 		List<BaseEntity> skills = SkillDAO.getInstance().get();
-		SkillTableModel softSkillsModel = new SkillTableModel(title, Utils.getSkills(skills, TypeSkill.SOFT), cuser);
-		SkillTableModel techSkillsModel = new SkillTableModel(title, Utils.getSkills(skills, TypeSkill.TECH), cuser);
+		SkillTableModel softSkillsModel = new SkillTableModel(title, Utils.getSkillsType(skills, TypeSkill.SOFT), cuser);
+		SkillTableModel techSkillsModel = new SkillTableModel(title, Utils.getSkillsType(skills, TypeSkill.TECH), cuser);
 		cview.getTableSoftSkills().setModel(softSkillsModel);
 		cview.getTableSoftSkills().setRowSorter(softSkillsModel.getSorter());
 		cview.getTableTechSkills().setModel(techSkillsModel);
@@ -175,9 +175,9 @@ public class ProfileCtrl extends MainCtrl {
 
 					String[] title = { "Activer", "Compétence" };
 					SkillTableModel softSkillsModel = new SkillTableModel(title,
-							Utils.getSkills(skills, TypeSkill.SOFT), job);
+							Utils.getSkillsType(skills, TypeSkill.SOFT), job);
 					SkillTableModel techSkillsModel = new SkillTableModel(title,
-							Utils.getSkills(skills, TypeSkill.TECH), job);
+							Utils.getSkillsType(skills, TypeSkill.TECH), job);
 					cview.getTblSoftSkills().setModel(softSkillsModel);
 					cview.getTblSoftSkills().setRowSorter(softSkillsModel.getSorter());
 					cview.getTblTechSkills().setModel(techSkillsModel);
