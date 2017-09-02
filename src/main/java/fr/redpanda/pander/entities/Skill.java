@@ -77,6 +77,20 @@ public class Skill extends BaseEntity {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -88,7 +102,14 @@ public class Skill extends BaseEntity {
 		if (getClass() != obj.getClass())
 			return false;
 		Skill other = (Skill) obj;
-		return this.id == other.getId();
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (type != other.type)
+			return false;
+		return true;
 	}
 
 }
