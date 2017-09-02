@@ -90,10 +90,6 @@ public class ProfileCtrl extends MainCtrl {
 	private void initCompanyView(User user) {
 		CompanyView cview = (CompanyView) this.view;
 		Company cuser = (Company) user;
-		cuser.setJobs(JobDAO.getInstance().get(cuser));
-		for (Job job : cuser.getJobs()) {
-			JobDAO.getInstance().getSkills(job);
-		}
 		cview.getLstJob().setModel(new JobListModel(cuser));
 	}
 
@@ -106,8 +102,10 @@ public class ProfileCtrl extends MainCtrl {
 		cview.getTextTransport().setText(cuser.getTransport());
 		String[] title = { "Activer", "Compétence" };
 		List<BaseEntity> skills = SkillDAO.getInstance().get();
-		SkillTableModel softSkillsModel = new SkillTableModel(title, Utils.getSkillsType(skills, TypeSkill.SOFT), cuser);
-		SkillTableModel techSkillsModel = new SkillTableModel(title, Utils.getSkillsType(skills, TypeSkill.TECH), cuser);
+		SkillTableModel softSkillsModel = new SkillTableModel(title, Utils.getSkillsType(skills, TypeSkill.SOFT),
+				cuser);
+		SkillTableModel techSkillsModel = new SkillTableModel(title, Utils.getSkillsType(skills, TypeSkill.TECH),
+				cuser);
 		cview.getTableSoftSkills().setModel(softSkillsModel);
 		cview.getTableSoftSkills().setRowSorter(softSkillsModel.getSorter());
 		cview.getTableTechSkills().setModel(techSkillsModel);

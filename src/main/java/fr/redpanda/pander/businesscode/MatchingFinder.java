@@ -71,10 +71,13 @@ public class MatchingFinder {
 			while (rs.next()) {
 				if (isCandidate) {
 					candidate = (Candidate) CandidateDAO.getInstance().parse(rs);
+					CandidateDAO.getInstance().getSkills(candidate);
 				} else {
 					company = (Company) user;
+					JobDAO.getInstance().get(company);
 				}
 				for (Job job : company.getJobs()) {
+					JobDAO.getInstance().getSkills(job);
 					matchings.add(new Matching(candidate, company, job));
 				}
 				matchingDone.add(isCandidate ? candidate : company);

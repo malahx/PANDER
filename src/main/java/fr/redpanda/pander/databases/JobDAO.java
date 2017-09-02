@@ -5,9 +5,7 @@ package fr.redpanda.pander.databases;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import fr.redpanda.pander.databases.base.BaseDAO;
 import fr.redpanda.pander.databases.base.IBaseSkillDAO;
@@ -124,19 +122,18 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 		return job;
 	}
 
-	public List<Job> get(Company company) {
+	public Company get(Company company) {
 
 		ResultSet rs = executeQuery("SELECT * FROM " + TABLE + " WHERE " + ID_COMPANY + " = " + company.getId());
-		List<Job> jobs = new ArrayList<>();
 		try {
 			while (rs.next()) {
-				jobs.add((Job) parse(rs));
+				company.getJobs().add((Job) parse(rs));
 			}
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return jobs;
+		return company;
 
 	}
 

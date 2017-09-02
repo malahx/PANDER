@@ -17,10 +17,12 @@ import javax.swing.event.DocumentEvent;
 import fr.redpanda.pander.controllers.base.BaseCtrl;
 import fr.redpanda.pander.databases.CandidateDAO;
 import fr.redpanda.pander.databases.CompanyDAO;
+import fr.redpanda.pander.databases.JobDAO;
 import fr.redpanda.pander.databases.UserDAO;
 import fr.redpanda.pander.entities.Admin;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
+import fr.redpanda.pander.entities.Job;
 import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.managers.ViewsManager;
@@ -47,7 +49,11 @@ public class AuthCtrl extends BaseCtrl {
 				CandidateDAO.getInstance().getSkills((Candidate) loggedUser);
 			} else if (loggedUser instanceof Company) {
 				ViewsManager.getInstance().next(new HomeCtrl(frame));
-				// CompanyDAO.getInstance().getJobs((Company) loggedUser);
+				Company company = (Company) loggedUser;
+				JobDAO.getInstance().get(company);
+				for (Job job : company.getJobs()) {
+					JobDAO.getInstance().getSkills(job);
+				}
 			} else if (loggedUser instanceof Admin) {
 				ViewsManager.getInstance().next(new AdminCtrl(frame));
 			}
