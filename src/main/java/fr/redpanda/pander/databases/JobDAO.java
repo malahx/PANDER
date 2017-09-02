@@ -51,13 +51,13 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 	public static final String ID_COMPANY = "id_company";
 
 	/** the skill table */
-	private static final String TABLE_SKILL = "job_skill";
+	public static final String TABLE_SKILL = "job_skill";
 
 	/** the skill id on the job skill table */
-	private static final String ID_SKILL = "id_skill";
+	public static final String ID_SKILL = "id_skill";
 
 	/** the job id on the job skill table */
-	private static final String ID_JOB = "id_job";
+	public static final String ID_JOB = "id_job";
 
 	protected JobDAO() {
 		super(TABLE, ID);
