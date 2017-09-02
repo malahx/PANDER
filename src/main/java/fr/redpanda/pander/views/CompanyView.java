@@ -16,6 +16,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 
 import fr.redpanda.pander.entities.Job;
@@ -39,7 +40,7 @@ public class CompanyView extends MainView {
 	private JLabel lblLien;
 	private JTextField txtLink;
 	private JLabel lblInfos;
-	private JTextArea txtrInfos;
+	private JTextArea txtInfos;
 	private JLabel lblTechSkills;
 	private JScrollPane scrPTechSkills;
 	private JTable tblTechSkills;
@@ -49,8 +50,10 @@ public class CompanyView extends MainView {
 	private JPanel pnlTechSkills;
 	private JTable tblSoftSkills;
 	private JPanel pnlButton;
-	private JButton btnAddUp;
+	private JButton btnAdd;
 	private JButton btnDelete;
+	private JButton btnClear;
+	private JPanel pnlSkills;
 
 	/**
 	 * @return the pnlJobList
@@ -248,18 +251,18 @@ public class CompanyView extends MainView {
 	}
 
 	/**
-	 * @return the txtrInfos
+	 * @return the txtInfos
 	 */
-	public JTextArea getTxtrInfos() {
-		return txtrInfos;
+	public JTextArea getTxtInfos() {
+		return txtInfos;
 	}
 
 	/**
-	 * @param txtrInfos
-	 *            the txtrInfos to set
+	 * @param txtInfos
+	 *            the txtInfos to set
 	 */
-	public void setTxtrInfos(JTextArea txtrInfos) {
-		this.txtrInfos = txtrInfos;
+	public void setTxtInfos(JTextArea txtInfos) {
+		this.txtInfos = txtInfos;
 	}
 
 	/**
@@ -398,18 +401,18 @@ public class CompanyView extends MainView {
 	}
 
 	/**
-	 * @return the btnAddUp
+	 * @return the btnAdd
 	 */
-	public JButton getBtnAddUp() {
-		return btnAddUp;
+	public JButton getBtnAdd() {
+		return btnAdd;
 	}
 
 	/**
-	 * @param btnAddUp
-	 *            the btnAddUp to set
+	 * @param btnAdd
+	 *            the btnAdd to set
 	 */
-	public void setBtnAddUp(JButton btnAddUp) {
-		this.btnAddUp = btnAddUp;
+	public void setBtnAdd(JButton btnAdd) {
+		this.btnAdd = btnAdd;
 	}
 
 	/**
@@ -428,6 +431,36 @@ public class CompanyView extends MainView {
 	}
 
 	/**
+	 * @return the btnClear
+	 */
+	public JButton getBtnClear() {
+		return btnClear;
+	}
+
+	/**
+	 * @param btnClear
+	 *            the btnClear to set
+	 */
+	public void setBtnClear(JButton btnClear) {
+		this.btnClear = btnClear;
+	}
+
+	/**
+	 * @return the pnlSkills
+	 */
+	public JPanel getPnlSkills() {
+		return pnlSkills;
+	}
+
+	/**
+	 * @param pnlSkills
+	 *            the pnlSkills to set
+	 */
+	public void setPnlSkills(JPanel pnlSkills) {
+		this.pnlSkills = pnlSkills;
+	}
+
+	/**
 	 * Create the frame.
 	 */
 	public CompanyView() {
@@ -436,31 +469,48 @@ public class CompanyView extends MainView {
 		super.pageName = "Entreprise";
 
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] { 0, 0, 0 };
+		gbl_contentPane.columnWidths = new int[] { 200, 0 };
 		gbl_contentPane.rowHeights = new int[] { 0, 0, 0 };
-		gbl_contentPane.columnWeights = new double[] { 1.0, 1.0 };
+		gbl_contentPane.columnWeights = new double[] { 0.0, 1.0 };
 		gbl_contentPane.rowWeights = new double[] { 1.0, 1.0, 0.0 };
 		getPnlContent().setLayout(gbl_contentPane);
 
 		pnlJobList = new JPanel();
 		GridBagConstraints gbc_pnlJobList = new GridBagConstraints();
+		gbc_pnlJobList.gridheight = 2;
 		gbc_pnlJobList.insets = new Insets(0, 0, 5, 5);
 		gbc_pnlJobList.fill = GridBagConstraints.BOTH;
 		gbc_pnlJobList.gridx = 0;
 		gbc_pnlJobList.gridy = 0;
 		getPnlContent().add(pnlJobList, gbc_pnlJobList);
-		pnlJobList.setLayout(new BoxLayout(pnlJobList, BoxLayout.Y_AXIS));
+		GridBagLayout gbl_pnlJobList = new GridBagLayout();
+		gbl_pnlJobList.columnWidths = new int[] { 200 };
+		gbl_pnlJobList.rowHeights = new int[] { 0, 0 };
+		gbl_pnlJobList.columnWeights = new double[] { 1.0 };
+		gbl_pnlJobList.rowWeights = new double[] { 0.0, 1.0 };
+		pnlJobList.setLayout(gbl_pnlJobList);
 
 		lblJobList = new JLabel("Liste de Poste");
 		lblJobList.setAlignmentY(0.0f);
-		pnlJobList.add(lblJobList);
+		GridBagConstraints gbc_lblJobList = new GridBagConstraints();
+		gbc_lblJobList.anchor = GridBagConstraints.NORTHWEST;
+		gbc_lblJobList.insets = new Insets(0, 0, 5, 0);
+		gbc_lblJobList.gridx = 0;
+		gbc_lblJobList.gridy = 0;
+		pnlJobList.add(lblJobList, gbc_lblJobList);
 
 		scrPJobList = new JScrollPane();
 		scrPJobList.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrPJobList.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		pnlJobList.add(scrPJobList);
+		GridBagConstraints gbc_scrPJobList = new GridBagConstraints();
+		gbc_scrPJobList.fill = GridBagConstraints.BOTH;
+		gbc_scrPJobList.anchor = GridBagConstraints.NORTHWEST;
+		gbc_scrPJobList.gridx = 0;
+		gbc_scrPJobList.gridy = 1;
+		pnlJobList.add(scrPJobList, gbc_scrPJobList);
 
 		lstJob = new JList<Job>();
+		lstJob.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrPJobList.setViewportView(lstJob);
 
 		pnlJobInfo = new JPanel();
@@ -536,25 +586,73 @@ public class CompanyView extends MainView {
 		gbc_lblInfos.gridy = 6;
 		pnlJobInfo.add(lblInfos, gbc_lblInfos);
 
-		txtrInfos = new JTextArea();
-		txtrInfos.setRows(8);
-		GridBagConstraints gbc_txtrInfos = new GridBagConstraints();
-		gbc_txtrInfos.fill = GridBagConstraints.BOTH;
-		gbc_txtrInfos.ipady = 1;
-		gbc_txtrInfos.gridx = 1;
-		gbc_txtrInfos.gridy = 6;
-		pnlJobInfo.add(txtrInfos, gbc_txtrInfos);
+		txtInfos = new JTextArea();
+		txtInfos.setWrapStyleWord(true);
+		txtInfos.setLineWrap(true);
+		GridBagConstraints gbc_txtInfos = new GridBagConstraints();
+		gbc_txtInfos.fill = GridBagConstraints.BOTH;
+		gbc_txtInfos.ipady = 1;
+		gbc_txtInfos.gridx = 1;
+		gbc_txtInfos.gridy = 6;
+		pnlJobInfo.add(txtInfos, gbc_txtInfos);
+
+		pnlSkills = new JPanel();
+		GridBagConstraints gbc_pnlSkills = new GridBagConstraints();
+		gbc_pnlSkills.insets = new Insets(0, 0, 5, 0);
+		gbc_pnlSkills.fill = GridBagConstraints.BOTH;
+		gbc_pnlSkills.gridx = 1;
+		gbc_pnlSkills.gridy = 1;
+		getPnlContent().add(pnlSkills, gbc_pnlSkills);
+		GridBagLayout gbl_pnlSkills = new GridBagLayout();
+		gbl_pnlSkills.columnWidths = new int[] { 0, 0, 0 };
+		gbl_pnlSkills.rowHeights = new int[] { 0 };
+		gbl_pnlSkills.columnWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
+		gbl_pnlSkills.rowWeights = new double[] { 1.0 };
+		pnlSkills.setLayout(gbl_pnlSkills);
+
+		pnlSoftSkills = new JPanel();
+		GridBagConstraints gbc_pnlSoftSkills = new GridBagConstraints();
+		gbc_pnlSoftSkills.fill = GridBagConstraints.BOTH;
+		gbc_pnlSoftSkills.insets = new Insets(0, 0, 0, 5);
+		gbc_pnlSoftSkills.gridx = 0;
+		gbc_pnlSoftSkills.gridy = 0;
+		pnlSkills.add(pnlSoftSkills, gbc_pnlSoftSkills);
+		GridBagLayout gbl_pnlSoftSkills = new GridBagLayout();
+		gbl_pnlSoftSkills.columnWidths = new int[] { 0 };
+		gbl_pnlSoftSkills.rowHeights = new int[] { 0 };
+		gbl_pnlSoftSkills.columnWeights = new double[] { 1.0 };
+		gbl_pnlSoftSkills.rowWeights = new double[] { 0.0, 1.0 };
+		pnlSoftSkills.setLayout(gbl_pnlSoftSkills);
+
+		lblSoftSkills = new JLabel("Qualités Humaines");
+		GridBagConstraints gbc_lblSoftSkills = new GridBagConstraints();
+		gbc_lblSoftSkills.anchor = GridBagConstraints.NORTH;
+		gbc_lblSoftSkills.insets = new Insets(0, 0, 5, 0);
+		gbc_lblSoftSkills.gridx = 0;
+		gbc_lblSoftSkills.gridy = 0;
+		pnlSoftSkills.add(lblSoftSkills, gbc_lblSoftSkills);
+
+		scrPSoftSkills = new JScrollPane();
+		GridBagConstraints gbc_scrPSoftSkills = new GridBagConstraints();
+		gbc_scrPSoftSkills.fill = GridBagConstraints.BOTH;
+		gbc_scrPSoftSkills.gridx = 0;
+		gbc_scrPSoftSkills.gridy = 1;
+		pnlSoftSkills.add(scrPSoftSkills, gbc_scrPSoftSkills);
+		scrPSoftSkills.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrPSoftSkills.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+		tblSoftSkills = new JTable();
+		scrPSoftSkills.setViewportView(tblSoftSkills);
 
 		pnlTechSkills = new JPanel();
 		GridBagConstraints gbc_pnlTechSkills = new GridBagConstraints();
 		gbc_pnlTechSkills.fill = GridBagConstraints.BOTH;
-		gbc_pnlTechSkills.insets = new Insets(0, 0, 5, 5);
-		gbc_pnlTechSkills.gridx = 0;
-		gbc_pnlTechSkills.gridy = 1;
-		getPnlContent().add(pnlTechSkills, gbc_pnlTechSkills);
+		gbc_pnlTechSkills.gridx = 1;
+		gbc_pnlTechSkills.gridy = 0;
+		pnlSkills.add(pnlTechSkills, gbc_pnlTechSkills);
 		GridBagLayout gbl_pnlTechSkills = new GridBagLayout();
 		gbl_pnlTechSkills.columnWidths = new int[] { 0 };
-		gbl_pnlTechSkills.rowHeights = new int[] { 0, 0 };
+		gbl_pnlTechSkills.rowHeights = new int[] { 0 };
 		gbl_pnlTechSkills.columnWeights = new double[] { 1.0 };
 		gbl_pnlTechSkills.rowWeights = new double[] { 0.0, 1.0 };
 		pnlTechSkills.setLayout(gbl_pnlTechSkills);
@@ -579,55 +677,30 @@ public class CompanyView extends MainView {
 		tblTechSkills = new JTable();
 		scrPTechSkills.setViewportView(tblTechSkills);
 
-		pnlSoftSkills = new JPanel();
-		GridBagConstraints gbc_pnlSoftSkills = new GridBagConstraints();
-		gbc_pnlSoftSkills.insets = new Insets(0, 0, 5, 0);
-		gbc_pnlSoftSkills.fill = GridBagConstraints.BOTH;
-		gbc_pnlSoftSkills.gridx = 1;
-		gbc_pnlSoftSkills.gridy = 1;
-		getPnlContent().add(pnlSoftSkills, gbc_pnlSoftSkills);
-		GridBagLayout gbl_pnlSoftSkills = new GridBagLayout();
-		gbl_pnlSoftSkills.columnWidths = new int[] { 0 };
-		gbl_pnlSoftSkills.rowHeights = new int[] { 0, 0 };
-		gbl_pnlSoftSkills.columnWeights = new double[] { 1.0 };
-		gbl_pnlSoftSkills.rowWeights = new double[] { 0.0, 1.0 };
-		pnlSoftSkills.setLayout(gbl_pnlSoftSkills);
-
-		lblSoftSkills = new JLabel("Soft Skills");
-		GridBagConstraints gbc_lblSoftSkills = new GridBagConstraints();
-		gbc_lblSoftSkills.anchor = GridBagConstraints.NORTH;
-		gbc_lblSoftSkills.insets = new Insets(0, 0, 5, 0);
-		gbc_lblSoftSkills.gridx = 0;
-		gbc_lblSoftSkills.gridy = 0;
-		pnlSoftSkills.add(lblSoftSkills, gbc_lblSoftSkills);
-
-		scrPSoftSkills = new JScrollPane();
-		GridBagConstraints gbc_scrPSoftSkills = new GridBagConstraints();
-		gbc_scrPSoftSkills.fill = GridBagConstraints.BOTH;
-		gbc_scrPSoftSkills.gridx = 0;
-		gbc_scrPSoftSkills.gridy = 1;
-		pnlSoftSkills.add(scrPSoftSkills, gbc_scrPSoftSkills);
-		scrPSoftSkills.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		scrPSoftSkills.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-		tblSoftSkills = new JTable();
-		scrPSoftSkills.setViewportView(tblSoftSkills);
+		btnDelete = new JButton("Supprimer");
+		btnDelete.setEnabled(false);
+		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
+		gbc_btnDelete.fill = GridBagConstraints.BOTH;
+		gbc_btnDelete.insets = new Insets(0, 0, 5, 5);
+		gbc_btnDelete.gridx = 0;
+		gbc_btnDelete.gridy = 2;
+		getPnlContent().add(btnDelete, gbc_btnDelete);
 
 		pnlButton = new JPanel();
 		GridBagConstraints gbc_pnlButton = new GridBagConstraints();
 		gbc_pnlButton.anchor = GridBagConstraints.EAST;
-		gbc_pnlButton.gridwidth = 2;
-		gbc_pnlButton.insets = new Insets(0, 0, 0, 5);
-		gbc_pnlButton.fill = GridBagConstraints.VERTICAL;
-		gbc_pnlButton.gridx = 0;
+		gbc_pnlButton.insets = new Insets(0, 0, 5, 0);
+		gbc_pnlButton.gridx = 1;
 		gbc_pnlButton.gridy = 2;
 		getPnlContent().add(pnlButton, gbc_pnlButton);
+		pnlButton.setLayout(new BoxLayout(pnlButton, BoxLayout.X_AXIS));
 
-		btnAddUp = new JButton("Ajouter un poste");
-		pnlButton.add(btnAddUp);
+		btnAdd = new JButton("Ajouter");
+		btnAdd.setEnabled(false);
+		pnlButton.add(btnAdd);
 
-		btnDelete = new JButton("Supprimer un poste");
-		pnlButton.add(btnDelete);
+		btnClear = new JButton("Effacer les champs");
+		pnlButton.add(btnClear);
 
 	}
 

@@ -113,7 +113,7 @@ public abstract class MainView extends BaseView implements IMainView {
 		gbc_pnlSidebar.gridheight = 2;
 		gbc_pnlSidebar.insets = new Insets(0, 0, 5, 5);
 		gbc_pnlSidebar.anchor = GridBagConstraints.WEST;
-		gbc_pnlSidebar.fill = GridBagConstraints.VERTICAL;
+		gbc_pnlSidebar.fill = GridBagConstraints.BOTH;
 		gbc_pnlSidebar.gridx = 0;
 		gbc_pnlSidebar.gridy = 1;
 		contentPane.add(pnlSidebar, gbc_pnlSidebar);
