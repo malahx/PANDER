@@ -20,6 +20,7 @@ import fr.redpanda.pander.utils.file.FileManager;
 public class DAOManager {
 
 	private static final String DB_SQL = "pander.sql";
+	private static final String DATA_SQL = "data.sql";
 	private static final String FILE_CONFIG = "dbconfig";
 	private static final String PATH_CONFIG = "config";
 
@@ -30,6 +31,7 @@ public class DAOManager {
 		} else {
 			createDB();
 			initDB(PATH_CONFIG, DB_SQL);
+			initDB(PATH_CONFIG, DATA_SQL);
 		}
 	}
 
@@ -93,22 +95,22 @@ public class DAOManager {
 
 	}
 
-//	private void deleteDB() {
-//
-//		try {
-//			Statement statement = createConnection.createStatement();
-//			statement.execute("DROP DATABSE " + dbName + ";");
-//			statement.close();
-//			connection.close();
-//			connection = null;
-//			createConnection.close();
-//			createConnection = null;
-//			instance = null;
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//
-//	}
+	// private void deleteDB() {
+	//
+	// try {
+	// Statement statement = createConnection.createStatement();
+	// statement.execute("DROP DATABSE " + dbName + ";");
+	// statement.close();
+	// connection.close();
+	// connection = null;
+	// createConnection.close();
+	// createConnection = null;
+	// instance = null;
+	// } catch (SQLException e) {
+	// e.printStackTrace();
+	// }
+	//
+	// }
 
 	private void initDB(String path, String fileName) {
 		connect();
