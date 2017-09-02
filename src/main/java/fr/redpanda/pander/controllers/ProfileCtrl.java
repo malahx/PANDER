@@ -28,6 +28,7 @@ import fr.redpanda.pander.views.CandidateView;
 import fr.redpanda.pander.views.CompanyView;
 import fr.redpanda.pander.views.MainView;
 import fr.redpanda.pander.views.models.DocListener;
+import fr.redpanda.pander.views.models.SkillTableModel;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -77,7 +78,10 @@ public class ProfileCtrl extends MainCtrl {
 	}
 
 	private void initCompanyView(User user) {
-		updateCompany(user);
+		CompanyView view = (CompanyView) this.view;
+		Company cuser = (Company) user;
+		view.getBtnAddUp().setEnabled(false);
+		view.getBtnDelete().setEnabled(false);
 	}
 
 	private void initCandidateView(User user) {
@@ -89,8 +93,13 @@ public class ProfileCtrl extends MainCtrl {
 		cview.getTextTransport().setText(cuser.getTransport());
 		String[] title = { "Activer", "Compétence" };
 		List<BaseEntity> skills = SkillDAO.getInstance().get();
-		cview.updateDatas(cview.getTableSoftSkills(), title, Utils.getSkills(skills, TypeSkill.SOFT), cuser);
-		cview.updateDatas(cview.getTableTechSkills(), title, Utils.getSkills(skills, TypeSkill.TECH), cuser);
+		SkillTableModel softSkillsModel = new SkillTableModel(title, Utils.getSkills(skills, TypeSkill.SOFT), cuser);
+		SkillTableModel techSkillsModel = new SkillTableModel(title, Utils.getSkills(skills, TypeSkill.TECH), cuser);
+		cview.getTableSoftSkills().setModel(softSkillsModel);
+		cview.getTableSoftSkills().setRowSorter(softSkillsModel.getSorter());
+		cview.getTableTechSkills().setModel(techSkillsModel);
+		cview.getTableTechSkills().setRowSorter(techSkillsModel.getSorter());
+
 	}
 
 	/*
@@ -118,6 +127,7 @@ public class ProfileCtrl extends MainCtrl {
 
 	private void initCompanyEvent(User user, DocListener updateProfile) {
 		CompanyView cview = (CompanyView) this.view;
+		
 	}
 
 	private void initCandidateEvent(User user, DocListener updateProfile) {

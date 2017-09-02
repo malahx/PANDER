@@ -3,22 +3,12 @@ package fr.redpanda.pander.views;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.RowSorter;
 import javax.swing.ScrollPaneConstants;
-import javax.swing.SortOrder;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
-
-import fr.redpanda.pander.entities.base.BaseEntity;
-import fr.redpanda.pander.entities.base.IBaseSkillEntity;
-import fr.redpanda.pander.views.models.SkillTableModel;
 
 /**
  * 
@@ -271,18 +261,6 @@ public class CandidateView extends MainView {
 	@Override
 	public boolean isEditable() {
 		return true;
-	}
-
-	public void updateDatas(JTable table, String[] title, List<BaseEntity> skills, IBaseSkillEntity entity) {
-		SkillTableModel model = new SkillTableModel(title, skills, entity);
-		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
-		List<RowSorter.SortKey> sortKeys = new ArrayList<RowSorter.SortKey>();
-		sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
-		sortKeys.add(new RowSorter.SortKey(1, SortOrder.ASCENDING));
-		sorter.setSortKeys(sortKeys);
-		sorter.setSortsOnUpdates(true);
-		table.setRowSorter(sorter);
-		table.setModel(model);
 	}
 
 }
