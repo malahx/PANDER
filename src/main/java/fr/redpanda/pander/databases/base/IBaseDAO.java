@@ -82,7 +82,7 @@ public interface IBaseDAO {
 	 *            the SQL request
 	 * @return the result of the request
 	 */
-	public ResultSet query(String request);
+	public ResultSet executeQuery(String request);
 
 	/**
 	 * Prepare a SQL request
@@ -93,7 +93,7 @@ public interface IBaseDAO {
 	 *            the SQL request
 	 * @return the {@link BaseEntity}
 	 */
-	public BaseEntity prepare(BaseEntity entity, String request);
+	public BaseEntity executePrepare(BaseEntity entity, String request);
 
 	/**
 	 * Execute a SQL request without a result

@@ -119,14 +119,14 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 		if (!checkExists(job) && checkFields(job)) {
 			job.setCreatedAt(new Date());
 			job.setUpdatedAt(new Date());
-			prepare(job, "INSERT INTO " + TABLE + " (" + fields() + ") VALUES (" + parse(job, company) + ")");
+			executePrepare(job, "INSERT INTO " + TABLE + " (" + fields() + ") VALUES (" + parse(job, company) + ")");
 		}
 		return job;
 	}
 
 	public List<Job> get(Company company) {
 
-		ResultSet rs = query("SELECT * FROM " + TABLE + " WHERE " + ID_COMPANY + " = " + company.getId());
+		ResultSet rs = executeQuery("SELECT * FROM " + TABLE + " WHERE " + ID_COMPANY + " = " + company.getId());
 		List<Job> jobs = new ArrayList<>();
 		try {
 			while (rs.next()) {

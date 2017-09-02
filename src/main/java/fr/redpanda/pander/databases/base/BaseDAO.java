@@ -58,7 +58,7 @@ public abstract class BaseDAO implements IBaseDAO {
 	 * @see fr.redpanda.pander.database.IDAOBase#executeRequest(java.lang.String)
 	 */
 	@Override
-	public ResultSet query(String request) {
+	public ResultSet executeQuery(String request) {
 
 		ResultSet rs = null;
 
@@ -79,7 +79,7 @@ public abstract class BaseDAO implements IBaseDAO {
 	 * @see fr.redpanda.pander.database.IDAOBase#execute(java.lang.String)
 	 */
 	@Override
-	public BaseEntity prepare(BaseEntity entity, String request) {
+	public BaseEntity executePrepare(BaseEntity entity, String request) {
 
 		try {
 			PreparedStatement prepare = DAOManager.getInstance().getConnection().prepareStatement(request,
@@ -142,7 +142,7 @@ public abstract class BaseDAO implements IBaseDAO {
 		if (entity == null || entity.getId() <= 0) {
 			return false;
 		}
-		ResultSet rs = query("SELECT " + id + " FROM " + table + " WHERE " + id + " = " + entity.getId());
+		ResultSet rs = executeQuery("SELECT " + id + " FROM " + table + " WHERE " + id + " = " + entity.getId());
 		try {
 			if (rs.next()) {
 				entity.setId(rs.getDouble(1));
@@ -167,7 +167,7 @@ public abstract class BaseDAO implements IBaseDAO {
 	@Override
 	public BaseEntity insert(BaseEntity entity) {
 		if (!checkExists(entity) && checkFields(entity) && !checkUniqueFields(entity)) {
-			prepare(entity, "INSERT INTO " + table + " (" + fields() + ") VALUES (" + parse(entity) + ")");
+			executePrepare(entity, "INSERT INTO " + table + " (" + fields() + ") VALUES (" + parse(entity) + ")");
 		}
 		return entity;
 	}
@@ -216,7 +216,7 @@ public abstract class BaseDAO implements IBaseDAO {
 	 */
 	@Override
 	public BaseEntity get(double id) {
-		ResultSet rs = query("SELECT * FROM " + table + " WHERE " + getId() + " = " + id);
+		ResultSet rs = executeQuery("SELECT * FROM " + table + " WHERE " + getId() + " = " + id);
 		BaseEntity entity = null;
 		try {
 			if (rs.next()) {
@@ -237,7 +237,7 @@ public abstract class BaseDAO implements IBaseDAO {
 	@Override
 	public List<BaseEntity> get() {
 		List<BaseEntity> entities = new ArrayList<>();
-		ResultSet rs = query("SELECT * FROM " + table);
+		ResultSet rs = executeQuery("SELECT * FROM " + table);
 		try {
 			while (rs.next()) {
 				entities.add(parse(rs));

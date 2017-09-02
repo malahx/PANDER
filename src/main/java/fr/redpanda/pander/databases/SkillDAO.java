@@ -57,7 +57,7 @@ public class SkillDAO extends BaseDAO {
 	 * @return a {@link BaseEntity}
 	 */
 	public BaseEntity get(String name) {
-		ResultSet rs = query("SELECT * FROM " + TABLE + " WHERE " + NAME + " = '" + name + "'");
+		ResultSet rs = executeQuery("SELECT * FROM " + TABLE + " WHERE " + NAME + " = '" + name + "'");
 		BaseEntity entity = null;
 		try {
 			if (rs.next()) {
@@ -72,7 +72,7 @@ public class SkillDAO extends BaseDAO {
 	
 	public IBaseSkillEntity getSkills(String table, String skillId, String otherId, IBaseSkillEntity entity) {
 
-		ResultSet rs = query(
+		ResultSet rs = executeQuery(
 				"SELECT " + skillId + " FROM " + table + " WHERE " + otherId + " = " + entity.getId());
 		try {
 			while (rs.next()) {

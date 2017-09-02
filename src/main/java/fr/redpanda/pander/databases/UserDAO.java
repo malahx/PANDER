@@ -57,7 +57,7 @@ public class UserDAO extends BaseDAO {
 	}
 
 	public BaseEntity get(String email, String password) {
-		ResultSet rs = query(
+		ResultSet rs = executeQuery(
 				"SELECT * FROM " + TABLE + " u LEFT JOIN " + CompanyDAO.TABLE + " co ON co." + CompanyDAO.ID + " = u."
 						+ ID + " LEFT JOIN " + CandidateDAO.TABLE + " ca ON ca." + CandidateDAO.ID + " = u." + ID
 						+ " WHERE u." + EMAIL + " = '" + email + "' AND u." + PASSWORD + " = '" + password + "'");
@@ -81,7 +81,7 @@ public class UserDAO extends BaseDAO {
 	}
 
 	public BaseEntity get(String email) {
-		ResultSet rs = query("SELECT * FROM " + TABLE + " WHERE " + EMAIL + " = '" + email + "'");
+		ResultSet rs = executeQuery("SELECT * FROM " + TABLE + " WHERE " + EMAIL + " = '" + email + "'");
 		BaseEntity entity = null;
 		try {
 			if (rs.next()) {
@@ -119,7 +119,7 @@ public class UserDAO extends BaseDAO {
 	}
 
 	public BaseEntity get(BaseEntity entity, double id) {
-		ResultSet rs = query("SELECT * FROM " + TABLE + " WHERE " + ID + " = " + id);
+		ResultSet rs = executeQuery("SELECT * FROM " + TABLE + " WHERE " + ID + " = " + id);
 		try {
 			if (rs.next()) {
 				entity = parse(entity, rs);
@@ -304,7 +304,7 @@ public class UserDAO extends BaseDAO {
 	@Override
 	public List<BaseEntity> get() {
 
-		ResultSet rs = query("SELECT * FROM " + TABLE + " LEFT JOIN " + CompanyDAO.TABLE + " ON " + CompanyDAO.TABLE
+		ResultSet rs = executeQuery("SELECT * FROM " + TABLE + " LEFT JOIN " + CompanyDAO.TABLE + " ON " + CompanyDAO.TABLE
 				+ "." + CompanyDAO.ID + " = " + ID + " LEFT JOIN " + CandidateDAO.TABLE + " ON " + CandidateDAO.TABLE
 				+ "." + CandidateDAO.ID + " = " + ID);
 		List<BaseEntity> entities = new ArrayList<>();
