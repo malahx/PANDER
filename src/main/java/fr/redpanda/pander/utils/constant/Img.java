@@ -16,4 +16,9 @@ public class Img {
 	public static final String LOGO_IMIE_S = "resources/logoImieMini.png";
 	public static final String MATCHING2 = "resources/MatchingImage2.jpg";
 	public static final String ANIM_BTN = "resources/AnimatedButton2.gif";
+	public static final String HOME_CANDIDATE = "resources/HomeCandidate.png";
+	public static final String HOME_COMPANY = "resources/HomeCompany.png";
+	public static final String LOGO_S = "resources/logoPander2Mini.png";
+	public static final String BANNER = "resources/BandeauImage1.png";
+	public static final String TITLE_S = "resources/titlePanderMini.png";
 }

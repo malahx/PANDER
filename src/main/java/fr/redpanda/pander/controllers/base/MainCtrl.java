@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.event.DocumentEvent;
 
 import fr.redpanda.pander.controllers.HomeCtrl;
@@ -20,6 +21,7 @@ import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.managers.ViewsManager;
+import fr.redpanda.pander.utils.constant.Img;
 import fr.redpanda.pander.utils.constant.TypeData;
 import fr.redpanda.pander.views.MainView;
 import fr.redpanda.pander.views.models.DocListener;
@@ -44,9 +46,11 @@ public abstract class MainCtrl extends BaseCtrl {
 		User user = (User) getViewDatas().get(TypeData.USER);
 		if (user instanceof Candidate) {
 			view.getNavbar().getLblUser().setText("CANDIDAT");
+			view.getNavbar().getLblLogouser().setIcon(new ImageIcon(Img.HOME_CANDIDATE));
 			view.getSidebar().initCandidate((Candidate) user);
 		} else {
 			view.getNavbar().getLblUser().setText("ENTREPRISE");
+			view.getNavbar().getLblLogouser().setIcon(new ImageIcon(Img.HOME_COMPANY));
 			view.getSidebar().initCompany((Company) user);
 		}
 
