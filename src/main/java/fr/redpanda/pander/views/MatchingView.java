@@ -15,6 +15,7 @@ import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
 import fr.redpanda.pander.utils.constant.Img;
+import fr.redpanda.pander.views.base.MainView;
 
 /**
  * @author Gwénolé LE HENAFF

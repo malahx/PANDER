@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 
 import fr.redpanda.pander.utils.constant.Img;
 import fr.redpanda.pander.utils.views.ViewUtils;
+import fr.redpanda.pander.views.base.BaseView;
 
 /**
  * 

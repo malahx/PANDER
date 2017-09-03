@@ -8,7 +8,7 @@ import java.util.Map;
 
 import javax.swing.JFrame;
 
-import fr.redpanda.pander.views.BaseView;
+import fr.redpanda.pander.views.base.BaseView;
 
 /**
  * @author Gwénolé LE HENAFF

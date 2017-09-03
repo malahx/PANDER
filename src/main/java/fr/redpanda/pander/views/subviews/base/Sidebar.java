@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.redpanda.pander.views.subviews;
+package fr.redpanda.pander.views.subviews.base;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -21,7 +21,7 @@ public abstract class Sidebar extends JPanel {
 	 */
 	private static final long serialVersionUID = -3102325959457435902L;
 
-	JButton btnTelechargCV;
+	protected JButton btnTelechargCV;
 
 	/**
 	 * @return the btnTelechargCV

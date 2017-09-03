@@ -10,6 +10,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
+import fr.redpanda.pander.views.base.MainView;
+
 /**
  * 
  * @author Patrice SCHOCH

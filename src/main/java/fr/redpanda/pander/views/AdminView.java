@@ -20,6 +20,7 @@ import java.util.List;
 import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
+import fr.redpanda.pander.views.base.BaseView;
 import fr.redpanda.pander.views.models.AdminTableModel;
 
 import javax.swing.JScrollPane;

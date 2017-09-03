@@ -1,4 +1,4 @@
-package fr.redpanda.pander.views;
+package fr.redpanda.pander.views.base;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -9,9 +9,9 @@ import javax.swing.JPanel;
 import fr.redpanda.pander.utils.views.ViewUtils;
 import fr.redpanda.pander.views.subviews.Footer;
 import fr.redpanda.pander.views.subviews.Navbar;
-import fr.redpanda.pander.views.subviews.Sidebar;
 import fr.redpanda.pander.views.subviews.SidebarEditable;
 import fr.redpanda.pander.views.subviews.SidebarPublic;
+import fr.redpanda.pander.views.subviews.base.Sidebar;
 
 public abstract class MainView extends BaseView implements IMainView {
 

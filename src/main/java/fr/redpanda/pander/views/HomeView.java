@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import fr.redpanda.pander.utils.constant.Img;
+import fr.redpanda.pander.views.base.MainView;
 
 /**
  * @author Gwénolé LE HENAFF

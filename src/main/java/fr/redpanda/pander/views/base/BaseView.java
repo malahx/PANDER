@@ -1,4 +1,4 @@
-package fr.redpanda.pander.views;
+package fr.redpanda.pander.views.base;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

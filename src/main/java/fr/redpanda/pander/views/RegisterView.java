@@ -14,6 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import fr.redpanda.pander.views.base.BaseView;
+
 /**
  * @author Gwénolé LE HENAFF
  *

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.redpanda.pander.views;
+package fr.redpanda.pander.views.base;
 
 /**
  * @author Gwénolé LE HENAFF

@@ -13,6 +13,7 @@ import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.utils.views.ViewUtils;
+import fr.redpanda.pander.views.subviews.base.Sidebar;
 
 /**
  * 

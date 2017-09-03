@@ -23,7 +23,7 @@ import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.managers.ViewsManager;
 import fr.redpanda.pander.utils.constant.Img;
 import fr.redpanda.pander.utils.constant.TypeData;
-import fr.redpanda.pander.views.MainView;
+import fr.redpanda.pander.views.base.MainView;
 import fr.redpanda.pander.views.models.DocListener;
 import fr.redpanda.pander.views.subviews.SidebarEditable;
 
