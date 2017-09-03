@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import fr.redpanda.pander.utils.constant.Img;
 import fr.redpanda.pander.utils.views.ViewUtils;
 
 /**
@@ -22,7 +23,7 @@ import fr.redpanda.pander.utils.views.ViewUtils;
  *
  */
 public class AuthView extends BaseView {
-
+	
 	private JTextField txtLogin;
 	private JPasswordField txtPassword;
 	private JButton btnPassword;
@@ -135,7 +136,7 @@ public class AuthView extends BaseView {
 		contentPane.setLayout(gbl_contentPane);
 
 		JLabel lblLogoImie = new JLabel();
-		ImageIcon imieIcon = new ImageIcon("resources/imie.png");
+		ImageIcon imieIcon = new ImageIcon(Img.LOGO_IMIE);
 		lblLogoImie.setIcon(imieIcon);
 		GridBagConstraints gbc_lblLogoImie = new GridBagConstraints();
 		gbc_lblLogoImie.anchor = GridBagConstraints.WEST;
@@ -145,7 +146,7 @@ public class AuthView extends BaseView {
 		contentPane.add(lblLogoImie, gbc_lblLogoImie);
 
 		JLabel lblPander = new JLabel();
-		ImageIcon titleIcon = new ImageIcon("resources/title.png");
+		ImageIcon titleIcon = new ImageIcon(Img.TITLE);
 		lblPander.setIcon(titleIcon);
 		lblPander.setFont(new Font("Lucida Grande", Font.BOLD, 35));
 		GridBagConstraints gbc_lblPander = new GridBagConstraints();
@@ -155,7 +156,7 @@ public class AuthView extends BaseView {
 		contentPane.add(lblPander, gbc_lblPander);
 
 		JLabel lblLogo = new JLabel();
-		ImageIcon logoIcon = new ImageIcon("resources/logo.png");
+		ImageIcon logoIcon = new ImageIcon(Img.LOGO_PANDER1);
 		lblLogo.setIcon(logoIcon);
 		lblLogo.setFont(new Font("Lucida Grande", Font.PLAIN, 36));
 		GridBagConstraints gbc_lblLogo = new GridBagConstraints();
@@ -285,7 +286,7 @@ public class AuthView extends BaseView {
 		panel_2.add(panel_3, gbc_panel_3);
 
 		btnCandidate = new JButton();
-		ImageIcon registerCandidateIcon = new ImageIcon("resources/registerCandidate.png");
+		ImageIcon registerCandidateIcon = new ImageIcon(Img.REGISTER_CANDIDATE);
 		btnCandidate.setIcon(registerCandidateIcon);
 		btnCandidate.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		panel_3.add(btnCandidate);
@@ -300,7 +301,7 @@ public class AuthView extends BaseView {
 		panel_2.add(panel_4, gbc_panel_4);
 
 		btnCompany = new JButton();
-		ImageIcon registerCompanyIcon = new ImageIcon("resources/registerCompany.png");
+		ImageIcon registerCompanyIcon = new ImageIcon(Img.REGISTER_COMPANY);
 		btnCompany.setIcon(registerCompanyIcon);
 		btnCompany.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		panel_4.add(btnCompany);

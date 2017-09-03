@@ -7,9 +7,10 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import fr.redpanda.pander.utils.constant.Img;
 
 /**
  * @author GwÃ©nolÃ© LE HENAFF
@@ -17,7 +18,6 @@ import javax.swing.JLabel;
  */
 public class HomeView extends MainView {
 
-	private static final Icon MatchingImage = null;
 	private JLabel lblInfo;
 	private JLabel lblText;
 	private JLabel lblLogoMatching;
@@ -90,7 +90,7 @@ public class HomeView extends MainView {
 		super();
 
 		super.pageName = "Accueil";
-		
+
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0 };
 		gridBagLayout.rowHeights = new int[] { 0, 0, 0, 0, 0 };
@@ -99,17 +99,17 @@ public class HomeView extends MainView {
 		getPnlContent().setLayout(gridBagLayout);
 
 		lblInfo = new JLabel("Bienvenue sur PANDER");
-		
+
 		GridBagConstraints gbc_lblInfo = new GridBagConstraints();
 		gbc_lblInfo.insets = new Insets(0, 0, 5, 0);
 		gbc_lblInfo.gridx = 0;
 		gbc_lblInfo.gridy = 0;
 		getPnlContent().add(lblInfo, gbc_lblInfo);
 		lblText = new JLabel("<html>Ce logiciel est un outil de matching qui va vous permettre de<br>"
-				+ "valoriser votre profil et vos compétences en informatique<br>"
-				+ "auprès des entreprises de la région.<br><br>"
-				+ "Compléter votre profil et répondez à notre questionnaires afin<br>"
-				+ "de pouvoir lancer le système de mise en relation.");
+				+ "valoriser votre profil et vos compï¿½tences en informatique<br>"
+				+ "auprï¿½s des entreprises de la rï¿½gion.<br><br>"
+				+ "Complï¿½ter votre profil et rï¿½pondez ï¿½ notre questionnaires afin<br>"
+				+ "de pouvoir lancer le systï¿½me de mise en relation.");
 		GridBagConstraints gbc_lblText = new GridBagConstraints();
 		gbc_lblText.anchor = GridBagConstraints.NORTH;
 		gbc_lblText.insets = new Insets(0, 0, 5, 0);
@@ -117,9 +117,8 @@ public class HomeView extends MainView {
 		gbc_lblText.gridy = 1;
 		getPnlContent().add(lblText, gbc_lblText);
 
-	
 		JLabel lblLogoMatching = new JLabel();
-		ImageIcon matchingIcon = new ImageIcon("resources/MatchingImage2.jpg");
+		ImageIcon matchingIcon = new ImageIcon(Img.MATCHING2);
 		lblLogoMatching.setIcon(matchingIcon);
 		GridBagConstraints gbc_lblLogoMatching = new GridBagConstraints();
 		gbc_lblLogoMatching.insets = new Insets(0, 0, 5, 0);
@@ -127,11 +126,9 @@ public class HomeView extends MainView {
 		gbc_lblLogoMatching.gridy = 2;
 		getPnlContent().add(lblLogoMatching, gbc_lblLogoMatching);
 
-		
 		lblLogoimie = new JLabel("LogoIMIE");
-		GridBagConstraints gbc_lblLogoimie = new GridBagConstraints();
 		JLabel lblLogoImie = new JLabel();
-		ImageIcon imieIcon = new ImageIcon("resources/logoImieMini.png");
+		ImageIcon imieIcon = new ImageIcon(Img.LOGO_IMIE_S);
 		lblLogoImie.setIcon(imieIcon);
 		GridBagConstraints gbc_lblLogoImie = new GridBagConstraints();
 		gbc_lblLogoImie.anchor = GridBagConstraints.EAST;

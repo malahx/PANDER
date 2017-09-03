@@ -10,10 +10,11 @@ import java.awt.Insets;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
+
+import fr.redpanda.pander.utils.constant.Img;
 
 /**
  * @author GwÃ©nolÃ© LE HENAFF
@@ -104,20 +105,15 @@ public class MatchingView extends MainView {
 		// gbc_btnMatching.gridx = 0;
 		// gbc_btnMatching.gridy = 1;
 		// getPnlContent().add(btnMatching, gbc_btnMatching);
-		
-		
-		// Test d'insertion du gif animé :   (Vérification fonctionnement impossible - pas accès à la vue)
+
+		// Test d'insertion du gif animï¿½ : (Vï¿½rification fonctionnement impossible - pas
+		// accï¿½s ï¿½ la vue)
 		btnMatching = new JButton();
-		ImageIcon matchingIconButton = new ImageIcon("resources/AnimatedButton2.gif");
+		ImageIcon matchingIconButton = new ImageIcon(Img.ANIM_BTN);
 		btnMatching.setIcon(matchingIconButton);
 		btnMatching.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
 		getPnlContent().add(btnMatching, btnMatching);
 
-		
-		
-		
-		
-		
 	}
 
 }
