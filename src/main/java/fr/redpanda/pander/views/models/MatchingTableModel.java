@@ -12,29 +12,23 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
-import fr.redpanda.pander.entities.Skill;
-import fr.redpanda.pander.entities.base.BaseEntity;
-import fr.redpanda.pander.entities.base.IBaseSkillEntity;
+import fr.redpanda.pander.businesscode.Matching;
 
 /**
  * @author Gwénolé LE HENAFF
  *
  */
-public class SkillTableModel extends AbstractTableModel {
-
-	private static final long serialVersionUID = -4831274774359919486L;
-
-	private final String[] title;
-	private final List<BaseEntity> skills;
-	private final IBaseSkillEntity entity;
-	private final TableRowSorter<TableModel> sorter;
+public class MatchingTableModel extends AbstractTableModel {
 
 	/**
-	 * @return the skills
+	 * 
 	 */
-	public List<BaseEntity> getSkills() {
-		return skills;
-	}
+	private static final long serialVersionUID = -7656754488588885879L;
+
+	private final String[] title;
+	private final List<Matching> matchings;
+	private final TableRowSorter<TableModel> sorter;
+	private final boolean isCandidate;
 
 	/**
 	 * @return the title
@@ -44,23 +38,34 @@ public class SkillTableModel extends AbstractTableModel {
 	}
 
 	/**
+	 * @return the matchings
+	 */
+	public List<Matching> getMatchings() {
+		return matchings;
+	}
+
+	/**
 	 * @return the sorter
 	 */
 	public TableRowSorter<TableModel> getSorter() {
 		return sorter;
 	}
 
+	public void add(Matching matching) {
+		matchings.add(matching);
+		fireTableDataChanged();
+	}
+
 	/**
-	 * @param entity
-	 * @param skills
 	 * @param title
-	 * @param type
-	 * 
+	 * @param matchings
 	 */
-	public SkillTableModel(String[] title, List<BaseEntity> skills, IBaseSkillEntity entity) {
-		this.title = title;
-		this.skills = skills;
-		this.entity = entity;
+	public MatchingTableModel(List<Matching> matchings, boolean isCandidate) {
+		super();
+		this.title = isCandidate ? new String[] { "Match", "Nom", "Email", "Poste" }
+				: new String[] { "Match", "Prénom", "Nom", "Email" };
+		this.matchings = matchings;
+		this.isCandidate = isCandidate;
 		this.sorter = new TableRowSorter<TableModel>(this);
 		List<RowSorter.SortKey> sortKeys = new ArrayList<RowSorter.SortKey>();
 		for (int i = 0; i < title.length; i++) {
@@ -77,7 +82,7 @@ public class SkillTableModel extends AbstractTableModel {
 	 */
 	@Override
 	public int getRowCount() {
-		return skills.size();
+		return matchings.size();
 	}
 
 	/*
@@ -92,7 +97,7 @@ public class SkillTableModel extends AbstractTableModel {
 
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
-		return getValueAt(0, columnIndex).getClass();
+		return String.class;
 	}
 
 	/*
@@ -112,45 +117,30 @@ public class SkillTableModel extends AbstractTableModel {
 	 */
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return getValueAt(skills.get(rowIndex), columnIndex);
+		return getValueAt(matchings.get(rowIndex), columnIndex);
 	}
 
 	/**
 	 * 
-	 * @param skill
+	 * @param matching
 	 *            the object to draw
 	 * @param columnIndex
 	 *            the index column to show
 	 * @return the value of the object
 	 */
-	public Object getValueAt(BaseEntity skill, int columnIndex) {
+	public Object getValueAt(Matching matching, int columnIndex) {
 		switch (columnIndex) {
 		case 0:
-			return entity.getSkills().contains(skill);
+			return matching.getMatchingCalculation();
 		case 1:
-			return ((Skill) skill).getName();
+			return isCandidate ? matching.getCompany().getName() : matching.getCandidate().getFirstname();
+		case 2:
+			return isCandidate ? matching.getCompany().getEmail() : matching.getCandidate().getLastname();
+		case 3:
+			return isCandidate ? matching.getJob().getName() : matching.getCandidate().getEmail();
 		default:
 			throw new IllegalArgumentException();
 		}
-	}
-
-	@Override
-	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-		boolean value = (boolean) aValue;
-		Skill skill = (Skill) skills.get(rowIndex);
-		if (columnIndex == 0) {
-			if (value) {
-				entity.getSkills().add(skill);
-			} else {
-				entity.getSkills().remove(skill);
-			}
-			fireTableDataChanged();
-		}
-	}
-
-	@Override
-	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return columnIndex == 0;
 	}
 
 }

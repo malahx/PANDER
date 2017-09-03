@@ -14,7 +14,7 @@ public class Matching {
 	private Candidate candidate;
 	private Company company;
 	private Job job;
-	private Double calculateRatio;
+	private Long calculateRatio;
 
 	/**
 	 * @return the candidate
@@ -112,7 +112,7 @@ public class Matching {
 		return returnEqualSkills;
 	}
 
-	public double matchingCalc() {
+	public double getMatchingCalculation() {
 
 		if (calculateRatio == null) {
 
@@ -125,12 +125,23 @@ public class Matching {
 
 			List<Skill> equalTechSkills = getEqualSkills(candidateTechSkills, jobTechSkills);
 			List<Skill> equalSoftSkills = getEqualSkills(candidateSoftSkills, jobSoftSkills);
+			double techMatchingResult;
+			double jokerMatchingResult;
+			if (jobTechSkills.size() != 0) {
+				techMatchingResult = (equalTechSkills.size()) / (jobTechSkills.size());
+				jokerMatchingResult = (jobTechSkills.size() - equalTechSkills.size()) / (jobTechSkills.size());
+			} else {
+				techMatchingResult = 1;
+				jokerMatchingResult = 1;
+			}
+			double softMatchingResult;
+			if (jobSoftSkills.size() != 0) {
+					softMatchingResult = (equalSoftSkills.size()) / (jobSoftSkills.size());
+			} else {
+				softMatchingResult = 1;
+			}
 
-			double techMatchingResult = (equalTechSkills.size()) / (jobTechSkills.size());
-			double softMatchingResult = (equalSoftSkills.size()) / (jobSoftSkills.size());
-			double jokerSkills = (jobTechSkills.size() - equalTechSkills.size()) / (jobTechSkills.size());
-
-			calculateRatio = (techMatchingResult * 60) + (softMatchingResult * 30) + (jokerSkills * 10);
+			calculateRatio = Math.round((techMatchingResult * 60) + (softMatchingResult * 30) + (jokerMatchingResult * 10));
 
 		}
 		return calculateRatio;

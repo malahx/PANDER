@@ -16,7 +16,6 @@ import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.Job;
 import fr.redpanda.pander.entities.User;
-import fr.redpanda.pander.entities.base.BaseEntity;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -24,29 +23,32 @@ import fr.redpanda.pander.entities.base.BaseEntity;
  */
 public class MatchingFinder {
 
-	private List<BaseEntity> matchingDone;
-
-	protected MatchingFinder() {
-		super();
-	}
-
-	protected static MatchingFinder instance = null;
+	private final List<Matching> matchingsDone;
+	private final boolean isCandidate;
+	private final User user;
 
 	/**
-	 * get and instance the singleton
-	 * 
-	 * @return the singleton
+	 * @return the matchingsDone
 	 */
-	public static MatchingFinder getInstance() {
-		if (instance == null) {
-			instance = new MatchingFinder();
-		}
-		return instance;
+	public List<Matching> getMatchingsDone() {
+		return matchingsDone;
 	}
 
-	public List<Matching> findBestResult(User user) {
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
 
-		boolean isCandidate = user instanceof Candidate;
+	public MatchingFinder(User user) {
+		super();
+		this.matchingsDone = new ArrayList<>();
+		this.isCandidate = user instanceof Candidate;
+		this.user = user;
+	}
+
+	public List<Matching> findBestResult() {
 
 		List<Matching> matchings = new ArrayList<>();
 		Company company = null;
@@ -55,7 +57,7 @@ public class MatchingFinder {
 		if (isCandidate) {
 			candidate = (Candidate) user;
 			query = "SELECT * FROM " + UserDAO.TABLE + " INNER JOIN " + CompanyDAO.TABLE + " ON " + CompanyDAO.ID
-					+ " = " + UserDAO.ID + " INNER JOIN " + JobDAO.TABLE + " ON " + JobDAO.ID_COMPANY + " = "
+					+ " = " + UserDAO.ID + " INNER JOIN " + JobDAO.TABLE + " ON " + JobDAO.ID_JOB + " = "
 					+ CompanyDAO.ID + " WHERE " + JobDAO.ID + " NOT IN (" + matchingDone() + ") GROUP BY " + UserDAO.ID
 					+ " ORDER BY count(" + UserDAO.ID + ") DESC LIMIT 10";
 		} else {
@@ -70,17 +72,22 @@ public class MatchingFinder {
 		try {
 			while (rs.next()) {
 				if (isCandidate) {
-					candidate = (Candidate) CandidateDAO.getInstance().parse(rs);
-					CandidateDAO.getInstance().getSkills(candidate);
+					candidate = (Candidate) user;
+					company = (Company) CompanyDAO.getInstance().parse(rs);
+					JobDAO.getInstance().get(company);
+					for (Job job : company.getJobs()) {
+						JobDAO.getInstance().getSkills(job);
+					}
 				} else {
 					company = (Company) user;
-					JobDAO.getInstance().get(company);
+					candidate = (Candidate) CandidateDAO.getInstance().parse(rs);
+					CandidateDAO.getInstance().getSkills(candidate);
 				}
 				for (Job job : company.getJobs()) {
-					JobDAO.getInstance().getSkills(job);
-					matchings.add(new Matching(candidate, company, job));
+					Matching matching = new Matching(candidate, company, job);
+					matchings.add(matching);
+					matchingsDone.add(matching);
 				}
-				matchingDone.add(isCandidate ? candidate : company);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -93,13 +100,10 @@ public class MatchingFinder {
 	 * @return
 	 */
 	private String matchingDone() {
-		String result = null;
-		for (BaseEntity entity : matchingDone) {
-			if (result == null) {
-				result = String.valueOf(entity.getId());
-			} else {
-				result += "," + entity.getId();
-			}
+		String result = "0";
+		for (Matching matching : matchingsDone) {
+			double id = isCandidate ? matching.getCandidate().getId() : matching.getJob().getId();
+			result += "," + id;
 		}
 		return result;
 	}

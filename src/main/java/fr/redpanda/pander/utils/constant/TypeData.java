@@ -16,5 +16,6 @@ public interface TypeData {
 	public String DB_NAME = "dbName";
 	public String LOGIN = "login";
 	public String PASSWORD = "pass";
+	public String MATCHING_FINDER = "matchingFinder";
 	
 }
