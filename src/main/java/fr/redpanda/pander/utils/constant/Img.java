@@ -21,4 +21,5 @@ public class Img {
 	public static final String LOGO_S = "resources/logoPander2Mini.png";
 	public static final String BANNER = "resources/BandeauImage1.png";
 	public static final String TITLE_S = "resources/titlePanderMini.png";
+	public static final String PROFILE_LOGO = "resources/ProfileType.png";
 }

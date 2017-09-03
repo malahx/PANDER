@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -11,6 +12,7 @@ import javax.swing.JTextField;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.User;
+import fr.redpanda.pander.utils.constant.Img;
 import fr.redpanda.pander.utils.views.ViewUtils;
 import fr.redpanda.pander.views.subviews.base.Sidebar;
 
@@ -25,6 +27,8 @@ public class SidebarEditable extends Sidebar {
 	 * 
 	 */
 	private static final long serialVersionUID = -7876599813851320634L;
+
+	private static final String PROFILE_LOGO = null;
 
 	private JTextField txtDescriptionTitle;
 	private JTextField txtCp;
@@ -434,13 +438,16 @@ public class SidebarEditable extends Sidebar {
 
 		initLayout();
 
-		// lblPhoto = new JLabel("PHOTO");
-		// GridBagConstraints gbc_lblPhoto = new GridBagConstraints();
-		// gbc_lblPhoto.gridheight = 3;
-		// gbc_lblPhoto.insets = new Insets(0, 0, 5, 5);
-		// gbc_lblPhoto.gridx = 0;
-		// gbc_lblPhoto.gridy = 2;
-		// add(lblPhoto, gbc_lblPhoto);
+		JLabel lblPhoto = new JLabel();
+		ImageIcon logoPhotoProfile = new ImageIcon(Img.PROFILE_LOGO);
+		lblPhoto.setIcon(logoPhotoProfile);
+		lblPhoto.setFont(new Font("Lucida Grande", Font.PLAIN, 36));
+		GridBagConstraints gbc_lblPhoto = new GridBagConstraints();
+		gbc_lblPhoto.gridheight = 3;
+		gbc_lblPhoto.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPhoto.gridx = 0;
+		gbc_lblPhoto.gridy = 2;
+		add(lblPhoto, gbc_lblPhoto);
 
 		lblNameOne = new JLabel("Name1");
 		lblNameOne.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
