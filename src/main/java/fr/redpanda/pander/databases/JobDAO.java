@@ -61,7 +61,7 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 		super(TABLE, ID);
 	}
 
-	protected static JobDAO instance = null;
+	private static JobDAO instance = null;
 
 	/**
 	 * get and instance the singleton
@@ -94,13 +94,14 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 			job.setUpdatedAt(rs.getTimestamp(UPDATED_AT));
 		} catch (SQLException e) {
 			e.printStackTrace();
-			job = null;
+			return null;
 		}
 		return job;
 
 	}
 
 	public String parse(Job job, Company company) {
+		//TODO à revoir en stringbuilder
 		String result = "'" + (job.getName() == null ? "" : job.getName()) + "',";
 		result += "'" + (job.getPresentation() == null ? "" : job.getPresentation()) + "',";
 		result += "'" + (job.getLink() == null ? "" : job.getLink()) + "',";
@@ -146,7 +147,7 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String parseUpdate(BaseEntity entity) {
-
+		//TODO à revoir en stringbuilder
 		Job job = (Job) entity;
 		String result = NAME + " = '" + job.getName() + "',";
 		result += PRESENTATION + " = '" + job.getPresentation() + "',";
@@ -167,6 +168,7 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String fields() {
+		//TODO à revoir en stringbuilder
 		return NAME + "," + PRESENTATION + "," + LINK + "," + CONTACT + "," + CREATED_AT + "," + UPDATED_AT + ","
 				+ ID_COMPANY;
 	}

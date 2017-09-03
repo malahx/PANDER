@@ -32,8 +32,9 @@ public class AdminCtrl extends BaseCtrl {
 	 * 
 	 */
 	public AdminCtrl(JFrame frame) {
+		super();
 		super.frame = frame;
-		super.view = new AdminView(this.frame);
+		super.view = new AdminView();
 	}
 
 	/*
@@ -53,69 +54,37 @@ public class AdminCtrl extends BaseCtrl {
 	@Override
 	public void initEvent() {
 		AdminView view = (AdminView) this.view;
-		view.getTglbtnUsers().addActionListener(new ActionListener() {
+		initBtnHeader(view);
+		initEdit(view);
+		view.getBtnExit().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
-				String[] title = { "Désactiver", "Email", "Mise à jour" };
-				view.getLblSubtitle().setText("Utilisateurs");
-				view.updateDatas(title, UserDAO.getInstance().get());
-				view.getTglbtnSkills().setSelected(false);
-				view.getBtnBtn1().setText("Générer mot de passe");
-				view.getTxtSkill().setText("");
-				view.getTxtSkill().setEditable(false);
-				view.getBtnBtn1().setEnabled(false);
-				view.getLblInfo().setText("Mot de passe généré : ");
-				view.getBtnBtn2().setEnabled(false);
+				frame.dispose();
 			}
 		});
-		view.getTglbtnSkills().addActionListener(new ActionListener() {
-
+		view.getTblTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				String[] title = { "Nom", "Type" };
-				view.updateDatas(title, SkillDAO.getInstance().get());
-				view.getTglbtnUsers().setSelected(false);
-				view.getBtnBtn1().setText("Ajouter compétence");
-				view.getTxtSkill().setText("");
-				view.getTxtSkill().setEditable(true);
-				view.getBtnBtn1().setEnabled(false);
-				view.getLblSubtitle().setText("Compétences");
-				view.getLblInfo().setText("Nouvelle compétence : ");
-				view.getBtnBtn2().setEnabled(false);
+			public void valueChanged(ListSelectionEvent evt) {
+				if (evt.getValueIsAdjusting()) {
+					return;
+				}
+				refreshButton(view);
 			}
 		});
+		view.getTglbtnUsers().doClick();
+	}
+
+	private void initEdit(AdminView view) {
 		view.getBtnBtn1().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (view.getTglbtnUsers().isSelected()) {
-					int selectedRow = view.getTblTable().getSelectedRow();
-					if (selectedRow >= 0) {
-						AdminTableModel model = (AdminTableModel) view.getTblTable().getModel();
-						Object object = model.getObjects().get(selectedRow);
-						if (object instanceof User) {
-							User user = (User) object;
-							String password = StringManager.createString();
-							user.setPassword(password);
-							view.getTxtSkill().setText(password);
-							UserDAO.getInstance().update(user);
-							model.fireTableDataChanged();
-							view.getTblTable().setRowSelectionInterval(selectedRow, selectedRow);
-						}
-					}
+					generatePassword(view);
 				}
 				if (view.getTglbtnSkills().isSelected()) {
-					String text = view.getTxtSkill().getText();
-					if (text.length() > 0) {
-						Skill skill = new Skill(text, TypeSkill.TECH);
-						SkillDAO.getInstance().insert(skill);
-						AdminTableModel model = (AdminTableModel) view.getTblTable().getModel();
-						model.getObjects().add(skill);
-						model.fireTableDataChanged();
-					}
+					addTechSkill(view);
 				}
 			}
 		});
@@ -124,31 +93,10 @@ public class AdminCtrl extends BaseCtrl {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				int selectedRow = view.getTblTable().getSelectedRow();
-				if (selectedRow >= 0) {
-					AdminTableModel model = (AdminTableModel) view.getTblTable().getModel();
-					Object object = model.getObjects().get(selectedRow);
-					if (object instanceof User) {
-						UserDAO.getInstance().delete((User) object);
-						view.getBtnBtn1().setEnabled(false);
-					}
-					if (object instanceof Skill) {
-						SkillDAO.getInstance().delete((Skill) object);
-					}
-					model.getObjects().remove(selectedRow);
-					model.fireTableDataChanged();
-				}
-				view.getBtnBtn2().setEnabled(false);
-
+				deleteRow(view);
 			}
 		});
-		view.getBtnExit().addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			}
-		});
 		view.getTxtSkill().getDocument().addDocumentListener(new DocListener() {
 
 			@Override
@@ -157,19 +105,102 @@ public class AdminCtrl extends BaseCtrl {
 			}
 
 		});
-		view.getTblTable().getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+	}
+
+	private void initBtnHeader(AdminView view) {
+		view.getTglbtnUsers().addActionListener(new ActionListener() {
+
 			@Override
-			public void valueChanged(ListSelectionEvent evt) {
-				if (evt.getValueIsAdjusting()) {
-					return;
-				}
-				view.getBtnBtn2().setEnabled(true);
-				if (view.getTglbtnUsers().isSelected()) {
-					view.getBtnBtn1().setEnabled(true);
-				}
+			public void actionPerformed(ActionEvent e) {
+				initUser(view);
 			}
 		});
-		view.getTglbtnUsers().doClick();
+		view.getTglbtnSkills().addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				initSkill(view);
+			}
+		});
+	}
+
+	protected void refreshButton(AdminView view) {
+		view.getBtnBtn2().setEnabled(true);
+		if (view.getTglbtnUsers().isSelected()) {
+			view.getBtnBtn1().setEnabled(true);
+		}
+	}
+
+	protected void deleteRow(AdminView view) {
+		int selectedRow = view.getTblTable().getSelectedRow();
+		if (selectedRow >= 0) {
+			AdminTableModel model = (AdminTableModel) view.getTblTable().getModel();
+			Object object = model.getObjects().get(selectedRow);
+			if (object instanceof User) {
+				UserDAO.getInstance().delete((User) object);
+				view.getBtnBtn1().setEnabled(false);
+			}
+			if (object instanceof Skill) {
+				SkillDAO.getInstance().delete((Skill) object);
+			}
+			model.getObjects().remove(selectedRow);
+			model.fireTableDataChanged();
+		}
+		view.getBtnBtn2().setEnabled(false);
+	}
+
+	protected void addTechSkill(AdminView view) {
+		String text = view.getTxtSkill().getText();
+		if (text.length() > 0) {
+			Skill skill = new Skill(text, TypeSkill.TECH);
+			SkillDAO.getInstance().insert(skill);
+			AdminTableModel model = (AdminTableModel) view.getTblTable().getModel();
+			model.getObjects().add(skill);
+			model.fireTableDataChanged();
+		}
+	}
+
+	protected void generatePassword(AdminView view) {
+		int selectedRow = view.getTblTable().getSelectedRow();
+		if (selectedRow >= 0) {
+			AdminTableModel model = (AdminTableModel) view.getTblTable().getModel();
+			Object object = model.getObjects().get(selectedRow);
+			if (object instanceof User) {
+				User user = (User) object;
+				String password = StringManager.createString();
+				user.setPassword(password);
+				view.getTxtSkill().setText(password);
+				UserDAO.getInstance().update(user);
+				model.fireTableDataChanged();
+				view.getTblTable().setRowSelectionInterval(selectedRow, selectedRow);
+			}
+		}
+	}
+
+	protected void initSkill(AdminView view) {
+		String[] title = { "Nom", "Type" };
+		view.updateDatas(title, SkillDAO.getInstance().get());
+		view.getTglbtnUsers().setSelected(false);
+		view.getBtnBtn1().setText("Ajouter compétence");
+		view.getTxtSkill().setText("");
+		view.getTxtSkill().setEditable(true);
+		view.getBtnBtn1().setEnabled(false);
+		view.getLblSubtitle().setText("Compétences");
+		view.getLblInfo().setText("Nouvelle compétence : ");
+		view.getBtnBtn2().setEnabled(false);
+	}
+
+	private void initUser(AdminView view) {
+		String[] title = { "Email", "Mise à jour" };
+		view.getLblSubtitle().setText("Utilisateurs");
+		view.updateDatas(title, UserDAO.getInstance().get());
+		view.getTglbtnSkills().setSelected(false);
+		view.getBtnBtn1().setText("Générer mot de passe");
+		view.getTxtSkill().setText("");
+		view.getTxtSkill().setEditable(false);
+		view.getBtnBtn1().setEnabled(false);
+		view.getLblInfo().setText("Mot de passe généré : ");
+		view.getBtnBtn2().setEnabled(false);
 	}
 
 	/*

@@ -42,7 +42,7 @@ public class UserDAO extends BaseDAO {
 		super(TABLE, ID);
 	}
 
-	protected static UserDAO instance = null;
+	private static UserDAO instance = null;
 
 	/**
 	 * get and instance the singleton
@@ -113,6 +113,7 @@ public class UserDAO extends BaseDAO {
 			user.setUpdatedAt(rs.getTimestamp(UPDATED_AT));
 		} catch (SQLException e) {
 			e.printStackTrace();
+			return null;
 		}
 		return user;
 
@@ -165,7 +166,7 @@ public class UserDAO extends BaseDAO {
 	 */
 	@Override
 	public String parse(BaseEntity entity) {
-
+		//TODO à revoir en stringbuilder
 		String result = "";
 		User user = (User) entity;
 		result += "'" + (user.getEmail() == null ? "" : user.getEmail()) + "',";
@@ -193,7 +194,7 @@ public class UserDAO extends BaseDAO {
 	 */
 	@Override
 	public String parseUpdate(BaseEntity entity) {
-
+		//TODO à revoir en stringbuilder
 		String result = "";
 		User user = (User) entity;
 		result += EMAIL + " = '" + user.getEmail() + "', ";
@@ -219,7 +220,7 @@ public class UserDAO extends BaseDAO {
 	 */
 	@Override
 	public String fields() {
-
+		//TODO à revoir en stringbuilder
 		String result = "";
 		result += EMAIL + ",";
 		result += PASSWORD + ",";

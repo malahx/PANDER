@@ -17,15 +17,16 @@ public class StringManager {
 	}
 
 	public static String splitWords(String field) {
-		String res = "";
+		StringBuilder stringBuilder = new StringBuilder();
 		for (int i = 0; i < field.length(); i++) {
 			Character ch = field.charAt(i);
-			if (Character.isUpperCase(ch))
-				res += " " + Character.toUpperCase(ch);
-			else
-				res += ch;
+			if (Character.isUpperCase(ch)) {
+				stringBuilder.append(' ').append(Character.toUpperCase(ch));
+			} else {
+				stringBuilder.append(ch);
+			}
 		}
-		return res;
+		return stringBuilder.toString();
 	}
 
 	public static String toTitle(String field) {
@@ -59,15 +60,15 @@ public class StringManager {
 	 * @return
 	 */
 	public static String createString() {
-		String string = "";
+		StringBuilder stringBuilder = new StringBuilder();
 		int end = ThreadLocalRandom.current().nextInt(6, 12);
 		for (int i = 0; i < end; i++) {
 			int type = ThreadLocalRandom.current().nextInt(0, 3);
-			string += type == 0 ? (char) ThreadLocalRandom.current().nextInt(65, 90 + 1)
+			stringBuilder.append(type == 0 ? (char) ThreadLocalRandom.current().nextInt(65, 90 + 1)
 					: type == 1 ? (char) ThreadLocalRandom.current().nextInt(97, 122 + 1)
-							: (char) ThreadLocalRandom.current().nextInt(48, 58);
+							: (char) ThreadLocalRandom.current().nextInt(48, 58));
 		}
-		return string;
+		return stringBuilder.toString();
 	}
 
 }

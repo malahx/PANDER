@@ -189,13 +189,13 @@ public class DumpFields {
 		return result;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unused" })
+	@SuppressWarnings({ "rawtypes" })
 	private static void SubFielder(Map<String, Object> result, Entry<String, Object> item) {
 		Map<String, Object> subResult = new HashMap<String, Object>();
 
 		result.put(item.getKey(), " :");
 
-		Class klazz = item.getValue().getClass();
+		//Class klazz = item.getValue().getClass();
 
 		int i = 0;
 

@@ -24,14 +24,15 @@ import fr.redpanda.pander.views.models.MatchingTableModel;
  */
 public class MatchingCtrl extends MainCtrl {
 
-	User user;
-	MatchingFinder mFinder;
-	MatchingTableModel model;
+	private User user;
+	private MatchingFinder mFinder;
+	private MatchingTableModel model;
 
 	/**
 	 * 
 	 */
 	public MatchingCtrl(JFrame frame) {
+		super();
 		super.frame = frame;
 		super.view = new MatchingView();
 	}

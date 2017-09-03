@@ -120,7 +120,7 @@ public class ViewUtils {
 		int frameHeight = 600;
 		int maxFrameWidth = 1500;
 		int maxFrameHeight = 900;
-		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
 		frame.setMaximumSize(new Dimension(maxFrameWidth, maxFrameHeight));
 		center(frame);

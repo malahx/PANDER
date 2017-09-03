@@ -101,13 +101,13 @@ public class MatchingFinder {
 	 * @return
 	 */
 	private String matchingDone() {
-		String result = "0";
+		StringBuilder result = new StringBuilder();
+		result.append('0');
 		for (Matching matching : matchingsDone) {
 			double id = isCandidate ? matching.getJob().getId() : matching.getCandidate().getId();
-			result += "," + String.valueOf(id);
+			result.append(',').append(String.valueOf(id));
 		}
-		System.out.println(result);
-		return result;
+		return result.toString();
 	}
 
 }

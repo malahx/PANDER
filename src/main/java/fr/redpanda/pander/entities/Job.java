@@ -106,7 +106,7 @@ public class Job extends BaseEntity implements IBaseSkillEntity {
 	 * @return the createdAt
 	 */
 	public Date getCreatedAt() {
-		return createdAt;
+		return createdAt != null ? new Date(createdAt.getTime()) : null;
 	}
 
 	/**
@@ -114,14 +114,14 @@ public class Job extends BaseEntity implements IBaseSkillEntity {
 	 *            the createdAt to set
 	 */
 	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+		this.createdAt = createdAt != null ? new Date(createdAt.getTime()) : null;
 	}
 
 	/**
 	 * @return the updatedAt
 	 */
 	public Date getUpdatedAt() {
-		return updatedAt;
+		return updatedAt != null ? new Date(updatedAt.getTime()) : null;
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class Job extends BaseEntity implements IBaseSkillEntity {
 	 *            the updatedAt to set
 	 */
 	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
+		this.updatedAt = updatedAt != null ? new Date(updatedAt.getTime()) : null;
 	}
 
 	/**

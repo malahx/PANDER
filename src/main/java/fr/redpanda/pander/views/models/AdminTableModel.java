@@ -3,7 +3,6 @@
  */
 package fr.redpanda.pander.views.models;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,9 +21,9 @@ public class AdminTableModel extends AbstractTableModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 208988814142622942L;
-	
-	private String[] title;
-	private List<Object> objects;
+
+	private final String[] title;
+	private final List<Object> objects;
 
 	/**
 	 * @return the users
@@ -32,33 +31,17 @@ public class AdminTableModel extends AbstractTableModel {
 	public List<Object> getObjects() {
 		return objects;
 	}
-	
-	/**
-	 * @param objects the objects to set
-	 */
-	public void setObjects(List<Object> objects) {
-		this.objects = objects;
-	}
-
-	/**
-	 * @return the title
-	 */
-	public String[] getTitle() {
-		return title;
-	}
-
-	/**
-	 * @param title the title to set
-	 */
-	public void setTitle(String[] title) {
-		this.title = title;
-	}
 
 	/**
 	 * 
 	 */
-	public AdminTableModel() {
-		objects = new ArrayList<>();
+	public AdminTableModel(String[] title, List<Object> objects) {
+		super();
+		this.title = new String[title.length];
+		for (int i = 0; i < title.length; i++) {
+			this.title[i] = title[i];
+		}
+		this.objects = objects;
 	}
 
 	/*
@@ -91,10 +74,10 @@ public class AdminTableModel extends AbstractTableModel {
 	 * 
 	 * @see javax.swing.table.TableModel#getColumnName(int, int)
 	 */
-    @Override
-    public String getColumnName(int column) {
-        return title[column];
-    }
+	@Override
+	public String getColumnName(int column) {
+		return title[column];
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -112,21 +95,23 @@ public class AdminTableModel extends AbstractTableModel {
 		}
 		return object;
 	}
-	
+
 	/**
 	 * 
-	 * @param user the object to draw
-	 * @param columnIndex the index column to show
+	 * @param user
+	 *            the object to draw
+	 * @param columnIndex
+	 *            the index column to show
 	 * @return the value of the object
 	 */
 	public Object getValueAt(User user, int columnIndex) {
 		switch (columnIndex) {
+//		case 0:
+//			return user.isDisabled();
 		case 0:
-			return user.isDisabled();
-		case 1:
 			return user.getEmail();
 
-		case 2:
+		case 1:
 			Date createdAt = user.getCreatedAt();
 			Date updateAt = user.getUpdatedAt();
 			return updateAt != null ? updateAt : (createdAt != null ? createdAt : new Date());
@@ -134,11 +119,13 @@ public class AdminTableModel extends AbstractTableModel {
 			throw new IllegalArgumentException();
 		}
 	}
-	
+
 	/**
 	 * 
-	 * @param user the object to draw
-	 * @param columnIndex the index column to show
+	 * @param user
+	 *            the object to draw
+	 * @param columnIndex
+	 *            the index column to show
 	 * @return the value of the object
 	 */
 	public Object getValueAt(Skill skill, int columnIndex) {

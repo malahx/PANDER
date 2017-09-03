@@ -61,7 +61,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 		super(TABLE, ID);
 	}
 
-	protected static CandidateDAO instance = null;
+	private static CandidateDAO instance = null;
 
 	/**
 	 * get and instance the singleton
@@ -84,6 +84,11 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	public BaseEntity parse(ResultSet rs) {
 
 		Candidate candidate = (Candidate) super.parse(new Candidate(), rs);
+
+		if (candidate == null) {
+			return null;
+		}
+
 		try {
 			// candidate.setId(rs.getDouble(ID));
 			candidate.setFirstname(rs.getString(FIRSTNAME));
@@ -97,7 +102,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 			candidate.setCv(rs.getString(CV));
 		} catch (SQLException e) {
 			e.printStackTrace();
-			candidate = null;
+			return null;
 		}
 		return candidate;
 
@@ -112,7 +117,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String parse(BaseEntity entity) {
-
+		//TODO à revoir en stringbuilder
 		String result = "";
 		Candidate candidate = (Candidate) entity;
 		result += "'" + candidate.getId() + "',";
@@ -138,7 +143,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String parseUpdate(BaseEntity entity) {
-
+		//TODO à revoir en stringbuilder
 		String result = "";
 		Candidate candidate = (Candidate) entity;
 		result += FIRSTNAME + " = '" + candidate.getFirstname() + "',";
@@ -164,7 +169,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String fields() {
-
+		//TODO à revoir en stringbuilder
 		String result = "";
 		result += ID + ",";
 		result += FIRSTNAME + ",";
@@ -191,10 +196,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	public boolean checkFields(BaseEntity entity) {
 
 		Candidate candidate = (Candidate) entity;
-		if (candidate.getFirstname() == null || candidate.getLastname() == null) {
-			return false;
-		}
-		return true;
+		return candidate.getFirstname() == null || candidate.getLastname() == null;
 
 	}
 

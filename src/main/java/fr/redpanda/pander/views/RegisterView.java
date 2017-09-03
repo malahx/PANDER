@@ -272,6 +272,7 @@ public class RegisterView extends BaseView {
 	 * Create the frame.
 	 */
 	public RegisterView() {
+		super();
 		pageName = "S'enregistrer";
 		contentPane = new JPanel();
 		GridBagLayout gbl_contentPane = new GridBagLayout();

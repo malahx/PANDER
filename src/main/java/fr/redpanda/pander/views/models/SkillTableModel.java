@@ -24,7 +24,7 @@ public class SkillTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = -4831274774359919486L;
 
-	private final String[] title;
+	private final String[] title = { "Activer", "Compétence" };
 	private final List<BaseEntity> skills;
 	private final IBaseSkillEntity entity;
 	private final TableRowSorter<TableModel> sorter;
@@ -34,13 +34,6 @@ public class SkillTableModel extends AbstractTableModel {
 	 */
 	public List<BaseEntity> getSkills() {
 		return skills;
-	}
-
-	/**
-	 * @return the title
-	 */
-	public String[] getTitle() {
-		return title;
 	}
 
 	/**
@@ -57,8 +50,8 @@ public class SkillTableModel extends AbstractTableModel {
 	 * @param type
 	 * 
 	 */
-	public SkillTableModel(String[] title, List<BaseEntity> skills, IBaseSkillEntity entity) {
-		this.title = title;
+	public SkillTableModel(List<BaseEntity> skills, IBaseSkillEntity entity) {
+		super();
 		this.skills = skills;
 		this.entity = entity;
 		this.sorter = new TableRowSorter<TableModel>(this);

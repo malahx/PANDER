@@ -66,14 +66,22 @@ public abstract class MainCtrl extends BaseCtrl {
 
 		MainView view = (MainView) this.view;
 
+		initNavbar(view);
+
+		initFooter(view);
+		initEditSidebar(view);
+
+	}
+
+	/**
+	 * @param view
+	 */
+	private void initNavbar(MainView view) {
 		view.getNavbar().getTglbtnHome().addItemListener(new ItemListener() {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				if (ViewsManager.getInstance().isCurrentController(HomeCtrl.class)) {
-					return;
-				}
-				ViewsManager.getInstance().next(new HomeCtrl(frame));
+				gotoHome();
 			}
 		});
 
@@ -81,10 +89,7 @@ public abstract class MainCtrl extends BaseCtrl {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				if (ViewsManager.getInstance().isCurrentController(ProfileCtrl.class)) {
-					return;
-				}
-				ViewsManager.getInstance().next(new ProfileCtrl(frame));
+				gotoProfile();
 			}
 		});
 
@@ -92,18 +97,20 @@ public abstract class MainCtrl extends BaseCtrl {
 
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				if (ViewsManager.getInstance().isCurrentController(MatchingCtrl.class)) {
-					return;
-				}
-				ViewsManager.getInstance().next(new MatchingCtrl(frame));
+				gotoMatching();
 			}
 		});
+	}
 
+	/**
+	 * @param view
+	 */
+	private void initFooter(MainView view) {
 		view.getFooter().getBtnExit().addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				frame.dispose();
 			}
 		});
 
@@ -114,32 +121,58 @@ public abstract class MainCtrl extends BaseCtrl {
 				ViewsManager.getInstance().start();
 			}
 		});
+	}
 
-		view.getSidebar().getBtnTelechargCV().addActionListener(new ActionListener() {
+	/**
+	 * @param view
+	 */
+	private void initEditSidebar(MainView view) {
+		if (!view.isEditable()) {
+			return;
+		}
+		SidebarEditable sidebar = (SidebarEditable) view.getSidebar();
+		DocListener updateProfile = new DocListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
+			public void update(DocumentEvent e) {
+				updateUser(sidebar);
 			}
-		});
+		};
+		sidebar.getTxtAdress().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtCity().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtDescriptionTitle().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtPhone().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtCp().getDocument().addDocumentListener(updateProfile);
+	}
 
-		if (view.isEditable()) {
-			SidebarEditable sidebar = (SidebarEditable) view.getSidebar();
-			DocListener updateProfile = new DocListener() {
-
-				@Override
-				public void update(DocumentEvent e) {
-					updateUser(sidebar);
-				}
-			};
-			sidebar.getTxtAdress().getDocument().addDocumentListener(updateProfile);
-			sidebar.getTxtCity().getDocument().addDocumentListener(updateProfile);
-			sidebar.getTxtDescriptionTitle().getDocument().addDocumentListener(updateProfile);
-			sidebar.getTxtPhone().getDocument().addDocumentListener(updateProfile);
-			sidebar.getTxtCp().getDocument().addDocumentListener(updateProfile);
+	/**
+	 * 
+	 */
+	protected void gotoMatching() {
+		if (ViewsManager.getInstance().isCurrentController(MatchingCtrl.class)) {
+			return;
 		}
+		ViewsManager.getInstance().next(new MatchingCtrl(frame));
+	}
 
+	/**
+	 * 
+	 */
+	protected void gotoProfile() {
+		if (ViewsManager.getInstance().isCurrentController(ProfileCtrl.class)) {
+			return;
+		}
+		ViewsManager.getInstance().next(new ProfileCtrl(frame));
+	}
+
+	/**
+	 * 
+	 */
+	private void gotoHome() {
+		if (ViewsManager.getInstance().isCurrentController(HomeCtrl.class)) {
+			return;
+		}
+		ViewsManager.getInstance().next(new HomeCtrl(frame));
 	}
 
 	/**

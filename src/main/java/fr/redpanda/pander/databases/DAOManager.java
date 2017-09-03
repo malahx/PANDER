@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Map;
 
+import fr.redpanda.pander.databases.base.DAO;
 import fr.redpanda.pander.utils.constant.TypeData;
 import fr.redpanda.pander.utils.file.FileManager;
 
@@ -17,7 +18,7 @@ import fr.redpanda.pander.utils.file.FileManager;
  * @author Gwénolé LE HENAFF
  *
  */
-public class DAOManager {
+public class DAOManager extends DAO {
 
 	private static final String DB_SQL = "pander.sql";
 	private static final String DATA_SQL = "data.sql";
@@ -25,6 +26,7 @@ public class DAOManager {
 	private static final String PATH_CONFIG = "config";
 
 	protected DAOManager() {
+		super();
 		connectCrea();
 		if (canConnect()) {
 			connect();
@@ -35,7 +37,7 @@ public class DAOManager {
 		}
 	}
 
-	protected static DAOManager instance = null;
+	private static DAOManager instance = null;
 
 	public static DAOManager getInstance() {
 		if (instance == null) {
@@ -70,27 +72,34 @@ public class DAOManager {
 	}
 
 	private boolean canConnect() {
+		Statement statement = null;
+		ResultSet rs = null;
 		try {
-			Statement statement = createConnection.createStatement();
-			ResultSet rSet = statement.executeQuery("SHOW DATABASES;");
-			while (rSet.next()) {
-				if (rSet.getString(1).equals(dbName)) {
+			statement = createConnection.createStatement();
+			rs = statement.executeQuery("SHOW DATABASES;");
+			while (rs.next()) {
+				if (rs.getString(1).equals(dbName)) {
+					close(statement, rs);
 					return true;
 				}
 			}
+			close(statement, rs);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			close(statement, rs);
 		}
 		return false;
 	}
 
 	private void createDB() {
-
+		Statement statement = null;
 		try {
-			Statement statement = createConnection.createStatement();
+			statement = createConnection.createStatement();
 			statement.execute("CREATE DATABASE IF NOT EXISTS " + dbName + ";");
+			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			close(statement);
 		}
 
 	}
@@ -115,28 +124,36 @@ public class DAOManager {
 	private void initDB(String path, String fileName) {
 		connect();
 
-		FileManager fileManager = new FileManager(path, fileName);
-		String queries = "";
-
-		for (String s : fileManager.loadFromFile()) {
-			if (s.startsWith("#") || s.startsWith("USE ") || s.startsWith("CREATE DATABASE")
-					|| s.startsWith("DROP DATABASE") || s.equals("")) {
-				continue;
-			}
-			queries += s + "\n";
-		}
-
+		String queries = readSql(path, fileName);
+		
+		Statement statement = null;
 		try {
-			Statement statement = connection.createStatement();
+			statement = connection.createStatement();
 			for (String s : queries.split(";")) {
 				if (s.equals("") || s.equals("\n")) {
 					continue;
 				}
 				statement.execute(s);
 			}
+			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			close(statement);
 		}
+	}
+
+	private String readSql(String path, String fileName) {
+		FileManager fileManager = new FileManager(path, fileName);
+		StringBuilder queries = new StringBuilder();
+
+		for (String s : fileManager.loadFromFile()) {
+			if (s.startsWith("#") || s.startsWith("USE ") || s.startsWith("CREATE DATABASE")
+					|| s.startsWith("DROP DATABASE") || s.equals("")) {
+				continue;
+			}
+			queries.append(s).append('\n');
+		}
+		return queries.toString();
 	}
 
 	public void connect() {

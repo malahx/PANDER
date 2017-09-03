@@ -18,6 +18,7 @@ public class HomeCtrl extends MainCtrl {
 	 * 
 	 */
 	public HomeCtrl(JFrame frame) {
+		super();
 		super.frame = frame;
 		super.view = new HomeView();
 	}

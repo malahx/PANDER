@@ -3,28 +3,24 @@
  */
 package fr.redpanda.pander.views;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-
-import java.awt.GridBagLayout;
-import javax.swing.JLabel;
-
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
-import javax.swing.JButton;
+import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 import fr.redpanda.pander.views.base.BaseView;
 import fr.redpanda.pander.views.models.AdminTableModel;
-
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -32,10 +28,7 @@ import javax.swing.ScrollPaneConstants;
  */
 public class AdminView extends BaseView {
 
-	private JPanel pnlHeader;
 	private JLabel lblTitle;
-	private JPanel pnlContent;
-	private JPanel pnlFooter;
 	private JLabel lblCopyright;
 	private JButton btnExit;
 	private JToggleButton tglbtnUsers;
@@ -52,21 +45,6 @@ public class AdminView extends BaseView {
 	private JTable tblTable;
 
 	/**
-	 * @return the pnlHeader
-	 */
-	public JPanel getPnlHeader() {
-		return pnlHeader;
-	}
-
-	/**
-	 * @param pnlHeader
-	 *            the pnlHeader to set
-	 */
-	public void setPnlHeader(JPanel pnlHeader) {
-		this.pnlHeader = pnlHeader;
-	}
-
-	/**
 	 * @return the lblTitle
 	 */
 	public JLabel getLblTitle() {
@@ -79,36 +57,6 @@ public class AdminView extends BaseView {
 	 */
 	public void setLblTitle(JLabel lblTitle) {
 		this.lblTitle = lblTitle;
-	}
-
-	/**
-	 * @return the pnlContent
-	 */
-	public JPanel getPnlContent() {
-		return pnlContent;
-	}
-
-	/**
-	 * @param pnlContent
-	 *            the pnlContent to set
-	 */
-	public void setPnlContent(JPanel pnlContent) {
-		this.pnlContent = pnlContent;
-	}
-
-	/**
-	 * @return the pnlFooter
-	 */
-	public JPanel getPnlFooter() {
-		return pnlFooter;
-	}
-
-	/**
-	 * @param pnlFooter
-	 *            the pnlFooter to set
-	 */
-	public void setPnlFooter(JPanel pnlFooter) {
-		this.pnlFooter = pnlFooter;
 	}
 
 	/**
@@ -324,7 +272,8 @@ public class AdminView extends BaseView {
 	/**
 	 * Create the panel.
 	 */
-	public AdminView(JFrame frame) {
+	public AdminView() {
+		super();
 		super.pageName = "Administrateur";
 		super.contentPane = new JPanel();
 
@@ -335,7 +284,7 @@ public class AdminView extends BaseView {
 		gbl_contentPane.rowWeights = new double[] { 0.0, 1.0, 0.0 };
 		getContentPane().setLayout(gbl_contentPane);
 
-		pnlHeader = new JPanel();
+		JPanel pnlHeader = new JPanel();
 		GridBagConstraints gbc_pnlHeader = new GridBagConstraints();
 		gbc_pnlHeader.fill = GridBagConstraints.BOTH;
 		gbc_pnlHeader.insets = new Insets(0, 0, 5, 0);
@@ -371,7 +320,7 @@ public class AdminView extends BaseView {
 		gbc_tglbtnSkills.gridy = 0;
 		pnlHeader.add(tglbtnSkills, gbc_tglbtnSkills);
 
-		pnlContent = new JPanel();
+		JPanel pnlContent = new JPanel();
 		GridBagConstraints gbc_pnlContent = new GridBagConstraints();
 		gbc_pnlContent.fill = GridBagConstraints.BOTH;
 		gbc_pnlContent.insets = new Insets(0, 0, 5, 0);
@@ -406,7 +355,7 @@ public class AdminView extends BaseView {
 		gbc_scrlTable.gridx = 1;
 		gbc_scrlTable.gridy = 2;
 		pnlContent.add(scrlTable, gbc_scrlTable);
-		
+
 		tblTable = new JTable();
 		tblTable.setFillsViewportHeight(true);
 		scrlTable.setViewportView(tblTable);
@@ -466,7 +415,7 @@ public class AdminView extends BaseView {
 		gbc_btnDelete.gridy = 0;
 		pnlButton.add(btnDelete, gbc_btnDelete);
 
-		pnlFooter = new JPanel();
+		JPanel pnlFooter = new JPanel();
 		GridBagConstraints gbc_pnlFooter = new GridBagConstraints();
 		gbc_pnlFooter.fill = GridBagConstraints.BOTH;
 		gbc_pnlFooter.gridx = 0;
@@ -498,11 +447,9 @@ public class AdminView extends BaseView {
 
 	@SuppressWarnings("unchecked")
 	public void updateDatas(String[] title, List<?> datas) {
-		userTableModel = new AdminTableModel();
-		userTableModel.setTitle(title);
-		userTableModel.setObjects((List<Object>)datas);
+		userTableModel = new AdminTableModel(title, (List<Object>) datas);
 		tblTable.setModel(userTableModel);
 		tblTable.addNotify();
-		
+
 	}
 }

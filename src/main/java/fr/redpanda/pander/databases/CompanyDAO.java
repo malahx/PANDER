@@ -39,7 +39,7 @@ public class CompanyDAO extends BaseUserDAO {
 		super(TABLE, ID);
 	}
 
-	protected static CompanyDAO instance = null;
+	private static CompanyDAO instance = null;
 
 	/**
 	 * get and instance the singleton
@@ -68,7 +68,6 @@ public class CompanyDAO extends BaseUserDAO {
 			company.setSiret(rs.getString(SIRET));
 			company.setContact(rs.getString(CONTACT));
 			company.setLink(rs.getString(LINK));
-			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			company = null;
@@ -86,7 +85,7 @@ public class CompanyDAO extends BaseUserDAO {
 	 */
 	@Override
 	public String parse(BaseEntity entity) {
-
+		//TODO à revoir en stringbuilder
 		String result = "";
 		Company company = (Company) entity;
 		result += company.getId() + ",";
@@ -106,7 +105,7 @@ public class CompanyDAO extends BaseUserDAO {
 	 */
 	@Override
 	public String parseUpdate(BaseEntity entity) {
-
+		//TODO à revoir en stringbuilder
 		String result = "";
 		Company company = (Company) entity;
 		result += NAME + " = '" + (company.getName() == null ? "" : company.getName()) + "',";
@@ -124,7 +123,7 @@ public class CompanyDAO extends BaseUserDAO {
 	 */
 	@Override
 	public String fields() {
-
+		//TODO à revoir en stringbuilder
 		String result = "";
 		result += ID + ",";
 		result += NAME + ",";

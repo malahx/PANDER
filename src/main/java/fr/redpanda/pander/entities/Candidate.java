@@ -150,7 +150,7 @@ public class Candidate extends User implements IBaseSkillEntity {
 	 * @return the birthdate
 	 */
 	public Date getBirthdate() {
-		return birthdate;
+		return birthdate != null ? new Date(birthdate.getTime()) : null;
 	}
 
 	/**
@@ -158,7 +158,7 @@ public class Candidate extends User implements IBaseSkillEntity {
 	 *            the birthdate to set
 	 */
 	public void setBirthdate(Date birthdate) {
-		this.birthdate = birthdate;
+		this.birthdate = birthdate != null ? new Date(birthdate.getTime()) : null;
 	}
 
 	@Override

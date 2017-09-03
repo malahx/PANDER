@@ -184,7 +184,7 @@ public abstract class User extends BaseEntity {
 	 * @return the createdAt
 	 */
 	public Date getCreatedAt() {
-		return createdAt;
+		return createdAt != null ? new Date(createdAt.getTime()) : null;
 	}
 
 	/**
@@ -192,14 +192,14 @@ public abstract class User extends BaseEntity {
 	 *            the createdAt to set
 	 */
 	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
+		this.createdAt = createdAt != null ? new Date(createdAt.getTime()) : null;
 	}
 
 	/**
 	 * @return the updatedAt
 	 */
 	public Date getUpdatedAt() {
-		return updatedAt;
+		return updatedAt != null ? new Date(updatedAt.getTime()) : null;
 	}
 
 	/**
@@ -207,7 +207,7 @@ public abstract class User extends BaseEntity {
 	 *            the updatedAt to set
 	 */
 	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
+		this.updatedAt = updatedAt != null ? new Date(updatedAt.getTime()) : null;
 	}
 
 	/**

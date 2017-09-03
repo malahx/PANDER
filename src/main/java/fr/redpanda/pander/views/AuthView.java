@@ -126,6 +126,7 @@ public class AuthView extends BaseView {
 	 * Create the frame.
 	 */
 	public AuthView() {
+		super();
 		pageName = "Authentification";
 		contentPane = new JPanel();
 

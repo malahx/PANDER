@@ -18,7 +18,7 @@ public abstract class DocListener implements DocumentListener {
 	 * 
 	 */
 	public DocListener() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 
 	/* (non-Javadoc)

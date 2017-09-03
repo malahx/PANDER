@@ -17,8 +17,8 @@ import fr.redpanda.pander.entities.base.BaseEntity;
  * @author Gwénolé LE HENAFF
  *
  */
-public abstract class BaseDAO implements IBaseDAO {
-	
+public abstract class BaseDAO extends DAO implements IBaseDAO {
+
 	/** the table to use */
 	protected String table;
 
@@ -48,6 +48,7 @@ public abstract class BaseDAO implements IBaseDAO {
 	 *            the id field to use
 	 */
 	protected BaseDAO(String table, String id) {
+		super();
 		this.table = table;
 		this.id = id;
 	}
@@ -59,16 +60,13 @@ public abstract class BaseDAO implements IBaseDAO {
 	 */
 	@Override
 	public ResultSet executeQuery(String request) {
-
 		ResultSet rs = null;
-
 		try {
 			Statement statement = DAOManager.getInstance().getConnection().createStatement();
 			rs = statement.executeQuery(request);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return rs;
 
 	}
@@ -80,12 +78,13 @@ public abstract class BaseDAO implements IBaseDAO {
 	 */
 	@Override
 	public BaseEntity executePrepare(BaseEntity entity, String request) {
-
+		PreparedStatement prepare = null;
+		ResultSet generatedKeys = null;
 		try {
-			PreparedStatement prepare = DAOManager.getInstance().getConnection().prepareStatement(request,
+			prepare = DAOManager.getInstance().getConnection().prepareStatement(request,
 					Statement.RETURN_GENERATED_KEYS);
 			prepare.executeUpdate();
-			ResultSet generatedKeys = prepare.getGeneratedKeys();
+			generatedKeys = prepare.getGeneratedKeys();
 			if (generatedKeys.next()) {
 				entity.setId(generatedKeys.getDouble(1));
 			}
@@ -93,6 +92,7 @@ public abstract class BaseDAO implements IBaseDAO {
 			prepare.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			close(prepare, generatedKeys);
 		}
 		return entity;
 

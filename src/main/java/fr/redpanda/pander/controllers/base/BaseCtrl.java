@@ -17,7 +17,7 @@ import fr.redpanda.pander.views.base.BaseView;
 public abstract class BaseCtrl implements IBaseCtrl {
 	protected JFrame frame;
 	protected BaseView view;
-	protected Map<String, Object> viewDatas = new HashMap<String, Object>();
+	protected Map<String, Object> viewDatas = new HashMap<>();
 
 	/**
 	 * @return the view

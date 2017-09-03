@@ -35,7 +35,7 @@ public class SkillDAO extends BaseDAO {
 		super(TABLE, ID);
 	}
 
-	protected static SkillDAO instance = null;
+	private static SkillDAO instance = null;
 
 	/**
 	 * get and instance the singleton
@@ -146,7 +146,7 @@ public class SkillDAO extends BaseDAO {
 	 */
 	@Override
 	public String parseUpdate(BaseEntity entity) {
-
+		//TODO à revoir en stringbuilder
 		String result = "";
 		Skill skill = (Skill) entity;
 

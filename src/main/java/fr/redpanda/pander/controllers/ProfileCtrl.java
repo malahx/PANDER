@@ -64,6 +64,7 @@ public class ProfileCtrl extends MainCtrl {
 	 * 
 	 */
 	public ProfileCtrl(JFrame frame) {
+		super();
 		super.frame = frame;
 	}
 
@@ -100,12 +101,9 @@ public class ProfileCtrl extends MainCtrl {
 		cview.getTextCertificate2().setText(cuser.getCertificate2());
 		cview.getTextBirthday().setText(DateConverter.getDate(cuser.getBirthdate()));
 		cview.getTextTransport().setText(cuser.getTransport());
-		String[] title = { "Activer", "Compétence" };
 		List<BaseEntity> skills = SkillDAO.getInstance().get();
-		SkillTableModel softSkillsModel = new SkillTableModel(title, Utils.getSkillsType(skills, TypeSkill.SOFT),
-				cuser);
-		SkillTableModel techSkillsModel = new SkillTableModel(title, Utils.getSkillsType(skills, TypeSkill.TECH),
-				cuser);
+		SkillTableModel softSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.SOFT), cuser);
+		SkillTableModel techSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.TECH), cuser);
 		cview.getTableSoftSkills().setModel(softSkillsModel);
 		cview.getTableSoftSkills().setRowSorter(softSkillsModel.getSorter());
 		cview.getTableTechSkills().setModel(techSkillsModel);
@@ -132,17 +130,12 @@ public class ProfileCtrl extends MainCtrl {
 	private void initCompanyEvent(User user) {
 		CompanyView cview = (CompanyView) this.view;
 		Company cuser = (Company) user;
-		List<BaseEntity> skills = SkillDAO.getInstance().get();
 
 		DocListener updateJob = new DocListener() {
 
 			@Override
 			public void update(DocumentEvent e) {
-				if (cview.getLstJob().isSelectionEmpty() || inLoading) {
-					return;
-				}
-				JobDAO.getInstance().update(parse(cview.getLstJob().getSelectedValue(), cview));
-				((JobListModel) cview.getLstJob().getModel()).refresh();
+				updateJob(cview);
 			}
 		};
 
@@ -150,7 +143,6 @@ public class ProfileCtrl extends MainCtrl {
 		cview.getTxtContact().getDocument().addDocumentListener(updateJob);
 		cview.getTxtInfos().getDocument().addDocumentListener(updateJob);
 		cview.getTxtLink().getDocument().addDocumentListener(updateJob);
-
 		cview.getTxtName().getDocument().addDocumentListener(new DocListener() {
 
 			@Override
@@ -166,37 +158,7 @@ public class ProfileCtrl extends MainCtrl {
 				if (e.getValueIsAdjusting()) {
 					return;
 				}
-				cview.getBtnDelete().setEnabled(!cview.getLstJob().isSelectionEmpty());
-				if (!cview.getLstJob().isSelectionEmpty()) {
-					Job job = cview.getLstJob().getSelectedValue();
-					loadJob(job, cview);
-
-					String[] title = { "Activer", "Compétence" };
-					SkillTableModel softSkillsModel = new SkillTableModel(title,
-							Utils.getSkillsType(skills, TypeSkill.SOFT), job);
-					SkillTableModel techSkillsModel = new SkillTableModel(title,
-							Utils.getSkillsType(skills, TypeSkill.TECH), job);
-					cview.getTblSoftSkills().setModel(softSkillsModel);
-					cview.getTblSoftSkills().setRowSorter(softSkillsModel.getSorter());
-					cview.getTblTechSkills().setModel(techSkillsModel);
-					cview.getTblTechSkills().setRowSorter(techSkillsModel.getSorter());
-
-					cview.getTblSoftSkills().getModel().addTableModelListener(new TableModelListener() {
-
-						@Override
-						public void tableChanged(TableModelEvent e) {
-							JobDAO.getInstance().insertSkills(cview.getLstJob().getSelectedValue());
-						}
-					});
-
-					cview.getTblTechSkills().getModel().addTableModelListener(new TableModelListener() {
-
-						@Override
-						public void tableChanged(TableModelEvent e) {
-							JobDAO.getInstance().insertSkills(cview.getLstJob().getSelectedValue());
-						}
-					});
-				}
+				jobListSelection(cview);
 			}
 		});
 
@@ -212,12 +174,7 @@ public class ProfileCtrl extends MainCtrl {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (!cview.getLstJob().isSelectionEmpty()) {
-					Job job = cview.getLstJob().getSelectedValue();
-					((JobListModel) cview.getLstJob().getModel()).remove(job);
-					JobDAO.getInstance().delete(job);
-					resetJob(cview);
-				}
+				jobDelete(cview);
 
 			}
 		});
@@ -235,6 +192,57 @@ public class ProfileCtrl extends MainCtrl {
 				resetJob(cview);
 			}
 		});
+	}
+
+	protected void jobDelete(CompanyView cview) {
+		if (!cview.getLstJob().isSelectionEmpty()) {
+			Job job = cview.getLstJob().getSelectedValue();
+			((JobListModel) cview.getLstJob().getModel()).remove(job);
+			JobDAO.getInstance().delete(job);
+			resetJob(cview);
+		}
+	}
+
+	protected void jobListSelection(CompanyView cview) {
+		cview.getBtnDelete().setEnabled(!cview.getLstJob().isSelectionEmpty());
+		if (!cview.getLstJob().isSelectionEmpty()) {
+			Job job = cview.getLstJob().getSelectedValue();
+			loadJob(job, cview);
+			List<BaseEntity> skills = SkillDAO.getInstance().get();
+			SkillTableModel softSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.SOFT), job);
+			SkillTableModel techSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.TECH), job);
+			cview.getTblSoftSkills().setModel(softSkillsModel);
+			cview.getTblSoftSkills().setRowSorter(softSkillsModel.getSorter());
+			cview.getTblTechSkills().setModel(techSkillsModel);
+			cview.getTblTechSkills().setRowSorter(techSkillsModel.getSorter());
+
+			cview.getTblSoftSkills().getModel().addTableModelListener(new TableModelListener() {
+
+				@Override
+				public void tableChanged(TableModelEvent e) {
+					JobDAO.getInstance().insertSkills(cview.getLstJob().getSelectedValue());
+				}
+			});
+
+			cview.getTblTechSkills().getModel().addTableModelListener(new TableModelListener() {
+
+				@Override
+				public void tableChanged(TableModelEvent e) {
+					JobDAO.getInstance().insertSkills(cview.getLstJob().getSelectedValue());
+				}
+			});
+		}
+	}
+
+	/**
+	 * @param cview
+	 */
+	protected void updateJob(CompanyView cview) {
+		if (cview.getLstJob().isSelectionEmpty() || inLoading) {
+			return;
+		}
+		JobDAO.getInstance().update(parse(cview.getLstJob().getSelectedValue(), cview));
+		((JobListModel) cview.getLstJob().getModel()).refresh();
 	}
 
 	private void initCandidateEvent(User user) {
@@ -306,7 +314,9 @@ public class ProfileCtrl extends MainCtrl {
 		cuser.setCertificate2(view.getTextCertificate2().getText());
 		try {
 			String s = view.getTextBirthday().getText();
-			cuser.setBirthdate(!s.equals("") ? new SimpleDateFormat("dd/MM/yyyy").parse(s) : null);
+			if (!s.equals("")) {
+				cuser.setBirthdate(new SimpleDateFormat("dd/MM/yyyy").parse(s));
+			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
