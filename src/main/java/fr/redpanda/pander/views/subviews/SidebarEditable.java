@@ -715,6 +715,12 @@ public class SidebarEditable extends Sidebar {
 		getTxtLink2().setText(candidate.getLink2());
 		getTxtName1().setText(candidate.getFirstname());
 		getTxtName2().setText(candidate.getLastname());
+		getBtnSeeCV().setVisible(false);
+		getBtnTelechargCV().setVisible(false);
+		getLblCurriculumVitae().setVisible(false);
+		getLblLink2Title().setText("Link 2 :");
+		getLblNameOne().setText("Prénom :");
+		getJlblNameTwo().setText("Nom :");
 	}
 
 	/*
@@ -732,6 +738,10 @@ public class SidebarEditable extends Sidebar {
 		getTxtName2().setText(company.getSiret());
 		getBtnSeeCV().setVisible(false);
 		getBtnTelechargCV().setVisible(false);
+		getLblCurriculumVitae().setVisible(false);
+		getLblLink2Title().setText("Contact :");
+		getLblNameOne().setText("Nom :");
+		getJlblNameTwo().setText("SIRET :");
 	}
 
 }

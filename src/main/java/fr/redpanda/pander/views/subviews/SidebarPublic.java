@@ -562,6 +562,9 @@ public class SidebarPublic extends Sidebar {
 		getLblLink2().setText(candidate.getLink2());
 		getLblName1().setText(candidate.getFirstname());
 		getLblName2().setText(candidate.getLastname());
+		getBtnTelechargCV().setVisible(false);
+		getLblCurriculumVitae().setVisible(false);
+		getLblLink2Title().setText("Link 2 :");
 	}
 
 	/*
@@ -578,6 +581,8 @@ public class SidebarPublic extends Sidebar {
 		getLblName1().setText(company.getName());
 		getLblName2().setText(company.getSiret());
 		getBtnTelechargCV().setVisible(false);
+		getLblCurriculumVitae().setVisible(false);
+		getLblLink2Title().setText("Contact :");
 	}
 
 }

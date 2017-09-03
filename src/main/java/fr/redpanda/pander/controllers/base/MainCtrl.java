@@ -154,22 +154,36 @@ public abstract class MainCtrl extends BaseCtrl {
 		user.setPhone(sidebar.getTxtPhone().getText());
 		user.setPostcode(sidebar.getTxtCp().getText());
 		if (user instanceof Candidate) {
-			Candidate cuser = (Candidate) user;
-			cuser.setFirstname(sidebar.getTxtName1().getText());
-			cuser.setLastname(sidebar.getTxtName2().getText());
-			cuser.setLink1(sidebar.getTxtLink1().getText());
-			cuser.setLink2(sidebar.getTxtLink2().getText());
-			CandidateDAO.getInstance().update(cuser);
+			updateUser(sidebar, (Candidate) user);
 		} else if (user instanceof Company) {
-			Company cuser = (Company) user;
-			cuser.setLink(sidebar.getTxtLink1().getText());
-			cuser.setSiret(sidebar.getTxtName2().getText());
-			cuser.setName(sidebar.getTxtName1().getText());
-			cuser.setContact(sidebar.getTxtLink2().getText());
-			CompanyDAO.getInstance().update(cuser);
+			updateUser(sidebar, (Company) user);
 		} else {
 			UserDAO.getInstance().update(user);
 		}
+	}
+
+	/**
+	 * @param sidebar
+	 * @param cuser
+	 */
+	private void updateUser(SidebarEditable sidebar, Company cuser) {
+		cuser.setLink(sidebar.getTxtLink1().getText());
+		cuser.setSiret(sidebar.getTxtName2().getText());
+		cuser.setName(sidebar.getTxtName1().getText());
+		cuser.setContact(sidebar.getTxtLink2().getText());
+		CompanyDAO.getInstance().update(cuser);
+	}
+
+	/**
+	 * @param sidebar
+	 * @param user
+	 */
+	private void updateUser(SidebarEditable sidebar, Candidate cuser) {
+		cuser.setFirstname(sidebar.getTxtName1().getText());
+		cuser.setLastname(sidebar.getTxtName2().getText());
+		cuser.setLink1(sidebar.getTxtLink1().getText());
+		cuser.setLink2(sidebar.getTxtLink2().getText());
+		CandidateDAO.getInstance().update(cuser);
 	}
 
 }
