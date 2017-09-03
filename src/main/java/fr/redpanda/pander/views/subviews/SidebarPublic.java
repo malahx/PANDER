@@ -4,12 +4,14 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.User;
+import fr.redpanda.pander.utils.constant.Img;
 import fr.redpanda.pander.utils.views.ViewUtils;
 import fr.redpanda.pander.views.subviews.base.Sidebar;
 
@@ -346,10 +348,13 @@ public class SidebarPublic extends Sidebar {
 		
 		initLayout();
 
-		lblPhoto = new JLabel("PHOTO");
+		lblPhoto = new JLabel();
+		ImageIcon logoPhotoProfile = new ImageIcon(Img.PROFILE_LOGO);
+		lblPhoto.setIcon(logoPhotoProfile);
 		GridBagConstraints gbc_lblPhoto = new GridBagConstraints();
+		gbc_lblPhoto.anchor = GridBagConstraints.WEST;
 		gbc_lblPhoto.gridheight = 4;
-		gbc_lblPhoto.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPhoto.insets = new Insets(5, 5, 5, 5);
 		gbc_lblPhoto.gridx = 1;
 		gbc_lblPhoto.gridy = 1;
 		add(lblPhoto, gbc_lblPhoto);
@@ -564,7 +569,8 @@ public class SidebarPublic extends Sidebar {
 		getLblName2().setText(candidate.getLastname());
 		getBtnTelechargCV().setVisible(false);
 		getLblCurriculumVitae().setVisible(false);
-		getLblLink2Title().setText("Link 2 :");
+		getLblLink1Title().setText("Lien 1 :");
+		getLblLink2Title().setText("Lien 2 :");
 	}
 
 	/*
@@ -582,6 +588,7 @@ public class SidebarPublic extends Sidebar {
 		getLblName2().setText(company.getSiret());
 		getBtnTelechargCV().setVisible(false);
 		getLblCurriculumVitae().setVisible(false);
+		getLblLink1Title().setText("Lien :");
 		getLblLink2Title().setText("Contact :");
 	}
 

@@ -28,8 +28,6 @@ public class SidebarEditable extends Sidebar {
 	 */
 	private static final long serialVersionUID = -7876599813851320634L;
 
-	private static final String PROFILE_LOGO = null;
-
 	private JTextField txtDescriptionTitle;
 	private JTextField txtCp;
 	private JTextField txtCity;
@@ -443,8 +441,9 @@ public class SidebarEditable extends Sidebar {
 		lblPhoto.setIcon(logoPhotoProfile);
 		lblPhoto.setFont(new Font("Lucida Grande", Font.PLAIN, 36));
 		GridBagConstraints gbc_lblPhoto = new GridBagConstraints();
+		gbc_lblPhoto.anchor = GridBagConstraints.WEST;
 		gbc_lblPhoto.gridheight = 3;
-		gbc_lblPhoto.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPhoto.insets = new Insets(5, 5, 5, 5);
 		gbc_lblPhoto.gridx = 0;
 		gbc_lblPhoto.gridy = 2;
 		add(lblPhoto, gbc_lblPhoto);
@@ -517,7 +516,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblCoordonateTittle.gridy = 8;
 		add(lblCoordonateTitle, gbc_lblCoordonateTittle);
 
-		lblAdressTitle = new JLabel("Adresse ");
+		lblAdressTitle = new JLabel("Adresse");
 		lblAdressTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		GridBagConstraints gbc_lblAdressTitle = new GridBagConstraints();
 		gbc_lblAdressTitle.anchor = GridBagConstraints.EAST;
@@ -725,7 +724,8 @@ public class SidebarEditable extends Sidebar {
 		getBtnSeeCV().setVisible(false);
 		getBtnTelechargCV().setVisible(false);
 		getLblCurriculumVitae().setVisible(false);
-		getLblLink2Title().setText("Link 2 :");
+		getLblLink1Title().setText("Lien 1 :");
+		getLblLink2Title().setText("Lien 2 :");
 		getLblNameOne().setText("Prénom :");
 		getJlblNameTwo().setText("Nom :");
 	}
@@ -746,6 +746,7 @@ public class SidebarEditable extends Sidebar {
 		getBtnSeeCV().setVisible(false);
 		getBtnTelechargCV().setVisible(false);
 		getLblCurriculumVitae().setVisible(false);
+		getLblLink1Title().setText("Lien :");
 		getLblLink2Title().setText("Contact :");
 		getLblNameOne().setText("Nom :");
 		getJlblNameTwo().setText("SIRET :");
