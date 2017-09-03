@@ -8,6 +8,7 @@ import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.Job;
 import fr.redpanda.pander.entities.Skill;
 import fr.redpanda.pander.entities.TypeSkill;
+import fr.redpanda.pander.utils.constant.MatchingPart;
 
 public class Matching {
 
@@ -116,7 +117,7 @@ public class Matching {
 		return returnEqualSkills;
 	}
 
-	public double getMatchingCalculation() {
+	public int getMatchingCalculation() {
 
 		if (calculateRatio == null || candidateCountSkills != candidate.getSkills().size()
 				|| jobCountSkills != job.getSkills().size()) {
@@ -133,26 +134,24 @@ public class Matching {
 			int techMatchingResult;
 			int jokerMatchingResult;
 			if (jobTechSkills.size() != 0) {
-				techMatchingResult = (equalTechSkills.size()) / (jobTechSkills.size());
-				jokerMatchingResult = (jobTechSkills.size() - equalTechSkills.size()) / (jobTechSkills.size());
-				System.out.println(techMatchingResult);
-				System.out.println(jokerMatchingResult);
+				techMatchingResult = (MatchingPart.TECH * equalTechSkills.size()) / jobTechSkills.size();
+				jokerMatchingResult = (MatchingPart.JOKER * (jobTechSkills.size() - equalTechSkills.size()))
+						/ jobTechSkills.size();
 			} else {
-				techMatchingResult = 1;
-				jokerMatchingResult = 1;
+				techMatchingResult = MatchingPart.TECH;
+				jokerMatchingResult = MatchingPart.JOKER;
 			}
 			int softMatchingResult;
 			if (jobSoftSkills.size() != 0) {
-				softMatchingResult = (equalSoftSkills.size()) / (jobSoftSkills.size());
-				System.out.println(softMatchingResult);
+				softMatchingResult = (MatchingPart.SOFT * equalSoftSkills.size()) / jobSoftSkills.size();
 			} else {
-				softMatchingResult = 1;
+				softMatchingResult = MatchingPart.SOFT;
 			}
 
 			candidateCountSkills = candidateSkills.size();
 			jobCountSkills = jobSkills.size();
 
-			calculateRatio = (techMatchingResult * 60) + (softMatchingResult * 30) + (jokerMatchingResult * 10);
+			calculateRatio = techMatchingResult + softMatchingResult + jokerMatchingResult;
 
 		}
 		return calculateRatio;

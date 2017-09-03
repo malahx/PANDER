@@ -60,6 +60,7 @@ public class RegisterCtrl extends BaseCtrl {
 	public void initView() {
 		super.initView();
 		frame.setBounds(0, 0, 400, 250);
+		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		ViewUtils.center(mainFrame, frame);
 
 		RegisterView view = (RegisterView) this.view;

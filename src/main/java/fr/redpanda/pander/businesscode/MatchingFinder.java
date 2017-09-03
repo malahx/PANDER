@@ -57,10 +57,10 @@ public class MatchingFinder {
 		String query = null;
 		if (isCandidate) {
 			candidate = (Candidate) user;
-			query = "SELECT * FROM " + UserDAO.TABLE + " INNER JOIN " + CompanyDAO.TABLE + " ON " + CompanyDAO.ID
-					+ " = " + UserDAO.ID + " INNER JOIN " + JobDAO.TABLE + " ON " + JobDAO.ID_COMPANY + " = "
-					+ CompanyDAO.ID + " WHERE " + JobDAO.ID_JOB + " NOT IN (" + matchingDone() + ") GROUP BY "
-					+ UserDAO.ID + " ORDER BY count(" + UserDAO.ID + ") DESC LIMIT 10";
+			query = "SELECT * FROM " + UserDAO.TABLE + " u INNER JOIN " + CompanyDAO.TABLE + " ON " + CompanyDAO.ID
+					+ " = u." + UserDAO.ID + " INNER JOIN " + JobDAO.TABLE + " j ON " + JobDAO.ID_COMPANY + " = "
+					+ CompanyDAO.ID + " WHERE j." + JobDAO.ID + " NOT IN (" + matchingDone() + ") GROUP BY "
+					+ CompanyDAO.ID + " ORDER BY count(" + CompanyDAO.ID + ") DESC LIMIT 10";
 		} else {
 			company = (Company) user;
 			query = "SELECT * FROM " + UserDAO.TABLE + " INNER JOIN " + CandidateDAO.TABLE + " ON " + CandidateDAO.ID

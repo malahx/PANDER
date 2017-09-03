@@ -124,7 +124,7 @@ public class MatchingTableModel extends AbstractTableModel {
 	public Object getValueAt(Matching matching, int columnIndex) {
 		switch (columnIndex) {
 		case 0:
-			return matching.getMatchingCalculation();
+			return String.valueOf(matching.getMatchingCalculation()) + "%";
 		case 1:
 			return isCandidate ? matching.getCompany().getName() : matching.getCandidate().getFirstname();
 		case 2:
