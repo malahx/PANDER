@@ -107,8 +107,8 @@ public class HomeView extends MainView {
 		gbc_lblInfo.gridy = 0;
 		getPnlContent().add(lblInfo, gbc_lblInfo);
 		lblText = new JLabel("<html>Ce logiciel est un outil de matching qui va vous permettre de<br>"
-				+ "valoriser votre profil et vos comp�tences en informatique<br>"
-				+ "aupr�s des entreprises de la r�gion.<br><br>"
+				+ "valoriser votre profil et vos compétences en informatique<br>"
+				+ "auprès des entreprises de la région.<br><br>"
 				+ "Compl�ter votre profil et r�pondez � notre questionnaires afin<br>"
 				+ "de pouvoir lancer le syst�me de mise en relation.");
 		GridBagConstraints gbc_lblText = new GridBagConstraints();
