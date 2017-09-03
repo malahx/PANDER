@@ -108,7 +108,16 @@ public class AuthCtrl extends BaseCtrl {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				initRegistration(new Candidate());
+				//initRegistration(new Candidate());
+				User loggeUser = new Candidate();
+				getViewDatas().put(TypeData.USER, loggeUser);
+				if (loggeUser instanceof Candidate || loggeUser instanceof Company) {
+					ViewsManager.getInstance().next(new HomeCtrl(frame));
+					return;
+				}
+				
+				
+				
 			}
 		});
 
@@ -116,9 +125,14 @@ public class AuthCtrl extends BaseCtrl {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				initRegistration(new Company());
+				//initRegistration(new Company());
+				User loggeUser = new Company();
+				getViewDatas().put(TypeData.USER, loggeUser);
+				if (loggeUser instanceof Candidate || loggeUser instanceof Company) {
+					ViewsManager.getInstance().next(new HomeCtrl(frame));
+					return;
 			}
-		});
+			}});
 
 		view.getTxtLogin().getDocument().addDocumentListener(new DocListener() {
 

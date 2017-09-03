@@ -94,7 +94,7 @@ public class Footer extends JPanel {
 		gbc_lblCopyright.gridy = 0;
 		add(lblCopyright, gbc_lblCopyright);
 
-		btnLogout = new JButton("DÃ©connexion");
+		btnLogout = new JButton("Déconnexion");
 		GridBagConstraints gbc_btnLogout = new GridBagConstraints();
 		gbc_btnLogout.anchor = GridBagConstraints.EAST;
 		gbc_btnLogout.insets = new Insets(0, 0, 0, 5);

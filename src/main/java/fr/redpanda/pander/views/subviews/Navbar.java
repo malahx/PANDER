@@ -8,6 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
@@ -201,7 +202,9 @@ public class Navbar extends JPanel {
 		gridBagLayout.rowWeights = new double[] { 0.0 };
 		setLayout(gridBagLayout);
 
-		lblLogopander = new JLabel("logoPander");
+		JLabel lblLogopander = new JLabel();
+		ImageIcon panderlogo = new ImageIcon("resources/logoPander2Mini.png");
+		lblLogopander.setIcon(panderlogo);
 		GridBagConstraints gbc_lblLogopander = new GridBagConstraints();
 		gbc_lblLogopander.fill = GridBagConstraints.VERTICAL;
 		gbc_lblLogopander.insets = new Insets(0, 0, 0, 5);
@@ -223,10 +226,14 @@ public class Navbar extends JPanel {
 		gbl_pnlNav.rowWeights = new double[] { 1.0, 0.0 };
 		pnlNav.setLayout(gbl_pnlNav);
 
-		pnlHeader = new JPanel();
+		
+
+		JLabel pnlHeader = new JLabel();
+		ImageIcon bandImage = new ImageIcon("resources/BandeauImage1.png");
+		pnlHeader.setIcon(bandImage);
 		GridBagConstraints gbc_pnlHeader = new GridBagConstraints();
 		gbc_pnlHeader.insets = new Insets(0, 0, 5, 0);
-		gbc_pnlHeader.fill = GridBagConstraints.BOTH;
+		gbc_pnlHeader.fill = GridBagConstraints.WEST;
 		gbc_pnlHeader.gridx = 0;
 		gbc_pnlHeader.gridy = 0;
 		pnlNav.add(pnlHeader, gbc_pnlHeader);
@@ -237,8 +244,9 @@ public class Navbar extends JPanel {
 		gbl_pnlHeader.rowWeights = new double[] { 0.0 };
 		pnlHeader.setLayout(gbl_pnlHeader);
 
-		lblPander = new JLabel("PANDER");
-		lblPander.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel lblPander = new JLabel();
+		ImageIcon panderName = new ImageIcon("resources/titlePanderMini.png");
+		lblPander.setIcon(panderName);
 		GridBagConstraints gbc_lblPander = new GridBagConstraints();
 		gbc_lblPander.anchor = GridBagConstraints.NORTHWEST;
 		gbc_lblPander.insets = new Insets(0, 0, 0, 5);
@@ -254,7 +262,8 @@ public class Navbar extends JPanel {
 		gbc_lblUser.gridx = 1;
 		gbc_lblUser.gridy = 0;
 		pnlHeader.add(lblUser, gbc_lblUser);
-
+		lblUser.setVisible(false);
+		
 		pnlButton = new JPanel();
 		GridBagConstraints gbc_pnlButton = new GridBagConstraints();
 		gbc_pnlButton.insets = new Insets(0, 0, 5, 0);
@@ -273,7 +282,10 @@ public class Navbar extends JPanel {
 		tglbtnMatching = new JToggleButton("Matching");
 		pnlButton.add(tglbtnMatching);
 
-		lblLogouser = new JLabel("LogoUser");
+		
+		JLabel lblLogouser = new JLabel();
+		ImageIcon logoUser = new ImageIcon("resources/HomeMan2.png");
+		lblLogouser.setIcon(logoUser);
 		GridBagConstraints gbc_lblLogouser = new GridBagConstraints();
 		gbc_lblLogouser.fill = GridBagConstraints.VERTICAL;
 		gbc_lblLogouser.gridx = 2;
@@ -281,6 +293,16 @@ public class Navbar extends JPanel {
 		add(lblLogouser, gbc_lblLogouser);
 		
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		ViewUtils.colorWhite(pnlButton);
 		ViewUtils.colorWhite(pnlHeader);
 		ViewUtils.colorWhite(pnlNav);
