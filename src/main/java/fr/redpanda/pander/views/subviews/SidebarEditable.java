@@ -434,13 +434,13 @@ public class SidebarEditable extends Sidebar {
 
 		initLayout();
 
-		lblPhoto = new JLabel("PHOTO");
-		GridBagConstraints gbc_lblPhoto = new GridBagConstraints();
-		gbc_lblPhoto.gridheight = 3;
-		gbc_lblPhoto.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPhoto.gridx = 0;
-		gbc_lblPhoto.gridy = 2;
-		add(lblPhoto, gbc_lblPhoto);
+		// lblPhoto = new JLabel("PHOTO");
+		// GridBagConstraints gbc_lblPhoto = new GridBagConstraints();
+		// gbc_lblPhoto.gridheight = 3;
+		// gbc_lblPhoto.insets = new Insets(0, 0, 5, 5);
+		// gbc_lblPhoto.gridx = 0;
+		// gbc_lblPhoto.gridy = 2;
+		// add(lblPhoto, gbc_lblPhoto);
 
 		lblNameOne = new JLabel("Name1");
 		lblNameOne.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
@@ -448,7 +448,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_lblNameOne.anchor = GridBagConstraints.EAST;
 		gbc_lblNameOne.gridwidth = 2;
 		gbc_lblNameOne.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNameOne.gridx = 1;
+		gbc_lblNameOne.gridx = 0;
 		gbc_lblNameOne.gridy = 2;
 		add(lblNameOne, gbc_lblNameOne);
 
@@ -457,7 +457,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_txtNameOne.gridwidth = 2;
 		gbc_txtNameOne.insets = new Insets(0, 0, 5, 0);
 		gbc_txtNameOne.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtNameOne.gridx = 3;
+		gbc_txtNameOne.gridx = 1;
 		gbc_txtNameOne.gridy = 2;
 		add(txtName1, gbc_txtNameOne);
 		txtName1.setColumns(10);
@@ -468,7 +468,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_jlblNameTwo.anchor = GridBagConstraints.EAST;
 		gbc_jlblNameTwo.gridwidth = 2;
 		gbc_jlblNameTwo.insets = new Insets(0, 0, 5, 5);
-		gbc_jlblNameTwo.gridx = 1;
+		gbc_jlblNameTwo.gridx = 0;
 		gbc_jlblNameTwo.gridy = 3;
 		add(jlblNameTwo, gbc_jlblNameTwo);
 
@@ -477,7 +477,7 @@ public class SidebarEditable extends Sidebar {
 		gbc_txtNameTwo.gridwidth = 2;
 		gbc_txtNameTwo.insets = new Insets(0, 0, 5, 0);
 		gbc_txtNameTwo.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtNameTwo.gridx = 3;
+		gbc_txtNameTwo.gridx = 1;
 		gbc_txtNameTwo.gridy = 3;
 		add(txtName2, gbc_txtNameTwo);
 		txtName2.setColumns(10);
