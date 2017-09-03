@@ -83,7 +83,7 @@ public class MatchingView extends MainView {
 		gbl_contentPane.columnWidths = new int[] { 0, 0 };
 		gbl_contentPane.rowHeights = new int[] { 0, 0, 0 };
 		gbl_contentPane.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
-		gbl_contentPane.rowWeights = new double[] { 1.0, 1.0, Double.MIN_VALUE };
+		gbl_contentPane.rowWeights = new double[] { 1.0, 0.0, Double.MIN_VALUE };
 		getPnlContent().setLayout(gbl_contentPane);
 
 		scrPMatching = new JScrollPane();

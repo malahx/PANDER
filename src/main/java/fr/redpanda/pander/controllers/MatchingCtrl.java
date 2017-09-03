@@ -49,6 +49,7 @@ public class MatchingCtrl extends MainCtrl {
 		if (!getViewDatas().containsKey(TypeData.MATCHING_FINDER)) {
 			mFinder = new MatchingFinder(user);
 			getViewDatas().put(TypeData.MATCHING_FINDER, mFinder);
+			mFinder.findBestResult();
 		} else {
 			mFinder = (MatchingFinder) getViewDatas().get(TypeData.MATCHING_FINDER);
 		}
@@ -84,7 +85,6 @@ public class MatchingCtrl extends MainCtrl {
 			public void actionPerformed(ActionEvent e) {
 				List<Matching> matchings = mFinder.findBestResult();
 				for (Matching matching : matchings) {
-					System.out.println(matching);
 					model.add(matching);
 				}
 

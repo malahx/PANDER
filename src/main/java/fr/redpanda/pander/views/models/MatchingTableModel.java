@@ -69,8 +69,8 @@ public class MatchingTableModel extends AbstractTableModel {
 		this.sorter = new TableRowSorter<TableModel>(this);
 		List<RowSorter.SortKey> sortKeys = new ArrayList<RowSorter.SortKey>();
 		for (int i = 0; i < title.length; i++) {
-			sortKeys.add(new RowSorter.SortKey(i, SortOrder.DESCENDING));
 		}
+		sortKeys.add(new RowSorter.SortKey(0, SortOrder.DESCENDING));
 		sorter.setSortKeys(sortKeys);
 		sorter.setSortsOnUpdates(true);
 	}
@@ -97,7 +97,7 @@ public class MatchingTableModel extends AbstractTableModel {
 
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
-		return String.class;
+		return getValueAt(0, columnIndex).getClass();
 	}
 
 	/*
