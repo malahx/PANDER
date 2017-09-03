@@ -24,6 +24,7 @@ import fr.redpanda.pander.entities.User;
 public class MatchingFinder {
 
 	private final List<Matching> matchingsDone;
+	// Map<double, int> skillCount;
 	private final boolean isCandidate;
 	private final User user;
 
@@ -57,9 +58,9 @@ public class MatchingFinder {
 		if (isCandidate) {
 			candidate = (Candidate) user;
 			query = "SELECT * FROM " + UserDAO.TABLE + " INNER JOIN " + CompanyDAO.TABLE + " ON " + CompanyDAO.ID
-					+ " = " + UserDAO.ID + " INNER JOIN " + JobDAO.TABLE + " ON " + JobDAO.ID_JOB + " = "
-					+ CompanyDAO.ID + " WHERE " + JobDAO.ID + " NOT IN (" + matchingDone() + ") GROUP BY " + UserDAO.ID
-					+ " ORDER BY count(" + UserDAO.ID + ") DESC LIMIT 10";
+					+ " = " + UserDAO.ID + " INNER JOIN " + JobDAO.TABLE + " ON " + JobDAO.ID_COMPANY + " = "
+					+ CompanyDAO.ID + " WHERE " + JobDAO.ID_JOB + " NOT IN (" + matchingDone() + ") GROUP BY "
+					+ UserDAO.ID + " ORDER BY count(" + UserDAO.ID + ") DESC LIMIT 10";
 		} else {
 			company = (Company) user;
 			query = "SELECT * FROM " + UserDAO.TABLE + " INNER JOIN " + CandidateDAO.TABLE + " ON " + CandidateDAO.ID
@@ -102,9 +103,10 @@ public class MatchingFinder {
 	private String matchingDone() {
 		String result = "0";
 		for (Matching matching : matchingsDone) {
-			double id = isCandidate ? matching.getCandidate().getId() : matching.getJob().getId();
-			result += "," + id;
+			double id = isCandidate ? matching.getJob().getId() : matching.getCandidate().getId();
+			result += "," + String.valueOf(id);
 		}
+		System.out.println(result);
 		return result;
 	}
 
