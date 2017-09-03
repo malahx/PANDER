@@ -112,7 +112,10 @@ public class MatchingView extends MainView {
 		ImageIcon matchingIconButton = new ImageIcon(Img.ANIM_BTN);
 		btnMatching.setIcon(matchingIconButton);
 		btnMatching.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
-		getPnlContent().add(btnMatching, btnMatching);
+		GridBagConstraints gbc_btnMatching = new GridBagConstraints();
+		gbc_btnMatching.gridx = 0;
+		gbc_btnMatching.gridy = 1;
+		getPnlContent().add(btnMatching, gbc_btnMatching);
 
 	}
 
