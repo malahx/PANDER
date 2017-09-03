@@ -290,6 +290,9 @@ public class Navbar extends JPanel {
 		ViewUtils.colorWhite(pnlButton);
 		ViewUtils.colorWhite(pnlHeader);
 		ViewUtils.colorWhite(pnlNav);
+		ViewUtils.colorWhite(tglbtnHome);
+		ViewUtils.colorWhite(tglbtnMatching);
+		ViewUtils.colorWhite(tglbtnProfile);
 
 	}
 

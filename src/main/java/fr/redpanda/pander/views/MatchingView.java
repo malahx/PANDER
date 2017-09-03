@@ -15,6 +15,7 @@ import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
 import fr.redpanda.pander.utils.constant.Img;
+import fr.redpanda.pander.utils.views.ViewUtils;
 import fr.redpanda.pander.views.base.MainView;
 
 /**
@@ -117,6 +118,8 @@ public class MatchingView extends MainView {
 		gbc_btnMatching.gridx = 0;
 		gbc_btnMatching.gridy = 1;
 		getPnlContent().add(btnMatching, gbc_btnMatching);
+		
+		ViewUtils.colorWhite(btnMatching);
 
 	}
 

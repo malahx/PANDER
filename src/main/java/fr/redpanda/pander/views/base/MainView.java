@@ -36,7 +36,7 @@ public abstract class MainView extends BaseView implements IMainView {
 		this.pnlContent = pnlContent;
 		ViewUtils.colorWhite(pnlContent);
 	}
-	
+
 	/**
 	 * @return the navbar
 	 */
@@ -101,7 +101,7 @@ public abstract class MainView extends BaseView implements IMainView {
 		JPanel pnlNavbar = navbar;
 		GridBagConstraints gbc_pnlNavbar = new GridBagConstraints();
 		gbc_pnlNavbar.gridwidth = 2;
-		gbc_pnlNavbar.insets = new Insets(0, 0, 5, 0);
+		gbc_pnlNavbar.insets = new Insets(0, 0, 0, 0);
 		gbc_pnlNavbar.anchor = GridBagConstraints.WEST;
 		gbc_pnlNavbar.fill = GridBagConstraints.HORIZONTAL;
 		gbc_pnlNavbar.gridx = 0;
@@ -111,7 +111,7 @@ public abstract class MainView extends BaseView implements IMainView {
 		JPanel pnlSidebar = sidebar;
 		GridBagConstraints gbc_pnlSidebar = new GridBagConstraints();
 		gbc_pnlSidebar.gridheight = 2;
-		gbc_pnlSidebar.insets = new Insets(0, 0, 5, 5);
+		gbc_pnlSidebar.insets = new Insets(0, 0, 0, 0);
 		gbc_pnlSidebar.anchor = GridBagConstraints.WEST;
 		gbc_pnlSidebar.fill = GridBagConstraints.BOTH;
 		gbc_pnlSidebar.gridx = 0;
@@ -120,7 +120,7 @@ public abstract class MainView extends BaseView implements IMainView {
 
 		pnlContent = new JPanel();
 		GridBagConstraints gbc_pnlContent = new GridBagConstraints();
-		gbc_pnlContent.insets = new Insets(0, 0, 5, 0);
+		gbc_pnlContent.insets = new Insets(5, 5, 5, 5);
 		gbc_pnlContent.fill = GridBagConstraints.BOTH;
 		gbc_pnlContent.gridx = 1;
 		gbc_pnlContent.gridy = 1;
@@ -128,13 +128,13 @@ public abstract class MainView extends BaseView implements IMainView {
 
 		JPanel pnlFooter = footer;
 		GridBagConstraints gbc_pnlFooter = new GridBagConstraints();
-		gbc_pnlFooter.insets = new Insets(0, 0, 0, 5);
+		gbc_pnlFooter.insets = new Insets(0, 0, 0, 0);
 		gbc_pnlFooter.anchor = GridBagConstraints.WEST;
 		gbc_pnlFooter.fill = GridBagConstraints.HORIZONTAL;
 		gbc_pnlFooter.gridx = 1;
 		gbc_pnlFooter.gridy = 2;
 		contentPane.add(pnlFooter, gbc_pnlFooter);
-		
+
 		ViewUtils.colorWhite(pnlContent);
 
 	}

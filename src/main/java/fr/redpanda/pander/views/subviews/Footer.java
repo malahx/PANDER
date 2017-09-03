@@ -77,8 +77,6 @@ public class Footer extends JPanel {
 	 * Create the panel.
 	 */
 	public Footer() {
-
-		ViewUtils.colorGrey(this);
 		
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0 };
@@ -94,7 +92,7 @@ public class Footer extends JPanel {
 		gbc_lblCopyright.gridy = 0;
 		add(lblCopyright, gbc_lblCopyright);
 
-		btnLogout = new JButton("Déconnexion");
+		btnLogout = new JButton("Dï¿½connexion");
 		GridBagConstraints gbc_btnLogout = new GridBagConstraints();
 		gbc_btnLogout.anchor = GridBagConstraints.EAST;
 		gbc_btnLogout.insets = new Insets(0, 0, 0, 5);
@@ -109,6 +107,10 @@ public class Footer extends JPanel {
 		gbc_btnExit.gridx = 2;
 		gbc_btnExit.gridy = 0;
 		add(btnExit, gbc_btnExit);
+		
+		ViewUtils.colorGrey(btnExit);
+		ViewUtils.colorGrey(btnLogout);
+		ViewUtils.colorGreyLight(this);
 
 	}
 

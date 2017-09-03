@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import fr.redpanda.pander.utils.views.ViewUtils;
 import fr.redpanda.pander.views.base.BaseView;
 
 /**
@@ -402,6 +403,9 @@ public class RegisterView extends BaseView {
 		gbc_btnRegister.gridx = 2;
 		gbc_btnRegister.gridy = 11;
 		contentPane.add(btnRegister, gbc_btnRegister);
+		
+		ViewUtils.colorWhite(btnCancel);
+		ViewUtils.colorNormal(btnRegister);
 	}
 
 }

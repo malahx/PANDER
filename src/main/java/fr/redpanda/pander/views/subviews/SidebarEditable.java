@@ -2,7 +2,6 @@ package fr.redpanda.pander.views.subviews;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.JButton;
@@ -433,16 +432,7 @@ public class SidebarEditable extends Sidebar {
 	 */
 	public SidebarEditable() {
 
-		ViewUtils.colorGrey(this);
-		
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
-		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0 };
-		gbl_contentPane.columnWeights = new double[] { 1.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
-		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		setLayout(gbl_contentPane);
+		initLayout();
 
 		lblPhoto = new JLabel("PHOTO");
 		GridBagConstraints gbc_lblPhoto = new GridBagConstraints();
@@ -692,10 +682,15 @@ public class SidebarEditable extends Sidebar {
 		gbc_label.gridx = 0;
 		gbc_label.gridy = 22;
 		add(label, gbc_label);
+
+		ViewUtils.colorGreyLight(this);
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.entities.User)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.
+	 * entities.User)
 	 */
 	@Override
 	protected void initUser(User user) {
@@ -707,8 +702,11 @@ public class SidebarEditable extends Sidebar {
 		getTxtCp().setText(user.getPostcode());
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.entities.User)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.
+	 * entities.User)
 	 */
 	@Override
 	public void initCandidate(Candidate candidate) {
@@ -719,8 +717,11 @@ public class SidebarEditable extends Sidebar {
 		getTxtName2().setText(candidate.getLastname());
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.entities.User)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.views.subviews.Sidebar#initData(fr.redpanda.pander.
+	 * entities.User)
 	 */
 	@Override
 	public void initCompany(Company company) {

@@ -2,7 +2,6 @@ package fr.redpanda.pander.views.subviews;
 
 import java.awt.Font;
 import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.JButton;
@@ -336,16 +335,16 @@ public class SidebarPublic extends Sidebar {
 	 */
 	public SidebarPublic() {
 
-		ViewUtils.colorGrey(this);
+//		GridBagLayout gbl_contentPane = new GridBagLayout();
+//		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
+//		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+//				0, 0 };
+//		gbl_contentPane.columnWeights = new double[] { 1.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
+//		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+//				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+//		setLayout(gbl_contentPane);
 		
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
-		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-				0, 0 };
-		gbl_contentPane.columnWeights = new double[] { 1.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
-		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-		setLayout(gbl_contentPane);
+		initLayout();
 
 		lblPhoto = new JLabel("PHOTO");
 		GridBagConstraints gbc_lblPhoto = new GridBagConstraints();
@@ -530,6 +529,8 @@ public class SidebarPublic extends Sidebar {
 		gbc_label.gridx = 0;
 		gbc_label.gridy = 23;
 		add(label, gbc_label);
+
+		ViewUtils.colorGreyLight(this);
 	}
 
 	/*

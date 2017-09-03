@@ -141,4 +141,11 @@ public class ViewUtils {
 		frame.setBounds(posWidth, posHeight, frame.getWidth(), frame.getHeight());
 	}
 
+	/**
+	 * @param component
+	 */
+	public static void colorTextWhite(JComponent component) {
+		component.setForeground(WHITE);
+	}
+
 }
