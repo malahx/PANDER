@@ -585,7 +585,7 @@ public class JobView extends MainView {
 		lblInfos = new JLabel("Infos :");
 		GridBagConstraints gbc_lblInfos = new GridBagConstraints();
 		gbc_lblInfos.anchor = GridBagConstraints.NORTHEAST;
-		gbc_lblInfos.insets = new Insets(0, 0, 5, 0);
+		gbc_lblInfos.insets = new Insets(0, 0, 5, 5);
 		gbc_lblInfos.gridx = 0;
 		gbc_lblInfos.gridy = 6;
 		pnlJobInfo.add(lblInfos, gbc_lblInfos);
