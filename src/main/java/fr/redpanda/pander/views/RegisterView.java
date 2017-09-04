@@ -363,7 +363,7 @@ public class RegisterView extends BaseView {
 		gbc_pwdPass.gridy = 7;
 		contentPane.add(pwdPass, gbc_pwdPass);
 
-		lblPassVerify = new JLabel("Confirmation MP");
+		lblPassVerify = new JLabel("Confirmation");
 		GridBagConstraints gbc_lblPassVerify = new GridBagConstraints();
 		gbc_lblPassVerify.anchor = GridBagConstraints.EAST;
 		gbc_lblPassVerify.insets = new Insets(0, 0, 5, 5);
