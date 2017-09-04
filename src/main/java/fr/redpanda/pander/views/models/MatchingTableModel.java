@@ -107,6 +107,11 @@ public class MatchingTableModel extends SorterTableModel {
 			return isCandidate ? matching.getCompany().getEmail() : matching.getCandidate().getLastname();
 		case 3:
 			return isCandidate ? matching.getJob().getName() : matching.getCandidate().getEmail();
+		case 4:
+			if (isCandidate) {
+				throw new IllegalArgumentException();
+			}
+			return matching.getJob().getName();
 		default:
 			throw new IllegalArgumentException();
 		}
