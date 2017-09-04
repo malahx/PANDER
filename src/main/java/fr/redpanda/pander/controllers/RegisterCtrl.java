@@ -118,7 +118,7 @@ public class RegisterCtrl extends BaseCtrl {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
+				close();
 			}
 		});
 	}
@@ -142,7 +142,12 @@ public class RegisterCtrl extends BaseCtrl {
 			company.setPassword(new String(view.getPwdPass().getPassword()));
 			CompanyDAO.getInstance().insert(company);
 		}
+		close();
+	}
+
+	private void close() {
 		frame.dispose();
+		mainFrame.setEnabled(true);
 	}
 
 	/**
