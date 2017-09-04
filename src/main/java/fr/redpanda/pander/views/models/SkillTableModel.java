@@ -105,7 +105,7 @@ public class SkillTableModel extends AbstractTableModel {
 	 */
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return getValueAt(skills.get(rowIndex), columnIndex);
+		return skills.size() > 0 ? getValueAt(skills.get(rowIndex), columnIndex) : new Object();
 	}
 
 	/**

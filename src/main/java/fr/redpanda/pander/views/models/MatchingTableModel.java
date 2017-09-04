@@ -110,7 +110,7 @@ public class MatchingTableModel extends AbstractTableModel {
 	 */
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		return getValueAt(matchings.get(rowIndex), columnIndex);
+		return matchings.size() > 0 ? getValueAt(matchings.get(rowIndex), columnIndex) : new Object();
 	}
 
 	/**
