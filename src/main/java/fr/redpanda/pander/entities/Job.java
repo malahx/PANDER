@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import fr.redpanda.pander.entities.base.BaseEntity;
+import fr.redpanda.pander.entities.base.DateEntity;
 import fr.redpanda.pander.entities.base.IBaseSkillEntity;
 
 /**
@@ -15,15 +15,13 @@ import fr.redpanda.pander.entities.base.IBaseSkillEntity;
  * @author Patrice SCHOCH
  *
  */
-public class Job extends BaseEntity implements IBaseSkillEntity {
+public class Job extends DateEntity implements IBaseSkillEntity {
 
 	private String name;
 	private String presentation;
 	private String link;
 	private String contact;
 	private List<Skill> skills;
-	private Date createdAt;
-	private Date updatedAt;
 
 	/**
 	 * @return the name
@@ -100,36 +98,6 @@ public class Job extends BaseEntity implements IBaseSkillEntity {
 	@Override
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
-	}
-
-	/**
-	 * @return the createdAt
-	 */
-	public Date getCreatedAt() {
-		return createdAt != null ? new Date(createdAt.getTime()) : null;
-	}
-
-	/**
-	 * @param createdAt
-	 *            the createdAt to set
-	 */
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt != null ? new Date(createdAt.getTime()) : null;
-	}
-
-	/**
-	 * @return the updatedAt
-	 */
-	public Date getUpdatedAt() {
-		return updatedAt != null ? new Date(updatedAt.getTime()) : null;
-	}
-
-	/**
-	 * @param updatedAt
-	 *            the updatedAt to set
-	 */
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt != null ? new Date(updatedAt.getTime()) : null;
 	}
 
 	/**

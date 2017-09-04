@@ -38,7 +38,10 @@ public class MatchingTableModel extends SorterTableModel {
 	 * @param matchings
 	 */
 	public MatchingTableModel(String[] title, List<Matching> matchings, boolean isCandidate) {
-		this.title = title;
+		this.title = new String[title.length];
+		for (int i = 0; i < title.length; i++) {
+			this.title[i] = title[i];
+		}
 		this.matchings = matchings;
 		this.isCandidate = isCandidate;
 		initSorter();
