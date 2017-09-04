@@ -132,14 +132,14 @@ public class RegisterCtrl extends BaseCtrl {
 			candidate.setFirstname(view.getTextName1().getText());
 			candidate.setLastname(view.getTextName2().getText());
 			candidate.setEmail(view.getTextEmail().getText());
-			candidate.setPassword(view.getTextEmail().getText());
+			candidate.setPassword(new String(view.getPwdPass().getPassword()));
 			CandidateDAO.getInstance().insert(candidate);
 		} else if (user instanceof Company) {
 			Company company = (Company) user;
 			company.setName(view.getTextName1().getText());
 			company.setSiret(view.getTextName2().getText());
 			company.setEmail(view.getTextEmail().getText());
-			company.setPassword(view.getTextEmail().getText());
+			company.setPassword(new String(view.getPwdPass().getPassword()));
 			CompanyDAO.getInstance().insert(company);
 		}
 		frame.dispose();
