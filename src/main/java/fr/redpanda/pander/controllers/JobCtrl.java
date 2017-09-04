@@ -13,7 +13,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import javax.swing.table.DefaultTableModel;
 
 import fr.redpanda.pander.controllers.base.MainCtrl;
 import fr.redpanda.pander.databases.JobDAO;
@@ -36,6 +35,7 @@ import fr.redpanda.pander.views.models.SkillTableModel;
 public class JobCtrl extends MainCtrl {
 
 	private boolean inLoading;
+	private Job nextJob;
 
 	/**
 	 * 
@@ -60,29 +60,6 @@ public class JobCtrl extends MainCtrl {
 		if (!cview.getLstJob().isSelectionEmpty()) {
 			Job job = cview.getLstJob().getSelectedValue();
 			loadJob(job, cview);
-			List<BaseEntity> skills = SkillDAO.getInstance().get();
-			SkillTableModel softSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.SOFT), job);
-			SkillTableModel techSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.TECH), job);
-			cview.getTblSoftSkills().setModel(softSkillsModel);
-			cview.getTblSoftSkills().setRowSorter(softSkillsModel.getSorter());
-			cview.getTblTechSkills().setModel(techSkillsModel);
-			cview.getTblTechSkills().setRowSorter(techSkillsModel.getSorter());
-
-			cview.getTblSoftSkills().getModel().addTableModelListener(new TableModelListener() {
-
-				@Override
-				public void tableChanged(TableModelEvent e) {
-					JobDAO.getInstance().insertSkills(cview.getLstJob().getSelectedValue());
-				}
-			});
-
-			cview.getTblTechSkills().getModel().addTableModelListener(new TableModelListener() {
-
-				@Override
-				public void tableChanged(TableModelEvent e) {
-					JobDAO.getInstance().insertSkills(cview.getLstJob().getSelectedValue());
-				}
-			});
 		}
 	}
 
@@ -103,6 +80,8 @@ public class JobCtrl extends MainCtrl {
 		view.getTxtContact().setText(job.getContact());
 		view.getTxtLink().setText(job.getLink());
 		view.getTxtInfos().setText(job.getPresentation());
+		((SkillTableModel) view.getTblSoftSkills().getModel()).setEntity(job);
+		((SkillTableModel) view.getTblTechSkills().getModel()).setEntity(job);
 		inLoading = false;
 	}
 
@@ -120,8 +99,55 @@ public class JobCtrl extends MainCtrl {
 		view.getTxtInfos().setText("");
 		view.getTxtLink().setText("");
 		view.getTxtName().setText("");
-		view.getTblSoftSkills().setModel(new DefaultTableModel());
-		view.getTblTechSkills().setModel(new DefaultTableModel());
+		nextJob = new Job();
+		((SkillTableModel) view.getTblSoftSkills().getModel()).setEntity(nextJob);
+		((SkillTableModel) view.getTblTechSkills().getModel()).setEntity(nextJob);
+	}
+
+	/**
+	 * 
+	 */
+	private void initSkills(JobView view) {
+		List<BaseEntity> skills = SkillDAO.getInstance().get();
+		SkillTableModel softSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.SOFT), nextJob);
+		SkillTableModel techSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.TECH), nextJob);
+		view.getTblSoftSkills().setModel(softSkillsModel);
+		view.getTblSoftSkills().setRowSorter(softSkillsModel.getSorter());
+		view.getTblTechSkills().setModel(techSkillsModel);
+		view.getTblTechSkills().setRowSorter(techSkillsModel.getSorter());
+		view.getTblSoftSkills().getModel().addTableModelListener(new TableModelListener() {
+
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				if (view.getLstJob().isSelectionEmpty()) {
+					return;
+				}
+				JobDAO.getInstance().insertSkills(view.getLstJob().getSelectedValue());
+			}
+		});
+
+		view.getTblTechSkills().getModel().addTableModelListener(new TableModelListener() {
+
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				if (view.getLstJob().isSelectionEmpty()) {
+					return;
+				}
+				JobDAO.getInstance().insertSkills(view.getLstJob().getSelectedValue());
+			}
+		});
+	}
+
+	private void jobAdd(JobView view, Company user) {
+
+		if (view.getTxtName().getText().equals("")) {
+			return;
+		}
+		Job job = parse(nextJob, view);
+		JobDAO.getInstance().insert(job, user);
+		JobDAO.getInstance().insertSkills(job);
+		((JobListModel) view.getLstJob().getModel()).add(job);
+		resetJob(view);
 	}
 
 	/*
@@ -136,6 +162,8 @@ public class JobCtrl extends MainCtrl {
 		Company cuser = (Company) getViewDatas().get(TypeData.USER);
 		cview.getLstJob().setModel(new JobListModel(cuser));
 		cview.getNavbar().getTglbtnJob().setSelected(true);
+		nextJob = new Job();
+		initSkills(cview);
 	}
 
 	/*
@@ -201,15 +229,8 @@ public class JobCtrl extends MainCtrl {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (cview.getTxtName().getText().equals("")) {
-					return;
-				}
-				Job job = parse(new Job(), cview);
-				JobDAO.getInstance().insert(job, cuser);
-				((JobListModel) cview.getLstJob().getModel()).add(job);
-				resetJob(cview);
+				jobAdd(cview, cuser);
 			}
 		});
 	}
-
 }

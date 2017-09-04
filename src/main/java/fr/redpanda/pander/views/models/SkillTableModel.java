@@ -18,13 +18,29 @@ public class SkillTableModel extends SorterTableModel {
 	private static final long serialVersionUID = -4831274774359919486L;
 
 	private final List<BaseEntity> skills;
-	private final IBaseSkillEntity entity;
+	private IBaseSkillEntity entity;
 
 	/**
 	 * @return the skills
 	 */
 	public List<BaseEntity> getSkills() {
 		return skills;
+	}
+
+	/**
+	 * @return the entity
+	 */
+	public IBaseSkillEntity getEntity() {
+		return entity;
+	}
+
+	/**
+	 * @param entity
+	 *            the entity to set
+	 */
+	public void setEntity(IBaseSkillEntity entity) {
+		this.entity = entity;
+		fireTableDataChanged();
 	}
 
 	/**
