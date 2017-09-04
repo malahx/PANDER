@@ -126,7 +126,7 @@ public class CandidateView extends MainView {
 	public CandidateView() {
 
 		super();
-		super.pageName = "Candidat";
+		super.pageName = "Profile";
 
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
