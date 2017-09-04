@@ -6,11 +6,13 @@ package fr.redpanda.pander.utils.views;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import fr.redpanda.pander.utils.constant.Img;
 import fr.redpanda.pander.utils.constant.PanderColor;
 
 /**
@@ -124,6 +126,8 @@ public class ViewUtils {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setMinimumSize(new Dimension(frameWidth, frameHeight));
 		frame.setMaximumSize(new Dimension(maxFrameWidth, maxFrameHeight));
+		ImageIcon icon = new ImageIcon(Img.APP_ICON);
+		frame.setIconImage(icon.getImage());
 		center(frame);
 	}
 
