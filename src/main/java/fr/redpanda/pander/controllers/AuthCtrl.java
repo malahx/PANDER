@@ -53,6 +53,8 @@ public class AuthCtrl extends BaseCtrl {
 			} else if (loggedUser instanceof Admin) {
 				ViewsManager.getInstance().next(new AdminCtrl(frame));
 			}
+		} else {
+			PopupManager.message("Authentification", "Identifiant ou mot de passe incorrect !");
 		}
 
 	}
