@@ -3,14 +3,7 @@
  */
 package fr.redpanda.pander.views.models;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.RowSorter;
-import javax.swing.SortOrder;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 import fr.redpanda.pander.entities.Skill;
 import fr.redpanda.pander.entities.base.BaseEntity;
@@ -20,14 +13,12 @@ import fr.redpanda.pander.entities.base.IBaseSkillEntity;
  * @author Gwénolé LE HENAFF
  *
  */
-public class SkillTableModel extends AbstractTableModel {
+public class SkillTableModel extends SorterTableModel {
 
 	private static final long serialVersionUID = -4831274774359919486L;
 
-	private final String[] title = { "Activer", "Compétence" };
 	private final List<BaseEntity> skills;
 	private final IBaseSkillEntity entity;
-	private final TableRowSorter<TableModel> sorter;
 
 	/**
 	 * @return the skills
@@ -37,30 +28,17 @@ public class SkillTableModel extends AbstractTableModel {
 	}
 
 	/**
-	 * @return the sorter
-	 */
-	public TableRowSorter<TableModel> getSorter() {
-		return sorter;
-	}
-
-	/**
 	 * @param entity
 	 * @param skills
-	 * @param title
+	 * @param TITLE
 	 * @param type
 	 * 
 	 */
 	public SkillTableModel(List<BaseEntity> skills, IBaseSkillEntity entity) {
-		super();
+		this.title = new String[] { "Activer", "Compétence" };
 		this.skills = skills;
 		this.entity = entity;
-		this.sorter = new TableRowSorter<TableModel>(this);
-		List<RowSorter.SortKey> sortKeys = new ArrayList<RowSorter.SortKey>();
-		for (int i = 0; i < title.length; i++) {
-			sortKeys.add(new RowSorter.SortKey(i, SortOrder.DESCENDING));
-		}
-		sorter.setSortKeys(sortKeys);
-		sorter.setSortsOnUpdates(true);
+		initSorter();
 	}
 
 	/*

@@ -66,7 +66,9 @@ public class MatchingCtrl extends MainCtrl {
 		super.initView();
 		MatchingView view = (MatchingView) this.view;
 		view.getNavbar().getTglbtnMatching().setSelected(true);
-		model = new MatchingTableModel(mFinder.getMatchingsDone(), user instanceof Candidate);
+		String[] title = user instanceof Candidate ? new String[] { "Match", "Nom", "Email", "Poste" }
+				: new String[] { "Match", "Prénom", "Nom", "Email" };
+		model = new MatchingTableModel(title, mFinder.getMatchingsDone(), user instanceof Candidate);
 		view.getTblMatching().setModel(model);
 		view.getTblMatching().setRowSorter(model.getSorter());
 	}
