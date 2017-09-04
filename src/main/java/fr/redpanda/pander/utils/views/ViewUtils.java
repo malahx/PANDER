@@ -3,7 +3,6 @@
  */
 package fr.redpanda.pander.utils.views;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
@@ -12,18 +11,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import fr.redpanda.pander.utils.constant.PanderColor;
+
 /**
  * @author Gwénolé LE HENAFF
  *
  */
 public class ViewUtils {
-
-	private static final Color GREY_LIGHT = new Color(207, 207, 207);
-	private static final Color GREY = new Color(158, 158, 158);
-	private static final Color LIGHT = new Color(255, 192, 70);
-	private static final Color NORMAL = new Color(255, 143, 0);
-	private static final Color DARK = new Color(197, 96, 0);
-	private static final Color WHITE = new Color(255, 255, 255);
 
 	/**
 	 * Configure the jFrame and the jPanel
@@ -48,7 +42,7 @@ public class ViewUtils {
 	 * 
 	 */
 	public static void colorDark(JComponent component) {
-		component.setBackground(DARK);
+		component.setBackground(PanderColor.DARK);
 	}
 
 	/**
@@ -59,7 +53,7 @@ public class ViewUtils {
 	 * 
 	 */
 	public static void colorNormal(JComponent component) {
-		component.setBackground(NORMAL);
+		component.setBackground(PanderColor.NORMAL);
 	}
 
 	/**
@@ -70,7 +64,7 @@ public class ViewUtils {
 	 * 
 	 */
 	public static void colorLight(JComponent component) {
-		component.setBackground(LIGHT);
+		component.setBackground(PanderColor.LIGHT);
 	}
 
 	/**
@@ -81,7 +75,7 @@ public class ViewUtils {
 	 * 
 	 */
 	public static void colorGrey(JComponent component) {
-		component.setBackground(GREY);
+		component.setBackground(PanderColor.GREY);
 	}
 
 	/**
@@ -92,7 +86,7 @@ public class ViewUtils {
 	 * 
 	 */
 	public static void colorGreyLight(JComponent component) {
-		component.setBackground(GREY_LIGHT);
+		component.setBackground(PanderColor.GREY_LIGHT);
 	}
 
 	/**
@@ -103,7 +97,14 @@ public class ViewUtils {
 	 * 
 	 */
 	public static void colorWhite(JComponent component) {
-		component.setBackground(WHITE);
+		component.setBackground(PanderColor.WHITE);
+	}
+
+	/**
+	 * @param component
+	 */
+	public static void colorTextWhite(JComponent component) {
+		component.setForeground(PanderColor.WHITE);
 	}
 
 	/**
@@ -139,13 +140,6 @@ public class ViewUtils {
 		int posWidth = mainFrame.getX() + (mainFrame.getWidth() - frame.getWidth()) / 2;
 		int posHeight = mainFrame.getY() + (mainFrame.getHeight() - frame.getHeight()) / 2;
 		frame.setBounds(posWidth, posHeight, frame.getWidth(), frame.getHeight());
-	}
-
-	/**
-	 * @param component
-	 */
-	public static void colorTextWhite(JComponent component) {
-		component.setForeground(WHITE);
 	}
 
 }
