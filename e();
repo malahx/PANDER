@@ -1,0 +1,51 @@
+[1mdiff --git a/src/main/java/fr/redpanda/pander/controllers/AuthCtrl.java b/src/main/java/fr/redpanda/pander/controllers/AuthCtrl.java[m
+[1mindex b909abc..83c4eca 100644[m
+[1m--- a/src/main/java/fr/redpanda/pander/controllers/AuthCtrl.java[m
+[1m+++ b/src/main/java/fr/redpanda/pander/controllers/AuthCtrl.java[m
+[36m@@ -160,6 +160,7 @@[m [mpublic class AuthCtrl extends BaseCtrl {[m
+ 	private void initRegistration(User user) {[m
+ 		JFrame registerFrame = new JFrame();[m
+ 		new RegisterCtrl(frame, registerFrame, user);[m
+[32m+[m		[32mframe.setEnabled(false);[m
+ 		// User loggeUser = new Company();[m
+ 		// getViewDatas().put(TypeData.USER, loggeUser);[m
+ 		// if (loggeUser instanceof Candidate || loggeUser instanceof Company) {[m
+[1mdiff --git a/src/main/java/fr/redpanda/pander/controllers/RegisterCtrl.java b/src/main/java/fr/redpanda/pander/controllers/RegisterCtrl.java[m
+[1mindex 9af7981..10ff1fe 100644[m
+[1m--- a/src/main/java/fr/redpanda/pander/controllers/RegisterCtrl.java[m
+[1m+++ b/src/main/java/fr/redpanda/pander/controllers/RegisterCtrl.java[m
+[36m@@ -118,7 +118,7 @@[m [mpublic class RegisterCtrl extends BaseCtrl {[m
+ [m
+ 			@Override[m
+ 			public void actionPerformed(ActionEvent e) {[m
+[31m-				frame.dispose();[m
+[32m+[m				[32mclose();[m
+ 			}[m
+ 		});[m
+ 	}[m
+[36m@@ -142,7 +142,12 @@[m [mpublic class RegisterCtrl extends BaseCtrl {[m
+ 			company.setPassword(new String(view.getPwdPass().getPassword()));[m
+ 			CompanyDAO.getInstance().insert(company);[m
+ 		}[m
+[32m+[m		[32mclose();[m
+[32m+[m	[32m}[m
+[32m+[m
+[32m+[m	[32mprivate void close() {[m
+ 		frame.dispose();[m
+[32m+[m		[32mmainFrame.setEnabled(true);[m
+ 	}[m
+ [m
+ 	/**[m
+[1mdiff --git a/src/main/java/fr/redpanda/pander/views/JobView.java b/src/main/java/fr/redpanda/pander/views/JobView.java[m
+[1mindex ee3ecb9..11b3241 100644[m
+[1m--- a/src/main/java/fr/redpanda/pander/views/JobView.java[m
+[1m+++ b/src/main/java/fr/redpanda/pander/views/JobView.java[m
+[36m@@ -585,7 +585,7 @@[m [mpublic class JobView extends MainView {[m
+ 		lblInfos = new JLabel("Infos :");[m
+ 		GridBagConstraints gbc_lblInfos = new GridBagConstraints();[m
+ 		gbc_lblInfos.anchor = GridBagConstraints.NORTHEAST;[m
+[31m-		gbc_lblInfos.insets = new Insets(0, 0, 5, 0);[m
+[32m+[m		[32mgbc_lblInfos.insets = new Insets(0, 0, 5, 5);[m
+ 		gbc_lblInfos.gridx = 0;[m
+ 		gbc_lblInfos.gridy = 6;[m
+ 		pnlJobInfo.add(lblInfos, gbc_lblInfos);[m

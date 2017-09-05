@@ -1,0 +1,5 @@
+serverAddress=localhost
+port=3306
+dbName=pander
+login=root
+password=

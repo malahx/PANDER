@@ -38,3 +38,20 @@ bin/
 
 #Conception's Data
 /Conception/
+
+#Bad File
+.DS_Store
+
+#Sublime project
+*.sublime-project
+*.sublime-workspace
+
+#miglayout
+miglayout-src.zip
+miglayout15-swing.jar
+
+#checkstyle
+*.checkstyle
+
+#config files
+config/dbconfig
