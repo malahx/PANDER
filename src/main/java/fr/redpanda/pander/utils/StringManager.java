@@ -1,6 +1,7 @@
 package fr.redpanda.pander.utils;
 
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.regex.Pattern;
 
 import fr.redpanda.pander.entities.Role;
 import fr.redpanda.pander.entities.TypeSkill;
@@ -69,6 +70,10 @@ public class StringManager {
 							: (char) ThreadLocalRandom.current().nextInt(48, 58));
 		}
 		return stringBuilder.toString();
+	}
+	
+	public static boolean isEmail(String s) {
+		return Pattern.matches("^[^@]{2,}?@[^@]{2,}\\.[^@.]{2,}$", s);
 	}
 
 }

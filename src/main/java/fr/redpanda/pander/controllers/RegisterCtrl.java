@@ -20,6 +20,7 @@ import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.utils.PopupManager;
+import fr.redpanda.pander.utils.StringManager;
 import fr.redpanda.pander.utils.views.ViewUtils;
 import fr.redpanda.pander.views.RegisterView;
 import fr.redpanda.pander.views.models.DocListener;
@@ -92,31 +93,19 @@ public class RegisterCtrl extends BaseCtrl {
 		super.initEvent();
 		RegisterView view = (RegisterView) this.view;
 
-		DocListener btnEnabler = new DocListener() {
+		DocListener refresh = new DocListener() {
 
 			@Override
 			public void update(DocumentEvent e) {
-				refreshBtn(view);
+				refresh(view);
 			}
 		};
 
-		DocListener passInfo = new DocListener() {
-
-			@Override
-			public void update(DocumentEvent e) {
-				passwordMessage(view);
-			}
-		};
-
-		view.getTextName1().getDocument().addDocumentListener(btnEnabler);
-		view.getTextName2().getDocument().addDocumentListener(btnEnabler);
-		view.getTextEmail().getDocument().addDocumentListener(btnEnabler);
-		view.getPwdPass().getDocument().addDocumentListener(btnEnabler);
-		view.getPwdPassVerify().getDocument().addDocumentListener(btnEnabler);
-
-		view.getPwdPass().getDocument().addDocumentListener(passInfo);
-		view.getPwdPassVerify().getDocument().addDocumentListener(passInfo);
-
+		view.getTextName1().getDocument().addDocumentListener(refresh);
+		view.getTextName2().getDocument().addDocumentListener(refresh);
+		view.getTextEmail().getDocument().addDocumentListener(refresh);
+		view.getPwdPass().getDocument().addDocumentListener(refresh);
+		view.getPwdPassVerify().getDocument().addDocumentListener(refresh);
 		view.getBtnRegister().addActionListener(new ActionListener() {
 
 			@Override
@@ -138,6 +127,10 @@ public class RegisterCtrl extends BaseCtrl {
 	 * @param view
 	 */
 	protected void register(RegisterView view) {
+		if (!StringManager.isEmail(view.getTextEmail().getText())) {
+			PopupManager.message("Echec d'enregistrement", "Votre email n'est pas valide.");
+			return;
+		}
 		if (UserDAO.getInstance().isExists(view.getTextEmail().getText())) {
 			PopupManager.message("Echec d'enregistrement", "Cet email est déjà utilisé.");
 			return;
@@ -172,25 +165,21 @@ public class RegisterCtrl extends BaseCtrl {
 	/**
 	 * @param view
 	 */
-	protected void passwordMessage(RegisterView view) {
-		if (!new String(view.getPwdPass().getPassword()).equals(new String(view.getPwdPassVerify().getPassword()))) {
-			view.getLblInfo().setText("Le mot de passe ne correspond pas.");
-		} else {
-			view.getLblInfo().setText("Merci de compléter ces informations.");
-		}
-	}
-
-	/**
-	 * @param view
-	 */
-	protected void refreshBtn(RegisterView view) {
+	protected void refresh(RegisterView view) {
+		boolean isValidEmail = StringManager.isEmail(view.getTextEmail().getText());
 		if (view.getTextName1().getText().equals("") || view.getTextName2().getText().equals("")
 				|| view.getTextEmail().getText().equals("") || new String(view.getPwdPass().getPassword()).equals("")
-				|| !view.isSamePass()) {
+				|| !view.isSamePass() || !isValidEmail) {
 			view.getBtnRegister().setEnabled(false);
 		} else {
 			view.getBtnRegister().setEnabled(true);
 		}
+		if (!new String(view.getPwdPass().getPassword()).equals(new String(view.getPwdPassVerify().getPassword()))) {
+			view.getLblInfo().setText("Le mot de passe ne correspond pas.");
+		} else if (!isValidEmail) {
+			view.getLblInfo().setText("Votre email n'est pas valide.");
+		} else {
+			view.getLblInfo().setText("Merci de compléter ces informations.");
+		}
 	}
-
 }
