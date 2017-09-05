@@ -10,7 +10,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.redpanda.pander.databases.CandidateDAO;
 import fr.redpanda.pander.databases.DAOManager;
+import fr.redpanda.pander.databases.JobDAO;
 import fr.redpanda.pander.entities.base.BaseEntity;
 
 /**
@@ -196,6 +198,8 @@ public abstract class BaseDAO extends DAO implements IBaseDAO {
 	 */
 	@Override
 	public int delete(BaseEntity entity) {
+		execute("DELETE FROM " + JobDAO.TABLE_SKILL + " WHERE " + JobDAO.ID_SKILL + " = " + entity.getId());
+		execute("DELETE FROM " + CandidateDAO.TABLE_SKILL + " WHERE " + CandidateDAO.ID_SKILL + " = " + entity.getId());
 		return execute("DELETE FROM " + table + " WHERE " + id + " = " + entity.getId());
 	}
 
