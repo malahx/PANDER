@@ -36,81 +36,7 @@ import fr.redpanda.pander.views.models.SkillTableModel;
  */
 public class ProfileCtrl extends MainCtrl {
 
-	@Override
-	public BaseView getView() {
-		return view;
-	}
-
-	/**
-	 * @param frame
-	 * 
-	 */
-	public ProfileCtrl(JFrame frame) {
-		super();
-		super.frame = frame;
-		User user = (User) getViewDatas().get(TypeData.USER);
-		if (user instanceof Candidate) {
-			view = new CandidateView();
-		} else if (user instanceof Company) {
-			view = new CompanyView();
-		}
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.redpanda.pander.controllers.IBaseCtrl#initView()
-	 */
-	@Override
-	public void initView() {
-
-		super.initView();
-		MainView view = (MainView) this.view;
-		view.getNavbar().getTglbtnProfile().setSelected(true);
-		User user = (User) getViewDatas().get(TypeData.USER);
-		if (user instanceof Candidate && view instanceof CandidateView) {
-			initCandidateView(user);
-		} else if (user instanceof Company && view instanceof CompanyView) {
-			initCompanyView(user);
-		}
-
-	}
-
-	private void initCompanyView(User user) {
-	}
-
-	private void initCandidateView(User user) {
-		CandidateView cview = (CandidateView) this.view;
-		Candidate cuser = (Candidate) user;
-		cview.getTextCertificate1().setText(cuser.getCertificate1());
-		cview.getTextCertificate2().setText(cuser.getCertificate2());
-		cview.getTextBirthday().setText(DateConverter.getDate(cuser.getBirthdate()));
-		cview.getTextTransport().setText(cuser.getTransport());
-		List<BaseEntity> skills = SkillDAO.getInstance().get();
-		SkillTableModel softSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.SOFT), cuser);
-		SkillTableModel techSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.TECH), cuser);
-		cview.getTableSoftSkills().setModel(softSkillsModel);
-		cview.getTableSoftSkills().setRowSorter(softSkillsModel.getSorter());
-		cview.getTableTechSkills().setModel(techSkillsModel);
-		cview.getTableTechSkills().setRowSorter(techSkillsModel.getSorter());
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.redpanda.pander.controllers.MainCtrl#initEvent()
-	 */
-	@Override
-	public void initEvent() {
-		super.initEvent();
-		User user = (User) getViewDatas().get(TypeData.USER);
-		if (view instanceof CandidateView) {
-			initCandidateEvent(user);
-		} else if (view instanceof CompanyView) {
-			initCompanyEvent(user);
-		}
-	}
+	User user;
 
 	private void initCompanyEvent(User user) {
 		// TODO Auto-generated method stub
@@ -167,6 +93,99 @@ public class ProfileCtrl extends MainCtrl {
 		}
 		cuser.setTransport(view.getTextTransport().getText());
 		CandidateDAO.getInstance().update(cuser);
+	}
+
+	/**
+	 * @param frame
+	 * 
+	 */
+	public ProfileCtrl(JFrame frame) {
+		super();
+		super.frame = frame;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.controllers.base.BaseCtrl#setupDatas()
+	 */
+	@Override
+	public void setupDatas() {
+		super.setupDatas();
+
+		user = (User) getViewDatas().get(TypeData.USER);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.controllers.base.BaseCtrl#getView()
+	 */
+	@Override
+	public BaseView getView() {
+		if (view == null) {
+			if (user instanceof Candidate) {
+				view = new CandidateView();
+			} else if (user instanceof Company) {
+				view = new CompanyView();
+			}
+		}
+		return view;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.controllers.IBaseCtrl#initView()
+	 */
+	@Override
+	public void initView() {
+
+		super.initView();
+
+		MainView view = (MainView) this.view;
+		view.getNavbar().getTglbtnProfile().setSelected(true);
+		if (user instanceof Candidate && view instanceof CandidateView) {
+			initCandidateView(user);
+		} else if (user instanceof Company && view instanceof CompanyView) {
+			initCompanyView(user);
+		}
+
+	}
+
+	private void initCompanyView(User user) {
+	}
+
+	private void initCandidateView(User user) {
+		CandidateView cview = (CandidateView) this.view;
+		Candidate cuser = (Candidate) user;
+		cview.getTextCertificate1().setText(cuser.getCertificate1());
+		cview.getTextCertificate2().setText(cuser.getCertificate2());
+		cview.getTextBirthday().setText(DateConverter.getDate(cuser.getBirthdate()));
+		cview.getTextTransport().setText(cuser.getTransport());
+		List<BaseEntity> skills = SkillDAO.getInstance().get();
+		SkillTableModel softSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.SOFT), cuser);
+		SkillTableModel techSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.TECH), cuser);
+		cview.getTableSoftSkills().setModel(softSkillsModel);
+		cview.getTableSoftSkills().setRowSorter(softSkillsModel.getSorter());
+		cview.getTableTechSkills().setModel(techSkillsModel);
+		cview.getTableTechSkills().setRowSorter(techSkillsModel.getSorter());
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.controllers.MainCtrl#initEvent()
+	 */
+	@Override
+	public void initEvent() {
+		super.initEvent();
+		if (view instanceof CandidateView) {
+			initCandidateEvent(user);
+		} else if (view instanceof CompanyView) {
+			initCompanyEvent(user);
+		}
 	}
 
 }
