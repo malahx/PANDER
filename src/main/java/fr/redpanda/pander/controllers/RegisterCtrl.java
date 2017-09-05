@@ -6,6 +6,8 @@ package fr.redpanda.pander.controllers;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.event.DocumentEvent;
@@ -13,9 +15,12 @@ import javax.swing.event.DocumentEvent;
 import fr.redpanda.pander.controllers.base.BaseCtrl;
 import fr.redpanda.pander.databases.CandidateDAO;
 import fr.redpanda.pander.databases.CompanyDAO;
+import fr.redpanda.pander.databases.UserDAO;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.User;
+import fr.redpanda.pander.utils.PopupManager;
+import fr.redpanda.pander.utils.StringManager;
 import fr.redpanda.pander.utils.views.ViewUtils;
 import fr.redpanda.pander.views.RegisterView;
 import fr.redpanda.pander.views.models.DocListener;
@@ -60,8 +65,15 @@ public class RegisterCtrl extends BaseCtrl {
 	public void initView() {
 		super.initView();
 		frame.setBounds(0, 0, 400, 250);
-		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setAlwaysOnTop(true);
 		ViewUtils.center(mainFrame, frame);
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				close();
+			}
+		});
 
 		RegisterView view = (RegisterView) this.view;
 
@@ -81,31 +93,19 @@ public class RegisterCtrl extends BaseCtrl {
 		super.initEvent();
 		RegisterView view = (RegisterView) this.view;
 
-		DocListener btnEnabler = new DocListener() {
+		DocListener refresh = new DocListener() {
 
 			@Override
 			public void update(DocumentEvent e) {
-				refreshBtn(view);
+				refresh(view);
 			}
 		};
 
-		DocListener passInfo = new DocListener() {
-
-			@Override
-			public void update(DocumentEvent e) {
-				passwordMessage(view);
-			}
-		};
-
-		view.getTextName1().getDocument().addDocumentListener(btnEnabler);
-		view.getTextName2().getDocument().addDocumentListener(btnEnabler);
-		view.getTextEmail().getDocument().addDocumentListener(btnEnabler);
-		view.getPwdPass().getDocument().addDocumentListener(btnEnabler);
-		view.getPwdPassVerify().getDocument().addDocumentListener(btnEnabler);
-
-		view.getPwdPass().getDocument().addDocumentListener(passInfo);
-		view.getPwdPassVerify().getDocument().addDocumentListener(passInfo);
-
+		view.getTextName1().getDocument().addDocumentListener(refresh);
+		view.getTextName2().getDocument().addDocumentListener(refresh);
+		view.getTextEmail().getDocument().addDocumentListener(refresh);
+		view.getPwdPass().getDocument().addDocumentListener(refresh);
+		view.getPwdPassVerify().getDocument().addDocumentListener(refresh);
 		view.getBtnRegister().addActionListener(new ActionListener() {
 
 			@Override
@@ -118,7 +118,7 @@ public class RegisterCtrl extends BaseCtrl {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
+				close();
 			}
 		});
 	}
@@ -127,6 +127,14 @@ public class RegisterCtrl extends BaseCtrl {
 	 * @param view
 	 */
 	protected void register(RegisterView view) {
+		if (!StringManager.isEmail(view.getTextEmail().getText())) {
+			PopupManager.message("Echec d'enregistrement", "Votre email n'est pas valide.");
+			return;
+		}
+		if (UserDAO.getInstance().isExists(view.getTextEmail().getText())) {
+			PopupManager.message("Echec d'enregistrement", "Cet email est déjà utilisé.");
+			return;
+		}
 		if (user instanceof Candidate) {
 			Candidate candidate = (Candidate) user;
 			candidate.setFirstname(view.getTextName1().getText());
@@ -135,6 +143,10 @@ public class RegisterCtrl extends BaseCtrl {
 			candidate.setPassword(new String(view.getPwdPass().getPassword()));
 			CandidateDAO.getInstance().insert(candidate);
 		} else if (user instanceof Company) {
+			if (CompanyDAO.getInstance().isExists(view.getTextName2().getText())) {
+				PopupManager.message("Echec d'enregistrement", "Ce numéro SIRET est déjà utilisé.");
+				return;
+			}
 			Company company = (Company) user;
 			company.setName(view.getTextName1().getText());
 			company.setSiret(view.getTextName2().getText());
@@ -142,31 +154,32 @@ public class RegisterCtrl extends BaseCtrl {
 			company.setPassword(new String(view.getPwdPass().getPassword()));
 			CompanyDAO.getInstance().insert(company);
 		}
+		close();
+	}
+
+	private void close() {
 		frame.dispose();
+		mainFrame.setEnabled(true);
 	}
 
 	/**
 	 * @param view
 	 */
-	protected void passwordMessage(RegisterView view) {
-		if (!new String(view.getPwdPass().getPassword()).equals(new String(view.getPwdPassVerify().getPassword()))) {
-			view.getLblInfo().setText("Le mot de passe ne correspond pas.");
-		} else {
-			view.getLblInfo().setText("Merci de compléter ces informations.");
-		}
-	}
-
-	/**
-	 * @param view
-	 */
-	protected void refreshBtn(RegisterView view) {
+	protected void refresh(RegisterView view) {
+		boolean isValidEmail = StringManager.isEmail(view.getTextEmail().getText());
 		if (view.getTextName1().getText().equals("") || view.getTextName2().getText().equals("")
 				|| view.getTextEmail().getText().equals("") || new String(view.getPwdPass().getPassword()).equals("")
-				|| !view.isSamePass()) {
+				|| !view.isSamePass() || !isValidEmail) {
 			view.getBtnRegister().setEnabled(false);
 		} else {
 			view.getBtnRegister().setEnabled(true);
 		}
+		if (!new String(view.getPwdPass().getPassword()).equals(new String(view.getPwdPassVerify().getPassword()))) {
+			view.getLblInfo().setText("Le mot de passe ne correspond pas.");
+		} else if (!isValidEmail) {
+			view.getLblInfo().setText("Votre email n'est pas valide.");
+		} else {
+			view.getLblInfo().setText("Merci de compléter ces informations.");
+		}
 	}
-
 }

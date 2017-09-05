@@ -5,9 +5,8 @@ package fr.redpanda.pander.entities;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
-import fr.redpanda.pander.entities.base.BaseEntity;
+import fr.redpanda.pander.entities.base.DateEntity;
 import fr.redpanda.pander.utils.StringManager;
 
 /**
@@ -15,7 +14,7 @@ import fr.redpanda.pander.utils.StringManager;
  * @author Gwénolé LE HENAFF
  *
  */
-public abstract class User extends BaseEntity {
+public abstract class User extends DateEntity {
 
 	protected String email;
 	protected String password;
@@ -27,8 +26,6 @@ public abstract class User extends BaseEntity {
 	protected String description;
 	protected Boolean disabled;
 	protected Role role;
-	protected Date createdAt;
-	protected Date updatedAt;
 
 	/**
 	 * @return the email
@@ -178,36 +175,6 @@ public abstract class User extends BaseEntity {
 	 */
 	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	/**
-	 * @return the createdAt
-	 */
-	public Date getCreatedAt() {
-		return createdAt != null ? new Date(createdAt.getTime()) : null;
-	}
-
-	/**
-	 * @param createdAt
-	 *            the createdAt to set
-	 */
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt != null ? new Date(createdAt.getTime()) : null;
-	}
-
-	/**
-	 * @return the updatedAt
-	 */
-	public Date getUpdatedAt() {
-		return updatedAt != null ? new Date(updatedAt.getTime()) : null;
-	}
-
-	/**
-	 * @param updatedAt
-	 *            the updatedAt to set
-	 */
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt != null ? new Date(updatedAt.getTime()) : null;
 	}
 
 	/**

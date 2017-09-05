@@ -3,14 +3,7 @@
  */
 package fr.redpanda.pander.views.models;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.RowSorter;
-import javax.swing.SortOrder;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
 
 import fr.redpanda.pander.businesscode.Matching;
 
@@ -18,16 +11,14 @@ import fr.redpanda.pander.businesscode.Matching;
  * @author Gwénolé LE HENAFF
  *
  */
-public class MatchingTableModel extends AbstractTableModel {
+public class MatchingTableModel extends SorterTableModel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -7656754488588885879L;
 
-	private final String[] title;
 	private final List<Matching> matchings;
-	private final TableRowSorter<TableModel> sorter;
 	private final boolean isCandidate;
 
 	/**
@@ -35,13 +26,6 @@ public class MatchingTableModel extends AbstractTableModel {
 	 */
 	public List<Matching> getMatchings() {
 		return matchings;
-	}
-
-	/**
-	 * @return the sorter
-	 */
-	public TableRowSorter<TableModel> getSorter() {
-		return sorter;
 	}
 
 	public void add(Matching matching) {
@@ -53,19 +37,14 @@ public class MatchingTableModel extends AbstractTableModel {
 	 * @param title
 	 * @param matchings
 	 */
-	public MatchingTableModel(List<Matching> matchings, boolean isCandidate) {
-		super();
-		this.title = isCandidate ? new String[] { "Match", "Nom", "Email", "Poste" }
-				: new String[] { "Match", "Prénom", "Nom", "Email" };
+	public MatchingTableModel(String[] title, List<Matching> matchings, boolean isCandidate) {
+		this.title = new String[title.length];
+		for (int i = 0; i < title.length; i++) {
+			this.title[i] = title[i];
+		}
 		this.matchings = matchings;
 		this.isCandidate = isCandidate;
-		this.sorter = new TableRowSorter<TableModel>(this);
-		List<RowSorter.SortKey> sortKeys = new ArrayList<RowSorter.SortKey>();
-		for (int i = 0; i < title.length; i++) {
-			sortKeys.add(new RowSorter.SortKey(i, SortOrder.DESCENDING));
-		}
-		sorter.setSortKeys(sortKeys);
-		sorter.setSortsOnUpdates(true);
+		initSorter();
 	}
 
 	/*
@@ -75,7 +54,7 @@ public class MatchingTableModel extends AbstractTableModel {
 	 */
 	@Override
 	public int getRowCount() {
-		return matchings.size();
+		return matchings != null ? matchings.size() : 0;
 	}
 
 	/*
@@ -131,6 +110,11 @@ public class MatchingTableModel extends AbstractTableModel {
 			return isCandidate ? matching.getCompany().getEmail() : matching.getCandidate().getLastname();
 		case 3:
 			return isCandidate ? matching.getJob().getName() : matching.getCandidate().getEmail();
+		case 4:
+			if (isCandidate) {
+				throw new IllegalArgumentException();
+			}
+			return matching.getJob().getName();
 		default:
 			throw new IllegalArgumentException();
 		}

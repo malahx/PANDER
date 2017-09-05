@@ -80,18 +80,18 @@ public class UserDAO extends BaseDAO {
 		return entity;
 	}
 
-	public BaseEntity get(String email) {
-		ResultSet rs = executeQuery("SELECT * FROM " + TABLE + " WHERE " + EMAIL + " = '" + email + "'");
-		BaseEntity entity = null;
+	public boolean isExists(String email) {
+		ResultSet rs = executeQuery("SELECT " + ID +" FROM " + TABLE + " WHERE " + EMAIL + " = '" + email + "'");
+		boolean result = false;
 		try {
 			if (rs.next()) {
-				entity = parse(rs);
+				result = rs.getDouble(ID) > 0 ? true : false;
 			}
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return entity;
+		return result;
 	}
 
 	public BaseEntity parse(BaseEntity entity, ResultSet rs) {
@@ -265,7 +265,7 @@ public class UserDAO extends BaseDAO {
 	 */
 	@Override
 	public boolean checkUniqueFields(BaseEntity entity) {
-		return get(((User) entity).getEmail()) != null;
+		return isExists(((User) entity).getEmail());
 	}
 
 	/*

@@ -7,6 +7,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,7 +25,7 @@ import fr.redpanda.pander.views.base.BaseView;
  *
  */
 public class AuthView extends BaseView {
-	
+
 	private JTextField txtLogin;
 	private JPasswordField txtPassword;
 	private JButton btnPassword;
@@ -291,6 +292,7 @@ public class AuthView extends BaseView {
 		ImageIcon registerCandidateIcon = new ImageIcon(Img.REGISTER_CANDIDATE);
 		btnCandidate.setIcon(registerCandidateIcon);
 		btnCandidate.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		btnCandidate.setBorder(BorderFactory.createEmptyBorder());
 		panel_3.add(btnCandidate);
 
 		JPanel panel_4 = new JPanel();
@@ -306,6 +308,7 @@ public class AuthView extends BaseView {
 		ImageIcon registerCompanyIcon = new ImageIcon(Img.REGISTER_COMPANY);
 		btnCompany.setIcon(registerCompanyIcon);
 		btnCompany.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		btnCompany.setBorder(BorderFactory.createEmptyBorder());
 		panel_4.add(btnCompany);
 
 		ViewUtils.colorWhite(panel_1);

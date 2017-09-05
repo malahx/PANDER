@@ -28,11 +28,9 @@ public class Navbar extends JPanel {
 	private JToggleButton tglbtnProfile;
 	private JToggleButton tglbtnHome;
 	private JToggleButton tglbtnMatching;
+	private JToggleButton tglbtnJob;
 	private JLabel lblLogopander;
 	private JLabel lblLogouser;
-	private JPanel pnlNav;
-	private JPanel pnlButton;
-	private JPanel pnlHeader;
 	private JLabel lblPander;
 	private JLabel lblUser;
 
@@ -112,51 +110,6 @@ public class Navbar extends JPanel {
 	}
 
 	/**
-	 * @return the pnlNav
-	 */
-	public JPanel getPnlNav() {
-		return pnlNav;
-	}
-
-	/**
-	 * @param pnlNav
-	 *            the pnlNav to set
-	 */
-	public void setPnlNav(JPanel pnlNav) {
-		this.pnlNav = pnlNav;
-	}
-
-	/**
-	 * @return the pnlButton
-	 */
-	public JPanel getPnlButton() {
-		return pnlButton;
-	}
-
-	/**
-	 * @param pnlButton
-	 *            the pnlButton to set
-	 */
-	public void setPnlButton(JPanel pnlButton) {
-		this.pnlButton = pnlButton;
-	}
-
-	/**
-	 * @return the panel
-	 */
-	public JPanel getPanel() {
-		return pnlHeader;
-	}
-
-	/**
-	 * @param panel
-	 *            the panel to set
-	 */
-	public void setPanel(JPanel panel) {
-		this.pnlHeader = panel;
-	}
-
-	/**
 	 * @return the lblPander
 	 */
 	public JLabel getLblPander() {
@@ -187,6 +140,21 @@ public class Navbar extends JPanel {
 	}
 
 	/**
+	 * @return the tglbtnJob
+	 */
+	public JToggleButton getTglbtnJob() {
+		return tglbtnJob;
+	}
+
+	/**
+	 * @param tglbtnJob
+	 *            the tglbtnJob to set
+	 */
+	public void setTglbtnJob(JToggleButton tglbtnJob) {
+		this.tglbtnJob = tglbtnJob;
+	}
+
+	/**
 	 * Create the panel.
 	 */
 	public Navbar() {
@@ -210,7 +178,7 @@ public class Navbar extends JPanel {
 		gbc_lblLogopander.gridy = 0;
 		add(lblLogopander, gbc_lblLogopander);
 
-		pnlNav = new JPanel();
+		JPanel pnlNav = new JPanel();
 		GridBagConstraints gbc_pnlNav = new GridBagConstraints();
 		gbc_pnlNav.insets = new Insets(0, 0, 0, 5);
 		gbc_pnlNav.fill = GridBagConstraints.BOTH;
@@ -260,7 +228,7 @@ public class Navbar extends JPanel {
 		pnlHeader.add(lblUser, gbc_lblUser);
 		lblUser.setVisible(false);
 
-		pnlButton = new JPanel();
+		JPanel pnlButton = new JPanel();
 		GridBagConstraints gbc_pnlButton = new GridBagConstraints();
 		gbc_pnlButton.insets = new Insets(0, 0, 5, 0);
 		gbc_pnlButton.fill = GridBagConstraints.BOTH;
@@ -274,6 +242,10 @@ public class Navbar extends JPanel {
 
 		tglbtnProfile = new JToggleButton("Profile");
 		pnlButton.add(tglbtnProfile);
+
+		tglbtnJob = new JToggleButton("Poste");
+		tglbtnJob.setVisible(false);
+		pnlButton.add(tglbtnJob);
 
 		tglbtnMatching = new JToggleButton("Matching");
 		pnlButton.add(tglbtnMatching);
@@ -293,6 +265,7 @@ public class Navbar extends JPanel {
 		ViewUtils.colorWhite(tglbtnHome);
 		ViewUtils.colorWhite(tglbtnMatching);
 		ViewUtils.colorWhite(tglbtnProfile);
+		ViewUtils.colorWhite(tglbtnJob);
 
 	}
 

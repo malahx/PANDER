@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import fr.redpanda.pander.databases.base.BaseUserDAO;
 import fr.redpanda.pander.entities.Company;
+import fr.redpanda.pander.entities.Job;
 import fr.redpanda.pander.entities.base.BaseEntity;
 
 /**
@@ -53,6 +54,26 @@ public class CompanyDAO extends BaseUserDAO {
 		return instance;
 	}
 
+	/**
+	 * @param text
+	 * @return
+	 */
+	public boolean isExists(String text) {
+
+		ResultSet rs = executeQuery("SELECT " + ID + " FROM " + TABLE + " WHERE " + SIRET + " = '" + text + "'");
+		boolean result = false;
+		try {
+			if (rs.next()) {
+				result = rs.getDouble(ID) > 0 ? true : false;
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return result;
+
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -63,7 +84,7 @@ public class CompanyDAO extends BaseUserDAO {
 
 		Company company = (Company) super.parse(new Company(), rs);
 		try {
-			//company.setId(rs.getDouble(ID));
+			// company.setId(rs.getDouble(ID));
 			company.setName(rs.getString(NAME));
 			company.setSiret(rs.getString(SIRET));
 			company.setContact(rs.getString(CONTACT));
@@ -85,7 +106,7 @@ public class CompanyDAO extends BaseUserDAO {
 	 */
 	@Override
 	public String parse(BaseEntity entity) {
-		//TODO à revoir en stringbuilder
+		// TODO à revoir en stringbuilder
 		String result = "";
 		Company company = (Company) entity;
 		result += company.getId() + ",";
@@ -105,7 +126,7 @@ public class CompanyDAO extends BaseUserDAO {
 	 */
 	@Override
 	public String parseUpdate(BaseEntity entity) {
-		//TODO à revoir en stringbuilder
+		// TODO à revoir en stringbuilder
 		String result = "";
 		Company company = (Company) entity;
 		result += NAME + " = '" + (company.getName() == null ? "" : company.getName()) + "',";
@@ -123,7 +144,7 @@ public class CompanyDAO extends BaseUserDAO {
 	 */
 	@Override
 	public String fields() {
-		//TODO à revoir en stringbuilder
+		// TODO à revoir en stringbuilder
 		String result = "";
 		result += ID + ",";
 		result += NAME + ",";
@@ -150,6 +171,31 @@ public class CompanyDAO extends BaseUserDAO {
 		}
 		return true;
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.databases.base.BaseDAO#checkUniqueFields(fr.redpanda.
+	 * pander.entities.base.BaseEntity)
+	 */
+	@Override
+	public boolean checkUniqueFields(BaseEntity entity) {
+		return isExists(((Company) entity).getSiret());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.databases.base.BaseUserDAO#delete(fr.redpanda.pander.
+	 * entities.base.BaseEntity)
+	 */
+	@Override
+	public int delete(BaseEntity entity) {
+		for (Job job : ((Company) entity).getJobs()) {
+			JobDAO.getInstance().delete(job);
+		}
+		return super.delete(entity);
 	}
 
 }

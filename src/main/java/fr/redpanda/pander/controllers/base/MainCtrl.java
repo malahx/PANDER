@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.event.DocumentEvent;
 
 import fr.redpanda.pander.controllers.HomeCtrl;
+import fr.redpanda.pander.controllers.JobCtrl;
 import fr.redpanda.pander.controllers.MatchingCtrl;
 import fr.redpanda.pander.controllers.ProfileCtrl;
 import fr.redpanda.pander.databases.CandidateDAO;
@@ -33,6 +34,8 @@ import fr.redpanda.pander.views.subviews.SidebarEditable;
  */
 public abstract class MainCtrl extends BaseCtrl {
 
+	// TODO added user field ...
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -47,10 +50,12 @@ public abstract class MainCtrl extends BaseCtrl {
 		if (user instanceof Candidate) {
 			view.getNavbar().getLblUser().setText("CANDIDAT");
 			view.getNavbar().getLblLogouser().setIcon(new ImageIcon(Img.HOME_CANDIDATE));
+			view.getNavbar().getTglbtnJob().setVisible(false);
 			view.getSidebar().initCandidate((Candidate) user);
 		} else {
 			view.getNavbar().getLblUser().setText("ENTREPRISE");
 			view.getNavbar().getLblLogouser().setIcon(new ImageIcon(Img.HOME_COMPANY));
+			view.getNavbar().getTglbtnJob().setVisible(true);
 			view.getSidebar().initCompany((Company) user);
 		}
 
@@ -67,7 +72,6 @@ public abstract class MainCtrl extends BaseCtrl {
 		MainView view = (MainView) this.view;
 
 		initNavbar(view);
-
 		initFooter(view);
 		initEditSidebar(view);
 
@@ -98,6 +102,14 @@ public abstract class MainCtrl extends BaseCtrl {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				gotoMatching();
+			}
+		});
+
+		view.getNavbar().getTglbtnJob().addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				gotoJob();
 			}
 		});
 	}
@@ -138,6 +150,9 @@ public abstract class MainCtrl extends BaseCtrl {
 				updateUser(sidebar);
 			}
 		};
+		sidebar.getTxtName1().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtName2().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtCity().getDocument().addDocumentListener(updateProfile);
 		sidebar.getTxtAdress().getDocument().addDocumentListener(updateProfile);
 		sidebar.getTxtCity().getDocument().addDocumentListener(updateProfile);
 		sidebar.getTxtDescriptionTitle().getDocument().addDocumentListener(updateProfile);
@@ -148,7 +163,17 @@ public abstract class MainCtrl extends BaseCtrl {
 	/**
 	 * 
 	 */
-	protected void gotoMatching() {
+	private void gotoJob() {
+		if (ViewsManager.getInstance().isCurrentController(JobCtrl.class)) {
+			return;
+		}
+		ViewsManager.getInstance().next(new JobCtrl(frame));
+	}
+
+	/**
+	 * 
+	 */
+	private void gotoMatching() {
 		if (ViewsManager.getInstance().isCurrentController(MatchingCtrl.class)) {
 			return;
 		}
@@ -158,7 +183,7 @@ public abstract class MainCtrl extends BaseCtrl {
 	/**
 	 * 
 	 */
-	protected void gotoProfile() {
+	private void gotoProfile() {
 		if (ViewsManager.getInstance().isCurrentController(ProfileCtrl.class)) {
 			return;
 		}

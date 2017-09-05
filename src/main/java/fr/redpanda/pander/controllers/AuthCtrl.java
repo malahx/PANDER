@@ -53,6 +53,8 @@ public class AuthCtrl extends BaseCtrl {
 			} else if (loggedUser instanceof Admin) {
 				ViewsManager.getInstance().next(new AdminCtrl(frame));
 			}
+		} else {
+			PopupManager.message("Authentification", "Identifiant ou mot de passe incorrect !");
 		}
 
 	}
@@ -160,6 +162,7 @@ public class AuthCtrl extends BaseCtrl {
 	private void initRegistration(User user) {
 		JFrame registerFrame = new JFrame();
 		new RegisterCtrl(frame, registerFrame, user);
+		frame.setEnabled(false);
 		// User loggeUser = new Company();
 		// getViewDatas().put(TypeData.USER, loggeUser);
 		// if (loggeUser instanceof Candidate || loggeUser instanceof Company) {
