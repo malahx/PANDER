@@ -196,7 +196,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	public boolean checkFields(BaseEntity entity) {
 
 		Candidate candidate = (Candidate) entity;
-		return candidate.getFirstname() == null || candidate.getLastname() == null;
+		return candidate.getFirstname() != null || candidate.getLastname() != null;
 
 	}
 
