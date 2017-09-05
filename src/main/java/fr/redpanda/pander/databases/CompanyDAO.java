@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import fr.redpanda.pander.databases.base.BaseUserDAO;
 import fr.redpanda.pander.entities.Company;
+import fr.redpanda.pander.entities.Job;
 import fr.redpanda.pander.entities.base.BaseEntity;
 
 /**
@@ -181,6 +182,20 @@ public class CompanyDAO extends BaseUserDAO {
 	@Override
 	public boolean checkUniqueFields(BaseEntity entity) {
 		return isExists(((Company) entity).getSiret());
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.databases.base.BaseUserDAO#delete(fr.redpanda.pander.
+	 * entities.base.BaseEntity)
+	 */
+	@Override
+	public int delete(BaseEntity entity) {
+		for (Job job : ((Company) entity).getJobs()) {
+			JobDAO.getInstance().delete(job);
+		}
+		return super.delete(entity);
 	}
 
 }

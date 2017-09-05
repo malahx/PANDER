@@ -34,6 +34,8 @@ import fr.redpanda.pander.views.subviews.SidebarEditable;
  */
 public abstract class MainCtrl extends BaseCtrl {
 
+	// TODO added user field ...
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -148,6 +150,9 @@ public abstract class MainCtrl extends BaseCtrl {
 				updateUser(sidebar);
 			}
 		};
+		sidebar.getTxtName1().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtName2().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtCity().getDocument().addDocumentListener(updateProfile);
 		sidebar.getTxtAdress().getDocument().addDocumentListener(updateProfile);
 		sidebar.getTxtCity().getDocument().addDocumentListener(updateProfile);
 		sidebar.getTxtDescriptionTitle().getDocument().addDocumentListener(updateProfile);

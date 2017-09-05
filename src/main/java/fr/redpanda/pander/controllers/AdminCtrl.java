@@ -5,6 +5,7 @@ package fr.redpanda.pander.controllers;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.event.DocumentEvent;
@@ -12,11 +13,19 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import fr.redpanda.pander.controllers.base.BaseCtrl;
+import fr.redpanda.pander.databases.CandidateDAO;
+import fr.redpanda.pander.databases.CompanyDAO;
+import fr.redpanda.pander.databases.JobDAO;
 import fr.redpanda.pander.databases.SkillDAO;
 import fr.redpanda.pander.databases.UserDAO;
+import fr.redpanda.pander.entities.Candidate;
+import fr.redpanda.pander.entities.Company;
+import fr.redpanda.pander.entities.Job;
 import fr.redpanda.pander.entities.Skill;
 import fr.redpanda.pander.entities.TypeSkill;
 import fr.redpanda.pander.entities.User;
+import fr.redpanda.pander.entities.base.BaseEntity;
+import fr.redpanda.pander.entities.base.IBaseSkillEntity;
 import fr.redpanda.pander.utils.StringManager;
 import fr.redpanda.pander.views.AdminView;
 import fr.redpanda.pander.views.models.AdminTableModel;
@@ -137,7 +146,15 @@ public class AdminCtrl extends BaseCtrl {
 			AdminTableModel model = (AdminTableModel) view.getTblTable().getModel();
 			Object object = model.getObjects().get(selectedRow);
 			if (object instanceof User) {
-				UserDAO.getInstance().delete((User) object);
+				if (object instanceof Candidate) {
+					Candidate candidate = (Candidate) object;
+					CandidateDAO.getInstance().delete(candidate);
+				} else if (object instanceof Company) {
+					Company company = (Company) object;
+					CompanyDAO.getInstance().delete(company);
+				} else {
+					UserDAO.getInstance().delete((User) object);
+				}
 				view.getBtnBtn1().setEnabled(false);
 			}
 			if (object instanceof Skill) {
@@ -193,7 +210,18 @@ public class AdminCtrl extends BaseCtrl {
 	private void initUser(AdminView view) {
 		String[] title = { "Email", "Mise à jour" };
 		view.getLblSubtitle().setText("Utilisateurs");
-		view.updateDatas(title, UserDAO.getInstance().get());
+		List<BaseEntity> users = UserDAO.getInstance().get();
+		for (BaseEntity user : users) {
+			if (user instanceof Candidate) {
+				CandidateDAO.getInstance().getSkills((IBaseSkillEntity) user);
+			} else if (user instanceof Company) {
+				Company company = JobDAO.getInstance().get((Company) user);
+				for (Job job : company.getJobs()) {
+					JobDAO.getInstance().getSkills(job);
+				}
+			}
+		}
+		view.updateDatas(title, users);
 		view.getTglbtnSkills().setSelected(false);
 		view.getBtnBtn1().setText("Générer mot de passe");
 		view.getTxtSkill().setText("");
