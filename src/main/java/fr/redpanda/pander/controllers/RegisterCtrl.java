@@ -6,6 +6,8 @@ package fr.redpanda.pander.controllers;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JFrame;
 import javax.swing.event.DocumentEvent;
@@ -13,9 +15,11 @@ import javax.swing.event.DocumentEvent;
 import fr.redpanda.pander.controllers.base.BaseCtrl;
 import fr.redpanda.pander.databases.CandidateDAO;
 import fr.redpanda.pander.databases.CompanyDAO;
+import fr.redpanda.pander.databases.UserDAO;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.User;
+import fr.redpanda.pander.utils.PopupManager;
 import fr.redpanda.pander.utils.views.ViewUtils;
 import fr.redpanda.pander.views.RegisterView;
 import fr.redpanda.pander.views.models.DocListener;
@@ -60,8 +64,15 @@ public class RegisterCtrl extends BaseCtrl {
 	public void initView() {
 		super.initView();
 		frame.setBounds(0, 0, 400, 250);
-		frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frame.setAlwaysOnTop(true);
 		ViewUtils.center(mainFrame, frame);
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				close();
+			}
+		});
 
 		RegisterView view = (RegisterView) this.view;
 
@@ -127,6 +138,10 @@ public class RegisterCtrl extends BaseCtrl {
 	 * @param view
 	 */
 	protected void register(RegisterView view) {
+		if (UserDAO.getInstance().isExists(view.getTextEmail().getText())) {
+			PopupManager.message("Echec d'enregistrement", "Cet email est déjà utilisé.");
+			return;
+		}
 		if (user instanceof Candidate) {
 			Candidate candidate = (Candidate) user;
 			candidate.setFirstname(view.getTextName1().getText());
@@ -135,6 +150,10 @@ public class RegisterCtrl extends BaseCtrl {
 			candidate.setPassword(new String(view.getPwdPass().getPassword()));
 			CandidateDAO.getInstance().insert(candidate);
 		} else if (user instanceof Company) {
+			if (CompanyDAO.getInstance().isExists(view.getTextName2().getText())) {
+				PopupManager.message("Echec d'enregistrement", "Ce numéro SIRET est déjà utilisé.");
+				return;
+			}
 			Company company = (Company) user;
 			company.setName(view.getTextName1().getText());
 			company.setSiret(view.getTextName2().getText());
