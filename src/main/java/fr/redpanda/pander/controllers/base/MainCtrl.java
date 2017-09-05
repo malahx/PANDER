@@ -159,7 +159,7 @@ public abstract class MainCtrl extends BaseCtrl {
 	 * 
 	 */
 	private void gotoJob() {
-		if (ViewsManager.getInstance().isCurrentController(MatchingCtrl.class)) {
+		if (ViewsManager.getInstance().isCurrentController(JobCtrl.class)) {
 			return;
 		}
 		ViewsManager.getInstance().next(new JobCtrl(frame));
