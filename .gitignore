@@ -35,6 +35,7 @@ proguard/
 .gradle/
 build/
 bin/
+libs/
 
 #Conception's Data
 /Conception/
