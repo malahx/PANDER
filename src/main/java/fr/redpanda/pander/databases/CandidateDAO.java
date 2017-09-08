@@ -5,6 +5,8 @@ package fr.redpanda.pander.databases;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.redpanda.pander.databases.base.BaseUserDAO;
 import fr.redpanda.pander.databases.base.IBaseSkillDAO;
@@ -117,7 +119,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String parse(BaseEntity entity) {
-		//TODO à revoir en stringbuilder
+		// TODO à revoir en stringbuilder
 		String result = "";
 		Candidate candidate = (Candidate) entity;
 		result += "'" + candidate.getId() + "',";
@@ -143,7 +145,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String parseUpdate(BaseEntity entity) {
-		//TODO à revoir en stringbuilder
+		// TODO à revoir en stringbuilder
 		String result = "";
 		Candidate candidate = (Candidate) entity;
 		result += FIRSTNAME + " = '" + candidate.getFirstname() + "',";
@@ -169,7 +171,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String fields() {
-		//TODO à revoir en stringbuilder
+		// TODO à revoir en stringbuilder
 		String result = "";
 		result += ID + ",";
 		result += FIRSTNAME + ",";
@@ -220,15 +222,37 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 		return SkillDAO.getInstance().deleteSkills(TABLE_SKILL);
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.databases.base.BaseUserDAO#delete(fr.redpanda.pander.entities.base.BaseEntity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.databases.base.BaseUserDAO#delete(fr.redpanda.pander.
+	 * entities.base.BaseEntity)
 	 */
 	@Override
 	public int delete(BaseEntity entity) {
 		deleteSkills((IBaseSkillEntity) entity);
 		return super.delete(entity);
 	}
-	
-	
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.database.BaseDAO#get(double)
+	 */
+	@Override
+	public List<BaseEntity> get() {
+		ResultSet rs = executeQuery("SELECT * FROM " + UserDAO.TABLE + " INNER JOIN " + TABLE + " ON " + TABLE + "."
+				+ ID + " = " + UserDAO.ID);
+		List<BaseEntity> entities = new ArrayList<>();
+		try {
+			while (rs.next()) {
+				entities.add(parse(rs));
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return entities;
+	}
 
 }
