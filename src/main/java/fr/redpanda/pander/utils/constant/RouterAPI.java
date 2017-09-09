@@ -10,5 +10,6 @@ package fr.redpanda.pander.utils.constant;
 public class RouterAPI {
 
 	public static final String CANDIDATE = "/candidate";
+	public static final String PATH_ID = "/{id}";
 	
 }
