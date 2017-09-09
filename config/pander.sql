@@ -128,14 +128,36 @@ CREATE TABLE IF NOT EXISTS question(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #------------------------------------------------------------
+# Table: mind
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS mind(
+        id              Bigint Auto_increment PRIMARY KEY NOT NULL,
+        name            Varchar(56) NOT NULL,
+        UNIQUE(NAME)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+#------------------------------------------------------------
 # Table: answer
 #------------------------------------------------------------
 
 CREATE TABLE IF NOT EXISTS answer(
         id              Bigint Auto_increment PRIMARY KEY NOT NULL,
         title           Varchar(255) NOT NULL,
-        id_skill        Bigint NOT NULL,
-        id_question         Bigint NOT NULL,
-        CONSTRAINT FK_answer_id_skill FOREIGN KEY (id_skill) REFERENCES skill(id),
-        CONSTRAINT FK_answer_id_skill FOREIGN KEY (id_test) REFERENCES test(id),
+        id_mind         Bigint NOT NULL,
+        id_question     Bigint NOT NULL,
+        CONSTRAINT FK_answer_id_mind FOREIGN KEY (id_mind) REFERENCES mind(id),
+        CONSTRAINT FK_answer_id_question FOREIGN KEY (id_question) REFERENCES question(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+#------------------------------------------------------------
+# Table: mind_skill
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS mind_skill(
+        id_mind      Bigint NOT NULL,
+        id_skill     Bigint NOT NULL,
+        PRIMARY KEY (id_mind, id_skill),
+        CONSTRAINT FK_mindskill_id_mind FOREIGN KEY (id_mind) REFERENCES mind(id),
+        CONSTRAINT FK_mindskill_id_skill FOREIGN KEY (id_skill) REFERENCES skill(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
