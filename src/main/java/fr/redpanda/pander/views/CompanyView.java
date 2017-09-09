@@ -10,19 +10,18 @@ import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import fr.redpanda.pander.utils.constant.Img;
-import fr.redpanda.pander.views.base.MainView;
+import fr.redpanda.pander.views.base.ProfileView;
 
 /**
  * @author Gwénolé LE HENAFF
  *
  */
-public class CompanyView extends MainView {
-	
+public class CompanyView extends ProfileView {
+
 	public CompanyView() {
 		super();
 		super.pageName = "Profile";
-		
+
 		JLabel lblCompanyView = new JLabel();
 		ImageIcon puzzleCompany = new ImageIcon("resources/companyImageProfile.jpg");
 		lblCompanyView.setIcon(puzzleCompany);
@@ -34,4 +33,3 @@ public class CompanyView extends MainView {
 		getPnlContent().add(lblCompanyView, gbc_lblCompanyView);
 	}
 }
-
