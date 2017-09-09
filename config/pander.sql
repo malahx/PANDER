@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS answer(
         id              Bigint Auto_increment PRIMARY KEY NOT NULL,
         title           Varchar(255) NOT NULL,
         id_skill        Bigint NOT NULL,
-        id_test         Bigint NOT NULL,
+        id_question         Bigint NOT NULL,
         CONSTRAINT FK_answer_id_skill FOREIGN KEY (id_skill) REFERENCES skill(id),
         CONSTRAINT FK_answer_id_skill FOREIGN KEY (id_test) REFERENCES test(id),
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
