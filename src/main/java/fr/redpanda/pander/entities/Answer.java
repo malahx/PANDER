@@ -12,7 +12,7 @@ import fr.redpanda.pander.entities.base.BaseEntity;
 public class Answer extends BaseEntity {
 
 	private String title;
-	private Skill skill;
+	private Mind mind;
 
 	/**
 	 * @return the title
@@ -30,18 +30,18 @@ public class Answer extends BaseEntity {
 	}
 
 	/**
-	 * @return the skill
+	 * @return the mind
 	 */
-	public Skill getSkill() {
-		return skill;
+	public Mind getMind() {
+		return mind;
 	}
 
 	/**
-	 * @param skill
-	 *            the skill to set
+	 * @param mind
+	 *            the mind to set
 	 */
-	public void setSkill(Skill skill) {
-		this.skill = skill;
+	public void setMind(Mind mind) {
+		this.mind = mind;
 	}
 
 	public Answer() {
