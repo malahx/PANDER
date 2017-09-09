@@ -70,14 +70,4 @@ public abstract class BaseUserDAO extends BaseDAO {
 		return n;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.redpanda.pander.database.BaseDAO#get(double)
-	 */
-	@Override
-	public BaseEntity get(double id) {
-		return UserDAO.getInstance().get(super.get(id), id);
-	}
-
 }

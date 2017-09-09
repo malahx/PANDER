@@ -129,6 +129,14 @@ public interface IBaseDAO {
 	public int delete(BaseEntity entity);
 
 	/**
+	 * Delete an id on the database
+	 * 
+	 * @param id
+	 *            the id to delete
+	 */
+	public int delete(double id);
+
+	/**
 	 * Delete all datas on the database
 	 */
 	public int delete();
