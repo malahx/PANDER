@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import fr.redpanda.pander.databases.base.BaseUserDAO;
 import fr.redpanda.pander.databases.base.IBaseSkillDAO;
 import fr.redpanda.pander.entities.Candidate;
+import fr.redpanda.pander.entities.Mind;
 import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.entities.base.IBaseSkillEntity;
 import fr.redpanda.pander.utils.date.DateConverter;
@@ -56,6 +57,8 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	public static final String ID_SKILL = "id_skill";
 	public static final String ID_CANDIDATE = "id_candidate";
 
+	private static final String ID_MIND = "id_mind";
+
 	/** The Constructor */
 	protected CandidateDAO() {
 		super(TABLE, ID);
@@ -100,6 +103,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 			candidate.setCertificate1(rs.getString(CERTIFICATE1));
 			candidate.setCertificate2(rs.getString(CERTIFICATE2));
 			candidate.setCv(rs.getString(CV));
+			candidate.setMind((Mind) MindDAO.getInstance().get(rs.getDouble(ID_MIND)));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -117,7 +121,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String parse(BaseEntity entity) {
-		//TODO à revoir en stringbuilder
+		// TODO à revoir en stringbuilder
 		String result = "";
 		Candidate candidate = (Candidate) entity;
 		result += "'" + candidate.getId() + "',";
@@ -143,7 +147,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String parseUpdate(BaseEntity entity) {
-		//TODO à revoir en stringbuilder
+		// TODO à revoir en stringbuilder
 		String result = "";
 		Candidate candidate = (Candidate) entity;
 		result += FIRSTNAME + " = '" + candidate.getFirstname() + "',";
@@ -158,6 +162,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 		result += CERTIFICATE2 + " = '" + (candidate.getCertificate2() == null ? "" : candidate.getCertificate2())
 				+ "',";
 		result += CV + " = '" + (candidate.getCv() == null ? "" : candidate.getCv()) + "'";
+		result += ID_MIND + " = '" + (candidate.getMind() == null ? "NULL" : candidate.getMind().getId()) + "'";
 		return result;
 
 	}
@@ -169,7 +174,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String fields() {
-		//TODO à revoir en stringbuilder
+		// TODO à revoir en stringbuilder
 		String result = "";
 		result += ID + ",";
 		result += FIRSTNAME + ",";
@@ -220,15 +225,16 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 		return SkillDAO.getInstance().deleteSkills(TABLE_SKILL);
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.databases.base.BaseUserDAO#delete(fr.redpanda.pander.entities.base.BaseEntity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.databases.base.BaseUserDAO#delete(fr.redpanda.pander.
+	 * entities.base.BaseEntity)
 	 */
 	@Override
 	public int delete(BaseEntity entity) {
 		deleteSkills((IBaseSkillEntity) entity);
 		return super.delete(entity);
 	}
-	
-	
 
 }

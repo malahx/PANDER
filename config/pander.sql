@@ -11,6 +11,16 @@ CREATE DATABASE IF NOT EXISTS pander;
 USE pander;
 
 #------------------------------------------------------------
+# Table: mind
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS mind(
+        id              Bigint Auto_increment PRIMARY KEY NOT NULL,
+        name            Varchar(56) NOT NULL,
+        UNIQUE(NAME)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+#------------------------------------------------------------
 # Table: kuser
 #------------------------------------------------------------
 
@@ -62,7 +72,9 @@ CREATE TABLE IF NOT EXISTS candidate(
         certificate1 Varchar(255) NULL,
         certificate2 Varchar(255) NULL,
         cv           Varchar(255) NULL,
-        CONSTRAINT FK_candidate_id_kuser  FOREIGN KEY (id_kuser) REFERENCES kuser(id)
+        id_mind      Bigint NULL,
+        CONSTRAINT FK_candidate_id_kuser  FOREIGN KEY (id_kuser) REFERENCES kuser(id),
+        CONSTRAINT FK_candidate_id_mind  FOREIGN KEY (id_mind) REFERENCES mind(id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #------------------------------------------------------------
@@ -125,16 +137,6 @@ CREATE TABLE IF NOT EXISTS candidate_skill(
 CREATE TABLE IF NOT EXISTS question(
         id              Bigint Auto_increment PRIMARY KEY NOT NULL,
         title           Varchar(255) NOT NULL
-)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-#------------------------------------------------------------
-# Table: mind
-#------------------------------------------------------------
-
-CREATE TABLE IF NOT EXISTS mind(
-        id              Bigint Auto_increment PRIMARY KEY NOT NULL,
-        name            Varchar(56) NOT NULL,
-        UNIQUE(NAME)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 #------------------------------------------------------------

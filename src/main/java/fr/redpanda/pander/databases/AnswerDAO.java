@@ -9,8 +9,8 @@ import java.util.List;
 
 import fr.redpanda.pander.databases.base.BaseDAO;
 import fr.redpanda.pander.entities.Answer;
+import fr.redpanda.pander.entities.Mind;
 import fr.redpanda.pander.entities.Question;
-import fr.redpanda.pander.entities.Skill;
 import fr.redpanda.pander.entities.base.BaseEntity;
 
 /**
@@ -28,8 +28,8 @@ public class AnswerDAO extends BaseDAO {
 	/** the title field */
 	public static final String TITLE = "title";
 
-	/** the id_skill field */
-	public static final String ID_SKILL = "id_skill";
+	/** the id_mind field */
+	public static final String ID_MIND = "id_mind";
 
 	/** the id_question field */
 	public static final String ID_QUESTION = "id_question";
@@ -58,7 +58,7 @@ public class AnswerDAO extends BaseDAO {
 		try {
 			while (rs.next()) {
 				Answer answer = (Answer) parse(rs);
-				answer.setSkill((Skill) SkillDAO.getInstance().get(rs.getDouble(ID_SKILL)));
+
 				question.getAnswers().add(answer);
 			}
 			rs.close();
@@ -80,6 +80,7 @@ public class AnswerDAO extends BaseDAO {
 		try {
 			answer.setId(rs.getDouble(ID));
 			answer.setTitle(rs.getString(TITLE));
+			answer.setMind((Mind) MindDAO.getInstance().get(rs.getDouble(ID_MIND)));
 		} catch (SQLException e) {
 			e.printStackTrace();
 			answer = null;
@@ -192,7 +193,6 @@ public class AnswerDAO extends BaseDAO {
 		try {
 			if (rs.next()) {
 				entity = parse(rs);
-				((Answer) entity).setSkill((Skill) SkillDAO.getInstance().get(rs.getDouble(ID_SKILL)));
 			}
 			rs.close();
 		} catch (SQLException e) {

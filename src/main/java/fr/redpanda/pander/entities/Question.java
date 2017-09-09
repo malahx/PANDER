@@ -3,6 +3,7 @@
  */
 package fr.redpanda.pander.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.redpanda.pander.entities.base.BaseEntity;
@@ -51,6 +52,7 @@ public class Question extends BaseEntity {
 	 */
 	public Question() {
 		super();
+		answers = new ArrayList<>();
 	}
 
 }

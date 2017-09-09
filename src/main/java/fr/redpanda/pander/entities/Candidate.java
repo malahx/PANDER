@@ -25,6 +25,7 @@ public class Candidate extends User implements IBaseSkillEntity {
 	private String cv;
 	private Date birthdate;
 	private List<Skill> skills;
+	private Mind mind;
 
 	/**
 	 * @return the firstname
@@ -171,6 +172,21 @@ public class Candidate extends User implements IBaseSkillEntity {
 		this.skills = skills;
 	}
 
+	/**
+	 * @return the mind
+	 */
+	public Mind getMind() {
+		return mind;
+	}
+
+	/**
+	 * @param mind
+	 *            the mind to set
+	 */
+	public void setMind(Mind mind) {
+		this.mind = mind;
+	}
+
 	public Candidate() {
 		super();
 		this.setRole(Role.CANDIDATE);
@@ -182,7 +198,6 @@ public class Candidate extends User implements IBaseSkillEntity {
 		this.setRole(Role.CANDIDATE);
 		this.setSkills(new ArrayList<>());
 	}
-	
 
 	/**
 	 * @param email
