@@ -1,5 +1,5 @@
 #------------------------------------------------------------
-#        Script MySQL: PANDER
+#        Script MySQL: PANDER version 2
 #------------------------------------------------------------
 
 
@@ -116,4 +116,26 @@ CREATE TABLE IF NOT EXISTS candidate_skill(
         PRIMARY KEY (id_skill, id_candidate),
         CONSTRAINT FK_candidateskill_id_skill FOREIGN KEY (id_skill) REFERENCES skill(id),
         CONSTRAINT FK_candidateskill_id_candidate FOREIGN KEY (id_candidate) REFERENCES candidate(id_kuser)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+#------------------------------------------------------------
+# Table: question
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS question(
+        id              Bigint Auto_increment PRIMARY KEY NOT NULL,
+        title           Varchar(255) NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+#------------------------------------------------------------
+# Table: answer
+#------------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS answer(
+        id              Bigint Auto_increment PRIMARY KEY NOT NULL,
+        title           Varchar(255) NOT NULL,
+        id_skill        Bigint NOT NULL,
+        id_test         Bigint NOT NULL,
+        CONSTRAINT FK_answer_id_skill FOREIGN KEY (id_skill) REFERENCES skill(id),
+        CONSTRAINT FK_answer_id_skill FOREIGN KEY (id_test) REFERENCES test(id),
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
