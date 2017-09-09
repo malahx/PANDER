@@ -255,4 +255,38 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 		return entities;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.database.BaseDAO#get(double)
+	 */
+	@Override
+	public BaseEntity get(double id) {
+		ResultSet rs = executeQuery("SELECT * FROM " + UserDAO.TABLE + " INNER JOIN " + TABLE + " ON " + TABLE + "."
+				+ ID + " = " + UserDAO.ID + " WHERE " + CandidateDAO.ID + " = " + id);
+		BaseEntity entity = null;
+		try {
+			if (rs.next()) {
+				entity = parse(rs);
+			}
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return entity;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.database.IDAOBase#delete(fr.redpanda.pander.entities.base.
+	 * BaseEntity)
+	 */
+	@Override
+	public int delete(double id) {
+		execute("DELETE FROM " + TABLE_SKILL + " WHERE " + ID_CANDIDATE + " = " + id);
+		return super.delete(id);
+	}
+
 }
