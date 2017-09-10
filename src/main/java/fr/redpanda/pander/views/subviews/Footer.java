@@ -108,9 +108,9 @@ public class Footer extends JPanel {
 		gbc_btnExit.gridy = 0;
 		add(btnExit, gbc_btnExit);
 		
-		ViewUtils.colorGrey(btnExit);
-		ViewUtils.colorGrey(btnLogout);
-		ViewUtils.colorGreyLight(this);
+		ViewUtils.colorGreyLight(btnExit);
+		ViewUtils.colorGreyLight(btnLogout);
+		ViewUtils.colorGrey(this);
 
 	}
 

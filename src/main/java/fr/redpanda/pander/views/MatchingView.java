@@ -15,6 +15,7 @@ import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
 import fr.redpanda.pander.utils.constant.Img;
+import fr.redpanda.pander.utils.constant.PanderColor;
 import fr.redpanda.pander.utils.views.ViewUtils;
 import fr.redpanda.pander.views.base.MainView;
 
@@ -113,7 +114,7 @@ public class MatchingView extends MainView {
 		btnMatching = new JButton();
 		ImageIcon matchingIconButton = new ImageIcon(Img.ANIM_BTN);
 		btnMatching.setIcon(matchingIconButton);
-		btnMatching.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		btnMatching.setFont(new Font(PanderColor.FONT, Font.PLAIN, 40));
 		GridBagConstraints gbc_btnMatching = new GridBagConstraints();
 		gbc_btnMatching.gridx = 0;
 		gbc_btnMatching.gridy = 1;
