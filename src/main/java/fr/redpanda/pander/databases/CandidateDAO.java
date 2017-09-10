@@ -117,7 +117,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String parse(BaseEntity entity) {
-		//TODO à revoir en stringbuilder
+		// TODO à revoir en stringbuilder
 		String result = "";
 		Candidate candidate = (Candidate) entity;
 		result += "'" + candidate.getId() + "',";
@@ -143,14 +143,14 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String parseUpdate(BaseEntity entity) {
-		//TODO à revoir en stringbuilder
+		// TODO à revoir en stringbuilder
 		String result = "";
 		Candidate candidate = (Candidate) entity;
 		result += FIRSTNAME + " = '" + candidate.getFirstname() + "',";
 		result += LASTNAME + " = '" + candidate.getLastname() + "',";
 		result += BIRTHDATE + " = " + (candidate.getBirthdate() == null ? "NULL"
 				: "'" + DateConverter.getMySqlDate(candidate.getBirthdate()) + "'") + ",";
-		result += TRANSPORT + " = " + (candidate.getTransport() == null ? "" : "'" + candidate.getTransport()) + "',";
+		result += TRANSPORT + " = '" + (candidate.getTransport() == null ? "" : "" + candidate.getTransport()) + "',";
 		result += LINK1 + " = '" + (candidate.getLink1() == null ? "" : candidate.getLink1()) + "',";
 		result += LINK2 + " = '" + (candidate.getLink2() == null ? "" : candidate.getLink2()) + "',";
 		result += CERTIFICATE1 + " = '" + (candidate.getCertificate1() == null ? "" : candidate.getCertificate1())
@@ -169,7 +169,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String fields() {
-		//TODO à revoir en stringbuilder
+		// TODO à revoir en stringbuilder
 		String result = "";
 		result += ID + ",";
 		result += FIRSTNAME + ",";
@@ -220,15 +220,16 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 		return SkillDAO.getInstance().deleteSkills(TABLE_SKILL);
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.databases.base.BaseUserDAO#delete(fr.redpanda.pander.entities.base.BaseEntity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.databases.base.BaseUserDAO#delete(fr.redpanda.pander.
+	 * entities.base.BaseEntity)
 	 */
 	@Override
 	public int delete(BaseEntity entity) {
 		deleteSkills((IBaseSkillEntity) entity);
 		return super.delete(entity);
 	}
-	
-	
 
 }
