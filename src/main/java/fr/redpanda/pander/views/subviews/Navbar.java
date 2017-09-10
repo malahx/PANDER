@@ -29,6 +29,7 @@ public class Navbar extends JPanel {
 	private JToggleButton tglbtnHome;
 	private JToggleButton tglbtnMatching;
 	private JToggleButton tglbtnJob;
+	private JToggleButton tglbtnPublicProfile;
 	private JLabel lblLogopander;
 	private JLabel lblLogouser;
 	private JLabel lblPander;
@@ -77,6 +78,21 @@ public class Navbar extends JPanel {
 	 */
 	public void setTglbtnMatching(JToggleButton tglbtnMatching) {
 		this.tglbtnMatching = tglbtnMatching;
+	}
+
+	/**
+	 * @return the tglbtnPublicProfile
+	 */
+	public JToggleButton getTglbtnPublicProfile() {
+		return tglbtnPublicProfile;
+	}
+
+	/**
+	 * @param tglbtnPublicProfile
+	 *            the tglbtnPublicProfile to set
+	 */
+	public void setTglbtnPublicProfile(JToggleButton tglbtnPublicProfile) {
+		this.tglbtnPublicProfile = tglbtnPublicProfile;
 	}
 
 	/**
@@ -225,7 +241,7 @@ public class Navbar extends JPanel {
 		gbc_lblBanner.gridx = 0;
 		gbc_lblBanner.gridy = 0;
 		pnlHeader.add(lblBanner, gbc_lblBanner);
-		
+
 		// JLabel pnlHeader = new JLabel();
 		// ImageIcon bandImage = new ImageIcon(Img.BANNER);
 		// pnlHeader.setIcon(bandImage);
@@ -303,6 +319,10 @@ public class Navbar extends JPanel {
 
 		tglbtnMatching = new JToggleButton("Matching");
 		pnlButton.add(tglbtnMatching);
+
+		tglbtnPublicProfile = new JToggleButton("PublicProfile");
+		tglbtnPublicProfile.setVisible(false);
+		pnlButton.add(tglbtnPublicProfile);
 
 		lblLogouser = new JLabel();
 		ImageIcon logoUser = new ImageIcon(Img.HOME_CANDIDATE);

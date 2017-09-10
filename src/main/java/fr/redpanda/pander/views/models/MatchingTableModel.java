@@ -116,7 +116,7 @@ public class MatchingTableModel extends SorterTableModel {
 			}
 			return matching.getJob().getName();
 		default:
-			throw new IllegalArgumentException();
+			return matching;
 		}
 	}
 

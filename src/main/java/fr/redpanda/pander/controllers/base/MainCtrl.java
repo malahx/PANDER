@@ -15,6 +15,7 @@ import fr.redpanda.pander.controllers.HomeCtrl;
 import fr.redpanda.pander.controllers.JobCtrl;
 import fr.redpanda.pander.controllers.MatchingCtrl;
 import fr.redpanda.pander.controllers.ProfileCtrl;
+import fr.redpanda.pander.controllers.PublicProfileCtrl;
 import fr.redpanda.pander.databases.CandidateDAO;
 import fr.redpanda.pander.databases.CompanyDAO;
 import fr.redpanda.pander.databases.UserDAO;
@@ -34,7 +35,7 @@ import fr.redpanda.pander.views.subviews.SidebarEditable;
  */
 public abstract class MainCtrl extends BaseCtrl {
 
-	// TODO added user field ...
+	protected User user;
 
 	/*
 	 * (non-Javadoc)
@@ -46,7 +47,6 @@ public abstract class MainCtrl extends BaseCtrl {
 
 		MainView view = (MainView) this.view;
 
-		User user = (User) getViewDatas().get(TypeData.USER);
 		if (user instanceof Candidate) {
 			view.getNavbar().getLblUser().setText("CANDIDAT");
 			view.getNavbar().getLblLogouser().setIcon(new ImageIcon(Img.HOME_CANDIDATE));
@@ -165,7 +165,7 @@ public abstract class MainCtrl extends BaseCtrl {
 	/**
 	 * 
 	 */
-	private void gotoJob() {
+	protected void gotoJob() {
 		if (ViewsManager.getInstance().isCurrentController(JobCtrl.class)) {
 			return;
 		}
@@ -175,7 +175,7 @@ public abstract class MainCtrl extends BaseCtrl {
 	/**
 	 * 
 	 */
-	private void gotoMatching() {
+	protected void gotoMatching() {
 		if (ViewsManager.getInstance().isCurrentController(MatchingCtrl.class)) {
 			return;
 		}
@@ -185,7 +185,7 @@ public abstract class MainCtrl extends BaseCtrl {
 	/**
 	 * 
 	 */
-	private void gotoProfile() {
+	protected void gotoProfile() {
 		if (ViewsManager.getInstance().isCurrentController(ProfileCtrl.class)) {
 			return;
 		}
@@ -195,7 +195,7 @@ public abstract class MainCtrl extends BaseCtrl {
 	/**
 	 * 
 	 */
-	private void gotoHome() {
+	protected void gotoHome() {
 		if (ViewsManager.getInstance().isCurrentController(HomeCtrl.class)) {
 			return;
 		}
@@ -205,8 +205,17 @@ public abstract class MainCtrl extends BaseCtrl {
 	/**
 	 * 
 	 */
+	protected void gotoProfile(User publicUser) {
+		if (ViewsManager.getInstance().isCurrentController(PublicProfileCtrl.class)) {
+			return;
+		}
+		ViewsManager.getInstance().next(new PublicProfileCtrl(frame, publicUser));
+	}
+
+	/**
+	 * 
+	 */
 	private void updateUser(SidebarEditable sidebar) {
-		User user = (User) getViewDatas().get(TypeData.USER);
 		user.setEmail(sidebar.getTxtMail().getText());
 		user.setAddress(sidebar.getTxtAddress().getText());
 		user.setCity(sidebar.getTxtCity().getText());
@@ -246,4 +255,14 @@ public abstract class MainCtrl extends BaseCtrl {
 		CandidateDAO.getInstance().update(cuser);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.controllers.base.BaseCtrl#setupDatas()
+	 */
+	@Override
+	public void setupDatas() {
+		super.setupDatas();
+		user = (User) getViewDatas().get(TypeData.USER);
+	}
 }

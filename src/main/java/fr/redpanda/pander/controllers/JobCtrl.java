@@ -22,7 +22,6 @@ import fr.redpanda.pander.entities.Job;
 import fr.redpanda.pander.entities.TypeSkill;
 import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.utils.Utils;
-import fr.redpanda.pander.utils.constant.TypeData;
 import fr.redpanda.pander.views.JobView;
 import fr.redpanda.pander.views.models.DocListener;
 import fr.redpanda.pander.views.models.JobListModel;
@@ -159,7 +158,7 @@ public class JobCtrl extends MainCtrl {
 	public void initView() {
 		super.initView();
 		JobView cview = (JobView) this.view;
-		Company cuser = (Company) getViewDatas().get(TypeData.USER);
+		Company cuser = (Company) user;
 		cview.getLstJob().setModel(new JobListModel(cuser));
 		cview.getNavbar().getTglbtnJob().setSelected(true);
 		nextJob = new Job();
@@ -175,7 +174,7 @@ public class JobCtrl extends MainCtrl {
 	public void initEvent() {
 		super.initEvent();
 		JobView cview = (JobView) this.view;
-		Company cuser = (Company) getViewDatas().get(TypeData.USER);
+		Company cuser = (Company) user;
 
 		DocListener updateJob = new DocListener() {
 

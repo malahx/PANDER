@@ -8,6 +8,10 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 import fr.redpanda.pander.businesscode.Matching;
 import fr.redpanda.pander.businesscode.MatchingFinder;
@@ -24,7 +28,6 @@ import fr.redpanda.pander.views.models.MatchingTableModel;
  */
 public class MatchingCtrl extends MainCtrl {
 
-	private User user;
 	private MatchingFinder mFinder;
 	private MatchingTableModel model;
 
@@ -46,7 +49,6 @@ public class MatchingCtrl extends MainCtrl {
 	public void setupDatas() {
 		super.setupDatas();
 
-		user = (User) getViewDatas().get(TypeData.USER);
 		if (!getViewDatas().containsKey(TypeData.MATCHING_FINDER)) {
 			mFinder = new MatchingFinder(user);
 			getViewDatas().put(TypeData.MATCHING_FINDER, mFinder);
@@ -91,6 +93,25 @@ public class MatchingCtrl extends MainCtrl {
 					model.add(matching);
 				}
 
+			}
+		});
+		ListSelectionModel selectionModel = view.getTblMatching().getSelectionModel();
+		selectionModel.addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				JTable table = view.getTblMatching();
+				int row = table.getSelectedRow();
+				if (e.getValueIsAdjusting() || view.getTblMatching().getSelectedRow() == -1) {
+					return;
+				}
+				User publicUser;
+				if (user instanceof Candidate) {
+					publicUser = ((Matching) table.getValueAt(row, -1)).getCompany();
+				} else {
+					publicUser = ((Matching) table.getValueAt(row, -1)).getCandidate();
+				}
+				gotoProfile(publicUser);
 			}
 		});
 	}

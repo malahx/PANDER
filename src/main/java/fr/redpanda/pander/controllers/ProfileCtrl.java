@@ -21,7 +21,6 @@ import fr.redpanda.pander.entities.TypeSkill;
 import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.utils.Utils;
-import fr.redpanda.pander.utils.constant.TypeData;
 import fr.redpanda.pander.utils.date.DateConverter;
 import fr.redpanda.pander.views.CandidateView;
 import fr.redpanda.pander.views.CompanyView;
@@ -35,8 +34,6 @@ import fr.redpanda.pander.views.models.SkillTableModel;
  *
  */
 public class ProfileCtrl extends MainCtrl {
-
-	User user;
 
 	private void initCompanyEvent(User user) {
 		// TODO Auto-generated method stub
@@ -102,18 +99,6 @@ public class ProfileCtrl extends MainCtrl {
 	public ProfileCtrl(JFrame frame) {
 		super();
 		super.frame = frame;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.redpanda.pander.controllers.base.BaseCtrl#setupDatas()
-	 */
-	@Override
-	public void setupDatas() {
-		super.setupDatas();
-
-		user = (User) getViewDatas().get(TypeData.USER);
 	}
 
 	/*
