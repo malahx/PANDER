@@ -153,11 +153,13 @@ public abstract class MainCtrl extends BaseCtrl {
 		sidebar.getTxtName1().getDocument().addDocumentListener(updateProfile);
 		sidebar.getTxtName2().getDocument().addDocumentListener(updateProfile);
 		sidebar.getTxtCity().getDocument().addDocumentListener(updateProfile);
-		sidebar.getTxtAdress().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtAddress().getDocument().addDocumentListener(updateProfile);
 		sidebar.getTxtCity().getDocument().addDocumentListener(updateProfile);
-		sidebar.getTxtDescriptionTitle().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtDescription().getDocument().addDocumentListener(updateProfile);
 		sidebar.getTxtPhone().getDocument().addDocumentListener(updateProfile);
-		sidebar.getTxtCp().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtPostcode().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtLink1().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtLink2().getDocument().addDocumentListener(updateProfile);
 	}
 
 	/**
@@ -206,11 +208,11 @@ public abstract class MainCtrl extends BaseCtrl {
 	private void updateUser(SidebarEditable sidebar) {
 		User user = (User) getViewDatas().get(TypeData.USER);
 		user.setEmail(sidebar.getTxtMail().getText());
-		user.setAddress(sidebar.getTxtAdress().getText());
+		user.setAddress(sidebar.getTxtAddress().getText());
 		user.setCity(sidebar.getTxtCity().getText());
-		user.setDescription(sidebar.getTxtDescriptionTitle().getText());
+		user.setDescription(sidebar.getTxtDescription().getText());
 		user.setPhone(sidebar.getTxtPhone().getText());
-		user.setPostcode(sidebar.getTxtCp().getText());
+		user.setPostcode(sidebar.getTxtPostcode().getText());
 		if (user instanceof Candidate) {
 			updateUser(sidebar, (Candidate) user);
 		} else if (user instanceof Company) {
