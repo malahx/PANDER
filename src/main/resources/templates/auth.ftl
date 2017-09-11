@@ -29,13 +29,13 @@
                                 <label>
                                     Identifiant
                                 </label>
-                                <input placeholder="Email"/>
+                                <input name="email" placeholder="Email"/>
                             </div>
                             <div>
                                 <label>
                                     Mot de passe
                                 </label>
-                                <input placeholder="Mot de pass" type="password"/>
+                                <input name="password" placeholder="Mot de pass" type="password"/>
                             </div>
                             <div>
                                 <a href="#">
