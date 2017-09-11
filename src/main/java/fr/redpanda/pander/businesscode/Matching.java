@@ -135,10 +135,13 @@ public class Matching {
 			int jokerMatchingResult;
 			if (jobTechSkills.size() != 0) {
 				techMatchingResult = (MatchingPart.TECH * equalTechSkills.size()) / jobTechSkills.size();
-				jokerMatchingResult = (MatchingPart.JOKER * (jobTechSkills.size() - equalTechSkills.size()))
-						/ jobTechSkills.size();
 			} else {
 				techMatchingResult = MatchingPart.TECH;
+			}
+			if (candidateTechSkills.size() != 0) {
+				jokerMatchingResult = (MatchingPart.JOKER * (candidateTechSkills.size() - equalTechSkills.size()))
+						/ candidateTechSkills.size();
+			} else {
 				jokerMatchingResult = MatchingPart.JOKER;
 			}
 			int softMatchingResult;
