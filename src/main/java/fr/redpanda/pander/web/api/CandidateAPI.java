@@ -1,7 +1,7 @@
 /**
  * 
  */
-package fr.redpanda.pander.api;
+package fr.redpanda.pander.web.api;
 
 import java.util.ArrayList;
 import java.util.List;
