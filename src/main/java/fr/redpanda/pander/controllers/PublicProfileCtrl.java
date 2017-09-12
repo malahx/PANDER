@@ -19,6 +19,7 @@ import fr.redpanda.pander.utils.date.DateConverter;
 import fr.redpanda.pander.utils.views.ViewUtils;
 import fr.redpanda.pander.views.CandidateView;
 import fr.redpanda.pander.views.CompanyView;
+import fr.redpanda.pander.views.JobView;
 import fr.redpanda.pander.views.base.BaseView;
 import fr.redpanda.pander.views.base.MainView;
 import fr.redpanda.pander.views.models.SkillTableModel;
@@ -92,7 +93,7 @@ public class PublicProfileCtrl extends MainCtrl {
 					}
 				};
 			} else if (publicUser instanceof Company) {
-				view = new CompanyView() {
+				view = new JobView() {
 
 					/*
 					 * (non-Javadoc)
