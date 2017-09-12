@@ -4,56 +4,28 @@
 package fr.redpanda.pander.test.databases;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.apache.commons.lang.SystemUtils;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.redpanda.pander.databases.DAOManager;
-import fr.redpanda.pander.utils.ProcessManager;
+import fr.redpanda.pander.test.databases.base.BaseMysql;
 
 /**
  * @author Gwénolé LE HENAFF
  *
  */
-public class DAOManagerTest {
-
-	private static ProcessManager process;
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		if (SystemUtils.IS_OS_LINUX) {
-			process = new ProcessManager(ProcessManager.START_MYSQL);
-		} else {
-			process = new ProcessManager(ProcessManager.WAMP);
-		}
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-		if (SystemUtils.IS_OS_LINUX) {
-			process.close(ProcessManager.STOP_MYSQL);
-		} else {
-			process.close();
-		}
-	}
+public class DAOManagerTest extends BaseMysql {
 
 	/**
 	 * @throws java.lang.Exception
@@ -67,6 +39,18 @@ public class DAOManagerTest {
 	 */
 	@After
 	public void tearDown() throws Exception {
+	}
+
+	private void dbDelete(String dbName) {
+		Connection connectionCreate = DAOManager.getInstance().getCreateConnection();
+		Statement statement;
+		try {
+			statement = connectionCreate.createStatement();
+			statement.execute("DROP DATABASE IF EXISTS " + dbName);
+			statement.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -84,7 +68,7 @@ public class DAOManagerTest {
 	 */
 	@Test
 	public void testGetCreateConnectionNotNull() {
-		assertNotNull("getCreateConnection is null", DAOManager.getInstance().getCreateConnection());
+		assertNotNull(DAOManager.getInstance().getCreateConnection());
 	}
 
 	/**
@@ -99,13 +83,14 @@ public class DAOManagerTest {
 	@Test
 	public void testGetCreateConnectionValid()
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
 		Connection connectionCreate = DAOManager.getInstance().getCreateConnection();
 		Connection createConnection = null;
 
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		createConnection = DriverManager.getConnection(connectionCreate.getMetaData().getURL(), "root", "");
 
-		assertEquals(connectionCreate, createConnection);
+		assertEquals(connectionCreate.getMetaData().getURL(), createConnection.getMetaData().getURL());
 
 	}
 
@@ -121,28 +106,33 @@ public class DAOManagerTest {
 	@Test(expected = SQLException.class)
 	public void testGetCreateConnectionNotValid()
 			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
 		Connection connectionCreate = DAOManager.getInstance().getCreateConnection();
+		@SuppressWarnings("unused")
 		Connection createConnection = null;
 
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
-		createConnection = DriverManager.getConnection(connectionCreate.getMetaData().getURL(), "jean-louison", "patator");
+		createConnection = DriverManager.getConnection(connectionCreate.getMetaData().getURL(), "jean-louison",
+				"patator");
 
-		assertNotEquals(connectionCreate, createConnection);
+		fail();
 
 	}
 
 	/**
 	 * Test method for
 	 * {@link fr.redpanda.pander.databases.DAOManager#getCreateConnection()}.
-	 * @throws SQLException 
+	 * 
+	 * @throws SQLException
 	 */
 	@Test
-	public void testGetCreateConnectionRequest() throws SQLException {
+	public void testGetCreateConnectionRequest() {
 
 		Connection connectionCreate = DAOManager.getInstance().getCreateConnection();
-
+		boolean result = false;
 		String dbName = "panderTest";
 		Statement statement;
+
 		try {
 			statement = connectionCreate.createStatement();
 			statement.execute("CREATE DATABASE IF NOT EXISTS " + dbName + ";");
@@ -152,11 +142,25 @@ public class DAOManagerTest {
 		}
 		try {
 			statement = connectionCreate.createStatement();
-			statement.execute("");
+			ResultSet rs = statement.executeQuery("SHOW DATABASES");
+
+			while (rs.next()) {
+				if (rs.getString(1).equals(dbName)) {
+					result = true;
+				}
+			}
+
+			assertTrue(result);
+
+			rs.close();
+			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			dbDelete(dbName);
+			fail("Database not found");
 		}
-		
+
 	}
 
 	/**
