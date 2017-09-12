@@ -13,7 +13,7 @@ import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.Job;
 import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.entities.base.IBaseSkillEntity;
-import fr.redpanda.pander.utils.date.DateConverter;
+import fr.redpanda.pander.utils.StringManager;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -101,17 +101,15 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 	}
 
 	public String parse(Job job, Company company) {
-		//TODO à revoir en stringbuilder
-		String result = "'" + (job.getName() == null ? "" : job.getName()) + "',";
-		result += "'" + (job.getPresentation() == null ? "" : job.getPresentation()) + "',";
-		result += "'" + (job.getLink() == null ? "" : job.getLink()) + "',";
-		result += "'" + (job.getContact() == null ? "" : job.getContact()) + "',";
-		result += (job.getCreatedAt() == null ? "NULL" : "'" + DateConverter.getMySqlDatetime(job.getCreatedAt()) + "'")
-				+ ",";
-		result += (job.getUpdatedAt() == null ? "NULL" : "'" + DateConverter.getMySqlDatetime(job.getUpdatedAt()) + "'")
-				+ ",";
-		result += String.valueOf(company.getId());
-		return result;
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(StringManager.toMySQL(job.getName(), false))
+				.append(StringManager.toMySQL(job.getPresentation(), false))
+				.append(StringManager.toMySQL(job.getLink(), false))
+				.append(StringManager.toMySQL(job.getContact(), false))
+				.append(StringManager.toMySQLDateTime(job.getCreatedAt(), false))
+				.append(StringManager.toMySQLDateTime(job.getUpdatedAt(), false))
+				.append(StringManager.toMySQL(company.getId(), true));
+		return new String(stringBuilder);
 	}
 
 	public BaseEntity insert(Job job, Company company) {
@@ -147,18 +145,15 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String parseUpdate(BaseEntity entity) {
-		//TODO à revoir en stringbuilder
 		Job job = (Job) entity;
-		String result = NAME + " = '" + job.getName() + "',";
-		result += PRESENTATION + " = '" + job.getPresentation() + "',";
-		result += LINK + " = '" + (job.getLink() == null ? "" : job.getLink()) + "',";
-		result += CONTACT + " = '" + (job.getContact() == null ? "" : job.getContact()) + "',";
-		result += CREATED_AT + " = "
-				+ (job.getCreatedAt() == null ? "NULL" : "'" + DateConverter.getMySqlDatetime(job.getCreatedAt()) + "'")
-				+ ",";
-		result += UPDATED_AT + " = " + (job.getUpdatedAt() == null ? "NULL"
-				: "'" + DateConverter.getMySqlDatetime(job.getUpdatedAt()) + "'");
-		return result;
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(StringManager.toMySQLUpdate(NAME, job.getName(), false))
+				.append(StringManager.toMySQLUpdate(PRESENTATION, job.getPresentation(), false))
+				.append(StringManager.toMySQLUpdate(LINK, job.getLink(), false))
+				.append(StringManager.toMySQLUpdate(CONTACT, job.getContact(), false))
+				.append(StringManager.toMySQLUpdateDateTime(CREATED_AT, job.getCreatedAt(), false))
+				.append(StringManager.toMySQLUpdateDateTime(UPDATED_AT, job.getUpdatedAt(), true));
+		return new String(stringBuilder);
 	}
 
 	/*
@@ -168,9 +163,12 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String fields() {
-		//TODO à revoir en stringbuilder
-		return NAME + "," + PRESENTATION + "," + LINK + "," + CONTACT + "," + CREATED_AT + "," + UPDATED_AT + ","
-				+ ID_COMPANY;
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(StringManager.last(NAME, false)).append(StringManager.last(PRESENTATION, false))
+				.append(StringManager.last(LINK, false)).append(StringManager.last(CONTACT, false))
+				.append(StringManager.last(CREATED_AT, false)).append(StringManager.last(UPDATED_AT, false))
+				.append(StringManager.last(ID_COMPANY, true));
+		return new String(stringBuilder);
 	}
 
 	/*
