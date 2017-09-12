@@ -53,11 +53,11 @@ public abstract class BaseDAOTest extends BaseMysql {
 	 */
 	@Before
 	public void setUp() {
-		
+
 		admin = new Admin();
 		admin.setEmail("admin@admin.fr");
 		admin.setPassword("password");
-		
+
 		candidate = new Candidate();
 		candidate.setEmail("candidate@candidate.fr");
 		candidate.setPassword("password");
@@ -65,7 +65,10 @@ public abstract class BaseDAOTest extends BaseMysql {
 		candidate.setLastname("lastname");
 
 		company = new Company();
-		company.setPassword("hashedpassword");
+		company.setEmail("company@company.fr");
+		company.setPassword("password");
+		company.setName("name");
+		company.setSiret("1234567891011");
 
 		job = new Job("Developpeur");
 
