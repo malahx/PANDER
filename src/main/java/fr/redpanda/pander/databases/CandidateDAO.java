@@ -11,7 +11,7 @@ import fr.redpanda.pander.databases.base.IBaseSkillDAO;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.entities.base.IBaseSkillEntity;
-import fr.redpanda.pander.utils.date.DateConverter;
+import fr.redpanda.pander.utils.StringManager;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -117,21 +117,19 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String parse(BaseEntity entity) {
-		//TODO à revoir en stringbuilder
-		String result = "";
 		Candidate candidate = (Candidate) entity;
-		result += "'" + candidate.getId() + "',";
-		result += "'" + candidate.getFirstname() + "',";
-		result += "'" + candidate.getLastname() + "',";
-		result += candidate.getBirthdate() == null ? "NULL, "
-				: "'" + DateConverter.getMySqlDate(candidate.getBirthdate()) + "',";
-		result += "'" + candidate.getTransport() + "',";
-		result += "'" + candidate.getLink1() + "',";
-		result += "'" + candidate.getLink2() + "',";
-		result += "'" + candidate.getCertificate1() + "',";
-		result += "'" + candidate.getCertificate2() + "',";
-		result += "'" + candidate.getCv() + "'";
-		return result;
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(StringManager.toMySQL(candidate.getId(), false))
+				.append(StringManager.toMySQL(candidate.getFirstname(), false))
+				.append(StringManager.toMySQL(candidate.getLastname(), false))
+				.append(StringManager.toMySQLDate(candidate.getBirthdate(), false))
+				.append(StringManager.toMySQL(candidate.getTransport(), false))
+				.append(StringManager.toMySQL(candidate.getLink1(), false))
+				.append(StringManager.toMySQL(candidate.getLink2(), false))
+				.append(StringManager.toMySQL(candidate.getCertificate1(), false))
+				.append(StringManager.toMySQL(candidate.getCertificate2(), false))
+				.append(StringManager.toMySQL(candidate.getCv(), true));
+		return new String(stringBuilder);
 	}
 
 	/*
@@ -143,22 +141,18 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String parseUpdate(BaseEntity entity) {
-		//TODO à revoir en stringbuilder
-		String result = "";
 		Candidate candidate = (Candidate) entity;
-		result += FIRSTNAME + " = '" + candidate.getFirstname() + "',";
-		result += LASTNAME + " = '" + candidate.getLastname() + "',";
-		result += BIRTHDATE + " = " + (candidate.getBirthdate() == null ? "NULL"
-				: "'" + DateConverter.getMySqlDate(candidate.getBirthdate()) + "'") + ",";
-		result += TRANSPORT + " = " + (candidate.getTransport() == null ? "" : "'" + candidate.getTransport()) + "',";
-		result += LINK1 + " = '" + (candidate.getLink1() == null ? "" : candidate.getLink1()) + "',";
-		result += LINK2 + " = '" + (candidate.getLink2() == null ? "" : candidate.getLink2()) + "',";
-		result += CERTIFICATE1 + " = '" + (candidate.getCertificate1() == null ? "" : candidate.getCertificate1())
-				+ "',";
-		result += CERTIFICATE2 + " = '" + (candidate.getCertificate2() == null ? "" : candidate.getCertificate2())
-				+ "',";
-		result += CV + " = '" + (candidate.getCv() == null ? "" : candidate.getCv()) + "'";
-		return result;
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(StringManager.toMySQLUpdate(FIRSTNAME, candidate.getFirstname(), false))
+				.append(StringManager.toMySQLUpdate(LASTNAME, candidate.getLastname(), false))
+				.append(StringManager.toMySQLUpdateDate(BIRTHDATE, candidate.getBirthdate(), false))
+				.append(StringManager.toMySQLUpdate(TRANSPORT, candidate.getTransport(), false))
+				.append(StringManager.toMySQLUpdate(LINK1, candidate.getLink1(), false))
+				.append(StringManager.toMySQLUpdate(LINK2, candidate.getLink2(), false))
+				.append(StringManager.toMySQLUpdate(CERTIFICATE1, candidate.getCertificate1(), false))
+				.append(StringManager.toMySQLUpdate(CERTIFICATE2, candidate.getCertificate2(), false))
+				.append(StringManager.toMySQLUpdate(CV, candidate.getCv(), true));
+		return new String(stringBuilder);
 
 	}
 
@@ -169,7 +163,7 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String fields() {
-		//TODO à revoir en stringbuilder
+		// TODO à revoir en stringbuilder
 		String result = "";
 		result += ID + ",";
 		result += FIRSTNAME + ",";
@@ -220,15 +214,16 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 		return SkillDAO.getInstance().deleteSkills(TABLE_SKILL);
 	}
 
-	/* (non-Javadoc)
-	 * @see fr.redpanda.pander.databases.base.BaseUserDAO#delete(fr.redpanda.pander.entities.base.BaseEntity)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.databases.base.BaseUserDAO#delete(fr.redpanda.pander.
+	 * entities.base.BaseEntity)
 	 */
 	@Override
 	public int delete(BaseEntity entity) {
 		deleteSkills((IBaseSkillEntity) entity);
 		return super.delete(entity);
 	}
-	
-	
 
 }
