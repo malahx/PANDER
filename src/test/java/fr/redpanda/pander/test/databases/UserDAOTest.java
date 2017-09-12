@@ -13,7 +13,6 @@ import static org.junit.Assert.fail;
 import org.junit.Test;
 
 import fr.redpanda.pander.databases.UserDAO;
-import fr.redpanda.pander.entities.Admin;
 import fr.redpanda.pander.test.databases.base.BaseDAOTest;
 
 /**
@@ -21,29 +20,14 @@ import fr.redpanda.pander.test.databases.base.BaseDAOTest;
  */
 public class UserDAOTest extends BaseDAOTest {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.redpanda.pander.test.databases.base.BaseDAOTest#setUp()
-	 */
-	@Override
-	public void setUp() {
-		super.setUp();
-		entity = new Admin();
-		Admin admin = (Admin) entity;
-		admin.setEmail("admin@admin.fr");
-		admin.setPassword("password");
-	}
-
 	private void deleteAdmin() {
-		Admin admin = (Admin) entity;
 		execute("DELETE FROM " + UserDAO.TABLE + " WHERE " + UserDAO.EMAIL + " = '" + admin.getEmail() + "'");
 	}
 
 	private void insertAdmin() {
 		deleteAdmin();
 		execute("INSERT INTO " + UserDAO.TABLE + " (" + UserDAO.getInstance().fields() + ") VALUES ("
-				+ UserDAO.getInstance().parse(entity) + ")");
+				+ UserDAO.getInstance().parse(admin) + ")");
 	}
 
 	/**
@@ -77,7 +61,6 @@ public class UserDAOTest extends BaseDAOTest {
 	 */
 	@Test
 	public void testGetStringStringExists() {
-		Admin admin = (Admin) entity;
 		insertAdmin();
 		assertNotNull(UserDAO.getInstance().get(admin.getEmail(), admin.getPassword()));
 	}
@@ -88,7 +71,6 @@ public class UserDAOTest extends BaseDAOTest {
 	 */
 	@Test
 	public void testGetStringStringNotExists() {
-		Admin admin = (Admin) entity;
 		deleteAdmin();
 		assertNull(UserDAO.getInstance().get(admin.getEmail(), admin.getPassword()));
 	}
@@ -99,7 +81,6 @@ public class UserDAOTest extends BaseDAOTest {
 	 */
 	@Test
 	public void testIsExistsFalse() {
-		Admin admin = (Admin) entity;
 		deleteAdmin();
 		assertFalse(UserDAO.getInstance().isExists(admin.getEmail()));
 	}
@@ -110,7 +91,6 @@ public class UserDAOTest extends BaseDAOTest {
 	 */
 	@Test
 	public void testIsExistsTrue() {
-		Admin admin = (Admin) entity;
 		insertAdmin();
 		assertTrue(UserDAO.getInstance().isExists(admin.getEmail()));
 	}
@@ -148,7 +128,6 @@ public class UserDAOTest extends BaseDAOTest {
 	 */
 	@Test
 	public void testParseBaseEntity() {
-		Admin admin = (Admin) entity;
 		String result = "'" + admin.getEmail() + "','" + admin.getPassword() + "','" + admin.getRole().toString()
 				+ "','0','','','','','','',NULL,NULL";
 		assertEquals(UserDAO.getInstance().parse(admin), result);
@@ -160,7 +139,6 @@ public class UserDAOTest extends BaseDAOTest {
 	 */
 	@Test
 	public void testParseUpdate() {
-		Admin admin = (Admin) entity;
 		String result = "email = '" + admin.getEmail() + "',password = '" + admin.getPassword() + "',role = '"
 				+ admin.getRole().toString()
 				+ "',disabled = '0',phone = '',address = '',postcode = '',city = '',photo = '',description = '',created_at = NULL,updated_at = NULL";

@@ -8,15 +8,11 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import fr.redpanda.pander.databases.JobDAO;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.Job;
-import fr.redpanda.pander.entities.Skill;
-import fr.redpanda.pander.entities.TypeSkill;
 import fr.redpanda.pander.test.databases.base.BaseDAOTest;
 
 /**
@@ -24,25 +20,6 @@ import fr.redpanda.pander.test.databases.base.BaseDAOTest;
  *
  */
 public class JobDAOTest extends BaseDAOTest {
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() {
-		entity = new Job("Developpeur");
-		Job job = (Job) entity;
-		job.getSkills().add(new Skill("Rigoureux1", TypeSkill.SOFT));
-		job.getSkills().add(new Skill("Java1", TypeSkill.TECH));
-		job.getSkills().add(new Skill("Gestion de projet1", TypeSkill.TECH));
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() {
-	}
 
 	/**
 	 * Test method for
@@ -110,7 +87,6 @@ public class JobDAOTest extends BaseDAOTest {
 	 */
 	@Test
 	public void testParseJobCompany() {
-		Job job = (Job) entity;
 		String result = "'" + job.getName() + "','','','',NULL,NULL,0";
 		assertEquals(JobDAO.getInstance().parse(job, new Company()), result);
 	}
@@ -139,10 +115,9 @@ public class JobDAOTest extends BaseDAOTest {
 	 */
 	@Test
 	public void testParseUpdate() {
-		Job job = (Job) entity;
 		String result = "name = '" + job.getName()
 				+ "',presentation = '',link = '',contact = '',created_at = NULL,updated_at = NULL";
-		assertEquals(JobDAO.getInstance().parseUpdate(entity), result);
+		assertEquals(JobDAO.getInstance().parseUpdate(job), result);
 	}
 
 	/**
@@ -160,7 +135,7 @@ public class JobDAOTest extends BaseDAOTest {
 	 */
 	@Test
 	public void testCheckFieldsTrue() {
-		assertTrue(JobDAO.getInstance().checkFields(entity));
+		assertTrue(JobDAO.getInstance().checkFields(job));
 	}
 
 	/**
@@ -178,7 +153,7 @@ public class JobDAOTest extends BaseDAOTest {
 	 */
 	@Test(expected = UnsupportedOperationException.class)
 	public void testParseBaseEntity() {
-		JobDAO.getInstance().parse(entity);
+		JobDAO.getInstance().parse(job);
 		fail();
 	}
 

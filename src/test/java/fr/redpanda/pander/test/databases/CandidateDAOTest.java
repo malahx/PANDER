@@ -7,14 +7,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.redpanda.pander.databases.CandidateDAO;
-import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.test.databases.base.BaseDAOTest;
 
 /**
@@ -22,40 +17,6 @@ import fr.redpanda.pander.test.databases.base.BaseDAOTest;
  *
  */
 public class CandidateDAOTest extends BaseDAOTest {
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	/**
-	 */
-	@Before
-	public void setUp() {
-		super.setUp();
-		entity = new Candidate();
-		Candidate candidate = (Candidate) entity;
-		candidate.setEmail("candidate@candidate.fr");
-		candidate.setPassword("password");
-		candidate.setFirstname("firstname");
-		candidate.setLastname("lastname");
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-	}
 
 	/**
 	 * Test method for
@@ -98,7 +59,6 @@ public class CandidateDAOTest extends BaseDAOTest {
 	 */
 	@Test
 	public void testParseBaseEntity() {
-		Candidate candidate = (Candidate) entity;
 		String result = "0,'firstname','lastname',NULL,'','','','','',''";
 		assertEquals(CandidateDAO.getInstance().parse(candidate), result);
 	}
@@ -109,7 +69,6 @@ public class CandidateDAOTest extends BaseDAOTest {
 	 */
 	@Test
 	public void testParseUpdate() {
-		Candidate candidate = (Candidate) entity;
 		String result = "firstname = '" + candidate.getFirstname() + "',lastname = '" + candidate.getLastname()
 				+ "',birthdate = NULL,transport = '',link1 = '',link2 = '',certificate1 = '',certificate2 = '',cv = ''";
 		assertEquals(CandidateDAO.getInstance().parseUpdate(candidate), result);

@@ -5,21 +5,35 @@ package fr.redpanda.pander.test.databases.base;
 
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fr.redpanda.pander.entities.base.BaseEntity;
+import fr.redpanda.pander.entities.Admin;
+import fr.redpanda.pander.entities.Candidate;
+import fr.redpanda.pander.entities.Company;
+import fr.redpanda.pander.entities.Job;
+import fr.redpanda.pander.entities.Skill;
+import fr.redpanda.pander.entities.TypeSkill;
 
 /**
  * @author Gwénolé LE HENAFF
  *
  */
 public abstract class BaseDAOTest extends BaseMysql {
-	
-	protected BaseEntity entity;
+
+	protected Admin admin;
+	protected Candidate candidate;
+	protected Company company;
+	protected Job job;
+	protected Skill skillSoft;
+	protected Skill skillTech;
+	protected Skill skillOther;
 
 	/**
 	 * @throws java.lang.Exception
@@ -39,6 +53,35 @@ public abstract class BaseDAOTest extends BaseMysql {
 	 */
 	@Before
 	public void setUp() {
+		
+		admin = new Admin();
+		admin.setEmail("admin@admin.fr");
+		admin.setPassword("password");
+		
+		candidate = new Candidate();
+		candidate.setEmail("candidate@candidate.fr");
+		candidate.setPassword("password");
+		candidate.setFirstname("firstname");
+		candidate.setLastname("lastname");
+
+		company = new Company();
+		company.setPassword("hashedpassword");
+
+		job = new Job("Developpeur");
+
+		skillSoft = new Skill("Rigoureux1", TypeSkill.SOFT);
+		skillTech = new Skill("Java1", TypeSkill.TECH);
+		skillOther = new Skill("Gestion de projet1", TypeSkill.TECH);
+
+		List<Skill> skills = new ArrayList<>();
+		skills.add(skillSoft);
+		skills.add(skillTech);
+		skills.add(skillOther);
+
+		job.getSkills().addAll(skills);
+		candidate.getSkills().addAll(skills);
+
+		company.getJobs().add(job);
 	}
 
 	/**
