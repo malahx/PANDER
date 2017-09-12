@@ -24,7 +24,7 @@
                         S'IDENTIFIER
                     </h2>
                     <div class="border">
-                        <form>
+                        <form action="/login" method="post">
                             <div>
                                 <label>
                                     Identifiant

@@ -28,8 +28,9 @@ public class AuthWebCtrl {
 	public String login(Model model, @RequestParam(value = "email", required = true) String email, @RequestParam(value = "password", required = true) String password) {
 		User user = (User) UserDAO.getInstance().get(email, password);
 		if (user != null) {
-			return "home";
+			return "redirect:/home";
 		}
 		return "auth";
 	}
+	
 }
