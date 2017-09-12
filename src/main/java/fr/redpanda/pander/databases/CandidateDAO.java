@@ -163,20 +163,13 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 	 */
 	@Override
 	public String fields() {
-		// TODO à revoir en stringbuilder
-		String result = "";
-		result += ID + ",";
-		result += FIRSTNAME + ",";
-		result += LASTNAME + ",";
-		result += BIRTHDATE + ",";
-		result += TRANSPORT + ",";
-		result += LINK1 + ",";
-		result += LINK2 + ",";
-		result += CERTIFICATE1 + ",";
-		result += CERTIFICATE2 + ",";
-		result += CV;
-		return result;
-
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(StringManager.last(ID, false)).append(StringManager.last(FIRSTNAME, false))
+				.append(StringManager.last(LASTNAME, false)).append(StringManager.last(BIRTHDATE, false))
+				.append(StringManager.last(TRANSPORT, false)).append(StringManager.last(LINK1, false))
+				.append(StringManager.last(LINK2, false)).append(StringManager.last(CERTIFICATE1, false))
+				.append(StringManager.last(CERTIFICATE2, false)).append(StringManager.last(CV, true));
+		return new String(stringBuilder);
 	}
 
 	/*
