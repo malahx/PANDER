@@ -20,6 +20,13 @@ public abstract class BaseCtrl implements IBaseCtrl {
 	protected Map<String, Object> viewDatas = new HashMap<>();
 
 	/**
+	 * @return the frame
+	 */
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	/**
 	 * @return the view
 	 */
 	public BaseView getView() {

@@ -3,7 +3,6 @@
  */
 package fr.redpanda.pander.controllers;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -43,17 +42,8 @@ public class RegisterCtrl extends BaseCtrl {
 		super.frame = frame;
 		super.view = new RegisterView();
 		this.mainFrame = mainFrame;
+		this.mainFrame.setEnabled(false);
 		this.user = user;
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					loadController(frame);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 
 	/*
@@ -157,15 +147,20 @@ public class RegisterCtrl extends BaseCtrl {
 		close();
 	}
 
-	private void close() {
+	protected void close() {
 		frame.dispose();
 		mainFrame.setEnabled(true);
 	}
 
 	/**
+	 * Refresh the btnRegister and the lblInfo
+	 * 
 	 * @param view
+	 *            the view
+	 * @return if the btnRegister is enabled
 	 */
-	protected void refresh(RegisterView view) {
+	protected boolean refresh(RegisterView view) {
+		boolean result = false;
 		boolean isValidEmail = StringManager.isEmail(view.getTextEmail().getText());
 		if (view.getTextName1().getText().equals("") || view.getTextName2().getText().equals("")
 				|| view.getTextEmail().getText().equals("") || new String(view.getPwdPass().getPassword()).equals("")
@@ -173,6 +168,7 @@ public class RegisterCtrl extends BaseCtrl {
 			view.getBtnRegister().setEnabled(false);
 		} else {
 			view.getBtnRegister().setEnabled(true);
+			result = true;
 		}
 		if (!new String(view.getPwdPass().getPassword()).equals(new String(view.getPwdPassVerify().getPassword()))) {
 			view.getLblInfo().setText("Le mot de passe ne correspond pas.");
@@ -181,5 +177,6 @@ public class RegisterCtrl extends BaseCtrl {
 		} else {
 			view.getLblInfo().setText("Merci de compléter ces informations.");
 		}
+		return result;
 	}
 }

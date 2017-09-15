@@ -3,6 +3,7 @@
  */
 package fr.redpanda.pander.controllers;
 
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -34,6 +35,15 @@ import fr.redpanda.pander.views.models.DocListener;
  *
  */
 public class AuthCtrl extends BaseCtrl {
+
+	private RegisterCtrl registerCtrl;
+
+	/**
+	 * @return the registerCtrl
+	 */
+	public RegisterCtrl getRegisterCtrl() {
+		return registerCtrl;
+	}
 
 	private void login(String email, String password) {
 
@@ -160,9 +170,18 @@ public class AuthCtrl extends BaseCtrl {
 	}
 
 	private void initRegistration(User user) {
-		JFrame registerFrame = new JFrame();
-		new RegisterCtrl(frame, registerFrame, user);
-		frame.setEnabled(false);
+		registerCtrl = new RegisterCtrl(frame, new JFrame(), user);
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					loadController(frame);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		// User loggeUser = new Company();
 		// getViewDatas().put(TypeData.USER, loggeUser);
 		// if (loggeUser instanceof Candidate || loggeUser instanceof Company) {
