@@ -26,7 +26,15 @@ public class ViewsManager {
 	private int currentControllerIndex;
 	private BaseCtrl currentController;
 
+	/**
+	 * @return the currentController
+	 */
+	public BaseCtrl getCurrentController() {
+		return currentController;
+	}
+
 	public void start() {
+		System.setProperty( "file.encoding", "UTF-8" );
 		ViewUtils.configure(frame);
 		controllers = new ArrayList<BaseCtrl>();
 		currentControllerIndex = -1;

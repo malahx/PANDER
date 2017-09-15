@@ -15,7 +15,6 @@ import fr.redpanda.pander.entities.Role;
 import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.utils.StringManager;
-import fr.redpanda.pander.utils.date.DateConverter;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -76,12 +75,13 @@ public class UserDAO extends BaseDAO {
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			entity = null;
 		}
 		return entity;
 	}
 
 	public boolean isExists(String email) {
-		ResultSet rs = executeQuery("SELECT " + ID +" FROM " + TABLE + " WHERE " + EMAIL + " = '" + email + "'");
+		ResultSet rs = executeQuery("SELECT " + ID + " FROM " + TABLE + " WHERE " + EMAIL + " = '" + email + "'");
 		boolean result = false;
 		try {
 			if (rs.next()) {
@@ -113,7 +113,7 @@ public class UserDAO extends BaseDAO {
 			user.setUpdatedAt(rs.getTimestamp(UPDATED_AT));
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return null;
+			user = null;
 		}
 		return user;
 
@@ -166,23 +166,21 @@ public class UserDAO extends BaseDAO {
 	 */
 	@Override
 	public String parse(BaseEntity entity) {
-		//TODO à revoir en stringbuilder
-		String result = "";
 		User user = (User) entity;
-		result += "'" + (user.getEmail() == null ? "" : user.getEmail()) + "',";
-		result += "'" + (user.getPassword() == null ? "" : user.getPassword()) + "',";
-		result += "'" + (user.getRole() == null ? "" : user.getRole().toString()) + "',";
-		result += (!user.isDisabled() ? 0 : 1) + ",";
-		result += "'" + (user.getPhone() == null ? "" : user.getPhone()) + "',";
-		result += "'" + (user.getAddress() == null ? "" : user.getAddress()) + "',";
-		result += "'" + (user.getPostcode() == null ? "" : user.getPostcode()) + "',";
-		result += "'" + (user.getCity() == null ? "" : user.getCity()) + "',";
-		result += "'" + (user.getPhoto() == null ? "" : user.getPhoto()) + "',";
-		result += "'" + (user.getDescription() == null ? "" : user.getDescription()) + "',";
-		result += "'" + DateConverter.getMySqlDatetime(user.getCreatedAt()) + "',";
-		result += "'" + DateConverter.getMySqlDatetime(user.getUpdatedAt()) + "'";
-		return result;
-
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(StringManager.toMySQL(user.getEmail(), false))
+				.append(StringManager.toMySQL(user.getPassword(), false))
+				.append(StringManager.toMySQL(user.getRole(), false))
+				.append(StringManager.toMySQL(user.isDisabled(), false))
+				.append(StringManager.toMySQL(user.getPhone(), false))
+				.append(StringManager.toMySQL(user.getAddress(), false))
+				.append(StringManager.toMySQL(user.getPostcode(), false))
+				.append(StringManager.toMySQL(user.getCity(), false))
+				.append(StringManager.toMySQL(user.getPhoto(), false))
+				.append(StringManager.toMySQL(user.getDescription(), false))
+				.append(StringManager.toMySQLDateTime(user.getCreatedAt(), false))
+				.append(StringManager.toMySQLDateTime(user.getUpdatedAt(), true));
+		return new String(stringBuilder);
 	}
 
 	/*
@@ -194,22 +192,21 @@ public class UserDAO extends BaseDAO {
 	 */
 	@Override
 	public String parseUpdate(BaseEntity entity) {
-		//TODO à revoir en stringbuilder
-		String result = "";
 		User user = (User) entity;
-		result += EMAIL + " = '" + user.getEmail() + "', ";
-		result += PASSWORD + " = '" + user.getPassword() + "', ";
-		result += ROLE + " = '" + user.getRole() + "', ";
-		result += DISABLED + " = " + (user.isDisabled() ? 1 : 0) + ", ";
-		result += PHONE + " = '" + (user.getPhone() == null ? "" : user.getPhone()) + "', ";
-		result += ADDRESS + " = '" + (user.getAddress() == null ? "" : user.getAddress()) + "', ";
-		result += POSTCODE + " = '" + (user.getPostcode() == null ? "" : user.getPostcode()) + "', ";
-		result += CITY + " = '" + (user.getCity() == null ? "" : user.getCity()) + "', ";
-		result += PHOTO + " = '" + (user.getPhoto() == null ? "" : user.getPhoto()) + "', ";
-		result += DESCRIPTION + " = '" + (user.getDescription() == null ? "" : user.getDescription()) + "', ";
-		result += CREATED_AT + " = '" + DateConverter.getMySqlDatetime(user.getCreatedAt()) + "', ";
-		result += UPDATED_AT + " = '" + DateConverter.getMySqlDatetime(user.getUpdatedAt()) + "'";
-		return result;
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(StringManager.toMySQLUpdate(EMAIL, user.getEmail(), false))
+				.append(StringManager.toMySQLUpdate(PASSWORD, user.getPassword(), false))
+				.append(StringManager.toMySQLUpdate(ROLE, user.getRole(), false))
+				.append(StringManager.toMySQLUpdate(DISABLED, user.isDisabled(), false))
+				.append(StringManager.toMySQLUpdate(PHONE, user.getPhone(), false))
+				.append(StringManager.toMySQLUpdate(ADDRESS, user.getAddress(), false))
+				.append(StringManager.toMySQLUpdate(POSTCODE, user.getPostcode(), false))
+				.append(StringManager.toMySQLUpdate(CITY, user.getCity(), false))
+				.append(StringManager.toMySQLUpdate(PHOTO, user.getPhoto(), false))
+				.append(StringManager.toMySQLUpdate(DESCRIPTION, user.getDescription(), false))
+				.append(StringManager.toMySQLUpdateDateTime(CREATED_AT, user.getCreatedAt(), false))
+				.append(StringManager.toMySQLUpdateDateTime(UPDATED_AT, user.getUpdatedAt(), true));
+		return new String(stringBuilder);
 
 	}
 
@@ -220,21 +217,14 @@ public class UserDAO extends BaseDAO {
 	 */
 	@Override
 	public String fields() {
-		//TODO à revoir en stringbuilder
-		String result = "";
-		result += EMAIL + ",";
-		result += PASSWORD + ",";
-		result += ROLE + ",";
-		result += DISABLED + ",";
-		result += PHONE + ",";
-		result += ADDRESS + ",";
-		result += POSTCODE + ",";
-		result += CITY + ",";
-		result += PHOTO + ",";
-		result += DESCRIPTION + ",";
-		result += CREATED_AT + ",";
-		result += UPDATED_AT;
-		return result;
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(StringManager.last(EMAIL, false)).append(StringManager.last(PASSWORD, false))
+				.append(StringManager.last(ROLE, false)).append(StringManager.last(DISABLED, false))
+				.append(StringManager.last(PHONE, false)).append(StringManager.last(ADDRESS, false))
+				.append(StringManager.last(POSTCODE, false)).append(StringManager.last(CITY, false))
+				.append(StringManager.last(PHOTO, false)).append(StringManager.last(DESCRIPTION, false))
+				.append(StringManager.last(CREATED_AT, false)).append(StringManager.last(UPDATED_AT, true));
+		return new String(stringBuilder);
 
 	}
 
@@ -247,13 +237,8 @@ public class UserDAO extends BaseDAO {
 	 */
 	@Override
 	public boolean checkFields(BaseEntity entity) {
-
 		User user = (User) entity;
-		if (user.getEmail() == null || user.getPassword() == null || user.getRole() == null) {
-			return false;
-		}
-		return true;
-
+		return user.getEmail() != null && user.getPassword() != null && user.getRole() != null;
 	}
 
 	/*
@@ -305,9 +290,9 @@ public class UserDAO extends BaseDAO {
 	@Override
 	public List<BaseEntity> get() {
 
-		ResultSet rs = executeQuery("SELECT * FROM " + TABLE + " LEFT JOIN " + CompanyDAO.TABLE + " ON " + CompanyDAO.TABLE
-				+ "." + CompanyDAO.ID + " = " + ID + " LEFT JOIN " + CandidateDAO.TABLE + " ON " + CandidateDAO.TABLE
-				+ "." + CandidateDAO.ID + " = " + ID);
+		ResultSet rs = executeQuery("SELECT * FROM " + TABLE + " LEFT JOIN " + CompanyDAO.TABLE + " ON "
+				+ CompanyDAO.TABLE + "." + CompanyDAO.ID + " = " + ID + " LEFT JOIN " + CandidateDAO.TABLE + " ON "
+				+ CandidateDAO.TABLE + "." + CandidateDAO.ID + " = " + ID);
 		List<BaseEntity> entities = new ArrayList<>();
 		try {
 			while (rs.next()) {
