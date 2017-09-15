@@ -21,40 +21,40 @@ import fr.redpanda.pander.test.databases.base.BaseDAOTest;
  */
 public class JobDAOTest extends BaseDAOTest {
 
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.JobDAO#insert(fr.redpanda.pander.entities.base.BaseEntity)}.
-	 */
-	@Test
-	public void testInsertBaseEntity() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.JobDAO#update(fr.redpanda.pander.entities.base.BaseEntity)}.
-	 */
-	@Test
-	public void testUpdate() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.JobDAO#delete(fr.redpanda.pander.entities.base.BaseEntity)}.
-	 */
-	@Test
-	public void testDeleteBaseEntity() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link fr.redpanda.pander.databases.JobDAO#delete()}.
-	 */
-	@Test
-	public void testDelete() {
-		fail("Not yet implemented");
-	}
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.JobDAO#insert(fr.redpanda.pander.entities.base.BaseEntity)}.
+//	 */
+//	@Test
+//	public void testInsertBaseEntity() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.JobDAO#update(fr.redpanda.pander.entities.base.BaseEntity)}.
+//	 */
+//	@Test
+//	public void testUpdate() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.JobDAO#delete(fr.redpanda.pander.entities.base.BaseEntity)}.
+//	 */
+//	@Test
+//	public void testDeleteBaseEntity() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for {@link fr.redpanda.pander.databases.JobDAO#delete()}.
+//	 */
+//	@Test
+//	public void testDelete() {
+//		fail("Not yet implemented");
+//	}
 
 	/**
 	 * {@link fr.redpanda.pander.databases.JobDAO#getInstance()}.
@@ -72,14 +72,14 @@ public class JobDAOTest extends BaseDAOTest {
 		assertNotNull(JobDAO.getInstance());
 	}
 
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.JobDAO#parse(java.sql.ResultSet)}.
-	 */
-	@Test
-	public void testParseResultSet() {
-		fail("Not yet implemented");
-	}
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.JobDAO#parse(java.sql.ResultSet)}.
+//	 */
+//	@Test
+//	public void testParseResultSet() {
+//		fail("Not yet implemented");
+//	}
 
 	/**
 	 * Test method for
@@ -91,23 +91,23 @@ public class JobDAOTest extends BaseDAOTest {
 		assertEquals(JobDAO.getInstance().parse(job, new Company()), result);
 	}
 
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.JobDAO#insert(fr.redpanda.pander.entities.Job, fr.redpanda.pander.entities.Company)}.
-	 */
-	@Test
-	public void testInsertJobCompany() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.JobDAO#get(fr.redpanda.pander.entities.Company)}.
-	 */
-	@Test
-	public void testGetCompany() {
-		fail("Not yet implemented");
-	}
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.JobDAO#insert(fr.redpanda.pander.entities.Job, fr.redpanda.pander.entities.Company)}.
+//	 */
+//	@Test
+//	public void testInsertJobCompany() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.JobDAO#get(fr.redpanda.pander.entities.Company)}.
+//	 */
+//	@Test
+//	public void testGetCompany() {
+//		fail("Not yet implemented");
+//	}
 
 	/**
 	 * Test method for
@@ -157,39 +157,39 @@ public class JobDAOTest extends BaseDAOTest {
 		fail();
 	}
 
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.JobDAO#getSkills(fr.redpanda.pander.entities.base.IBaseSkillEntity)}.
-	 */
-	@Test
-	public void testGetSkills() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.JobDAO#insertSkills(fr.redpanda.pander.entities.base.IBaseSkillEntity)}.
-	 */
-	@Test
-	public void testInsertSkills() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.JobDAO#deleteSkills(fr.redpanda.pander.entities.base.IBaseSkillEntity)}.
-	 */
-	@Test
-	public void testDeleteSkillsIBaseSkillEntity() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link fr.redpanda.pander.databases.JobDAO#deleteSkills()}.
-	 */
-	@Test
-	public void testDeleteSkills() {
-		fail("Not yet implemented");
-	}
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.JobDAO#getSkills(fr.redpanda.pander.entities.base.IBaseSkillEntity)}.
+//	 */
+//	@Test
+//	public void testGetSkills() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.JobDAO#insertSkills(fr.redpanda.pander.entities.base.IBaseSkillEntity)}.
+//	 */
+//	@Test
+//	public void testInsertSkills() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.JobDAO#deleteSkills(fr.redpanda.pander.entities.base.IBaseSkillEntity)}.
+//	 */
+//	@Test
+//	public void testDeleteSkillsIBaseSkillEntity() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for {@link fr.redpanda.pander.databases.JobDAO#deleteSkills()}.
+//	 */
+//	@Test
+//	public void testDeleteSkills() {
+//		fail("Not yet implemented");
+//	}
 
 }

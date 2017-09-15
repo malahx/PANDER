@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Before;
 
-import fr.redpanda.pander.databases.DAOManager;
+import fr.redpanda.pander.entities.Admin;
 import fr.redpanda.pander.entities.Candidate;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.Job;
@@ -19,8 +19,9 @@ import fr.redpanda.pander.entities.TypeSkill;
  * @author Gwénolé LE HENAFF
  *
  */
-public abstract class EntitiesCreation extends DAOManager {
+public abstract class EntitiesCreation {
 
+	protected Admin admin;
 	protected Candidate candidate;
 	protected Company company;
 	protected Job job;
@@ -29,19 +30,29 @@ public abstract class EntitiesCreation extends DAOManager {
 	protected Skill skillOther;
 
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 
-		candidate = new Candidate("firstname@lastname.com", "firstname", "lastname");
-		candidate.setPassword("hashedpassword");
+		admin = new Admin();
+		admin.setEmail("admin@admin.fr");
+		admin.setPassword("password");
 
-		company = new Company("IMIE", "00000000000000", "firstname@imie.com", "https://imie-ecole-informatique.fr/");
-		company.setPassword("hashedpassword");
+		candidate = new Candidate();
+		candidate.setEmail("candidate@candidate.fr");
+		candidate.setPassword("password");
+		candidate.setFirstname("firstname");
+		candidate.setLastname("lastname");
 
-		job = new Job("Developer");
+		company = new Company();
+		company.setEmail("company@company.fr");
+		company.setPassword("password");
+		company.setName("name");
+		company.setSiret("1234567891011");
 
-		skillSoft = new Skill("Rigoureux", TypeSkill.SOFT);
-		skillTech = new Skill("Java", TypeSkill.TECH);
-		skillOther = new Skill("Gestion de projet", TypeSkill.TECH);
+		job = new Job("Developpeur");
+
+		skillSoft = new Skill("Rigoureux1", TypeSkill.SOFT);
+		skillTech = new Skill("Java1", TypeSkill.TECH);
+		skillOther = new Skill("Gestion de projet1", TypeSkill.TECH);
 
 		List<Skill> skills = new ArrayList<>();
 		skills.add(skillSoft);

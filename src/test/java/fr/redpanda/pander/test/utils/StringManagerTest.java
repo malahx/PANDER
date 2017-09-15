@@ -3,6 +3,7 @@
  */
 package fr.redpanda.pander.test.utils;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -108,7 +109,10 @@ public class StringManagerTest {
 	 */
 	@Test
 	public void testIsEmail() {
-		fail("Not yet implemented");
+		assertFalse(StringManager.isEmail("a@a.a"));
+		assertFalse(StringManager.isEmail("aaa"));
+		assertFalse(StringManager.isEmail("a.a"));
+		assertTrue(StringManager.isEmail("aa@aa.aa"));
 	}
 
 	/**
@@ -192,7 +196,9 @@ public class StringManagerTest {
 	 */
 	@Test
 	public void testLast() {
-		fail("Not yet implemented");
+		String test = "test";
+		assertTrue(StringManager.last(test, true).equals(test));
+		assertTrue(StringManager.last(test, false).equals(test + ','));
 	}
 
 }
