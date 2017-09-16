@@ -43,8 +43,6 @@ public class ProfileCtrl extends MainCtrl {
 	 * @param user
 	 */
 	private void initCompanyEvent(User user) {
-		// TODO Auto-generated method stub
-
 	}
 
 	/**

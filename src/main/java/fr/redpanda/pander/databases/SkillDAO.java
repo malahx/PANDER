@@ -178,7 +178,6 @@ public class SkillDAO extends BaseDAO {
 	 */
 	@Override
 	public String parseUpdate(BaseEntity entity) {
-		// TODO à revoir en stringbuilder
 		String result = "";
 		Skill skill = (Skill) entity;
 
