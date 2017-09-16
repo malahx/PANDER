@@ -16,6 +16,7 @@ public enum Role {
 	private final String text;
 
 	/**
+	 * The constructor for a toString
 	 * @param text
 	 */
 	private Role(final String text) {

@@ -46,6 +46,8 @@ public class Skill extends BaseEntity {
 	}
 
 	/**
+	 * The constructor with the name and the type of a skill
+	 * 
 	 * @param id
 	 * @param name
 	 * @param type
@@ -57,6 +59,8 @@ public class Skill extends BaseEntity {
 	}
 
 	/**
+	 * The constructor with the id, the name and the type of a skill
+	 * 
 	 * @param id
 	 * @param name
 	 * @param type
@@ -69,7 +73,7 @@ public class Skill extends BaseEntity {
 	}
 
 	/**
-	 * An empty constructor
+	 * The empty constructor
 	 */
 	public Skill() {
 		super();

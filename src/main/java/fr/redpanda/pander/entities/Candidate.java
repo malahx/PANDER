@@ -161,38 +161,32 @@ public class Candidate extends User implements IBaseSkillEntity {
 		this.birthdate = birthdate != null ? new Date(birthdate.getTime()) : null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.entities.base.IBaseSkillEntity#getSkills()
+	 */
 	@Override
 	public List<Skill> getSkills() {
 		return skills;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.entities.base.IBaseSkillEntity#setSkills(java.util.List)
+	 */
 	@Override
 	public void setSkills(List<Skill> skills) {
 		this.skills = skills;
 	}
 
+	/**
+	 * The empty constructor
+	 */
 	public Candidate() {
 		super();
-		this.setRole(Role.CANDIDATE);
-		this.setSkills(new ArrayList<>());
-	}
-
-	public Candidate(String email) {
-		super(email);
-		this.setRole(Role.CANDIDATE);
-		this.setSkills(new ArrayList<>());
-	}
-	
-
-	/**
-	 * @param email
-	 * @param firstname
-	 * @param lastname
-	 */
-	public Candidate(String email, String firstname, String lastname) {
-		super(email);
-		this.setFirstname(firstname);
-		this.setLastname(lastname);
 		this.setRole(Role.CANDIDATE);
 		this.setSkills(new ArrayList<>());
 	}

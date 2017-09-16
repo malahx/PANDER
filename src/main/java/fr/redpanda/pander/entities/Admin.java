@@ -17,13 +17,4 @@ public class Admin extends User {
 		this.setRole(Role.ADMIN);
 	}
 
-	/**
-	 * 
-	 * @param email
-	 */
-	public Admin(String email) {
-		super(email);
-		this.setRole(Role.ADMIN);
-	}
-
 }
