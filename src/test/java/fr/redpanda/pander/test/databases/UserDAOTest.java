@@ -149,7 +149,7 @@ public class UserDAOTest extends BaseDAOTest {
 	 */
 	@Test
 	public void testFields() {
-		String result = "email,password,role,disabled,phone,address,postcode,city,photo,description,created_at,created_at";
+		String result = "email,password,role,disabled,phone,address,postcode,city,photo,description,created_at,updated_at";
 		assertEquals(UserDAO.getInstance().fields(), result);
 	}
 

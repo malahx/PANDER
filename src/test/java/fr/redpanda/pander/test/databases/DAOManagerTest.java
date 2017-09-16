@@ -156,9 +156,9 @@ public class DAOManagerTest extends BaseMysql {
 			statement.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			fail("Database not found");
 		} finally {
 			dbDelete(dbName);
-			fail("Database not found");
 		}
 
 	}

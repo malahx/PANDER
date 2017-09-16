@@ -4,6 +4,7 @@
 package fr.redpanda.pander.test.databases;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -144,7 +145,7 @@ public class JobDAOTest extends BaseDAOTest {
 	 */
 	@Test
 	public void testCheckFieldsFalse() {
-		assertTrue(JobDAO.getInstance().checkFields(new Job()));
+		assertFalse(JobDAO.getInstance().checkFields(new Job()));
 	}
 
 	/**
