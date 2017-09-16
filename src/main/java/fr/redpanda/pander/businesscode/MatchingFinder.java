@@ -24,7 +24,6 @@ import fr.redpanda.pander.entities.User;
 public class MatchingFinder {
 
 	private final List<Matching> matchingsDone;
-	// Map<double, int> skillCount;
 	private final boolean isCandidate;
 	private final User user;
 
@@ -42,6 +41,11 @@ public class MatchingFinder {
 		return user;
 	}
 
+	/**
+	 * The constructor
+	 * 
+	 * @param user
+	 */
 	public MatchingFinder(User user) {
 		super();
 		this.matchingsDone = new ArrayList<>();
@@ -49,6 +53,11 @@ public class MatchingFinder {
 		this.user = user;
 	}
 
+	/**
+	 * The Matching finder, with the best candidates / jobs
+	 * 
+	 * @return
+	 */
 	public List<Matching> findBestResult() {
 
 		List<Matching> matchings = new ArrayList<>();
@@ -98,6 +107,8 @@ public class MatchingFinder {
 	}
 
 	/**
+	 * The list of the matching Done to be used in SQL
+	 * 
 	 * @return
 	 */
 	private String matchingDone() {

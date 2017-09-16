@@ -34,11 +34,11 @@ public class ViewsManager {
 	}
 
 	public void start() {
-		System.setProperty( "file.encoding", "UTF-8" );
+		System.setProperty("file.encoding", "UTF-8");
 		ViewUtils.configure(frame);
 		controllers = new ArrayList<BaseCtrl>();
 		currentControllerIndex = -1;
-		loadController(new AuthCtrl(frame));
+		loadController(new AuthCtrl());
 	}
 
 	public ViewsManager add(BaseCtrl controller) {

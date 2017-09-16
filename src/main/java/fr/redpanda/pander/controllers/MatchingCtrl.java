@@ -7,8 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JFrame;
-
 import fr.redpanda.pander.businesscode.Matching;
 import fr.redpanda.pander.businesscode.MatchingFinder;
 import fr.redpanda.pander.controllers.base.MainCtrl;
@@ -29,11 +27,10 @@ public class MatchingCtrl extends MainCtrl {
 	private MatchingTableModel model;
 
 	/**
-	 * 
+	 * The constructor
 	 */
-	public MatchingCtrl(JFrame frame) {
+	public MatchingCtrl() {
 		super();
-		super.frame = frame;
 		super.view = new MatchingView();
 	}
 

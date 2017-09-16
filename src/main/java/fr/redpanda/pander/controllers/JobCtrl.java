@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JFrame;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -38,14 +37,18 @@ public class JobCtrl extends MainCtrl {
 	private Job nextJob;
 
 	/**
-	 * 
+	 * The constructor
 	 */
-	public JobCtrl(JFrame frame) {
+	public JobCtrl() {
 		super();
-		super.frame = frame;
 		super.view = new JobView();
 	}
 
+	/**
+	 * The Job deletion
+	 * 
+	 * @param cview
+	 */
 	protected void jobDelete(JobView cview) {
 		if (!cview.getLstJob().isSelectionEmpty()) {
 			Job job = cview.getLstJob().getSelectedValue();
@@ -55,6 +58,11 @@ public class JobCtrl extends MainCtrl {
 		}
 	}
 
+	/**
+	 * Refresh the job datas from the list selection
+	 * 
+	 * @param cview
+	 */
 	protected void jobListSelection(JobView cview) {
 		cview.getBtnDelete().setEnabled(!cview.getLstJob().isSelectionEmpty());
 		if (!cview.getLstJob().isSelectionEmpty()) {
@@ -64,6 +72,8 @@ public class JobCtrl extends MainCtrl {
 	}
 
 	/**
+	 * The update of a job
+	 * 
 	 * @param cview
 	 */
 	protected void updateJob(JobView cview) {
@@ -74,6 +84,12 @@ public class JobCtrl extends MainCtrl {
 		((JobListModel) cview.getLstJob().getModel()).refresh();
 	}
 
+	/**
+	 * The load of a job
+	 * 
+	 * @param job
+	 * @param view
+	 */
 	private void loadJob(Job job, JobView view) {
 		inLoading = true;
 		view.getTxtName().setText(job.getName());
@@ -85,6 +101,13 @@ public class JobCtrl extends MainCtrl {
 		inLoading = false;
 	}
 
+	/**
+	 * Parse a job from the view
+	 * 
+	 * @param job
+	 * @param view
+	 * @return
+	 */
 	private Job parse(Job job, JobView view) {
 		job.setName(view.getTxtName().getText());
 		job.setLink(view.getTxtLink().getText());
@@ -93,6 +116,11 @@ public class JobCtrl extends MainCtrl {
 		return job;
 	}
 
+	/**
+	 * Reset the job view
+	 * 
+	 * @param view
+	 */
 	private void resetJob(JobView view) {
 		view.getLstJob().clearSelection();
 		view.getTxtContact().setText("");
@@ -105,7 +133,7 @@ public class JobCtrl extends MainCtrl {
 	}
 
 	/**
-	 * 
+	 * Initialization of the table skills
 	 */
 	private void initSkills(JobView view) {
 		List<BaseEntity> skills = SkillDAO.getInstance().get();
@@ -138,6 +166,12 @@ public class JobCtrl extends MainCtrl {
 		});
 	}
 
+	/**
+	 * The job addition function
+	 * 
+	 * @param view
+	 * @param user
+	 */
 	private void jobAdd(JobView view, Company user) {
 
 		if (view.getTxtName().getText().equals("")) {

@@ -37,6 +37,9 @@ public class UserDAO extends BaseDAO {
 	public static final String CREATED_AT = "created_at";
 	public static final String UPDATED_AT = "updated_at";
 
+	/**
+	 * The constructor
+	 */
 	protected UserDAO() {
 		super(TABLE, ID);
 	}
@@ -55,6 +58,13 @@ public class UserDAO extends BaseDAO {
 		return instance;
 	}
 
+	/**
+	 * Get an entity from an email and a password
+	 * 
+	 * @param email
+	 * @param password
+	 * @return
+	 */
 	public BaseEntity get(String email, String password) {
 		ResultSet rs = executeQuery(
 				"SELECT * FROM " + TABLE + " u LEFT JOIN " + CompanyDAO.TABLE + " co ON co." + CompanyDAO.ID + " = u."
@@ -80,6 +90,12 @@ public class UserDAO extends BaseDAO {
 		return entity;
 	}
 
+	/**
+	 * Test if an email is used by an user
+	 * 
+	 * @param email
+	 * @return
+	 */
 	public boolean isExists(String email) {
 		ResultSet rs = executeQuery("SELECT " + ID + " FROM " + TABLE + " WHERE " + EMAIL + " = '" + email + "'");
 		boolean result = false;
@@ -94,6 +110,13 @@ public class UserDAO extends BaseDAO {
 		return result;
 	}
 
+	/**
+	 * Parse an user from a resultset
+	 * 
+	 * @param entity
+	 * @param rs
+	 * @return
+	 */
 	public BaseEntity parse(BaseEntity entity, ResultSet rs) {
 
 		User user = (User) entity;
@@ -119,6 +142,13 @@ public class UserDAO extends BaseDAO {
 
 	}
 
+	/**
+	 * Get the user information of an entity
+	 * 
+	 * @param entity
+	 * @param id
+	 * @return
+	 */
 	public BaseEntity get(BaseEntity entity, double id) {
 		ResultSet rs = executeQuery("SELECT * FROM " + TABLE + " WHERE " + ID + " = " + id);
 		try {

@@ -57,6 +57,9 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 	/** the job id on the job skill table */
 	public static final String ID_JOB = "id_job";
 
+	/**
+	 * The constructor
+	 */
 	protected JobDAO() {
 		super(TABLE, ID);
 	}
@@ -100,6 +103,13 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 
 	}
 
+	/**
+	 * Parse a job with his company linked
+	 * 
+	 * @param job
+	 * @param company
+	 * @return
+	 */
 	public String parse(Job job, Company company) {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(StringManager.toMySQL(job.getName(), false))
@@ -112,6 +122,13 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 		return new String(stringBuilder);
 	}
 
+	/**
+	 * Insert a job with his company linked
+	 * 
+	 * @param job
+	 * @param company
+	 * @return
+	 */
 	public BaseEntity insert(Job job, Company company) {
 		if (!checkExists(job) && checkFields(job)) {
 			job.setCreatedAt(new Date());
@@ -121,6 +138,12 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 		return job;
 	}
 
+	/**
+	 * Add all job from a company
+	 * 
+	 * @param company
+	 * @return
+	 */
 	public Company get(Company company) {
 
 		ResultSet rs = executeQuery("SELECT * FROM " + TABLE + " WHERE " + ID_COMPANY + " = " + company.getId());
@@ -245,21 +268,47 @@ public class JobDAO extends BaseDAO implements IBaseSkillDAO {
 		return super.delete();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.databases.base.IBaseSkillDAO#getSkills(fr.redpanda.pander.
+	 * entities.base.IBaseSkillEntity)
+	 */
 	@Override
 	public IBaseSkillEntity getSkills(IBaseSkillEntity entity) {
 		return SkillDAO.getInstance().getSkills(TABLE_SKILL, ID_SKILL, ID_JOB, entity);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.databases.base.IBaseSkillDAO#insertSkills(fr.redpanda.
+	 * pander.entities.base.IBaseSkillEntity)
+	 */
 	@Override
 	public int insertSkills(IBaseSkillEntity entity) {
 		return SkillDAO.getInstance().insertSkills(TABLE_SKILL, ID_SKILL, ID_JOB, entity);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.databases.base.IBaseSkillDAO#deleteSkills(fr.redpanda.
+	 * pander.entities.base.IBaseSkillEntity)
+	 */
 	@Override
 	public int deleteSkills(IBaseSkillEntity entity) {
 		return SkillDAO.getInstance().deleteSkills(TABLE_SKILL, ID_JOB, entity);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.databases.base.IBaseSkillDAO#deleteSkills()
+	 */
 	@Override
 	public int deleteSkills() {
 		return SkillDAO.getInstance().deleteSkills(TABLE_SKILL);

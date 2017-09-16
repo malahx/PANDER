@@ -187,21 +187,47 @@ public class CandidateDAO extends BaseUserDAO implements IBaseSkillDAO {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.databases.base.IBaseSkillDAO#getSkills(fr.redpanda.pander.
+	 * entities.base.IBaseSkillEntity)
+	 */
 	@Override
 	public IBaseSkillEntity getSkills(IBaseSkillEntity entity) {
 		return SkillDAO.getInstance().getSkills(TABLE_SKILL, ID_SKILL, ID_CANDIDATE, entity);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.databases.base.IBaseSkillDAO#insertSkills(fr.redpanda.
+	 * pander.entities.base.IBaseSkillEntity)
+	 */
 	@Override
 	public int insertSkills(IBaseSkillEntity entity) {
 		return SkillDAO.getInstance().insertSkills(TABLE_SKILL, ID_SKILL, ID_CANDIDATE, entity);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.databases.base.IBaseSkillDAO#deleteSkills(fr.redpanda.
+	 * pander.entities.base.IBaseSkillEntity)
+	 */
 	@Override
 	public int deleteSkills(IBaseSkillEntity entity) {
 		return SkillDAO.getInstance().deleteSkills(TABLE_SKILL, ID_CANDIDATE, entity);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.databases.base.IBaseSkillDAO#deleteSkills()
+	 */
 	@Override
 	public int deleteSkills() {
 		return SkillDAO.getInstance().deleteSkills(TABLE_SKILL);

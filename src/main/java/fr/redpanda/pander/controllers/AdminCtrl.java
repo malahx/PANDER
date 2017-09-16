@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JFrame;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -38,21 +37,13 @@ import fr.redpanda.pander.views.models.DocListener;
 public class AdminCtrl extends BaseCtrl {
 
 	/**
+	 * The constructor
 	 * 
+	 * @param frame
 	 */
-	public AdminCtrl(JFrame frame) {
+	public AdminCtrl() {
 		super();
-		super.frame = frame;
 		super.view = new AdminView();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.redpanda.pander.controllers.IBaseCtrl#initView()
-	 */
-	@Override
-	public void initView() {
 	}
 
 	/*
@@ -84,6 +75,11 @@ public class AdminCtrl extends BaseCtrl {
 		view.getTglbtnUsers().doClick();
 	}
 
+	/**
+	 * Initialization of the edit events
+	 * 
+	 * @param view
+	 */
 	private void initEdit(AdminView view) {
 		view.getBtnBtn1().addActionListener(new ActionListener() {
 
@@ -116,6 +112,11 @@ public class AdminCtrl extends BaseCtrl {
 		});
 	}
 
+	/**
+	 * The initialization of the button events
+	 * 
+	 * @param view
+	 */
 	private void initBtnHeader(AdminView view) {
 		view.getTglbtnUsers().addActionListener(new ActionListener() {
 
@@ -133,6 +134,11 @@ public class AdminCtrl extends BaseCtrl {
 		});
 	}
 
+	/**
+	 * The refresh of the button enable/disable
+	 * 
+	 * @param view
+	 */
 	protected void refreshButton(AdminView view) {
 		view.getBtnBtn2().setEnabled(true);
 		if (view.getTglbtnUsers().isSelected()) {
@@ -140,6 +146,11 @@ public class AdminCtrl extends BaseCtrl {
 		}
 	}
 
+	/**
+	 * The function to delete a row from a table model
+	 * 
+	 * @param view
+	 */
 	protected void deleteRow(AdminView view) {
 		int selectedRow = view.getTblTable().getSelectedRow();
 		if (selectedRow >= 0) {
@@ -166,6 +177,11 @@ public class AdminCtrl extends BaseCtrl {
 		view.getBtnBtn2().setEnabled(false);
 	}
 
+	/**
+	 * The function to add a tech skill
+	 * 
+	 * @param view
+	 */
 	protected void addTechSkill(AdminView view) {
 		String text = view.getTxtSkill().getText();
 		if (text.length() > 0) {
@@ -177,6 +193,11 @@ public class AdminCtrl extends BaseCtrl {
 		}
 	}
 
+	/**
+	 * the password generation
+	 * 
+	 * @param view
+	 */
 	protected void generatePassword(AdminView view) {
 		int selectedRow = view.getTblTable().getSelectedRow();
 		if (selectedRow >= 0) {
@@ -194,6 +215,11 @@ public class AdminCtrl extends BaseCtrl {
 		}
 	}
 
+	/**
+	 * The function to init the skill datas from the table
+	 * 
+	 * @param view
+	 */
 	protected void initSkill(AdminView view) {
 		String[] title = { "Nom", "Type" };
 		view.updateDatas(title, SkillDAO.getInstance().get());
@@ -207,6 +233,11 @@ public class AdminCtrl extends BaseCtrl {
 		view.getBtnBtn2().setEnabled(false);
 	}
 
+	/**
+	 * The function to init the users datas from the table
+	 * 
+	 * @param view
+	 */
 	private void initUser(AdminView view) {
 		String[] title = { "Email", "Mise à jour" };
 		view.getLblSubtitle().setText("Utilisateurs");
@@ -229,15 +260,6 @@ public class AdminCtrl extends BaseCtrl {
 		view.getBtnBtn1().setEnabled(false);
 		view.getLblInfo().setText("Mot de passe généré : ");
 		view.getBtnBtn2().setEnabled(false);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.redpanda.pander.controllers.IBaseCtrl#setupDatas()
-	 */
-	@Override
-	public void setupDatas() {
 	}
 
 }

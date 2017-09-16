@@ -31,10 +31,10 @@ public class RegisterCtrlDecorator extends RegisterCtrl {
 	 * @param frame
 	 * @param user
 	 */
-	public RegisterCtrlDecorator(JFrame mainFrame, JFrame frame, User user) {
-		super(mainFrame, frame, user);
+	public RegisterCtrlDecorator(JFrame mainFrame, User user) {
+		super(mainFrame, user);
 	}
-	
+
 	public boolean refresh(RegisterView view) {
 		return super.refresh(view);
 	}

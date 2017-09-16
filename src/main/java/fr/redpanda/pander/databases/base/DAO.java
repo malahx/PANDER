@@ -17,6 +17,12 @@ import fr.redpanda.pander.entities.base.BaseEntity;
  */
 public abstract class DAO implements IDAO {
 
+	/**
+	 * Close a statement and a resultSet
+	 * 
+	 * @param statement
+	 * @param resultSet
+	 */
 	protected void close(Statement statement, ResultSet resultSet) {
 		try {
 			if (resultSet != null && !resultSet.isClosed()) {
@@ -28,6 +34,11 @@ public abstract class DAO implements IDAO {
 		close(statement);
 	}
 
+	/**
+	 * Close a statement
+	 * 
+	 * @param statement
+	 */
 	protected void close(Statement statement) {
 		try {
 			if (statement != null && !statement.isClosed()) {

@@ -66,6 +66,8 @@ public class Matching {
 	}
 
 	/**
+	 * The constructor
+	 * 
 	 * @param candidate
 	 * @param company
 	 * @param job
@@ -79,6 +81,12 @@ public class Matching {
 		this.jobCountSkills = job.getSkills().size();
 	}
 
+	/**
+	 * Get all tech Skills from a list of skill
+	 * 
+	 * @param skills
+	 * @return
+	 */
 	private List<Skill> getTechSkills(List<Skill> skills) {
 		List<Skill> returnTechSkills = new ArrayList<>();
 		for (int i = 0; i < skills.size(); i++) {
@@ -90,6 +98,12 @@ public class Matching {
 		return returnTechSkills;
 	}
 
+	/**
+	 * Get all soft Skills from a list of skill
+	 * 
+	 * @param skills
+	 * @return
+	 */
 	private List<Skill> getSoftSkills(List<Skill> skills) {
 		List<Skill> returnSoftSkills = new ArrayList<>();
 		for (int i = 0; i < skills.size(); i++) {
@@ -101,6 +115,13 @@ public class Matching {
 		return returnSoftSkills;
 	}
 
+	/**
+	 * Get all equal Skills on 2 list of skills
+	 * 
+	 * @param candidateSkills
+	 * @param jobSkills
+	 * @return
+	 */
 	private List<Skill> getEqualSkills(List<Skill> candidateSkills, List<Skill> jobSkills) {
 		List<Skill> returnEqualSkills = new ArrayList<>();
 		for (int i = 0; i < candidateSkills.size(); i++) {
@@ -117,6 +138,11 @@ public class Matching {
 		return returnEqualSkills;
 	}
 
+	/**
+	 * The matching calculation
+	 * 
+	 * @return the calculation
+	 */
 	public int getMatchingCalculation() {
 
 		if (calculateRatio == null || candidateCountSkills != candidate.getSkills().size()

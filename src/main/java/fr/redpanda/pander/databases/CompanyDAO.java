@@ -56,12 +56,14 @@ public class CompanyDAO extends BaseUserDAO {
 	}
 
 	/**
-	 * @param text
+	 * Test if a SIRET number is index in the database
+	 * 
+	 * @param siret
 	 * @return
 	 */
-	public boolean isExists(String text) {
+	public boolean isExists(String siret) {
 
-		ResultSet rs = executeQuery("SELECT " + ID + " FROM " + TABLE + " WHERE " + SIRET + " = '" + text + "'");
+		ResultSet rs = executeQuery("SELECT " + ID + " FROM " + TABLE + " WHERE " + SIRET + " = '" + siret + "'");
 		boolean result = false;
 		try {
 			if (rs.next()) {

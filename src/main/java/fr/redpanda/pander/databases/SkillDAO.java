@@ -69,7 +69,16 @@ public class SkillDAO extends BaseDAO {
 		}
 		return entity;
 	}
-	
+
+	/**
+	 * Get and add all skills of an entity
+	 * 
+	 * @param table
+	 * @param skillId
+	 * @param otherId
+	 * @param entity
+	 * @return
+	 */
 	public IBaseSkillEntity getSkills(String table, String skillId, String otherId, IBaseSkillEntity entity) {
 
 		ResultSet rs = executeQuery(
@@ -85,20 +94,43 @@ public class SkillDAO extends BaseDAO {
 
 	}
 
+	/**
+	 * Insert all skills of an entity to the database
+	 * 
+	 * @param table
+	 * @param skillId
+	 * @param otherId
+	 * @param entity
+	 * @return
+	 */
 	public int insertSkills(String table, String skillId, String otherId, IBaseSkillEntity entity) {
 		int result = 0;
 		deleteSkills(table, otherId, entity);
 		for (Skill skill : entity.getSkills()) {
-			result += execute("INSERT INTO " + table + " (" + otherId + "," + skillId + ") VALUES ("
-					+ entity.getId() + "," + skill.getId() + ")");
+			result += execute("INSERT INTO " + table + " (" + otherId + "," + skillId + ") VALUES (" + entity.getId()
+					+ "," + skill.getId() + ")");
 		}
 		return result;
 	}
 
+	/**
+	 * Delete all skills of an entity to the database
+	 * 
+	 * @param table
+	 * @param otherId
+	 * @param entity
+	 * @return
+	 */
 	public int deleteSkills(String table, String otherId, IBaseSkillEntity entity) {
 		return execute("DELETE FROM " + table + " WHERE " + otherId + " = " + entity.getId());
 	}
 
+	/**
+	 * Delete all linked skills of the table
+	 * 
+	 * @param table
+	 * @return
+	 */
 	public int deleteSkills(String table) {
 		return execute("DELETE FROM " + table);
 	}
@@ -146,7 +178,7 @@ public class SkillDAO extends BaseDAO {
 	 */
 	@Override
 	public String parseUpdate(BaseEntity entity) {
-		//TODO à revoir en stringbuilder
+		// TODO à revoir en stringbuilder
 		String result = "";
 		Skill skill = (Skill) entity;
 

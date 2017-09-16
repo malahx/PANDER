@@ -78,6 +78,8 @@ public abstract class MainCtrl extends BaseCtrl {
 	}
 
 	/**
+	 * Initialization of the Navbar Events
+	 * 
 	 * @param view
 	 */
 	private void initNavbar(MainView view) {
@@ -115,6 +117,8 @@ public abstract class MainCtrl extends BaseCtrl {
 	}
 
 	/**
+	 * Initialization of the Footer Events
+	 * 
 	 * @param view
 	 */
 	private void initFooter(MainView view) {
@@ -136,6 +140,8 @@ public abstract class MainCtrl extends BaseCtrl {
 	}
 
 	/**
+	 * Initialization of the Edit sidebar Events
+	 * 
 	 * @param view
 	 */
 	private void initEditSidebar(MainView view) {
@@ -161,47 +167,49 @@ public abstract class MainCtrl extends BaseCtrl {
 	}
 
 	/**
-	 * 
+	 * The function to go to the Job controller
 	 */
 	private void gotoJob() {
 		if (ViewsManager.getInstance().isCurrentController(JobCtrl.class)) {
 			return;
 		}
-		ViewsManager.getInstance().next(new JobCtrl(frame));
+		ViewsManager.getInstance().next(new JobCtrl());
 	}
 
 	/**
-	 * 
+	 * The function to go to the Matching controller
 	 */
 	private void gotoMatching() {
 		if (ViewsManager.getInstance().isCurrentController(MatchingCtrl.class)) {
 			return;
 		}
-		ViewsManager.getInstance().next(new MatchingCtrl(frame));
+		ViewsManager.getInstance().next(new MatchingCtrl());
 	}
 
 	/**
-	 * 
+	 * The function to go to the Profile controller
 	 */
 	private void gotoProfile() {
 		if (ViewsManager.getInstance().isCurrentController(ProfileCtrl.class)) {
 			return;
 		}
-		ViewsManager.getInstance().next(new ProfileCtrl(frame));
+		ViewsManager.getInstance().next(new ProfileCtrl());
 	}
 
 	/**
-	 * 
+	 * The function to go to the Home controller
 	 */
 	private void gotoHome() {
 		if (ViewsManager.getInstance().isCurrentController(HomeCtrl.class)) {
 			return;
 		}
-		ViewsManager.getInstance().next(new HomeCtrl(frame));
+		ViewsManager.getInstance().next(new HomeCtrl());
 	}
 
 	/**
+	 * The function to update users from the sidebar
 	 * 
+	 * @param sidebar
 	 */
 	private void updateUser(SidebarEditable sidebar) {
 		User user = (User) getViewDatas().get(TypeData.USER);
@@ -221,27 +229,31 @@ public abstract class MainCtrl extends BaseCtrl {
 	}
 
 	/**
+	 * The function to update a company from the sidebar
+	 * 
 	 * @param sidebar
-	 * @param cuser
+	 * @param company
 	 */
-	private void updateUser(SidebarEditable sidebar, Company cuser) {
-		cuser.setLink(sidebar.getTxtLink1().getText());
-		cuser.setSiret(sidebar.getTxtName2().getText());
-		cuser.setName(sidebar.getTxtName1().getText());
-		cuser.setContact(sidebar.getTxtLink2().getText());
-		CompanyDAO.getInstance().update(cuser);
+	private void updateUser(SidebarEditable sidebar, Company company) {
+		company.setLink(sidebar.getTxtLink1().getText());
+		company.setSiret(sidebar.getTxtName2().getText());
+		company.setName(sidebar.getTxtName1().getText());
+		company.setContact(sidebar.getTxtLink2().getText());
+		CompanyDAO.getInstance().update(company);
 	}
 
 	/**
+	 * The function to update candidate from the sidebar
+	 * 
 	 * @param sidebar
-	 * @param user
+	 * @param candidate
 	 */
-	private void updateUser(SidebarEditable sidebar, Candidate cuser) {
-		cuser.setFirstname(sidebar.getTxtName1().getText());
-		cuser.setLastname(sidebar.getTxtName2().getText());
-		cuser.setLink1(sidebar.getTxtLink1().getText());
-		cuser.setLink2(sidebar.getTxtLink2().getText());
-		CandidateDAO.getInstance().update(cuser);
+	private void updateUser(SidebarEditable sidebar, Candidate candidate) {
+		candidate.setFirstname(sidebar.getTxtName1().getText());
+		candidate.setLastname(sidebar.getTxtName2().getText());
+		candidate.setLink1(sidebar.getTxtLink1().getText());
+		candidate.setLink2(sidebar.getTxtLink2().getText());
+		CandidateDAO.getInstance().update(candidate);
 	}
 
 }

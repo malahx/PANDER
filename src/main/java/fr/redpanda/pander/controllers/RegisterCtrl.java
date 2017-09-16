@@ -34,15 +34,15 @@ public class RegisterCtrl extends BaseCtrl {
 	private User user;
 
 	/**
+	 * The constructor
+	 * 
 	 * @param frame
 	 * 
 	 */
-	public RegisterCtrl(JFrame mainFrame, JFrame frame, User user) {
+	public RegisterCtrl(JFrame mainFrame, User user) {
 		super();
-		super.frame = frame;
 		super.view = new RegisterView();
 		this.mainFrame = mainFrame;
-		this.mainFrame.setEnabled(false);
 		this.user = user;
 	}
 
@@ -54,17 +54,11 @@ public class RegisterCtrl extends BaseCtrl {
 	@Override
 	public void initView() {
 		super.initView();
+		mainFrame.setEnabled(false);
 		frame.setBounds(0, 0, 400, 250);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setAlwaysOnTop(true);
 		ViewUtils.center(mainFrame, frame);
-		frame.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosed(WindowEvent e) {
-				close();
-			}
-		});
-
 		RegisterView view = (RegisterView) this.view;
 
 		boolean isCandidate = user instanceof Candidate;
@@ -81,6 +75,14 @@ public class RegisterCtrl extends BaseCtrl {
 	@Override
 	public void initEvent() {
 		super.initEvent();
+
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				close();
+			}
+		});
+
 		RegisterView view = (RegisterView) this.view;
 
 		DocListener refresh = new DocListener() {
@@ -96,6 +98,7 @@ public class RegisterCtrl extends BaseCtrl {
 		view.getTextEmail().getDocument().addDocumentListener(refresh);
 		view.getPwdPass().getDocument().addDocumentListener(refresh);
 		view.getPwdPassVerify().getDocument().addDocumentListener(refresh);
+
 		view.getBtnRegister().addActionListener(new ActionListener() {
 
 			@Override
@@ -114,6 +117,8 @@ public class RegisterCtrl extends BaseCtrl {
 	}
 
 	/**
+	 * The register action
+	 * 
 	 * @param view
 	 */
 	protected void register(RegisterView view) {
@@ -147,6 +152,10 @@ public class RegisterCtrl extends BaseCtrl {
 		close();
 	}
 
+	
+	/**
+	 * The close action
+	 */
 	protected void close() {
 		frame.dispose();
 		mainFrame.setEnabled(true);

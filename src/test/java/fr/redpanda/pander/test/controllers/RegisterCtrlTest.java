@@ -44,7 +44,7 @@ public class RegisterCtrlTest extends BaseCtrlTest {
 		// registerFrame = registerCtrl.getFrame();
 		mainFrame = new JFrame();
 		registerFrame = new JFrame();
-		baseCtrl = new RegisterCtrlDecorator(mainFrame, registerFrame, company);
+		baseCtrl = new RegisterCtrlDecorator(mainFrame, company);
 		baseCtrl.loadController(registerFrame);
 		view = (RegisterView) baseCtrl.getView();
 	}
