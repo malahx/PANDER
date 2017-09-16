@@ -23,9 +23,6 @@ import fr.redpanda.pander.views.subviews.base.Sidebar;
  */
 public class SidebarEditable extends Sidebar {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7876599813851320634L;
 
 	private JTextField txtDescriptionTitle;
@@ -430,7 +427,7 @@ public class SidebarEditable extends Sidebar {
 	}
 
 	/**
-	 * Create the frame.
+	 * The Constructor
 	 */
 	public SidebarEditable() {
 

@@ -5,7 +5,6 @@ package fr.redpanda.pander.test.utils;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -49,59 +48,59 @@ public class StringManagerTest {
 	public void tearDown() throws Exception {
 	}
 
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.utils.StringManager#firstLetterUpperCase(java.lang.String)}.
-	 */
-	@Test
-	public void testFirstLetterUpperCase() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.utils.StringManager#splitWords(java.lang.String)}.
-	 */
-	@Test
-	public void testSplitWords() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.utils.StringManager#toTitle(java.lang.String)}.
-	 */
-	@Test
-	public void testToTitle() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.utils.StringManager#getRoleFrom(java.lang.String)}.
-	 */
-	@Test
-	public void testGetRoleFrom() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.utils.StringManager#getTypeSkillFrom(java.lang.String)}.
-	 */
-	@Test
-	public void testGetTypeSkillFrom() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.utils.StringManager#createString()}.
-	 */
-	@Test
-	public void testCreateString() {
-		fail("Not yet implemented");
-	}
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.utils.StringManager#firstLetterUpperCase(java.lang.String)}.
+//	 */
+//	@Test
+//	public void testFirstLetterUpperCase() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.utils.StringManager#splitWords(java.lang.String)}.
+//	 */
+//	@Test
+//	public void testSplitWords() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.utils.StringManager#toTitle(java.lang.String)}.
+//	 */
+//	@Test
+//	public void testToTitle() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.utils.StringManager#getRoleFrom(java.lang.String)}.
+//	 */
+//	@Test
+//	public void testGetRoleFrom() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.utils.StringManager#getTypeSkillFrom(java.lang.String)}.
+//	 */
+//	@Test
+//	public void testGetTypeSkillFrom() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.utils.StringManager#createString()}.
+//	 */
+//	@Test
+//	public void testCreateString() {
+//		fail("Not yet implemented");
+//	}
 
 	/**
 	 * Test method for
@@ -115,23 +114,23 @@ public class StringManagerTest {
 		assertTrue(StringManager.isEmail("aa@aa.aa"));
 	}
 
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.utils.StringManager#toMySQL(java.lang.String, boolean)}.
-	 */
-	@Test
-	public void testToMySQLStringBoolean() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.utils.StringManager#toMySQL(fr.redpanda.pander.entities.Role, boolean)}.
-	 */
-	@Test
-	public void testToMySQLRoleBoolean() {
-		fail("Not yet implemented");
-	}
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.utils.StringManager#toMySQL(java.lang.String, boolean)}.
+//	 */
+//	@Test
+//	public void testToMySQLStringBoolean() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.utils.StringManager#toMySQL(fr.redpanda.pander.entities.Role, boolean)}.
+//	 */
+//	@Test
+//	public void testToMySQLRoleBoolean() {
+//		fail("Not yet implemented");
+//	}
 
 	/**
 	 * Test method for
@@ -163,32 +162,32 @@ public class StringManagerTest {
 		assertTrue(StringManager.toMySQL(true, true).equals(result));
 	}
 
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.utils.StringManager#toMySQLUpdate(java.lang.String, java.lang.String, boolean)}.
-	 */
-	@Test
-	public void testToMySQLUpdateStringStringBoolean() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.utils.StringManager#toMySQLUpdate(java.lang.String, fr.redpanda.pander.entities.Role, boolean)}.
-	 */
-	@Test
-	public void testToMySQLUpdateStringRoleBoolean() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.utils.StringManager#toMySQLUpdate(java.lang.String, boolean, boolean)}.
-	 */
-	@Test
-	public void testToMySQLUpdateStringBooleanBoolean() {
-		fail("Not yet implemented");
-	}
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.utils.StringManager#toMySQLUpdate(java.lang.String, java.lang.String, boolean)}.
+//	 */
+//	@Test
+//	public void testToMySQLUpdateStringStringBoolean() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.utils.StringManager#toMySQLUpdate(java.lang.String, fr.redpanda.pander.entities.Role, boolean)}.
+//	 */
+//	@Test
+//	public void testToMySQLUpdateStringRoleBoolean() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.utils.StringManager#toMySQLUpdate(java.lang.String, boolean, boolean)}.
+//	 */
+//	@Test
+//	public void testToMySQLUpdateStringBooleanBoolean() {
+//		fail("Not yet implemented");
+//	}
 
 	/**
 	 * Test method for

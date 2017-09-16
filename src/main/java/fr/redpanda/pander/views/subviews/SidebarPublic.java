@@ -22,6 +22,8 @@ import fr.redpanda.pander.views.subviews.base.Sidebar;
  */
 public class SidebarPublic extends Sidebar {
 
+	private static final long serialVersionUID = -5654665579388722049L;
+
 	private JLabel lblPhoto;
 	private JLabel lblName1;
 	private JLabel lblName2;
@@ -328,24 +330,10 @@ public class SidebarPublic extends Sidebar {
 	}
 
 	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -5654665579388722049L;
-
-	/**
-	 * Create the public sidebar.
+	 * The Constructor
 	 */
 	public SidebarPublic() {
 
-//		GridBagLayout gbl_contentPane = new GridBagLayout();
-//		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
-//		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-//				0, 0 };
-//		gbl_contentPane.columnWeights = new double[] { 1.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
-//		gbl_contentPane.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-//				0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
-//		setLayout(gbl_contentPane);
-		
 		initLayout();
 
 		lblPhoto = new JLabel();

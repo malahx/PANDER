@@ -117,11 +117,7 @@ public class CandidateView extends ProfileView {
 	}
 
 	/**
-	 * Launch the application.
-	 */
-
-	/**
-	 * Create the frame.
+	 * The constructor
 	 */
 	public CandidateView() {
 

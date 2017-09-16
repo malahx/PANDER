@@ -7,7 +7,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -21,23 +20,23 @@ import fr.redpanda.pander.test.databases.base.BaseDAOTest;
  */
 public class CompanyDAOTest extends BaseDAOTest {
 
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.CompanyDAO#checkUniqueFields(fr.redpanda.pander.entities.base.BaseEntity)}.
-	 */
-	@Test
-	public void testCheckUniqueFields() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.CompanyDAO#delete(fr.redpanda.pander.entities.base.BaseEntity)}.
-	 */
-	@Test
-	public void testDeleteBaseEntity() {
-		fail("Not yet implemented");
-	}
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.CompanyDAO#checkUniqueFields(fr.redpanda.pander.entities.base.BaseEntity)}.
+//	 */
+//	@Test
+//	public void testCheckUniqueFields() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.CompanyDAO#delete(fr.redpanda.pander.entities.base.BaseEntity)}.
+//	 */
+//	@Test
+//	public void testDeleteBaseEntity() {
+//		fail("Not yet implemented");
+//	}
 
 	/**
 	 * {@link fr.redpanda.pander.databases.CompanyDAO#getInstance()}.
@@ -56,23 +55,23 @@ public class CompanyDAOTest extends BaseDAOTest {
 		assertNotNull(CompanyDAO.getInstance());
 	}
 
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.CompanyDAO#isExists(java.lang.String)}.
-	 */
-	@Test
-	public void testIsExists() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.CompanyDAO#parse(java.sql.ResultSet)}.
-	 */
-	@Test
-	public void testParseResultSet() {
-		fail("Not yet implemented");
-	}
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.CompanyDAO#isExists(java.lang.String)}.
+//	 */
+//	@Test
+//	public void testIsExists() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.CompanyDAO#parse(java.sql.ResultSet)}.
+//	 */
+//	@Test
+//	public void testParseResultSet() {
+//		fail("Not yet implemented");
+//	}
 
 	/**
 	 * Test method for

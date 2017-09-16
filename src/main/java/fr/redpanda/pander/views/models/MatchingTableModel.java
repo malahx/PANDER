@@ -13,9 +13,6 @@ import fr.redpanda.pander.businesscode.Matching;
  */
 public class MatchingTableModel extends SorterTableModel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -7656754488588885879L;
 
 	private final List<Matching> matchings;
@@ -28,12 +25,19 @@ public class MatchingTableModel extends SorterTableModel {
 		return matchings;
 	}
 
+	/**
+	 * Add a matching to the list
+	 * 
+	 * @param matching
+	 */
 	public void add(Matching matching) {
 		matchings.add(matching);
 		fireTableDataChanged();
 	}
 
 	/**
+	 * The constructor of the matching table model
+	 * 
 	 * @param title
 	 * @param matchings
 	 */
@@ -67,6 +71,11 @@ public class MatchingTableModel extends SorterTableModel {
 		return title.length;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
+	 */
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		return getValueAt(0, columnIndex).getClass();
@@ -93,6 +102,7 @@ public class MatchingTableModel extends SorterTableModel {
 	}
 
 	/**
+	 * Get a matching information of a column
 	 * 
 	 * @param matching
 	 *            the object to draw

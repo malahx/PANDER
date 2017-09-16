@@ -13,6 +13,15 @@ import javax.swing.JPanel;
  */
 public abstract class BaseViewTest {
 
+	/**
+	 * Verify if a component is contained in a panel and in is sub panel
+	 * 
+	 * @param main
+	 *            the main panel
+	 * @param entity
+	 *            the entity to test
+	 * @return
+	 */
 	public boolean contains(JPanel main, Component entity) {
 		boolean result = true;
 		Component[] components = main.getComponents();

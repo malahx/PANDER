@@ -83,7 +83,7 @@ public abstract class MainView extends BaseView implements IMainView {
 	}
 
 	/**
-	 * Create the frame.
+	 * The constructor of a main view
 	 */
 	public MainView() {
 		super.contentPane = new JPanel();

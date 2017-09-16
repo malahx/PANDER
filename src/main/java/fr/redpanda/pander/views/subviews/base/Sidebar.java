@@ -18,9 +18,6 @@ import fr.redpanda.pander.entities.User;
  */
 public abstract class Sidebar extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3102325959457435902L;
 
 	protected JButton btnTelechargCV;
@@ -65,6 +62,9 @@ public abstract class Sidebar extends JPanel {
 	public abstract void initCompany(Company company);
 	
 
+	/**
+	 * Initialize the layout
+	 */
 	protected void initLayout() {
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };

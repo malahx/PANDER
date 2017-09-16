@@ -264,12 +264,16 @@ public class RegisterView extends BaseView {
 		this.pwdPassVerify = pwdPassVerify;
 	}
 
+	/**
+	 * 
+	 * @return if the password is the same
+	 */
 	public boolean isSamePass() {
 		return new String(getPwdPass().getPassword()).equals(new String(getPwdPassVerify().getPassword()));
 	}
-	
+
 	/**
-	 * Create the frame.
+	 * The constructor
 	 */
 	public RegisterView() {
 		super();
@@ -404,7 +408,7 @@ public class RegisterView extends BaseView {
 		gbc_btnRegister.gridx = 2;
 		gbc_btnRegister.gridy = 11;
 		contentPane.add(btnRegister, gbc_btnRegister);
-		
+
 		ViewUtils.colorWhite(btnCancel);
 		ViewUtils.colorNormal(btnRegister);
 	}

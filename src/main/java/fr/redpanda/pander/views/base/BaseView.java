@@ -24,9 +24,14 @@ public abstract class BaseView implements IBaseView {
 		return contentPane;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.views.base.IBaseView#loadView(javax.swing.JFrame)
+	 */
 	@Override
 	public void loadView(JFrame frame) {
-		frame.setTitle("PANDER : "  + getPageName());
+		frame.setTitle("PANDER : " + getPageName());
 		ViewUtils.configure(frame, getContentPane());
 	}
 }

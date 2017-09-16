@@ -20,6 +20,13 @@ import fr.redpanda.pander.entities.base.BaseEntity;
  */
 public class Utils {
 
+	/**
+	 * Get skills from a list with a type
+	 * 
+	 * @param skills
+	 * @param type
+	 * @return
+	 */
 	public static List<BaseEntity> getSkillsType(List<BaseEntity> skills, TypeSkill type) {
 		List<BaseEntity> s = new ArrayList<>();
 		for (BaseEntity skill : skills) {
@@ -30,6 +37,9 @@ public class Utils {
 		return s;
 	}
 
+	/**
+	 * Generate default candidate
+	 */
 	public static void generateCandidate() {
 		List<BaseEntity> skills = SkillDAO.getInstance().get();
 		for (int i = 0; i < 30; i++) {

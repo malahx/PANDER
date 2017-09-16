@@ -10,10 +10,19 @@ import fr.redpanda.pander.controllers.AuthCtrl;
 import fr.redpanda.pander.controllers.base.BaseCtrl;
 import fr.redpanda.pander.utils.views.ViewUtils;
 
+/**
+ * 
+ * @author Gwénolé LE HENAFF
+ *
+ */
 public class ViewsManager {
 
 	private static ViewsManager instance = null;
 
+	/**
+	 * 
+	 * @return the instance
+	 */
 	public static ViewsManager getInstance() {
 		if (instance == null) {
 			instance = new ViewsManager();
@@ -33,6 +42,9 @@ public class ViewsManager {
 		return currentController;
 	}
 
+	/**
+	 * Start the application
+	 */
 	public void start() {
 		System.setProperty("file.encoding", "UTF-8");
 		ViewUtils.configure(frame);
@@ -41,17 +53,34 @@ public class ViewsManager {
 		loadController(new AuthCtrl());
 	}
 
+	/**
+	 * Add a new controller
+	 * 
+	 * @param controller
+	 * @return
+	 */
 	public ViewsManager add(BaseCtrl controller) {
 		this.controllers.add(controller);
 		return this;
 	}
 
+	/**
+	 * Switch to a new controller
+	 * 
+	 * @param controller
+	 * @return
+	 */
 	public ViewsManager next(BaseCtrl controller) {
 		controller.setViewDatas(controllers.get(currentControllerIndex).getViewDatas());
 		loadController(controller);
 		return this;
 	}
 
+	/**
+	 * Load the controller
+	 * 
+	 * @param controller
+	 */
 	private void loadController(BaseCtrl controller) {
 		currentController = controller;
 		this.controllers.add(currentController);
@@ -69,6 +98,9 @@ public class ViewsManager {
 
 	}
 
+	/**
+	 * The constructor
+	 */
 	protected ViewsManager() {
 		this.frame = new JFrame();
 		controllers = new ArrayList<BaseCtrl>();

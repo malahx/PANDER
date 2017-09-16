@@ -155,7 +155,7 @@ public class Navbar extends JPanel {
 	}
 
 	/**
-	 * Create the panel.
+	 * The Constructor
 	 */
 	public Navbar() {
 

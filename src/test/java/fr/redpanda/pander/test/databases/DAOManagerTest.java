@@ -53,14 +53,14 @@ public class DAOManagerTest extends BaseMysql {
 		}
 	}
 
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.DAOManager#getInstance()}.
-	 */
-	@Test
-	public void testGetInstance() {
-		fail("Not yet implemented");
-	}
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.DAOManager#getInstance()}.
+//	 */
+//	@Test
+//	public void testGetInstance() {
+//		fail("Not yet implemented");
+//	}
 
 	/**
 	 * Test method for
@@ -163,92 +163,92 @@ public class DAOManagerTest extends BaseMysql {
 
 	}
 
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.DAOManager#getConnection()}.
-	 */
-	@Test
-	public void testGetConnection() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link fr.redpanda.pander.databases.DAOManager#getdbName()}.
-	 */
-	@Test
-	public void testGetdbName() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link fr.redpanda.pander.databases.DAOManager#connect()}.
-	 */
-	@Test
-	public void testConnect() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.DAOManager#connect(java.lang.String, java.lang.String)}.
-	 */
-	@Test
-	public void testConnectStringString() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.DAOManager#connect(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
-	 */
-	@Test
-	public void testConnectStringStringStringStringString() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.DAOManager#connectCrea()}.
-	 */
-	@Test
-	public void testConnectCrea() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.DAOManager#connectCrea(java.lang.String, java.lang.String)}.
-	 */
-	@Test
-	public void testConnectCreaStringString() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.DAOManager#connectCrea(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
-	 */
-	@Test
-	public void testConnectCreaStringStringStringString() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.base.DAO#close(java.sql.Statement, java.sql.ResultSet)}.
-	 */
-	@Test
-	public void testCloseStatementResultSet() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.base.DAO#close(java.sql.Statement)}.
-	 */
-	@Test
-	public void testCloseStatement() {
-		fail("Not yet implemented");
-	}
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.DAOManager#getConnection()}.
+//	 */
+//	@Test
+//	public void testGetConnection() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for {@link fr.redpanda.pander.databases.DAOManager#getdbName()}.
+//	 */
+//	@Test
+//	public void testGetdbName() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for {@link fr.redpanda.pander.databases.DAOManager#connect()}.
+//	 */
+//	@Test
+//	public void testConnect() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.DAOManager#connect(java.lang.String, java.lang.String)}.
+//	 */
+//	@Test
+//	public void testConnectStringString() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.DAOManager#connect(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
+//	 */
+//	@Test
+//	public void testConnectStringStringStringStringString() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.DAOManager#connectCrea()}.
+//	 */
+//	@Test
+//	public void testConnectCrea() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.DAOManager#connectCrea(java.lang.String, java.lang.String)}.
+//	 */
+//	@Test
+//	public void testConnectCreaStringString() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.DAOManager#connectCrea(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}.
+//	 */
+//	@Test
+//	public void testConnectCreaStringStringStringString() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.base.DAO#close(java.sql.Statement, java.sql.ResultSet)}.
+//	 */
+//	@Test
+//	public void testCloseStatementResultSet() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.base.DAO#close(java.sql.Statement)}.
+//	 */
+//	@Test
+//	public void testCloseStatement() {
+//		fail("Not yet implemented");
+//	}
 
 }

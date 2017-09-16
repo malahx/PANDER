@@ -48,7 +48,8 @@ public abstract class EntitiesCreation {
 		company.setName("name");
 		company.setSiret("1234567891011");
 
-		job = new Job("Developpeur");
+		job = new Job();
+		job.setName("Developpeur");
 
 		skillSoft = new Skill("Rigoureux1", TypeSkill.SOFT);
 		skillTech = new Skill("Java1", TypeSkill.TECH);

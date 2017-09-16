@@ -152,7 +152,6 @@ public class RegisterCtrl extends BaseCtrl {
 		close();
 	}
 
-	
 	/**
 	 * The close action
 	 */

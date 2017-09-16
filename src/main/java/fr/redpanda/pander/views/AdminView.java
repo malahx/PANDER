@@ -270,7 +270,7 @@ public class AdminView extends BaseView {
 	}
 
 	/**
-	 * Create the panel.
+	 * The constructor
 	 */
 	public AdminView() {
 		super();
@@ -445,6 +445,12 @@ public class AdminView extends BaseView {
 
 	}
 
+	/**
+	 * Update the datas of the table model
+	 * 
+	 * @param title
+	 * @param datas
+	 */
 	@SuppressWarnings("unchecked")
 	public void updateDatas(String[] title, List<?> datas) {
 		userTableModel = new AdminTableModel(title, (List<Object>) datas);

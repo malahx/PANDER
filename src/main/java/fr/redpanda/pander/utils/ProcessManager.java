@@ -18,6 +18,11 @@ public class ProcessManager {
 	private Process process;
 	private String programName;
 
+	/**
+	 * Execute the start process
+	 * 
+	 * @param program
+	 */
 	public ProcessManager(String program) {
 		programName = program;
 		try {
@@ -29,6 +34,11 @@ public class ProcessManager {
 		}
 	}
 
+	/**
+	 * Close the process with a script
+	 * 
+	 * @param program
+	 */
 	public void close(String program) {
 		try {
 			System.out.println("Closing with " + program);
@@ -39,6 +49,9 @@ public class ProcessManager {
 		}
 	}
 
+	/**
+	 * Close the process by killing it
+	 */
 	public void close() {
 		System.out.println("Closing " + programName);
 		process.destroy();

@@ -18,6 +18,9 @@ import fr.redpanda.pander.views.base.ProfileView;
  */
 public class CompanyView extends ProfileView {
 
+	/**
+	 * The constructor
+	 */
 	public CompanyView() {
 		super();
 		super.pageName = "Profile";
@@ -32,4 +35,5 @@ public class CompanyView extends ProfileView {
 		gbc_lblCompanyView.gridy = 0;
 		getPnlContent().add(lblCompanyView, gbc_lblCompanyView);
 	}
+
 }

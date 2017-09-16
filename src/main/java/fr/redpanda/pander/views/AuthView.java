@@ -124,7 +124,7 @@ public class AuthView extends BaseView {
 	}
 
 	/**
-	 * Create the frame.
+	 * The constructor
 	 */
 	public AuthView() {
 		super();

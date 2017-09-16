@@ -19,9 +19,6 @@ import fr.redpanda.pander.utils.views.ViewUtils;
  */
 public class Footer extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8490956596546449622L;
 
 	private JLabel lblCopyright;
@@ -74,10 +71,10 @@ public class Footer extends JPanel {
 	}
 
 	/**
-	 * Create the panel.
+	 * The constructor
 	 */
 	public Footer() {
-		
+
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0 };
@@ -107,7 +104,7 @@ public class Footer extends JPanel {
 		gbc_btnExit.gridx = 2;
 		gbc_btnExit.gridy = 0;
 		add(btnExit, gbc_btnExit);
-		
+
 		ViewUtils.colorGrey(btnExit);
 		ViewUtils.colorGrey(btnLogout);
 		ViewUtils.colorGreyLight(this);

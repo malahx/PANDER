@@ -8,7 +8,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -30,14 +29,14 @@ public class UserDAOTest extends BaseDAOTest {
 				+ UserDAO.getInstance().parse(admin) + ")");
 	}
 
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.UserDAO#checkUniqueFields(fr.redpanda.pander.entities.base.BaseEntity)}.
-	 */
-	@Test
-	public void testCheckUniqueFields() {
-		fail("Not yet implemented");
-	}
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.UserDAO#checkUniqueFields(fr.redpanda.pander.entities.base.BaseEntity)}.
+//	 */
+//	@Test
+//	public void testCheckUniqueFields() {
+//		fail("Not yet implemented");
+//	}
 
 	/**
 	 * Test method for {@link fr.redpanda.pander.databases.UserDAO#getInstance()}.
@@ -95,32 +94,32 @@ public class UserDAOTest extends BaseDAOTest {
 		assertTrue(UserDAO.getInstance().isExists(admin.getEmail()));
 	}
 
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.UserDAO#parse(fr.redpanda.pander.entities.base.BaseEntity, java.sql.ResultSet)}.
-	 */
-	@Test
-	public void testParseBaseEntityResultSet() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.UserDAO#get(fr.redpanda.pander.entities.base.BaseEntity, double)}.
-	 */
-	@Test
-	public void testGetBaseEntityDouble() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.UserDAO#parse(java.sql.ResultSet)}.
-	 */
-	@Test
-	public void testParseResultSet() {
-		fail("Not yet implemented");
-	}
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.UserDAO#parse(fr.redpanda.pander.entities.base.BaseEntity, java.sql.ResultSet)}.
+//	 */
+//	@Test
+//	public void testParseBaseEntityResultSet() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.UserDAO#get(fr.redpanda.pander.entities.base.BaseEntity, double)}.
+//	 */
+//	@Test
+//	public void testGetBaseEntityDouble() {
+//		fail("Not yet implemented");
+//	}
+//
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.UserDAO#parse(java.sql.ResultSet)}.
+//	 */
+//	@Test
+//	public void testParseResultSet() {
+//		fail("Not yet implemented");
+//	}
 
 	/**
 	 * Test method for
@@ -154,13 +153,13 @@ public class UserDAOTest extends BaseDAOTest {
 		assertEquals(UserDAO.getInstance().fields(), result);
 	}
 
-	/**
-	 * Test method for
-	 * {@link fr.redpanda.pander.databases.UserDAO#checkFields(fr.redpanda.pander.entities.base.BaseEntity)}.
-	 */
-	@Test
-	public void testCheckFields() {
-		fail("Not yet implemented");
-	}
+//	/**
+//	 * Test method for
+//	 * {@link fr.redpanda.pander.databases.UserDAO#checkFields(fr.redpanda.pander.entities.base.BaseEntity)}.
+//	 */
+//	@Test
+//	public void testCheckFields() {
+//		fail("Not yet implemented");
+//	}
 
 }

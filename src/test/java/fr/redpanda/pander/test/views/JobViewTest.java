@@ -21,7 +21,7 @@ import fr.redpanda.pander.views.JobView;
  */
 public class JobViewTest extends BaseViewTest {
 
-	JobView view;
+	private JobView view;
 
 	/**
 	 * @throws java.lang.Exception

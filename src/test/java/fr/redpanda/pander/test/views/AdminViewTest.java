@@ -21,7 +21,7 @@ import fr.redpanda.pander.views.AdminView;
  */
 public class AdminViewTest extends BaseViewTest {
 
-	AdminView view;
+	private AdminView view;
 
 	/**
 	 * @throws java.lang.Exception

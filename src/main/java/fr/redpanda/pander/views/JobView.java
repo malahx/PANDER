@@ -465,7 +465,7 @@ public class JobView extends MainView {
 	}
 
 	/**
-	 * Create the frame.
+	 * The constructor
 	 */
 	public JobView() {
 
@@ -706,7 +706,7 @@ public class JobView extends MainView {
 
 		btnClear = new JButton("Effacer les champs");
 		pnlButton.add(btnClear);
-		
+
 		ViewUtils.colorLight(btnDelete);
 		ViewUtils.colorLight(btnAdd);
 		ViewUtils.colorLight(btnClear);

@@ -131,6 +131,11 @@ public class ViewUtils {
 		center(frame);
 	}
 
+	/**
+	 * Center a frame
+	 * 
+	 * @param frame
+	 */
 	public static void center(JFrame frame) {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int screenWidth = (int) screenSize.getWidth();
@@ -140,6 +145,12 @@ public class ViewUtils {
 		frame.setBounds(posWidth, posHeight, frame.getWidth(), frame.getHeight());
 	}
 
+	/**
+	 * Center a frame with the dimension of an other frame
+	 * 
+	 * @param mainFrame
+	 * @param frame
+	 */
 	public static void center(JFrame mainFrame, JFrame frame) {
 		int posWidth = mainFrame.getX() + (mainFrame.getWidth() - frame.getWidth()) / 2;
 		int posHeight = mainFrame.getY() + (mainFrame.getHeight() - frame.getHeight()) / 2;

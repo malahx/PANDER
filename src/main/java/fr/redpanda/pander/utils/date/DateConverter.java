@@ -5,6 +5,12 @@ import java.util.Date;
 
 public class DateConverter {
 
+	/**
+	 * Date parser
+	 * 
+	 * @param date
+	 * @return
+	 */
 	public static String getMySqlDate(Date date) {
 		if (date != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -14,6 +20,12 @@ public class DateConverter {
 		}
 	}
 
+	/**
+	 * Date parser
+	 * 
+	 * @param date
+	 * @return
+	 */
 	public static String getMySqlDatetime(Date date) {
 		if (date != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -23,6 +35,12 @@ public class DateConverter {
 		}
 	}
 
+	/**
+	 * Date parser
+	 * 
+	 * @param date
+	 * @return
+	 */
 	public static String getDate(Date date) {
 		if (date != null) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
