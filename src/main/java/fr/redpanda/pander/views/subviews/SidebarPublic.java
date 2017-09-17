@@ -24,48 +24,73 @@ public class SidebarPublic extends Sidebar {
 	private JLabel lblPhoto;
 	private JLabel lblName1;
 	private JLabel lblName2;
-	private JLabel lblDescriptionTitle;
-	private JLabel lblPresentation;
-	private JLabel lblCoordonateTitle;
 	private JLabel lblAddress;
-	private JLabel lblCp;
 	private JLabel lblCity;
 	private JLabel lblPhone;
 	private JLabel lblMail;
-	private JLabel lblAddress;
 	private JLabel lblLink1;
 	private JLabel lblLink2;
-	private JLabel lblName1;
-	private JLabel lblName2;
+	private JLabel lblDescription;
+	private JLabel lblPostcode;
 
 	/**
-	 * @return the lblDescription
+	 * @return the lblPhoto
 	 */
-	public JLabel getLblDescription() {
-		return lblDescription;
+	public JLabel getLblPhoto() {
+		return lblPhoto;
 	}
 
 	/**
-	 * @param lblDescription
-	 *            the lblDescription to set
+	 * @param lblPhoto
+	 *            the lblPhoto to set
 	 */
-	public void setLblDescription(JLabel lblDescription) {
-		this.lblDescription = lblDescription;
+	public void setLblPhoto(JLabel lblPhoto) {
+		this.lblPhoto = lblPhoto;
 	}
 
 	/**
-	 * @return the lblPostcode
+	 * @return the lblName1
 	 */
-	public JLabel getLblPostcode() {
-		return lblPostcode;
+	public JLabel getLblName1() {
+		return lblName1;
 	}
 
 	/**
-	 * @param lblPostcode
-	 *            the lblPostcode to set
+	 * @param lblName1
+	 *            the lblName1 to set
 	 */
-	public void setLblPostcode(JLabel lblPostcode) {
-		this.lblPostcode = lblPostcode;
+	public void setLblName1(JLabel lblName1) {
+		this.lblName1 = lblName1;
+	}
+
+	/**
+	 * @return the lblName2
+	 */
+	public JLabel getLblName2() {
+		return lblName2;
+	}
+
+	/**
+	 * @param lblName2
+	 *            the lblName2 to set
+	 */
+	public void setLblName2(JLabel lblName2) {
+		this.lblName2 = lblName2;
+	}
+
+	/**
+	 * @return the lblAddress
+	 */
+	public JLabel getLblAddress() {
+		return lblAddress;
+	}
+
+	/**
+	 * @param lblAddress
+	 *            the lblAddress to set
+	 */
+	public void setLblAddress(JLabel lblAddress) {
+		this.lblAddress = lblAddress;
 	}
 
 	/**
@@ -114,21 +139,6 @@ public class SidebarPublic extends Sidebar {
 	}
 
 	/**
-	 * @return the lblAddress
-	 */
-	public JLabel getLblAddress() {
-		return lblAddress;
-	}
-
-	/**
-	 * @param lblAddress
-	 *            the lblAddress to set
-	 */
-	public void setLblAddress(JLabel lblAddress) {
-		this.lblAddress = lblAddress;
-	}
-
-	/**
 	 * @return the lblLink1
 	 */
 	public JLabel getLblLink1() {
@@ -159,18 +169,33 @@ public class SidebarPublic extends Sidebar {
 	}
 
 	/**
-	 * @return the lblName1
+	 * @return the lblDescription
 	 */
-	public JLabel getLblName1() {
-		return lblName1;
+	public JLabel getLblDescription() {
+		return lblDescription;
 	}
 
 	/**
-	 * @param lblName1
-	 *            the lblName1 to set
+	 * @param lblDescription
+	 *            the lblDescription to set
 	 */
-	public void setLblName1(JLabel lblName1) {
-		this.lblName1 = lblName1;
+	public void setLblDescription(JLabel lblDescription) {
+		this.lblDescription = lblDescription;
+	}
+
+	/**
+	 * @return the lblPostcode
+	 */
+	public JLabel getLblPostcode() {
+		return lblPostcode;
+	}
+
+	/**
+	 * @param lblPostcode
+	 *            the lblPostcode to set
+	 */
+	public void setLblPostcode(JLabel lblPostcode) {
+		this.lblPostcode = lblPostcode;
 	}
 
 	/**
@@ -178,18 +203,7 @@ public class SidebarPublic extends Sidebar {
 	 */
 	public SidebarPublic() {
 
-		initLayout();
-
-		lblPhoto = new JLabel();
-		ImageIcon logoPhotoProfile = new ImageIcon(Img.PROFILE_LOGO);
-		lblPhoto.setIcon(logoPhotoProfile);
-		GridBagConstraints gbc_lblPhoto = new GridBagConstraints();
-		gbc_lblPhoto.anchor = GridBagConstraints.WEST;
-		gbc_lblPhoto.gridheight = 4;
-		gbc_lblPhoto.insets = new Insets(5, 5, 5, 5);
-		gbc_lblPhoto.gridx = 1;
-		gbc_lblPhoto.gridy = 1;
-		add(lblPhoto, gbc_lblPhoto);
+		super();
 
 		lblName1 = new JLabel("Name 1");
 		GridBagConstraints gbc_lblName1 = new GridBagConstraints();

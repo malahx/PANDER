@@ -328,7 +328,7 @@ public abstract class Sidebar extends JPanel {
 	}
 
 	/**
-	 * Init the layout
+	 * The constructor
 	 */
 	protected Sidebar() {
 		GridBagLayout gbl_contentPane = new GridBagLayout();
