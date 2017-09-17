@@ -19,13 +19,6 @@ public abstract class DocListener implements DocumentListener {
 	 */
 	public abstract void update(DocumentEvent e);
 
-	/**
-	 * 
-	 */
-	public DocListener() {
-		super();
-	}
-
 	/*
 	 * (non-Javadoc)
 	 * 

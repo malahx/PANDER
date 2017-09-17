@@ -115,10 +115,11 @@ public abstract class BaseDAO extends DAO implements IBaseDAO {
 	 */
 	@Override
 	public int update(BaseEntity entity) {
+		Integer i = null;
 		if (checkExists(entity) && checkFields(entity)) {
-			return execute("UPDATE " + table + " SET " + parseUpdate(entity) + " WHERE " + id + " = " + entity.getId());
+			i = execute("UPDATE " + table + " SET " + parseUpdate(entity) + " WHERE " + id + " = " + entity.getId());
 		}
-		return 0;
+		return i;
 	}
 
 	/*

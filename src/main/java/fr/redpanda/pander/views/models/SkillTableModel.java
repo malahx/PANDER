@@ -54,6 +54,7 @@ public class SkillTableModel extends SorterTableModel {
 	 * 
 	 */
 	public SkillTableModel(List<BaseEntity> skills, IBaseSkillEntity entity) {
+		super();
 		this.title = new String[] { "Activer", "Compétence" };
 		this.skills = skills;
 		this.entity = entity;
@@ -61,7 +62,15 @@ public class SkillTableModel extends SorterTableModel {
 		initSorter();
 	}
 
+	/**
+	 * The constructor of a skill table model with editable option
+	 * 
+	 * @param skills
+	 * @param entity
+	 * @param editable
+	 */
 	public SkillTableModel(List<BaseEntity> skills, IBaseSkillEntity entity, boolean editable) {
+		super();
 		this.title = new String[] { "Activer", "Compétence" };
 		this.skills = skills;
 		this.entity = entity;

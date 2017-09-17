@@ -15,7 +15,7 @@ import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
 import fr.redpanda.pander.utils.constant.Img;
-import fr.redpanda.pander.utils.views.ViewUtils;
+import fr.redpanda.pander.utils.views.ColorUtils;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -174,8 +174,9 @@ public class Navbar extends JPanel {
 	 * The Constructor
 	 */
 	public Navbar() {
+		super();
 
-		ViewUtils.colorWhite(this);
+		ColorUtils.colorWhite(this);
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0 };
@@ -242,52 +243,6 @@ public class Navbar extends JPanel {
 		gbc_lblBanner.gridy = 0;
 		pnlHeader.add(lblBanner, gbc_lblBanner);
 
-		// JLabel pnlHeader = new JLabel();
-		// ImageIcon bandImage = new ImageIcon(Img.BANNER);
-		// pnlHeader.setIcon(bandImage);
-		// GridBagConstraints gbc_pnlHeader = new GridBagConstraints();
-		// gbc_pnlHeader.insets = new Insets(0, 0, 5, 0);
-		// gbc_pnlHeader.fill = GridBagConstraints.WEST;
-		// gbc_pnlHeader.gridx = 0;
-		// gbc_pnlHeader.gridy = 0;
-		// pnlNav.add(pnlHeader, gbc_pnlHeader);
-		// GridBagLayout gbl_pnlHeader = new GridBagLayout();
-		// gbl_pnlHeader.columnWidths = new int[] { 0, 0 };
-		// gbl_pnlHeader.rowHeights = new int[] { 0 };
-		// gbl_pnlHeader.columnWeights = new double[] { 1.0, 0.0 };
-		// gbl_pnlHeader.rowWeights = new double[] { 0.0 };
-		// pnlHeader.setLayout(gbl_pnlHeader);
-		//
-		// JLabel lblPander = new JLabel();
-		// ImageIcon panderName = new ImageIcon(Img.TITLE_S);
-		// lblPander.setIcon(panderName);
-		// GridBagConstraints gbc_lblPander = new GridBagConstraints();
-		// gbc_lblPander.anchor = GridBagConstraints.NORTHWEST;
-		// gbc_lblPander.insets = new Insets(0, 0, 0, 5);
-		// gbc_lblPander.gridx = 0;
-		// gbc_lblPander.gridy = 0;
-		// pnlHeader.add(lblPander, gbc_lblPander);
-
-		// JLabel lblBanner = new JLabel();
-		// ImageIcon bandImage = new ImageIcon(Img.BANNER);
-		// lblBanner.setIcon(bandImage);
-		// GridBagConstraints gbc_lblBanner = new GridBagConstraints();
-		// gbc_lblBanner.anchor = GridBagConstraints.NORTHWEST;
-		// gbc_lblBanner.insets = new Insets(0, 0, 0, 5);
-		// gbc_lblBanner.gridx = 1;
-		// gbc_lblBanner.gridy = 0;
-		// pnlHeader.add(lblBanner, gbc_lblBanner);
-		//
-		// JLabel lblPander = new JLabel();
-		// ImageIcon panderName = new ImageIcon(Img.TITLE_S);
-		// lblPander.setIcon(panderName);
-		// GridBagConstraints gbc_lblPander = new GridBagConstraints();
-		// gbc_lblPander.anchor = GridBagConstraints.NORTHEAST;
-		// gbc_lblPander.insets = new Insets(0, 0, 0, 5);
-		// gbc_lblPander.gridx = 0;
-		// gbc_lblPander.gridy = 0;
-		// pnlHeader.add(lblPander, gbc_lblPander);
-
 		lblUser = new JLabel("User");
 		lblUser.setHorizontalAlignment(SwingConstants.RIGHT);
 		GridBagConstraints gbc_lblUser = new GridBagConstraints();
@@ -333,13 +288,13 @@ public class Navbar extends JPanel {
 		gbc_lblLogouser.gridy = 0;
 		add(lblLogouser, gbc_lblLogouser);
 
-		ViewUtils.colorWhite(pnlButton);
-		ViewUtils.colorWhite(pnlHeader);
-		ViewUtils.colorWhite(pnlNav);
-		ViewUtils.colorWhite(tglbtnHome);
-		ViewUtils.colorWhite(tglbtnMatching);
-		ViewUtils.colorWhite(tglbtnProfile);
-		ViewUtils.colorWhite(tglbtnJob);
+		ColorUtils.colorWhite(pnlButton);
+		ColorUtils.colorWhite(pnlHeader);
+		ColorUtils.colorWhite(pnlNav);
+		ColorUtils.colorWhite(tglbtnHome);
+		ColorUtils.colorWhite(tglbtnMatching);
+		ColorUtils.colorWhite(tglbtnProfile);
+		ColorUtils.colorWhite(tglbtnJob);
 
 	}
 

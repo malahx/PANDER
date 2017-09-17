@@ -12,12 +12,8 @@ public class DateConverter {
 	 * @return
 	 */
 	public static String getMySqlDate(Date date) {
-		if (date != null) {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			return sdf.format(date);
-		} else {
-			return null;
-		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return date != null ? sdf.format(date) : null;
 	}
 
 	/**
@@ -27,12 +23,8 @@ public class DateConverter {
 	 * @return
 	 */
 	public static String getMySqlDatetime(Date date) {
-		if (date != null) {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			return sdf.format(date);
-		} else {
-			return null;
-		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return date != null ? sdf.format(date) : null;
 	}
 
 	/**
@@ -42,11 +34,7 @@ public class DateConverter {
 	 * @return
 	 */
 	public static String getDate(Date date) {
-		if (date != null) {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			return sdf.format(date);
-		} else {
-			return null;
-		}
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		return date != null ? sdf.format(date) : null;
 	}
 }

@@ -18,7 +18,7 @@ import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.utils.constant.Img;
 import fr.redpanda.pander.utils.constant.PanderColor;
-import fr.redpanda.pander.utils.views.ViewUtils;
+import fr.redpanda.pander.utils.views.ColorUtils;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -331,6 +331,7 @@ public abstract class Sidebar extends JPanel {
 	 * The constructor
 	 */
 	protected Sidebar() {
+		super();
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 0, 0, 0, 0, 0, 0 };
 		gbl_contentPane.rowHeights = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -493,7 +494,7 @@ public abstract class Sidebar extends JPanel {
 		gbc_label.gridy = 22;
 		add(label, gbc_label);
 
-		ViewUtils.colorGrey(this);
+		ColorUtils.colorGrey(this);
 
 	}
 

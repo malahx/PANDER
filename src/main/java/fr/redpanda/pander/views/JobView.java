@@ -22,7 +22,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
 
 import fr.redpanda.pander.entities.Job;
-import fr.redpanda.pander.utils.views.ViewUtils;
+import fr.redpanda.pander.utils.views.ColorUtils;
 import fr.redpanda.pander.views.base.MainView;
 
 /**
@@ -707,15 +707,15 @@ public class JobView extends MainView {
 		btnClear = new JButton("Effacer les champs");
 		pnlButton.add(btnClear);
 
-		ViewUtils.colorLight(btnDelete);
-		ViewUtils.colorLight(btnAdd);
-		ViewUtils.colorLight(btnClear);
-		ViewUtils.colorWhite(pnlButton);
-		ViewUtils.colorWhite(pnlJobInfo);
-		ViewUtils.colorWhite(pnlJobList);
-		ViewUtils.colorWhite(pnlSkills);
-		ViewUtils.colorWhite(pnlSoftSkills);
-		ViewUtils.colorWhite(pnlTechSkills);
+		ColorUtils.colorLight(btnDelete);
+		ColorUtils.colorLight(btnAdd);
+		ColorUtils.colorLight(btnClear);
+		ColorUtils.colorWhite(pnlButton);
+		ColorUtils.colorWhite(pnlJobInfo);
+		ColorUtils.colorWhite(pnlJobList);
+		ColorUtils.colorWhite(pnlSkills);
+		ColorUtils.colorWhite(pnlSoftSkills);
+		ColorUtils.colorWhite(pnlTechSkills);
 
 	}
 

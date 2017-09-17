@@ -15,7 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import fr.redpanda.pander.utils.constant.PanderColor;
-import fr.redpanda.pander.utils.views.ViewUtils;
+import fr.redpanda.pander.utils.views.ColorUtils;
 import fr.redpanda.pander.views.base.BaseView;
 
 /**
@@ -410,8 +410,8 @@ public class RegisterView extends BaseView {
 		gbc_btnRegister.gridy = 11;
 		contentPane.add(btnRegister, gbc_btnRegister);
 
-		ViewUtils.colorWhite(btnCancel);
-		ViewUtils.colorNormal(btnRegister);
+		ColorUtils.colorWhite(btnCancel);
+		ColorUtils.colorNormal(btnRegister);
 	}
 
 }

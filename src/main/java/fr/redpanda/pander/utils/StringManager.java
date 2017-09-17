@@ -11,18 +11,19 @@ import fr.redpanda.pander.utils.date.DateConverter;
 public class StringManager {
 
 	/**
+	 * 
+	 */
+	private static final String EQUALS = " = ";
+
+	/**
 	 * Make a String with a first letter upper case
 	 * 
 	 * @param toConvert
 	 * @return
 	 */
 	public static String firstLetterUpperCase(String toConvert) {
-		if (toConvert.length() > 1) {
-			return toConvert.substring(0, 1).toUpperCase() + toConvert.substring(1);
-		} else {
-			return toConvert.toUpperCase();
-		}
-
+		return toConvert.length() > 1 ? toConvert.substring(0, 1).toUpperCase() + toConvert.substring(1)
+				: toConvert.toUpperCase();
 	}
 
 	/**
@@ -179,7 +180,7 @@ public class StringManager {
 	 * @return
 	 */
 	public static String toMySQLUpdate(String attr, String value, boolean last) {
-		return attr + " = " + toMySQL(value, last);
+		return attr + EQUALS + toMySQL(value, last);
 	}
 
 	/**
@@ -191,7 +192,7 @@ public class StringManager {
 	 * @return
 	 */
 	public static String toMySQLUpdate(String attr, double value, boolean last) {
-		return attr + " = " + toMySQL(value, last);
+		return attr + EQUALS + toMySQL(value, last);
 	}
 
 	/**
@@ -203,7 +204,7 @@ public class StringManager {
 	 * @return
 	 */
 	public static String toMySQLUpdate(String attr, Role value, boolean last) {
-		return attr + " = " + toMySQL(value, last);
+		return attr + EQUALS + toMySQL(value, last);
 	}
 
 	/**
@@ -215,7 +216,7 @@ public class StringManager {
 	 * @return
 	 */
 	public static String toMySQLUpdate(String attr, boolean value, boolean last) {
-		return attr + " = " + toMySQL(value, last);
+		return attr + EQUALS + toMySQL(value, last);
 	}
 
 	/**
@@ -227,7 +228,7 @@ public class StringManager {
 	 * @return
 	 */
 	public static String toMySQLUpdateDateTime(String attr, Date value, boolean last) {
-		return attr + " = " + toMySQLDateTime(value, last);
+		return attr + EQUALS + toMySQLDateTime(value, last);
 	}
 
 	/**
@@ -239,7 +240,7 @@ public class StringManager {
 	 * @return
 	 */
 	public static String toMySQLUpdateDate(String attr, Date value, boolean last) {
-		return attr + " = " + toMySQLDate(value, last);
+		return attr + EQUALS + toMySQLDate(value, last);
 	}
 
 	/**

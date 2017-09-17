@@ -42,6 +42,7 @@ public class MatchingTableModel extends SorterTableModel {
 	 * @param matchings
 	 */
 	public MatchingTableModel(String[] title, List<Matching> matchings, boolean isCandidate) {
+		super();
 		this.title = new String[title.length];
 		for (int i = 0; i < title.length; i++) {
 			this.title[i] = title[i];
@@ -113,7 +114,7 @@ public class MatchingTableModel extends SorterTableModel {
 	public Object getValueAt(Matching matching, int columnIndex) {
 		switch (columnIndex) {
 		case 0:
-			return String.valueOf(matching.getMatchingCalculation()) + "%";
+			return matching.getMatchingCalculation() + "%";
 		case 1:
 			return isCandidate ? matching.getCompany().getName() : matching.getCandidate().getFirstname();
 		case 2:

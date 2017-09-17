@@ -4,7 +4,7 @@
 package fr.redpanda.pander.controllers.base;
 
 import fr.redpanda.pander.entities.User;
-import fr.redpanda.pander.utils.views.ViewUtils;
+import fr.redpanda.pander.utils.views.ColorUtils;
 import fr.redpanda.pander.views.base.MainView;
 
 /**
@@ -14,7 +14,7 @@ import fr.redpanda.pander.views.base.MainView;
 public abstract class PublicProfileCtrl extends MainCtrl {
 
 	protected User publicUser;
-	
+
 	public PublicProfileCtrl() {
 		super();
 	}
@@ -41,12 +41,12 @@ public abstract class PublicProfileCtrl extends MainCtrl {
 			MainView view = (MainView) this.view;
 			view.getNavbar().getTglbtnPublicProfile().setSelected(true);
 			view.getNavbar().getTglbtnPublicProfile().setVisible(true);
-			ViewUtils.colorLight(view.getSidebar());
-			ViewUtils.colorLight(view.getFooter());
-			ViewUtils.colorDark(view.getFooter().getBtnExit());
-			ViewUtils.colorDark(view.getFooter().getBtnLogout());
-			ViewUtils.colorTextWhite(view.getFooter().getBtnExit());
-			ViewUtils.colorTextWhite(view.getFooter().getBtnLogout());
+			ColorUtils.colorLight(view.getSidebar());
+			ColorUtils.colorLight(view.getFooter());
+			ColorUtils.colorDark(view.getFooter().getBtnExit());
+			ColorUtils.colorDark(view.getFooter().getBtnLogout());
+			ColorUtils.colorTextWhite(view.getFooter().getBtnExit());
+			ColorUtils.colorTextWhite(view.getFooter().getBtnLogout());
 		}
 
 	}

@@ -10,7 +10,9 @@ import static org.junit.Assert.assertTrue;
 import javax.swing.JFrame;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.redpanda.pander.test.controllers.base.BaseCtrlTest;
@@ -26,8 +28,20 @@ public class RegisterCtrlTest extends BaseCtrlTest {
 	private JFrame mainFrame;
 	private JFrame registerFrame;
 	private RegisterView view;
-	// AuthCtrl authCtrl;
-	// AuthView authView;
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+	}
+
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
 
 	/**
 	 * @throws java.lang.Exception
@@ -55,8 +69,8 @@ public class RegisterCtrlTest extends BaseCtrlTest {
 	@After
 	public void tearDown() throws Exception {
 		super.tearDown();
-		// mainFrame.dispose();
-		// registerFrame.dispose();
+		mainFrame.dispose();
+		registerFrame.dispose();
 	}
 
 	/**
@@ -132,7 +146,7 @@ public class RegisterCtrlTest extends BaseCtrlTest {
 	 * Test method for {@link fr.redpanda.pander.controllers.RegisterCtrl#close()}.
 	 */
 	@Test
-	public void testClose() {
+	public void testZClose() {
 		view.getBtnCancel().doClick();
 		assertFalse(registerFrame.isDisplayable());
 		assertTrue(mainFrame.isEnabled());
