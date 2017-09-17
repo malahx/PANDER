@@ -111,6 +111,11 @@ public class ProfileCtrl extends PublicProfileCtrl {
 		super();
 	}
 
+	/**
+	 * The constructor for public view (only for candidate)
+	 * 
+	 * @param publicUser
+	 */
 	public ProfileCtrl(User publicUser) {
 		super(publicUser);
 		super.view = new CandidateView() {

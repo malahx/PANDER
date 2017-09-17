@@ -177,6 +177,11 @@ public class AuthCtrl extends BaseCtrl {
 						: false);
 	}
 
+	/**
+	 * Initialize the registration for an user
+	 * 
+	 * @param user
+	 */
 	private void initRegistration(User user) {
 		registerCtrl = new RegisterCtrl(frame, user);
 

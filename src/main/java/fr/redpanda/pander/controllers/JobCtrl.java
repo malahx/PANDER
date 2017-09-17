@@ -45,6 +45,8 @@ public class JobCtrl extends PublicProfileCtrl {
 	}
 
 	/**
+	 * The constructor for public view
+	 * 
 	 * @param publicUser
 	 */
 	public JobCtrl(User publicUser) {
