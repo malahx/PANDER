@@ -50,12 +50,20 @@ public abstract class MainCtrl extends BaseCtrl {
 		if (user instanceof Candidate) {
 			view.getNavbar().getLblUser().setText("CANDIDAT");
 			view.getNavbar().getLblLogouser().setIcon(new ImageIcon(Img.HOME_CANDIDATE));
-			view.getNavbar().getTglbtnJob().setVisible(false);
+			if (!isPublic) {
+				view.getNavbar().getTglbtnJob().setVisible(false);
+			} else {
+				view.getNavbar().getTglbtnJob().setVisible(true);
+			}
 			view.getSidebar().initCandidate((Candidate) user);
 		} else {
 			view.getNavbar().getLblUser().setText("ENTREPRISE");
 			view.getNavbar().getLblLogouser().setIcon(new ImageIcon(Img.HOME_COMPANY));
-			view.getNavbar().getTglbtnJob().setVisible(true);
+			if (isPublic) {
+				view.getNavbar().getTglbtnJob().setVisible(false);
+			} else {
+				view.getNavbar().getTglbtnJob().setVisible(true);
+			}
 			view.getSidebar().initCompany((Company) user);
 		}
 
@@ -217,7 +225,8 @@ public abstract class MainCtrl extends BaseCtrl {
 		if (ViewsManager.getInstance().isCurrentController(PublicProfileCtrl.class)) {
 			return;
 		}
-		ViewsManager.getInstance().next(publicUser instanceof Candidate ? new ProfileCtrl(publicUser) : new JobCtrl(publicUser));
+		ViewsManager.getInstance()
+				.next(publicUser instanceof Candidate ? new ProfileCtrl(publicUser) : new JobCtrl(publicUser));
 	}
 
 	/**
