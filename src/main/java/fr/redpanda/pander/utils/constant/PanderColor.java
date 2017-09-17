@@ -17,5 +17,6 @@ public class PanderColor {
 	public static final Color NORMAL = new Color(255, 143, 0);
 	public static final Color DARK = new Color(197, 96, 0);
 	public static final Color WHITE = new Color(255, 255, 255);
+	public static final String FONT = "Lucida Grande";
 
 }

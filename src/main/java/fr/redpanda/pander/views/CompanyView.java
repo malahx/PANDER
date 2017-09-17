@@ -10,6 +10,7 @@ import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import fr.redpanda.pander.utils.constant.PanderColor;
 import fr.redpanda.pander.views.base.ProfileView;
 
 /**
@@ -28,7 +29,7 @@ public class CompanyView extends ProfileView {
 		JLabel lblCompanyView = new JLabel();
 		ImageIcon puzzleCompany = new ImageIcon("resources/companyImageProfile.jpg");
 		lblCompanyView.setIcon(puzzleCompany);
-		lblCompanyView.setFont(new Font("Lucida Grande", Font.BOLD, 35));
+		lblCompanyView.setFont(new Font(PanderColor.FONT, Font.BOLD, 35));
 		GridBagConstraints gbc_lblCompanyView = new GridBagConstraints();
 		gbc_lblCompanyView.insets = new Insets(0, 0, 5, 0);
 		gbc_lblCompanyView.gridx = 1;

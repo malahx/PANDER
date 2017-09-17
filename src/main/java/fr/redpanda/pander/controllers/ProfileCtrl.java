@@ -11,7 +11,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
-import fr.redpanda.pander.controllers.base.MainCtrl;
+import fr.redpanda.pander.controllers.base.PublicProfileCtrl;
 import fr.redpanda.pander.databases.CandidateDAO;
 import fr.redpanda.pander.databases.SkillDAO;
 import fr.redpanda.pander.entities.Candidate;
@@ -20,7 +20,6 @@ import fr.redpanda.pander.entities.TypeSkill;
 import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.utils.Utils;
-import fr.redpanda.pander.utils.constant.TypeData;
 import fr.redpanda.pander.utils.date.DateConverter;
 import fr.redpanda.pander.views.CandidateView;
 import fr.redpanda.pander.views.CompanyView;
@@ -33,9 +32,7 @@ import fr.redpanda.pander.views.models.SkillTableModel;
  * @author Gwénolé LE HENAFF
  *
  */
-public class ProfileCtrl extends MainCtrl {
-
-	User user;
+public class ProfileCtrl extends PublicProfileCtrl {
 
 	/**
 	 * The company events initialization
@@ -114,16 +111,21 @@ public class ProfileCtrl extends MainCtrl {
 		super();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.redpanda.pander.controllers.base.BaseCtrl#setupDatas()
-	 */
-	@Override
-	public void setupDatas() {
-		super.setupDatas();
+	public ProfileCtrl(User publicUser) {
+		super(publicUser);
+		super.view = new CandidateView() {
 
-		user = (User) getViewDatas().get(TypeData.USER);
+			/*
+			 * (non-Javadoc)
+			 * 
+			 * @see fr.redpanda.pander.views.base.ProfileView#isEditable()
+			 */
+			@Override
+			public boolean isEditable() {
+				return false;
+			}
+
+		};
 	}
 
 	/*
@@ -154,11 +156,15 @@ public class ProfileCtrl extends MainCtrl {
 		super.initView();
 
 		MainView view = (MainView) this.view;
-		view.getNavbar().getTglbtnProfile().setSelected(true);
+		if (isPublic) {
+			view.getNavbar().getTglbtnPublicProfile().setSelected(true);
+		} else {
+			view.getNavbar().getTglbtnProfile().setSelected(true);
+		}
 		if (user instanceof Candidate && view instanceof CandidateView) {
-			initCandidateView(user);
+			initCandidateView((Candidate) user);
 		} else if (user instanceof Company && view instanceof CompanyView) {
-			initCompanyView(user);
+			initCompanyView((Company) user);
 		}
 
 	}
@@ -184,12 +190,21 @@ public class ProfileCtrl extends MainCtrl {
 		cview.getTextBirthday().setText(DateConverter.getDate(cuser.getBirthdate()));
 		cview.getTextTransport().setText(cuser.getTransport());
 		List<BaseEntity> skills = SkillDAO.getInstance().get();
-		SkillTableModel softSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.SOFT), cuser);
-		SkillTableModel techSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.TECH), cuser);
+		SkillTableModel softSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.SOFT), cuser,
+				!isPublic);
+		SkillTableModel techSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.TECH), cuser,
+				!isPublic);
 		cview.getTableSoftSkills().setModel(softSkillsModel);
 		cview.getTableSoftSkills().setRowSorter(softSkillsModel.getSorter());
 		cview.getTableTechSkills().setModel(techSkillsModel);
 		cview.getTableTechSkills().setRowSorter(techSkillsModel.getSorter());
+		if (isPublic) {
+			cview.getTextBirthday().setEditable(false);
+			cview.getTextCertificate1().setEditable(false);
+			cview.getTextCertificate2().setEditable(false);
+			cview.getTextTransport().setEditable(false);
+			cview.getNavbar().getTglbtnPublicProfile().setText(cuser.getFirstname() + " " + cuser.getLastname());
+		}
 
 	}
 

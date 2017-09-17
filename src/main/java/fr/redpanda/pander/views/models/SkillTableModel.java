@@ -18,6 +18,7 @@ public class SkillTableModel extends SorterTableModel {
 	private static final long serialVersionUID = -4831274774359919486L;
 
 	private final List<BaseEntity> skills;
+	private final boolean editable;
 	private IBaseSkillEntity entity;
 
 	/**
@@ -56,6 +57,15 @@ public class SkillTableModel extends SorterTableModel {
 		this.title = new String[] { "Activer", "Compétence" };
 		this.skills = skills;
 		this.entity = entity;
+		this.editable = true;
+		initSorter();
+	}
+
+	public SkillTableModel(List<BaseEntity> skills, IBaseSkillEntity entity, boolean editable) {
+		this.title = new String[] { "Activer", "Compétence" };
+		this.skills = skills;
+		this.entity = entity;
+		this.editable = editable;
 		initSorter();
 	}
 
@@ -156,7 +166,7 @@ public class SkillTableModel extends SorterTableModel {
 	 */
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return columnIndex == 0;
+		return editable == true && columnIndex == 0;
 	}
 
 }
