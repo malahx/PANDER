@@ -15,7 +15,6 @@ import fr.redpanda.pander.controllers.HomeCtrl;
 import fr.redpanda.pander.controllers.JobCtrl;
 import fr.redpanda.pander.controllers.MatchingCtrl;
 import fr.redpanda.pander.controllers.ProfileCtrl;
-import fr.redpanda.pander.controllers.PublicProfileCtrl;
 import fr.redpanda.pander.databases.CandidateDAO;
 import fr.redpanda.pander.databases.CompanyDAO;
 import fr.redpanda.pander.databases.UserDAO;
@@ -35,6 +34,7 @@ import fr.redpanda.pander.views.subviews.SidebarEditable;
  */
 public abstract class MainCtrl extends BaseCtrl {
 
+	protected boolean isPublic = false;
 	protected User user;
 
 	/*
@@ -169,7 +169,7 @@ public abstract class MainCtrl extends BaseCtrl {
 		if (ViewsManager.getInstance().isCurrentController(JobCtrl.class)) {
 			return;
 		}
-		ViewsManager.getInstance().next(new JobCtrl(frame));
+		ViewsManager.getInstance().next(new JobCtrl());
 	}
 
 	/**
@@ -189,7 +189,7 @@ public abstract class MainCtrl extends BaseCtrl {
 		if (ViewsManager.getInstance().isCurrentController(ProfileCtrl.class)) {
 			return;
 		}
-		ViewsManager.getInstance().next(new ProfileCtrl(frame));
+		ViewsManager.getInstance().next(new ProfileCtrl());
 	}
 
 	/**
@@ -209,7 +209,7 @@ public abstract class MainCtrl extends BaseCtrl {
 		if (ViewsManager.getInstance().isCurrentController(PublicProfileCtrl.class)) {
 			return;
 		}
-		ViewsManager.getInstance().next(new PublicProfileCtrl(frame, publicUser));
+		ViewsManager.getInstance().next(publicUser instanceof Candidate ? new ProfileCtrl(publicUser) : new JobCtrl(publicUser));
 	}
 
 	/**
@@ -263,6 +263,9 @@ public abstract class MainCtrl extends BaseCtrl {
 	@Override
 	public void setupDatas() {
 		super.setupDatas();
+		if (isPublic) {
+			return;
+		}
 		user = (User) getViewDatas().get(TypeData.USER);
 	}
 }
