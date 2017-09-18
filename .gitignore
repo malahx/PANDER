@@ -56,3 +56,5 @@ miglayout15-swing.jar
 
 #config files
 config/dbconfig
+
+release/
