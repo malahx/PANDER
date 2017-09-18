@@ -7,22 +7,21 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.JFrame;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
-import fr.redpanda.pander.controllers.base.MainCtrl;
+import fr.redpanda.pander.controllers.base.PublicProfileCtrl;
 import fr.redpanda.pander.databases.JobDAO;
 import fr.redpanda.pander.databases.SkillDAO;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.Job;
 import fr.redpanda.pander.entities.TypeSkill;
+import fr.redpanda.pander.entities.User;
 import fr.redpanda.pander.entities.base.BaseEntity;
 import fr.redpanda.pander.utils.Utils;
-import fr.redpanda.pander.utils.constant.TypeData;
 import fr.redpanda.pander.views.JobView;
 import fr.redpanda.pander.views.models.DocListener;
 import fr.redpanda.pander.views.models.JobListModel;
@@ -32,20 +31,34 @@ import fr.redpanda.pander.views.models.SkillTableModel;
  * @author Gwénolé LE HENAFF
  *
  */
-public class JobCtrl extends MainCtrl {
+public class JobCtrl extends PublicProfileCtrl {
 
 	private boolean inLoading;
 	private Job nextJob;
 
 	/**
-	 * 
+	 * The constructor
 	 */
-	public JobCtrl(JFrame frame) {
+	public JobCtrl() {
 		super();
-		super.frame = frame;
 		super.view = new JobView();
 	}
 
+	/**
+	 * The constructor for public view
+	 * 
+	 * @param publicUser
+	 */
+	public JobCtrl(User publicUser) {
+		super(publicUser);
+		super.view = new JobView();
+	}
+
+	/**
+	 * The Job deletion
+	 * 
+	 * @param cview
+	 */
 	protected void jobDelete(JobView cview) {
 		if (!cview.getLstJob().isSelectionEmpty()) {
 			Job job = cview.getLstJob().getSelectedValue();
@@ -55,6 +68,11 @@ public class JobCtrl extends MainCtrl {
 		}
 	}
 
+	/**
+	 * Refresh the job datas from the list selection
+	 * 
+	 * @param cview
+	 */
 	protected void jobListSelection(JobView cview) {
 		cview.getBtnDelete().setEnabled(!cview.getLstJob().isSelectionEmpty());
 		if (!cview.getLstJob().isSelectionEmpty()) {
@@ -64,6 +82,8 @@ public class JobCtrl extends MainCtrl {
 	}
 
 	/**
+	 * The update of a job
+	 * 
 	 * @param cview
 	 */
 	protected void updateJob(JobView cview) {
@@ -74,6 +94,12 @@ public class JobCtrl extends MainCtrl {
 		((JobListModel) cview.getLstJob().getModel()).refresh();
 	}
 
+	/**
+	 * The load of a job
+	 * 
+	 * @param job
+	 * @param view
+	 */
 	private void loadJob(Job job, JobView view) {
 		inLoading = true;
 		view.getTxtName().setText(job.getName());
@@ -85,6 +111,13 @@ public class JobCtrl extends MainCtrl {
 		inLoading = false;
 	}
 
+	/**
+	 * Parse a job from the view
+	 * 
+	 * @param job
+	 * @param view
+	 * @return
+	 */
 	private Job parse(Job job, JobView view) {
 		job.setName(view.getTxtName().getText());
 		job.setLink(view.getTxtLink().getText());
@@ -93,6 +126,11 @@ public class JobCtrl extends MainCtrl {
 		return job;
 	}
 
+	/**
+	 * Reset the job view
+	 * 
+	 * @param view
+	 */
 	private void resetJob(JobView view) {
 		view.getLstJob().clearSelection();
 		view.getTxtContact().setText("");
@@ -105,12 +143,14 @@ public class JobCtrl extends MainCtrl {
 	}
 
 	/**
-	 * 
+	 * Initialization of the table skills
 	 */
 	private void initSkills(JobView view) {
 		List<BaseEntity> skills = SkillDAO.getInstance().get();
-		SkillTableModel softSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.SOFT), nextJob);
-		SkillTableModel techSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.TECH), nextJob);
+		SkillTableModel softSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.SOFT), nextJob,
+				!isPublic);
+		SkillTableModel techSkillsModel = new SkillTableModel(Utils.getSkillsType(skills, TypeSkill.TECH), nextJob,
+				!isPublic);
 		view.getTblSoftSkills().setModel(softSkillsModel);
 		view.getTblSoftSkills().setRowSorter(softSkillsModel.getSorter());
 		view.getTblTechSkills().setModel(techSkillsModel);
@@ -138,6 +178,12 @@ public class JobCtrl extends MainCtrl {
 		});
 	}
 
+	/**
+	 * The job addition function
+	 * 
+	 * @param view
+	 * @param user
+	 */
 	private void jobAdd(JobView view, Company user) {
 
 		if (view.getTxtName().getText().equals("")) {
@@ -159,11 +205,23 @@ public class JobCtrl extends MainCtrl {
 	public void initView() {
 		super.initView();
 		JobView cview = (JobView) this.view;
-		Company cuser = (Company) getViewDatas().get(TypeData.USER);
+		Company cuser = (Company) user;
 		cview.getLstJob().setModel(new JobListModel(cuser));
-		cview.getNavbar().getTglbtnJob().setSelected(true);
 		nextJob = new Job();
 		initSkills(cview);
+		if (isPublic) {
+			cview.getPnlButton().setEnabled(false);
+			cview.getPnlButton().setVisible(false);
+			cview.getBtnDelete().setEnabled(false);
+			cview.getBtnDelete().setVisible(false);
+			cview.getTxtContact().setEditable(false);
+			cview.getTxtInfos().setEditable(false);
+			cview.getTxtLink().setEditable(false);
+			cview.getTxtName().setEditable(false);
+			cview.getNavbar().getTglbtnPublicProfile().setText(cuser.getName());
+		} else {
+			cview.getNavbar().getTglbtnJob().setSelected(true);
+		}
 	}
 
 	/*
@@ -175,7 +233,7 @@ public class JobCtrl extends MainCtrl {
 	public void initEvent() {
 		super.initEvent();
 		JobView cview = (JobView) this.view;
-		Company cuser = (Company) getViewDatas().get(TypeData.USER);
+		Company cuser = (Company) user;
 
 		DocListener updateJob = new DocListener() {
 

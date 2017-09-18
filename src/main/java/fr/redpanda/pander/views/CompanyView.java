@@ -10,28 +10,31 @@ import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import fr.redpanda.pander.utils.constant.Img;
-import fr.redpanda.pander.views.base.MainView;
+import fr.redpanda.pander.utils.constant.PanderColor;
+import fr.redpanda.pander.views.base.ProfileView;
 
 /**
  * @author Gwénolé LE HENAFF
  *
  */
-public class CompanyView extends MainView {
-	
+public class CompanyView extends ProfileView {
+
+	/**
+	 * The constructor
+	 */
 	public CompanyView() {
 		super();
 		super.pageName = "Profile";
-		
+
 		JLabel lblCompanyView = new JLabel();
 		ImageIcon puzzleCompany = new ImageIcon("resources/companyImageProfile.jpg");
 		lblCompanyView.setIcon(puzzleCompany);
-		lblCompanyView.setFont(new Font("Lucida Grande", Font.BOLD, 35));
+		lblCompanyView.setFont(new Font(PanderColor.FONT, Font.BOLD, 35));
 		GridBagConstraints gbc_lblCompanyView = new GridBagConstraints();
 		gbc_lblCompanyView.insets = new Insets(0, 0, 5, 0);
 		gbc_lblCompanyView.gridx = 1;
 		gbc_lblCompanyView.gridy = 0;
 		getPnlContent().add(lblCompanyView, gbc_lblCompanyView);
 	}
-}
 
+}

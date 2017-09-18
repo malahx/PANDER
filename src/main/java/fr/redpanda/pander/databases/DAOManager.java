@@ -25,6 +25,9 @@ public class DAOManager extends DAO {
 	private static final String FILE_CONFIG = "dbconfig";
 	private static final String PATH_CONFIG = "config";
 
+	/**
+	 * The constructor
+	 */
 	protected DAOManager() {
 		super();
 		connectCrea();
@@ -32,13 +35,17 @@ public class DAOManager extends DAO {
 			connect();
 		} else {
 			createDB();
-			initDB(PATH_CONFIG, DB_SQL);
-			initDB(PATH_CONFIG, DATA_SQL);
+			loadDB(PATH_CONFIG, DB_SQL);
+			loadDB(PATH_CONFIG, DATA_SQL);
 		}
 	}
 
 	private static DAOManager instance = null;
 
+	/**
+	 * 
+	 * @return the instance
+	 */
 	public static DAOManager getInstance() {
 		if (instance == null) {
 			instance = new DAOManager();
@@ -71,6 +78,10 @@ public class DAOManager extends DAO {
 		return dbName;
 	}
 
+	/**
+	 * 
+	 * @return if the database is created
+	 */
 	private boolean canConnect() {
 		Statement statement = null;
 		ResultSet rs = null;
@@ -91,6 +102,9 @@ public class DAOManager extends DAO {
 		return false;
 	}
 
+	/**
+	 * Create the database set in dbName
+	 */
 	private void createDB() {
 		Statement statement = null;
 		try {
@@ -121,11 +135,19 @@ public class DAOManager extends DAO {
 	//
 	// }
 
-	private void initDB(String path, String fileName) {
+	/**
+	 * Load a SQL file in the database
+	 * 
+	 * @param path
+	 *            the path of the SQL file
+	 * @param fileName
+	 *            the filename with his extension
+	 */
+	private void loadDB(String path, String fileName) {
 		connect();
 
 		String queries = readSql(path, fileName);
-		
+
 		Statement statement = null;
 		try {
 			statement = connection.createStatement();
@@ -142,6 +164,15 @@ public class DAOManager extends DAO {
 		}
 	}
 
+	/**
+	 * Read a SQL file to be save in a String
+	 * 
+	 * @param path
+	 *            the path of the SQL file
+	 * @param fileName
+	 *            the filename with his extension
+	 * @return
+	 */
 	private String readSql(String path, String fileName) {
 		FileManager fileManager = new FileManager(path, fileName);
 		StringBuilder queries = new StringBuilder();
@@ -156,10 +187,21 @@ public class DAOManager extends DAO {
 		return queries.toString();
 	}
 
+	/**
+	 * Connect to the default database
+	 */
 	public void connect() {
 		connect(PATH_CONFIG, FILE_CONFIG);
 	}
 
+	/**
+	 * Connect to a database
+	 * 
+	 * @param path
+	 *            the path of the settings
+	 * @param fileName
+	 *            the filename of the settings with his extension
+	 */
 	public void connect(String path, String fileName) {
 		FileManager fileManager = new FileManager(path, fileName);
 
@@ -171,6 +213,15 @@ public class DAOManager extends DAO {
 
 	}
 
+	/**
+	 * Connect to a database
+	 * 
+	 * @param serverAddress
+	 * @param port
+	 * @param dbName
+	 * @param login
+	 * @param password
+	 */
 	public void connect(String serverAddress, String port, String dbName, String login, String password) {
 		this.dbName = dbName;
 		try {
@@ -188,10 +239,21 @@ public class DAOManager extends DAO {
 		}
 	}
 
+	/**
+	 * Connect to a database without dbName
+	 */
 	public void connectCrea() {
 		connectCrea(PATH_CONFIG, FILE_CONFIG);
 	}
 
+	/**
+	 * Connect to a database without dbName
+	 * 
+	 * @param path
+	 *            the path of the settings
+	 * @param fileName
+	 *            the filename of the settings with his extension
+	 */
 	public void connectCrea(String path, String fileName) {
 		FileManager fileManager = new FileManager(path, fileName);
 
@@ -205,6 +267,14 @@ public class DAOManager extends DAO {
 
 	}
 
+	/**
+	 * Connect to a database without dbName
+	 * 
+	 * @param serverAddress
+	 * @param port
+	 * @param login
+	 * @param password
+	 */
 	public void connectCrea(String serverAddress, String port, String login, String password) {
 		try {
 			if (createConnection == null) {

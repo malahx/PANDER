@@ -20,6 +20,13 @@ public abstract class BaseCtrl implements IBaseCtrl {
 	protected Map<String, Object> viewDatas = new HashMap<>();
 
 	/**
+	 * @return the frame
+	 */
+	public JFrame getFrame() {
+		return frame;
+	}
+
+	/**
 	 * @return the view
 	 */
 	public BaseView getView() {
@@ -41,8 +48,17 @@ public abstract class BaseCtrl implements IBaseCtrl {
 		return viewDatas;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * fr.redpanda.pander.controllers.base.IBaseCtrl#loadController(javax.swing.
+	 * JFrame)
+	 */
 	@Override
 	public BaseCtrl loadController(JFrame frame) {
+		this.frame = frame;
+		frame.setVisible(true);
 		setupDatas();
 		getView().loadView(frame);
 		initView();

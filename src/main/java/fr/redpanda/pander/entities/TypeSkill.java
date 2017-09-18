@@ -15,6 +15,8 @@ public enum TypeSkill {
 	private final String text;
 
 	/**
+	 * The constructor for the toString
+	 * 
 	 * @param text
 	 */
 	private TypeSkill(final String text) {
@@ -30,5 +32,5 @@ public enum TypeSkill {
 	public String toString() {
 		return text;
 	}
-	
+
 }

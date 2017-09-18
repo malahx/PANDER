@@ -7,13 +7,11 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import fr.redpanda.pander.utils.constant.Img;
-import fr.redpanda.pander.utils.constant.PanderColor;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -33,80 +31,7 @@ public class ViewUtils {
 	public static void configure(JFrame frame, JPanel panel) {
 		panel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		frame.setContentPane(panel);
-		colorWhite(panel);
-	}
-
-	/**
-	 * Configure the color of the component
-	 * 
-	 * @param component
-	 *            a JComponent to configure
-	 * 
-	 */
-	public static void colorDark(JComponent component) {
-		component.setBackground(PanderColor.DARK);
-	}
-
-	/**
-	 * Configure the color of the component
-	 * 
-	 * @param component
-	 *            a JComponent to configure
-	 * 
-	 */
-	public static void colorNormal(JComponent component) {
-		component.setBackground(PanderColor.NORMAL);
-	}
-
-	/**
-	 * Configure the color of the component
-	 * 
-	 * @param component
-	 *            a JPanel to configure
-	 * 
-	 */
-	public static void colorLight(JComponent component) {
-		component.setBackground(PanderColor.LIGHT);
-	}
-
-	/**
-	 * Configure the color of the component
-	 * 
-	 * @param component
-	 *            a JComponent to configure
-	 * 
-	 */
-	public static void colorGrey(JComponent component) {
-		component.setBackground(PanderColor.GREY);
-	}
-
-	/**
-	 * Configure the color of the component
-	 * 
-	 * @param component
-	 *            a JComponent to configure
-	 * 
-	 */
-	public static void colorGreyLight(JComponent component) {
-		component.setBackground(PanderColor.GREY_LIGHT);
-	}
-
-	/**
-	 * Configure the color of the component
-	 * 
-	 * @param component
-	 *            a JComponent to configure
-	 * 
-	 */
-	public static void colorWhite(JComponent component) {
-		component.setBackground(PanderColor.WHITE);
-	}
-
-	/**
-	 * @param component
-	 */
-	public static void colorTextWhite(JComponent component) {
-		component.setForeground(PanderColor.WHITE);
+		ColorUtils.colorWhite(panel);
 	}
 
 	/**
@@ -131,6 +56,11 @@ public class ViewUtils {
 		center(frame);
 	}
 
+	/**
+	 * Center a frame
+	 * 
+	 * @param frame
+	 */
 	public static void center(JFrame frame) {
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		int screenWidth = (int) screenSize.getWidth();
@@ -140,6 +70,12 @@ public class ViewUtils {
 		frame.setBounds(posWidth, posHeight, frame.getWidth(), frame.getHeight());
 	}
 
+	/**
+	 * Center a frame with the dimension of an other frame
+	 * 
+	 * @param mainFrame
+	 * @param frame
+	 */
 	public static void center(JFrame mainFrame, JFrame frame) {
 		int posWidth = mainFrame.getX() + (mainFrame.getWidth() - frame.getWidth()) / 2;
 		int posHeight = mainFrame.getY() + (mainFrame.getHeight() - frame.getHeight()) / 2;

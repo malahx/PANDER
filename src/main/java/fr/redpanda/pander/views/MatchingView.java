@@ -15,7 +15,8 @@ import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
 import fr.redpanda.pander.utils.constant.Img;
-import fr.redpanda.pander.utils.views.ViewUtils;
+import fr.redpanda.pander.utils.constant.PanderColor;
+import fr.redpanda.pander.utils.views.ColorUtils;
 import fr.redpanda.pander.views.base.MainView;
 
 /**
@@ -74,7 +75,7 @@ public class MatchingView extends MainView {
 	}
 
 	/**
-	 * Create the frame.
+	 * The constructor
 	 */
 	public MatchingView() {
 		super();
@@ -101,25 +102,16 @@ public class MatchingView extends MainView {
 		tblMatching = new JTable();
 		scrPMatching.setViewportView(tblMatching);
 
-		// Programme d'origine pour le boutton de lancement :
-		// btnMatching = new JButton("Matching");
-		// GridBagConstraints gbc_btnMatching = new GridBagConstraints();
-		// gbc_btnMatching.gridx = 0;
-		// gbc_btnMatching.gridy = 1;
-		// getPnlContent().add(btnMatching, gbc_btnMatching);
-
-		// Test d'insertion du gif anim� : (V�rification fonctionnement impossible - pas
-		// acc�s � la vue)
 		btnMatching = new JButton();
 		ImageIcon matchingIconButton = new ImageIcon(Img.ANIM_BTN);
 		btnMatching.setIcon(matchingIconButton);
-		btnMatching.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		btnMatching.setFont(new Font(PanderColor.FONT, Font.PLAIN, 40));
 		GridBagConstraints gbc_btnMatching = new GridBagConstraints();
 		gbc_btnMatching.gridx = 0;
 		gbc_btnMatching.gridy = 1;
 		getPnlContent().add(btnMatching, gbc_btnMatching);
-		
-		ViewUtils.colorWhite(btnMatching);
+
+		ColorUtils.colorWhite(btnMatching);
 
 	}
 

@@ -15,7 +15,7 @@ import javax.swing.JToggleButton;
 import javax.swing.SwingConstants;
 
 import fr.redpanda.pander.utils.constant.Img;
-import fr.redpanda.pander.utils.views.ViewUtils;
+import fr.redpanda.pander.utils.views.ColorUtils;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -29,6 +29,7 @@ public class Navbar extends JPanel {
 	private JToggleButton tglbtnHome;
 	private JToggleButton tglbtnMatching;
 	private JToggleButton tglbtnJob;
+	private JToggleButton tglbtnPublicProfile;
 	private JLabel lblLogopander;
 	private JLabel lblLogouser;
 	private JLabel lblPander;
@@ -77,6 +78,21 @@ public class Navbar extends JPanel {
 	 */
 	public void setTglbtnMatching(JToggleButton tglbtnMatching) {
 		this.tglbtnMatching = tglbtnMatching;
+	}
+
+	/**
+	 * @return the tglbtnPublicProfile
+	 */
+	public JToggleButton getTglbtnPublicProfile() {
+		return tglbtnPublicProfile;
+	}
+
+	/**
+	 * @param tglbtnPublicProfile
+	 *            the tglbtnPublicProfile to set
+	 */
+	public void setTglbtnPublicProfile(JToggleButton tglbtnPublicProfile) {
+		this.tglbtnPublicProfile = tglbtnPublicProfile;
 	}
 
 	/**
@@ -155,11 +171,12 @@ public class Navbar extends JPanel {
 	}
 
 	/**
-	 * Create the panel.
+	 * The Constructor
 	 */
 	public Navbar() {
+		super();
 
-		ViewUtils.colorWhite(this);
+		ColorUtils.colorWhite(this);
 
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0, 0 };
@@ -186,15 +203,13 @@ public class Navbar extends JPanel {
 		gbc_pnlNav.gridy = 0;
 		add(pnlNav, gbc_pnlNav);
 		GridBagLayout gbl_pnlNav = new GridBagLayout();
-		gbl_pnlNav.columnWidths = new int[] { 0, 0 };
-		gbl_pnlNav.rowHeights = new int[] { 0, 0 };
-		gbl_pnlNav.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
-		gbl_pnlNav.rowWeights = new double[] { 1.0, 0.0 };
+		gbl_pnlNav.columnWidths = new int[] { 0 };
+		gbl_pnlNav.rowHeights = new int[] { 0 };
+		gbl_pnlNav.columnWeights = new double[] { 1.0 };
+		gbl_pnlNav.rowWeights = new double[] { 1.0 };
 		pnlNav.setLayout(gbl_pnlNav);
 
-		JLabel pnlHeader = new JLabel();
-		ImageIcon bandImage = new ImageIcon(Img.BANNER);
-		pnlHeader.setIcon(bandImage);
+		JPanel pnlHeader = new JPanel();
 		GridBagConstraints gbc_pnlHeader = new GridBagConstraints();
 		gbc_pnlHeader.insets = new Insets(0, 0, 5, 0);
 		gbc_pnlHeader.fill = GridBagConstraints.WEST;
@@ -202,7 +217,7 @@ public class Navbar extends JPanel {
 		gbc_pnlHeader.gridy = 0;
 		pnlNav.add(pnlHeader, gbc_pnlHeader);
 		GridBagLayout gbl_pnlHeader = new GridBagLayout();
-		gbl_pnlHeader.columnWidths = new int[] { 0, 0 };
+		gbl_pnlHeader.columnWidths = new int[] { 50, 0 };
 		gbl_pnlHeader.rowHeights = new int[] { 0 };
 		gbl_pnlHeader.columnWeights = new double[] { 1.0, 0.0 };
 		gbl_pnlHeader.rowWeights = new double[] { 0.0 };
@@ -212,11 +227,21 @@ public class Navbar extends JPanel {
 		ImageIcon panderName = new ImageIcon(Img.TITLE_S);
 		lblPander.setIcon(panderName);
 		GridBagConstraints gbc_lblPander = new GridBagConstraints();
-		gbc_lblPander.anchor = GridBagConstraints.NORTHWEST;
-		gbc_lblPander.insets = new Insets(0, 0, 0, 5);
+		gbc_lblPander.anchor = GridBagConstraints.WEST;
+		gbc_lblPander.insets = new Insets(0, 0, 0, 0);
 		gbc_lblPander.gridx = 0;
 		gbc_lblPander.gridy = 0;
 		pnlHeader.add(lblPander, gbc_lblPander);
+
+		JLabel lblBanner = new JLabel();
+		ImageIcon bandImage = new ImageIcon(Img.BANNER);
+		lblBanner.setIcon(bandImage);
+		GridBagConstraints gbc_lblBanner = new GridBagConstraints();
+		gbc_lblBanner.anchor = GridBagConstraints.WEST;
+		gbc_lblBanner.insets = new Insets(0, 60, 0, 5);
+		gbc_lblBanner.gridx = 0;
+		gbc_lblBanner.gridy = 0;
+		pnlHeader.add(lblBanner, gbc_lblBanner);
 
 		lblUser = new JLabel("User");
 		lblUser.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -250,6 +275,10 @@ public class Navbar extends JPanel {
 		tglbtnMatching = new JToggleButton("Matching");
 		pnlButton.add(tglbtnMatching);
 
+		tglbtnPublicProfile = new JToggleButton("PublicProfile");
+		tglbtnPublicProfile.setVisible(false);
+		pnlButton.add(tglbtnPublicProfile);
+
 		lblLogouser = new JLabel();
 		ImageIcon logoUser = new ImageIcon(Img.HOME_CANDIDATE);
 		lblLogouser.setIcon(logoUser);
@@ -259,13 +288,13 @@ public class Navbar extends JPanel {
 		gbc_lblLogouser.gridy = 0;
 		add(lblLogouser, gbc_lblLogouser);
 
-		ViewUtils.colorWhite(pnlButton);
-		ViewUtils.colorWhite(pnlHeader);
-		ViewUtils.colorWhite(pnlNav);
-		ViewUtils.colorWhite(tglbtnHome);
-		ViewUtils.colorWhite(tglbtnMatching);
-		ViewUtils.colorWhite(tglbtnProfile);
-		ViewUtils.colorWhite(tglbtnJob);
+		ColorUtils.colorWhite(pnlButton);
+		ColorUtils.colorWhite(pnlHeader);
+		ColorUtils.colorWhite(pnlNav);
+		ColorUtils.colorWhite(tglbtnHome);
+		ColorUtils.colorWhite(tglbtnMatching);
+		ColorUtils.colorWhite(tglbtnProfile);
+		ColorUtils.colorWhite(tglbtnJob);
 
 	}
 

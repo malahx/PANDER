@@ -18,6 +18,7 @@ public class SkillTableModel extends SorterTableModel {
 	private static final long serialVersionUID = -4831274774359919486L;
 
 	private final List<BaseEntity> skills;
+	private final boolean editable;
 	private IBaseSkillEntity entity;
 
 	/**
@@ -44,6 +45,8 @@ public class SkillTableModel extends SorterTableModel {
 	}
 
 	/**
+	 * The constructor of a skill table model
+	 * 
 	 * @param entity
 	 * @param skills
 	 * @param TITLE
@@ -51,9 +54,27 @@ public class SkillTableModel extends SorterTableModel {
 	 * 
 	 */
 	public SkillTableModel(List<BaseEntity> skills, IBaseSkillEntity entity) {
+		super();
 		this.title = new String[] { "Activer", "Compétence" };
 		this.skills = skills;
 		this.entity = entity;
+		this.editable = true;
+		initSorter();
+	}
+
+	/**
+	 * The constructor of a skill table model with editable option
+	 * 
+	 * @param skills
+	 * @param entity
+	 * @param editable
+	 */
+	public SkillTableModel(List<BaseEntity> skills, IBaseSkillEntity entity, boolean editable) {
+		super();
+		this.title = new String[] { "Activer", "Compétence" };
+		this.skills = skills;
+		this.entity = entity;
+		this.editable = editable;
 		initSorter();
 	}
 
@@ -77,6 +98,11 @@ public class SkillTableModel extends SorterTableModel {
 		return title.length;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
+	 */
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		return getValueAt(0, columnIndex).getClass();
@@ -103,6 +129,7 @@ public class SkillTableModel extends SorterTableModel {
 	}
 
 	/**
+	 * Get a skill information from a column
 	 * 
 	 * @param skill
 	 *            the object to draw
@@ -121,6 +148,12 @@ public class SkillTableModel extends SorterTableModel {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.table.AbstractTableModel#setValueAt(java.lang.Object, int,
+	 * int)
+	 */
 	@Override
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		boolean value = (boolean) aValue;
@@ -135,9 +168,14 @@ public class SkillTableModel extends SorterTableModel {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.table.AbstractTableModel#isCellEditable(int, int)
+	 */
 	@Override
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-		return columnIndex == 0;
+		return editable == true && columnIndex == 0;
 	}
 
 }

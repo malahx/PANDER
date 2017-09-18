@@ -76,35 +76,6 @@ public interface IBaseDAO {
 	public boolean checkExists(BaseEntity entity);
 
 	/**
-	 * Execute a SQL request
-	 * 
-	 * @param request
-	 *            the SQL request
-	 * @return the result of the request
-	 */
-	public ResultSet executeQuery(String request);
-
-	/**
-	 * Prepare a SQL request
-	 * 
-	 * @param entity
-	 *            the {@link BaseEntity} to prepare
-	 * @param request
-	 *            the SQL request
-	 * @return the {@link BaseEntity}
-	 */
-	public BaseEntity executePrepare(BaseEntity entity, String request);
-
-	/**
-	 * Execute a SQL request without a result
-	 * 
-	 * @param request
-	 *            the SQL request
-	 * @return the number of modified row
-	 */
-	public int execute(String request);
-
-	/**
 	 * Insert a {@link BaseEntity} on the database
 	 * 
 	 * @param entity

@@ -3,6 +3,7 @@ package fr.redpanda.pander.views.base;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import fr.redpanda.pander.utils.constant.Version;
 import fr.redpanda.pander.utils.views.ViewUtils;
 
 public abstract class BaseView implements IBaseView {
@@ -24,9 +25,14 @@ public abstract class BaseView implements IBaseView {
 		return contentPane;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.views.base.IBaseView#loadView(javax.swing.JFrame)
+	 */
 	@Override
 	public void loadView(JFrame frame) {
-		frame.setTitle("PANDER : "  + getPageName());
+		frame.setTitle("PANDER v" + Version.CURRENT + " : " + getPageName());
 		ViewUtils.configure(frame, getContentPane());
 	}
 }

@@ -26,14 +26,28 @@ public class FileManager {
 	private String fileName;
 	private URI uri;
 
+	/**
+	 * 
+	 * @return the content of a file
+	 */
 	public ArrayList<String> getContent() {
 		return this.content;
 	}
 
+	/**
+	 * 
+	 * @return the URI of a file
+	 */
 	public URI getUri() {
 		return this.uri;
 	}
 
+	/**
+	 * The constructor from a file
+	 * 
+	 * @param path
+	 * @param fileName
+	 */
 	public FileManager(String path, String fileName) {
 		this.path = path;
 		this.fileName = fileName;
@@ -49,11 +63,21 @@ public class FileManager {
 		}
 	}
 
+	/**
+	 * The constructor from an URI
+	 * 
+	 * @param uri
+	 */
 	public FileManager(URI uri) {
 		this.uri = uri;
 
 	}
 
+	/**
+	 * Write the content to a file
+	 *
+	 * @param content
+	 */
 	public void writeToFile(ArrayList<String> content) {
 		this.writeToFile(content, StandardOpenOption.APPEND);
 	}
@@ -87,6 +111,10 @@ public class FileManager {
 		}
 	}
 
+	/**
+	 * 
+	 * @return load content from a file
+	 */
 	public ArrayList<String> loadFromFile() {
 		String thisLine = null;
 		try {
@@ -103,11 +131,21 @@ public class FileManager {
 		return this.content;
 	}
 
+	/**
+	 * 
+	 * @return extract datas from a default pattern
+	 */
 	public Map<String, Object> extractFromPattern() {
 		Pattern p = Pattern.compile("(\\w+)=\"*((?<=\")[^\"]+(?=\")|([^\\s]+))\"*");
 		return extractFromPattern(p);
 	}
 
+	/**
+	 * extract datas from a pattern
+	 * 
+	 * @param p
+	 * @return
+	 */
 	public Map<String, Object> extractFromPattern(Pattern p) {
 		Map<String, Object> map = new HashMap<String, Object>();
 

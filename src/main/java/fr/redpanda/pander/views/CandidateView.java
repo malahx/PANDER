@@ -10,14 +10,14 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-import fr.redpanda.pander.views.base.MainView;
+import fr.redpanda.pander.views.base.ProfileView;
 
 /**
  * 
  * @author Patrice SCHOCH
  *
  */
-public class CandidateView extends MainView {
+public class CandidateView extends ProfileView {
 
 	private JTextField textCertificate1;
 	private JTextField textCertificate2;
@@ -117,11 +117,7 @@ public class CandidateView extends MainView {
 	}
 
 	/**
-	 * Launch the application.
-	 */
-
-	/**
-	 * Create the frame.
+	 * The constructor
 	 */
 	public CandidateView() {
 
@@ -253,16 +249,6 @@ public class CandidateView extends MainView {
 
 		tableSoftSkills = new JTable();
 		scrollPaneSoftSkills.setViewportView(tableSoftSkills);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.redpanda.pander.views.IMainView#isEditable()
-	 */
-	@Override
-	public boolean isEditable() {
-		return true;
 	}
 
 }

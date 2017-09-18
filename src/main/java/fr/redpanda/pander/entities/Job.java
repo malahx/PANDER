@@ -4,7 +4,6 @@
 package fr.redpanda.pander.entities;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import fr.redpanda.pander.entities.base.DateEntity;
@@ -101,40 +100,7 @@ public class Job extends DateEntity implements IBaseSkillEntity {
 	}
 
 	/**
-	 * 
-	 * @param name
-	 */
-	public Job(String name) {
-		super();
-		this.setName(name);
-		this.setSkills(new ArrayList<>());
-	}
-
-	/**
-	 * @param id
-	 * @param name
-	 * @param presentation
-	 * @param link
-	 * @param contactEmail
-	 * @param skills
-	 * @param createdAt
-	 * @param updatedAt
-	 */
-	public Job(double id, String name, String presentation, String link, String contactEmail, Date createdAt,
-			Date updatedAt) {
-		super();
-		this.setId(id);
-		this.setName(name);
-		this.setPresentation(presentation);
-		this.setLink(link);
-		this.setContact(contactEmail);
-		this.setSkills(new ArrayList<>());
-		this.setCreatedAt(createdAt);
-		this.setUpdatedAt(updatedAt);
-	}
-
-	/**
-	 * 
+	 * The constructor
 	 */
 	public Job() {
 		super();

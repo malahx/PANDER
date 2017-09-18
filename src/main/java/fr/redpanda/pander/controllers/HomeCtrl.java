@@ -3,8 +3,6 @@
  */
 package fr.redpanda.pander.controllers;
 
-import javax.swing.JFrame;
-
 import fr.redpanda.pander.controllers.base.MainCtrl;
 import fr.redpanda.pander.views.HomeView;
 
@@ -15,14 +13,13 @@ import fr.redpanda.pander.views.HomeView;
 public class HomeCtrl extends MainCtrl {
 
 	/**
-	 * 
+	 * The constructor
 	 */
-	public HomeCtrl(JFrame frame) {
+	public HomeCtrl() {
 		super();
-		super.frame = frame;
 		super.view = new HomeView();
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 

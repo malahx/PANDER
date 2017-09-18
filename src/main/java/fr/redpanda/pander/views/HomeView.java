@@ -85,7 +85,7 @@ public class HomeView extends MainView {
 	}
 
 	/**
-	 * Create the panel.
+	 * The constructor
 	 */
 	public HomeView() {
 		super();

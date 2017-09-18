@@ -11,7 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import fr.redpanda.pander.utils.views.ViewUtils;
+import fr.redpanda.pander.utils.views.ColorUtils;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -19,9 +19,6 @@ import fr.redpanda.pander.utils.views.ViewUtils;
  */
 public class Footer extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -8490956596546449622L;
 
 	private JLabel lblCopyright;
@@ -74,10 +71,11 @@ public class Footer extends JPanel {
 	}
 
 	/**
-	 * Create the panel.
+	 * The constructor
 	 */
 	public Footer() {
-		
+		super();
+
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 0 };
@@ -107,10 +105,10 @@ public class Footer extends JPanel {
 		gbc_btnExit.gridx = 2;
 		gbc_btnExit.gridy = 0;
 		add(btnExit, gbc_btnExit);
-		
-		ViewUtils.colorGrey(btnExit);
-		ViewUtils.colorGrey(btnLogout);
-		ViewUtils.colorGreyLight(this);
+
+		ColorUtils.colorGrey(btnExit);
+		ColorUtils.colorGrey(btnLogout);
+		ColorUtils.colorGreyLight(this);
 
 	}
 

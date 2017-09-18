@@ -19,7 +19,7 @@ import javax.swing.table.TableRowSorter;
 public abstract class SorterTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = -6462455074540030580L;
-	
+
 	protected String[] title;
 	private TableRowSorter<TableModel> sorter;
 
@@ -30,6 +30,9 @@ public abstract class SorterTableModel extends AbstractTableModel {
 		return sorter;
 	}
 
+	/**
+	 * Initialize the sorter
+	 */
 	public void initSorter() {
 
 		this.sorter = new TableRowSorter<TableModel>(this);
@@ -40,6 +43,5 @@ public abstract class SorterTableModel extends AbstractTableModel {
 		sorter.setSortKeys(sortKeys);
 		sorter.setSortsOnUpdates(true);
 	}
-
 
 }

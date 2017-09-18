@@ -10,6 +10,7 @@ import fr.redpanda.pander.databases.base.BaseUserDAO;
 import fr.redpanda.pander.entities.Company;
 import fr.redpanda.pander.entities.Job;
 import fr.redpanda.pander.entities.base.BaseEntity;
+import fr.redpanda.pander.utils.StringManager;
 
 /**
  * @author Gwénolé LE HENAFF
@@ -55,12 +56,14 @@ public class CompanyDAO extends BaseUserDAO {
 	}
 
 	/**
-	 * @param text
+	 * Test if a SIRET number is index in the database
+	 * 
+	 * @param siret
 	 * @return
 	 */
-	public boolean isExists(String text) {
+	public boolean isExists(String siret) {
 
-		ResultSet rs = executeQuery("SELECT " + ID + " FROM " + TABLE + " WHERE " + SIRET + " = '" + text + "'");
+		ResultSet rs = executeQuery("SELECT " + ID + " FROM " + TABLE + " WHERE " + SIRET + " = '" + siret + "'");
 		boolean result = false;
 		try {
 			if (rs.next()) {
@@ -106,15 +109,14 @@ public class CompanyDAO extends BaseUserDAO {
 	 */
 	@Override
 	public String parse(BaseEntity entity) {
-		// TODO à revoir en stringbuilder
-		String result = "";
 		Company company = (Company) entity;
-		result += company.getId() + ",";
-		result += "'" + (company.getName() == null ? "" : company.getName()) + "',";
-		result += "'" + (company.getSiret() == null ? "" : company.getSiret()) + "',";
-		result += "'" + (company.getContact() == null ? "" : company.getContact()) + "',";
-		result += "'" + (company.getLink() == null ? "" : company.getLink()) + "'";
-		return result;
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(StringManager.toMySQL(company.getId(), false))
+				.append(StringManager.toMySQL(company.getName(), false))
+				.append(StringManager.toMySQL(company.getSiret(), false))
+				.append(StringManager.toMySQL(company.getContact(), false))
+				.append(StringManager.toMySQL(company.getLink(), true));
+		return new String(stringBuilder);
 	}
 
 	/*
@@ -126,14 +128,13 @@ public class CompanyDAO extends BaseUserDAO {
 	 */
 	@Override
 	public String parseUpdate(BaseEntity entity) {
-		// TODO à revoir en stringbuilder
-		String result = "";
 		Company company = (Company) entity;
-		result += NAME + " = '" + (company.getName() == null ? "" : company.getName()) + "',";
-		result += SIRET + " = '" + (company.getSiret() == null ? "" : company.getSiret()) + "',";
-		result += CONTACT + " = '" + (company.getContact() == null ? "" : company.getContact()) + "',";
-		result += LINK + " = '" + (company.getLink() == null ? "" : company.getLink()) + "'";
-		return result;
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(StringManager.toMySQLUpdate(NAME, company.getName(), false))
+				.append(StringManager.toMySQLUpdate(SIRET, company.getSiret(), false))
+				.append(StringManager.toMySQLUpdate(CONTACT, company.getContact(), false))
+				.append(StringManager.toMySQLUpdate(LINK, company.getLink(), true));
+		return new String(stringBuilder);
 
 	}
 
@@ -144,15 +145,10 @@ public class CompanyDAO extends BaseUserDAO {
 	 */
 	@Override
 	public String fields() {
-		// TODO à revoir en stringbuilder
-		String result = "";
-		result += ID + ",";
-		result += NAME + ",";
-		result += SIRET + ",";
-		result += CONTACT + ",";
-		result += LINK;
-		return result;
-
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(StringManager.last(ID, false)).append(StringManager.last(NAME, false))
+				.append(StringManager.last(SIRET, false)).append(StringManager.last(CONTACT, true));
+		return new String(stringBuilder);
 	}
 
 	/*

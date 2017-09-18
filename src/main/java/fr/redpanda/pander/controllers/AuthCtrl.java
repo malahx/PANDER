@@ -3,6 +3,7 @@
  */
 package fr.redpanda.pander.controllers;
 
+import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -35,23 +36,38 @@ import fr.redpanda.pander.views.models.DocListener;
  */
 public class AuthCtrl extends BaseCtrl {
 
+	private RegisterCtrl registerCtrl;
+
+	/**
+	 * @return the registerCtrl
+	 */
+	public RegisterCtrl getRegisterCtrl() {
+		return registerCtrl;
+	}
+
+	/**
+	 * The function to login an user from his email and his password
+	 * 
+	 * @param email
+	 * @param password
+	 */
 	private void login(String email, String password) {
 
 		BaseEntity loggedUser = UserDAO.getInstance().get(email, password);
 		if (loggedUser != null) {
 			getViewDatas().put(TypeData.USER, loggedUser);
 			if (loggedUser instanceof Candidate) {
-				ViewsManager.getInstance().next(new HomeCtrl(frame));
+				ViewsManager.getInstance().next(new HomeCtrl());
 				CandidateDAO.getInstance().getSkills((Candidate) loggedUser);
 			} else if (loggedUser instanceof Company) {
-				ViewsManager.getInstance().next(new HomeCtrl(frame));
+				ViewsManager.getInstance().next(new HomeCtrl());
 				Company company = (Company) loggedUser;
 				JobDAO.getInstance().get(company);
 				for (Job job : company.getJobs()) {
 					JobDAO.getInstance().getSkills(job);
 				}
 			} else if (loggedUser instanceof Admin) {
-				ViewsManager.getInstance().next(new AdminCtrl(frame));
+				ViewsManager.getInstance().next(new AdminCtrl());
 			}
 		} else {
 			PopupManager.message("Authentification", "Identifiant ou mot de passe incorrect !");
@@ -60,11 +76,10 @@ public class AuthCtrl extends BaseCtrl {
 	}
 
 	/**
-	 * 
+	 * The constructor
 	 */
-	public AuthCtrl(JFrame frame) {
+	public AuthCtrl() {
 		super();
-		super.frame = frame;
 		super.view = new AuthView();
 	}
 
@@ -151,6 +166,9 @@ public class AuthCtrl extends BaseCtrl {
 
 	}
 
+	/**
+	 * The function to refresh if the button validate is enabled or disabled
+	 */
 	private void refreshValidate() {
 		AuthView view = (AuthView) this.view;
 		view.getBtnValidate()
@@ -159,10 +177,23 @@ public class AuthCtrl extends BaseCtrl {
 						: false);
 	}
 
+	/**
+	 * Initialize the registration for an user
+	 * 
+	 * @param user
+	 */
 	private void initRegistration(User user) {
-		JFrame registerFrame = new JFrame();
-		new RegisterCtrl(frame, registerFrame, user);
-		frame.setEnabled(false);
+		registerCtrl = new RegisterCtrl(frame, user);
+
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					registerCtrl.loadController(new JFrame());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		// User loggeUser = new Company();
 		// getViewDatas().put(TypeData.USER, loggeUser);
 		// if (loggeUser instanceof Candidate || loggeUser instanceof Company) {

@@ -16,7 +16,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import fr.redpanda.pander.utils.constant.Img;
-import fr.redpanda.pander.utils.views.ViewUtils;
+import fr.redpanda.pander.utils.constant.PanderColor;
+import fr.redpanda.pander.utils.views.ColorUtils;
 import fr.redpanda.pander.views.base.BaseView;
 
 /**
@@ -124,7 +125,7 @@ public class AuthView extends BaseView {
 	}
 
 	/**
-	 * Create the frame.
+	 * The constructor
 	 */
 	public AuthView() {
 		super();
@@ -151,7 +152,7 @@ public class AuthView extends BaseView {
 		JLabel lblPander = new JLabel();
 		ImageIcon titleIcon = new ImageIcon(Img.TITLE);
 		lblPander.setIcon(titleIcon);
-		lblPander.setFont(new Font("Lucida Grande", Font.BOLD, 35));
+		lblPander.setFont(new Font(PanderColor.FONT, Font.BOLD, 35));
 		GridBagConstraints gbc_lblPander = new GridBagConstraints();
 		gbc_lblPander.insets = new Insets(0, 0, 5, 0);
 		gbc_lblPander.gridx = 1;
@@ -161,7 +162,7 @@ public class AuthView extends BaseView {
 		JLabel lblLogo = new JLabel();
 		ImageIcon logoIcon = new ImageIcon(Img.LOGO_PANDER1);
 		lblLogo.setIcon(logoIcon);
-		lblLogo.setFont(new Font("Lucida Grande", Font.PLAIN, 36));
+		lblLogo.setFont(new Font(PanderColor.FONT, Font.PLAIN, 36));
 		GridBagConstraints gbc_lblLogo = new GridBagConstraints();
 		gbc_lblLogo.insets = new Insets(0, 50, 0, 5);
 		gbc_lblLogo.gridx = 0;
@@ -196,7 +197,7 @@ public class AuthView extends BaseView {
 		panel_1.setLayout(gbl_panel_1);
 
 		JLabel lblSidentifier = new JLabel("S'IDENTIFIER :");
-		lblSidentifier.setFont(new Font("Lucida Grande", Font.BOLD, 15));
+		lblSidentifier.setFont(new Font(PanderColor.FONT, Font.BOLD, 15));
 		GridBagConstraints gbc_lblSidentifier = new GridBagConstraints();
 		gbc_lblSidentifier.insets = new Insets(0, 100, 5, 5);
 		gbc_lblSidentifier.gridx = 0;
@@ -237,7 +238,7 @@ public class AuthView extends BaseView {
 		panel_1.add(txtPassword, gbc_txtPassword);
 
 		btnPassword = new JButton("Mot de passe oublié ?");
-		btnPassword.setFont(new Font("Lucida Grande", Font.ITALIC, 10));
+		btnPassword.setFont(new Font(PanderColor.FONT, Font.ITALIC, 10));
 		btnPassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -250,7 +251,7 @@ public class AuthView extends BaseView {
 		panel_1.add(btnPassword, gbc_btnPassword);
 
 		btnValidate = new JButton("VALIDER");
-		btnValidate.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		btnValidate.setFont(new Font(PanderColor.FONT, Font.BOLD, 13));
 		GridBagConstraints gbc_btnValidate = new GridBagConstraints();
 		gbc_btnValidate.anchor = GridBagConstraints.EAST;
 		gbc_btnValidate.insets = new Insets(0, 0, 5, 50);
@@ -259,7 +260,7 @@ public class AuthView extends BaseView {
 		panel_1.add(btnValidate, gbc_btnValidate);
 
 		JLabel lblSenregistrer = new JLabel("S'ENREGISTRER :");
-		lblSenregistrer.setFont(new Font("Lucida Grande", Font.BOLD, 15));
+		lblSenregistrer.setFont(new Font(PanderColor.FONT, Font.BOLD, 15));
 		GridBagConstraints gbc_lblSenregistrer = new GridBagConstraints();
 		gbc_lblSenregistrer.anchor = GridBagConstraints.WEST;
 		gbc_lblSenregistrer.insets = new Insets(0, 100, 5, 0);
@@ -291,7 +292,7 @@ public class AuthView extends BaseView {
 		btnCandidate = new JButton();
 		ImageIcon registerCandidateIcon = new ImageIcon(Img.REGISTER_CANDIDATE);
 		btnCandidate.setIcon(registerCandidateIcon);
-		btnCandidate.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		btnCandidate.setFont(new Font(PanderColor.FONT, Font.PLAIN, 40));
 		btnCandidate.setBorder(BorderFactory.createEmptyBorder());
 		panel_3.add(btnCandidate);
 
@@ -307,19 +308,19 @@ public class AuthView extends BaseView {
 		btnCompany = new JButton();
 		ImageIcon registerCompanyIcon = new ImageIcon(Img.REGISTER_COMPANY);
 		btnCompany.setIcon(registerCompanyIcon);
-		btnCompany.setFont(new Font("Lucida Grande", Font.PLAIN, 40));
+		btnCompany.setFont(new Font(PanderColor.FONT, Font.PLAIN, 40));
 		btnCompany.setBorder(BorderFactory.createEmptyBorder());
 		panel_4.add(btnCompany);
 
-		ViewUtils.colorWhite(panel_1);
-		ViewUtils.colorWhite(panel_2);
-		ViewUtils.colorWhite(panel_3);
-		ViewUtils.colorWhite(panel_4);
-		ViewUtils.colorWhite(panel);
-		ViewUtils.colorWhite(btnCandidate);
-		ViewUtils.colorWhite(btnCompany);
-		ViewUtils.colorLight(btnValidate);
-		ViewUtils.colorGreyLight(btnPassword);
+		ColorUtils.colorWhite(panel_1);
+		ColorUtils.colorWhite(panel_2);
+		ColorUtils.colorWhite(panel_3);
+		ColorUtils.colorWhite(panel_4);
+		ColorUtils.colorWhite(panel);
+		ColorUtils.colorWhite(btnCandidate);
+		ColorUtils.colorWhite(btnCompany);
+		ColorUtils.colorLight(btnValidate);
+		ColorUtils.colorGreyLight(btnPassword);
 
 	}
 

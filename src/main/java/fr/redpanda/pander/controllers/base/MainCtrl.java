@@ -34,7 +34,8 @@ import fr.redpanda.pander.views.subviews.SidebarEditable;
  */
 public abstract class MainCtrl extends BaseCtrl {
 
-	// TODO added user field ...
+	protected boolean isPublic = false;
+	protected User user;
 
 	/*
 	 * (non-Javadoc)
@@ -46,16 +47,23 @@ public abstract class MainCtrl extends BaseCtrl {
 
 		MainView view = (MainView) this.view;
 
-		User user = (User) getViewDatas().get(TypeData.USER);
 		if (user instanceof Candidate) {
 			view.getNavbar().getLblUser().setText("CANDIDAT");
 			view.getNavbar().getLblLogouser().setIcon(new ImageIcon(Img.HOME_CANDIDATE));
-			view.getNavbar().getTglbtnJob().setVisible(false);
+			if (!isPublic) {
+				view.getNavbar().getTglbtnJob().setVisible(false);
+			} else {
+				view.getNavbar().getTglbtnJob().setVisible(true);
+			}
 			view.getSidebar().initCandidate((Candidate) user);
 		} else {
 			view.getNavbar().getLblUser().setText("ENTREPRISE");
 			view.getNavbar().getLblLogouser().setIcon(new ImageIcon(Img.HOME_COMPANY));
-			view.getNavbar().getTglbtnJob().setVisible(true);
+			if (isPublic) {
+				view.getNavbar().getTglbtnJob().setVisible(false);
+			} else {
+				view.getNavbar().getTglbtnJob().setVisible(true);
+			}
 			view.getSidebar().initCompany((Company) user);
 		}
 
@@ -78,6 +86,8 @@ public abstract class MainCtrl extends BaseCtrl {
 	}
 
 	/**
+	 * Initialization of the Navbar Events
+	 * 
 	 * @param view
 	 */
 	private void initNavbar(MainView view) {
@@ -115,6 +125,8 @@ public abstract class MainCtrl extends BaseCtrl {
 	}
 
 	/**
+	 * Initialization of the Footer Events
+	 * 
 	 * @param view
 	 */
 	private void initFooter(MainView view) {
@@ -136,6 +148,8 @@ public abstract class MainCtrl extends BaseCtrl {
 	}
 
 	/**
+	 * Initialization of the Edit sidebar Events
+	 * 
 	 * @param view
 	 */
 	private void initEditSidebar(MainView view) {
@@ -153,64 +167,78 @@ public abstract class MainCtrl extends BaseCtrl {
 		sidebar.getTxtName1().getDocument().addDocumentListener(updateProfile);
 		sidebar.getTxtName2().getDocument().addDocumentListener(updateProfile);
 		sidebar.getTxtCity().getDocument().addDocumentListener(updateProfile);
-		sidebar.getTxtAdress().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtAddress().getDocument().addDocumentListener(updateProfile);
 		sidebar.getTxtCity().getDocument().addDocumentListener(updateProfile);
-		sidebar.getTxtDescriptionTitle().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtDescription().getDocument().addDocumentListener(updateProfile);
 		sidebar.getTxtPhone().getDocument().addDocumentListener(updateProfile);
-		sidebar.getTxtCp().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtPostcode().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtLink1().getDocument().addDocumentListener(updateProfile);
+		sidebar.getTxtLink2().getDocument().addDocumentListener(updateProfile);
 	}
 
 	/**
-	 * 
+	 * The function to go to the Job controller
 	 */
-	private void gotoJob() {
+	protected void gotoJob() {
 		if (ViewsManager.getInstance().isCurrentController(JobCtrl.class)) {
 			return;
 		}
-		ViewsManager.getInstance().next(new JobCtrl(frame));
+		ViewsManager.getInstance().next(new JobCtrl());
 	}
 
 	/**
-	 * 
+	 * The function to go to the Matching controller
 	 */
-	private void gotoMatching() {
+	protected void gotoMatching() {
 		if (ViewsManager.getInstance().isCurrentController(MatchingCtrl.class)) {
 			return;
 		}
-		ViewsManager.getInstance().next(new MatchingCtrl(frame));
+		ViewsManager.getInstance().next(new MatchingCtrl());
 	}
 
 	/**
-	 * 
+	 * The function to go to the Profile controller
 	 */
-	private void gotoProfile() {
+	protected void gotoProfile() {
 		if (ViewsManager.getInstance().isCurrentController(ProfileCtrl.class)) {
 			return;
 		}
-		ViewsManager.getInstance().next(new ProfileCtrl(frame));
+		ViewsManager.getInstance().next(new ProfileCtrl());
 	}
 
 	/**
-	 * 
+	 * The function to go to the Home controller
 	 */
-	private void gotoHome() {
+	protected void gotoHome() {
 		if (ViewsManager.getInstance().isCurrentController(HomeCtrl.class)) {
 			return;
 		}
-		ViewsManager.getInstance().next(new HomeCtrl(frame));
+		ViewsManager.getInstance().next(new HomeCtrl());
+	}
+
+	/**
+	 * The function to update users from the sidebar
+	 * 
+	 * @param sidebar
+	 */
+	protected void gotoProfile(User publicUser) {
+		if (ViewsManager.getInstance().isCurrentController(PublicProfileCtrl.class)) {
+			return;
+		}
+		ViewsManager.getInstance()
+				.next(publicUser instanceof Candidate ? new ProfileCtrl(publicUser) : new JobCtrl(publicUser));
 	}
 
 	/**
 	 * 
 	 */
 	private void updateUser(SidebarEditable sidebar) {
-		User user = (User) getViewDatas().get(TypeData.USER);
 		user.setEmail(sidebar.getTxtMail().getText());
-		user.setAddress(sidebar.getTxtAdress().getText());
+		user.setAddress(sidebar.getTxtAddress().getText());
 		user.setCity(sidebar.getTxtCity().getText());
-		user.setDescription(sidebar.getTxtDescriptionTitle().getText());
+		user.setDescription(sidebar.getTxtDescription().getText());
 		user.setPhone(sidebar.getTxtPhone().getText());
-		user.setPostcode(sidebar.getTxtCp().getText());
+		user.setPostcode(sidebar.getTxtPostcode().getText());
 		if (user instanceof Candidate) {
 			updateUser(sidebar, (Candidate) user);
 		} else if (user instanceof Company) {
@@ -221,27 +249,44 @@ public abstract class MainCtrl extends BaseCtrl {
 	}
 
 	/**
+	 * The function to update a company from the sidebar
+	 * 
 	 * @param sidebar
-	 * @param cuser
+	 * @param company
 	 */
-	private void updateUser(SidebarEditable sidebar, Company cuser) {
-		cuser.setLink(sidebar.getTxtLink1().getText());
-		cuser.setSiret(sidebar.getTxtName2().getText());
-		cuser.setName(sidebar.getTxtName1().getText());
-		cuser.setContact(sidebar.getTxtLink2().getText());
-		CompanyDAO.getInstance().update(cuser);
+	private void updateUser(SidebarEditable sidebar, Company company) {
+		company.setLink(sidebar.getTxtLink1().getText());
+		company.setSiret(sidebar.getTxtName2().getText());
+		company.setName(sidebar.getTxtName1().getText());
+		company.setContact(sidebar.getTxtLink2().getText());
+		CompanyDAO.getInstance().update(company);
 	}
 
 	/**
+	 * The function to update candidate from the sidebar
+	 * 
 	 * @param sidebar
-	 * @param user
+	 * @param candidate
 	 */
-	private void updateUser(SidebarEditable sidebar, Candidate cuser) {
-		cuser.setFirstname(sidebar.getTxtName1().getText());
-		cuser.setLastname(sidebar.getTxtName2().getText());
-		cuser.setLink1(sidebar.getTxtLink1().getText());
-		cuser.setLink2(sidebar.getTxtLink2().getText());
-		CandidateDAO.getInstance().update(cuser);
+	private void updateUser(SidebarEditable sidebar, Candidate candidate) {
+		candidate.setFirstname(sidebar.getTxtName1().getText());
+		candidate.setLastname(sidebar.getTxtName2().getText());
+		candidate.setLink1(sidebar.getTxtLink1().getText());
+		candidate.setLink2(sidebar.getTxtLink2().getText());
+		CandidateDAO.getInstance().update(candidate);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see fr.redpanda.pander.controllers.base.BaseCtrl#setupDatas()
+	 */
+	@Override
+	public void setupDatas() {
+		super.setupDatas();
+		if (isPublic) {
+			return;
+		}
+		user = (User) getViewDatas().get(TypeData.USER);
+	}
 }

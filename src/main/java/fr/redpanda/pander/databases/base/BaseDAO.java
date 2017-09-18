@@ -3,15 +3,12 @@
  */
 package fr.redpanda.pander.databases.base;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import fr.redpanda.pander.databases.CandidateDAO;
-import fr.redpanda.pander.databases.DAOManager;
 import fr.redpanda.pander.databases.JobDAO;
 import fr.redpanda.pander.entities.base.BaseEntity;
 
@@ -53,71 +50,6 @@ public abstract class BaseDAO extends DAO implements IBaseDAO {
 		super();
 		this.table = table;
 		this.id = id;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.redpanda.pander.database.IDAOBase#executeRequest(java.lang.String)
-	 */
-	@Override
-	public ResultSet executeQuery(String request) {
-		ResultSet rs = null;
-		try {
-			Statement statement = DAOManager.getInstance().getConnection().createStatement();
-			rs = statement.executeQuery(request);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return rs;
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.redpanda.pander.database.IDAOBase#execute(java.lang.String)
-	 */
-	@Override
-	public BaseEntity executePrepare(BaseEntity entity, String request) {
-		PreparedStatement prepare = null;
-		ResultSet generatedKeys = null;
-		try {
-			prepare = DAOManager.getInstance().getConnection().prepareStatement(request,
-					Statement.RETURN_GENERATED_KEYS);
-			prepare.executeUpdate();
-			generatedKeys = prepare.getGeneratedKeys();
-			if (generatedKeys.next()) {
-				entity.setId(generatedKeys.getDouble(1));
-			}
-			generatedKeys.close();
-			prepare.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			close(prepare, generatedKeys);
-		}
-		return entity;
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see fr.redpanda.pander.database.IDAOBase#execute(java.lang.String)
-	 */
-	@Override
-	public int execute(String request) {
-
-		int result = 0;
-		try {
-			Statement statement = DAOManager.getInstance().getConnection().createStatement();
-			result = statement.executeUpdate(request);
-			statement.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return result;
-
 	}
 
 	/*
@@ -183,10 +115,11 @@ public abstract class BaseDAO extends DAO implements IBaseDAO {
 	 */
 	@Override
 	public int update(BaseEntity entity) {
+		Integer i = null;
 		if (checkExists(entity) && checkFields(entity)) {
-			return execute("UPDATE " + table + " SET " + parseUpdate(entity) + " WHERE " + id + " = " + entity.getId());
+			i = execute("UPDATE " + table + " SET " + parseUpdate(entity) + " WHERE " + id + " = " + entity.getId());
 		}
-		return 0;
+		return i;
 	}
 
 	/*

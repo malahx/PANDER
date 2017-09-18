@@ -35,6 +35,7 @@ proguard/
 .gradle/
 build/
 bin/
+libs/
 
 #Conception's Data
 /Conception/
@@ -55,3 +56,5 @@ miglayout15-swing.jar
 
 #config files
 config/dbconfig
+
+release/

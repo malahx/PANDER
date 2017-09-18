@@ -103,23 +103,4 @@ public class Company extends User {
 		this.setJobs(new ArrayList<>());
 	}
 
-	/**
-	 * The Constructor
-	 * 
-	 * @param name
-	 * @param siret
-	 * @param contact
-	 * @param link
-	 * @param jobs
-	 */
-	public Company(String name, String siret, String contact, String link) {
-		super();
-		this.setName(name);
-		this.setSiret(siret);
-		this.setContact(contact);
-		this.setLink(link);
-		this.setRole(Role.COMPANY);
-		this.setJobs(new ArrayList<>());
-	}
-
 }

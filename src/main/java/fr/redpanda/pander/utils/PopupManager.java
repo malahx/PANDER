@@ -12,11 +12,17 @@ import javax.swing.JOptionPane;
 public class PopupManager {
 
 	/**
-	 * 
+	 * The private constructor
 	 */
 	private PopupManager() {
 	}
-	
+
+	/**
+	 * Create a popup with a title and a message
+	 * 
+	 * @param title
+	 * @param msg
+	 */
 	public static void message(String title, String msg) {
 		JOptionPane.showMessageDialog(null, msg, "PANDER : " + title, JOptionPane.INFORMATION_MESSAGE);
 	}

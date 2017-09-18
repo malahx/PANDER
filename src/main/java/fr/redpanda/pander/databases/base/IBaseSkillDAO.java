@@ -21,20 +21,26 @@ public interface IBaseSkillDAO {
 	public IBaseSkillEntity getSkills(IBaseSkillEntity entity);
 
 	/**
+	 * Insert a list of skills from an entity
+	 * 
 	 * @param candidate
 	 * @return
 	 */
 	public int insertSkills(IBaseSkillEntity entity);
 
 	/**
+	 * Delete all skills from an entity
+	 * 
 	 * @param candidate
 	 * @return
 	 */
 	public int deleteSkills(IBaseSkillEntity entity);
 
 	/**
+	 * Delete all linked skills
+	 * 
 	 * @return
 	 */
-	int deleteSkills();
-	
+	public int deleteSkills();
+
 }

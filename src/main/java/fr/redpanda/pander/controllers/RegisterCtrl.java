@@ -3,7 +3,6 @@
  */
 package fr.redpanda.pander.controllers;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -35,25 +34,16 @@ public class RegisterCtrl extends BaseCtrl {
 	private User user;
 
 	/**
+	 * The constructor
+	 * 
 	 * @param frame
 	 * 
 	 */
-	public RegisterCtrl(JFrame mainFrame, JFrame frame, User user) {
+	public RegisterCtrl(JFrame mainFrame, User user) {
 		super();
-		super.frame = frame;
 		super.view = new RegisterView();
 		this.mainFrame = mainFrame;
 		this.user = user;
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					loadController(frame);
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 
 	/*
@@ -64,17 +54,11 @@ public class RegisterCtrl extends BaseCtrl {
 	@Override
 	public void initView() {
 		super.initView();
+		mainFrame.setEnabled(false);
 		frame.setBounds(0, 0, 400, 250);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setAlwaysOnTop(true);
 		ViewUtils.center(mainFrame, frame);
-		frame.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosed(WindowEvent e) {
-				close();
-			}
-		});
-
 		RegisterView view = (RegisterView) this.view;
 
 		boolean isCandidate = user instanceof Candidate;
@@ -91,6 +75,14 @@ public class RegisterCtrl extends BaseCtrl {
 	@Override
 	public void initEvent() {
 		super.initEvent();
+
+		frame.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				close();
+			}
+		});
+
 		RegisterView view = (RegisterView) this.view;
 
 		DocListener refresh = new DocListener() {
@@ -106,6 +98,7 @@ public class RegisterCtrl extends BaseCtrl {
 		view.getTextEmail().getDocument().addDocumentListener(refresh);
 		view.getPwdPass().getDocument().addDocumentListener(refresh);
 		view.getPwdPassVerify().getDocument().addDocumentListener(refresh);
+
 		view.getBtnRegister().addActionListener(new ActionListener() {
 
 			@Override
@@ -124,6 +117,8 @@ public class RegisterCtrl extends BaseCtrl {
 	}
 
 	/**
+	 * The register action
+	 * 
 	 * @param view
 	 */
 	protected void register(RegisterView view) {
@@ -157,15 +152,23 @@ public class RegisterCtrl extends BaseCtrl {
 		close();
 	}
 
-	private void close() {
+	/**
+	 * The close action
+	 */
+	protected void close() {
 		frame.dispose();
 		mainFrame.setEnabled(true);
 	}
 
 	/**
+	 * Refresh the btnRegister and the lblInfo
+	 * 
 	 * @param view
+	 *            the view
+	 * @return if the btnRegister is enabled
 	 */
-	protected void refresh(RegisterView view) {
+	protected boolean refresh(RegisterView view) {
+		boolean result = false;
 		boolean isValidEmail = StringManager.isEmail(view.getTextEmail().getText());
 		if (view.getTextName1().getText().equals("") || view.getTextName2().getText().equals("")
 				|| view.getTextEmail().getText().equals("") || new String(view.getPwdPass().getPassword()).equals("")
@@ -173,6 +176,7 @@ public class RegisterCtrl extends BaseCtrl {
 			view.getBtnRegister().setEnabled(false);
 		} else {
 			view.getBtnRegister().setEnabled(true);
+			result = true;
 		}
 		if (!new String(view.getPwdPass().getPassword()).equals(new String(view.getPwdPassVerify().getPassword()))) {
 			view.getLblInfo().setText("Le mot de passe ne correspond pas.");
@@ -181,5 +185,6 @@ public class RegisterCtrl extends BaseCtrl {
 		} else {
 			view.getLblInfo().setText("Merci de compléter ces informations.");
 		}
+		return result;
 	}
 }

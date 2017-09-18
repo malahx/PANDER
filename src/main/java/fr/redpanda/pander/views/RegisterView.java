@@ -14,7 +14,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import fr.redpanda.pander.utils.views.ViewUtils;
+import fr.redpanda.pander.utils.constant.PanderColor;
+import fr.redpanda.pander.utils.views.ColorUtils;
 import fr.redpanda.pander.views.base.BaseView;
 
 /**
@@ -264,12 +265,16 @@ public class RegisterView extends BaseView {
 		this.pwdPassVerify = pwdPassVerify;
 	}
 
+	/**
+	 * 
+	 * @return if the password is the same
+	 */
 	public boolean isSamePass() {
 		return new String(getPwdPass().getPassword()).equals(new String(getPwdPassVerify().getPassword()));
 	}
-	
+
 	/**
-	 * Create the frame.
+	 * The constructor
 	 */
 	public RegisterView() {
 		super();
@@ -284,7 +289,7 @@ public class RegisterView extends BaseView {
 		contentPane.setLayout(gbl_contentPane);
 
 		lblTittle = new JLabel("S'ENREGISTRER");
-		lblTittle.setFont(new Font("Lucida Grande", Font.BOLD, 16));
+		lblTittle.setFont(new Font(PanderColor.FONT, Font.BOLD, 16));
 		GridBagConstraints gbc_lblTittle = new GridBagConstraints();
 		gbc_lblTittle.gridwidth = 5;
 		gbc_lblTittle.insets = new Insets(0, 0, 5, 0);
@@ -381,7 +386,7 @@ public class RegisterView extends BaseView {
 		contentPane.add(pwdPassVerify, gbc_pwdPassVerify);
 
 		lblInfo = new JLabel("Merci de compléter ces informations.");
-		lblInfo.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		lblInfo.setFont(new Font(PanderColor.FONT, Font.PLAIN, 11));
 		GridBagConstraints gbc_lblInfo = new GridBagConstraints();
 		gbc_lblInfo.anchor = GridBagConstraints.WEST;
 		gbc_lblInfo.gridwidth = 3;
@@ -404,9 +409,9 @@ public class RegisterView extends BaseView {
 		gbc_btnRegister.gridx = 2;
 		gbc_btnRegister.gridy = 11;
 		contentPane.add(btnRegister, gbc_btnRegister);
-		
-		ViewUtils.colorWhite(btnCancel);
-		ViewUtils.colorNormal(btnRegister);
+
+		ColorUtils.colorWhite(btnCancel);
+		ColorUtils.colorNormal(btnRegister);
 	}
 
 }

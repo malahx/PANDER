@@ -17,9 +17,6 @@ import fr.redpanda.pander.entities.User;
  */
 public class AdminTableModel extends AbstractTableModel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 208988814142622942L;
 
 	private final String[] title;
@@ -33,7 +30,7 @@ public class AdminTableModel extends AbstractTableModel {
 	}
 
 	/**
-	 * 
+	 * The constructor
 	 */
 	public AdminTableModel(String[] title, List<Object> objects) {
 		super();
@@ -64,6 +61,11 @@ public class AdminTableModel extends AbstractTableModel {
 		return title.length;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
+	 */
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		return getValueAt(0, columnIndex).getClass();
@@ -97,6 +99,7 @@ public class AdminTableModel extends AbstractTableModel {
 	}
 
 	/**
+	 * Get user information at a column
 	 * 
 	 * @param user
 	 *            the object to draw
@@ -106,8 +109,8 @@ public class AdminTableModel extends AbstractTableModel {
 	 */
 	public Object getValueAt(User user, int columnIndex) {
 		switch (columnIndex) {
-//		case 0:
-//			return user.isDisabled();
+		// case 0:
+		// return user.isDisabled();
 		case 0:
 			return user.getEmail();
 
@@ -121,6 +124,7 @@ public class AdminTableModel extends AbstractTableModel {
 	}
 
 	/**
+	 * Get skill information at o column
 	 * 
 	 * @param user
 	 *            the object to draw

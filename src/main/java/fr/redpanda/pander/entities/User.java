@@ -3,11 +3,7 @@
  */
 package fr.redpanda.pander.entities;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import fr.redpanda.pander.entities.base.DateEntity;
-import fr.redpanda.pander.utils.StringManager;
 
 /**
  * 
@@ -183,37 +179,6 @@ public abstract class User extends DateEntity {
 	public User() {
 		super();
 		this.setDisabled(false);
-	}
-
-	/**
-	 * @param email
-	 */
-	public User(String email) {
-		super();
-		this.setEmail(email);
-		this.setDisabled(false);
-	}
-
-	/**
-	 * @param result
-	 *            the result set to parse
-	 * @throws SQLException
-	 */
-	public User(ResultSet result) throws SQLException {
-		super();
-		this.setId(result.getLong("id"));
-		this.setEmail(result.getString("email"));
-		this.setPassword(result.getString("password"));
-		this.setPhone(result.getString("phone"));
-		this.setAddress(result.getString("address"));
-		this.setPostcode(result.getString("postcode"));
-		this.setCity(result.getString("city"));
-		this.setPhoto(result.getString("photo"));
-		this.setDescription(result.getString("description"));
-		this.setDisabled(result.getBoolean("disabled"));
-		this.setRole(StringManager.getRoleFrom(result.getString("role")));
-		this.setCreatedAt(result.getTimestamp("created_at"));
-		this.setUpdatedAt(result.getTimestamp("updated_at"));
 	}
 
 	/*
